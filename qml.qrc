@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>res/access-point-check.svg</file>
+        <file>res/access-point-remove.svg</file>
+        <file>res/account-off.svg</file>
+        <file>res/account.svg</file>
+        <file>res/apps.svg</file>
+        <file>res/atom-variant.svg</file>
+        <file>res/baby-face-outline.svg</file>
+        <file>res/battery-alert.svg</file>
+        <file>res/bell-alert.svg</file>
+        <file>res/camera.svg</file>
+        <file>res/robot-angry-outline.svg</file>
+        <file>res/robot-confused-outline.svg</file>
+        <file>res/robot-dead-outline.svg</file>
+        <file>res/robot-excited-outline.svg</file>
+        <file>res/robot-love-outline.svg</file>
+        <file>res/robot-off-outline.svg</file>
+        <file>res/robot-outline.svg</file>
+        <file>res/hand-okay.svg</file>
+        <file>Discover.qml</file>
+        <file>res/pepper-proxemics.svg</file>
+        <file>IconButton.qml</file>
+        <file>PhotoCapture.qml</file>
+    </qresource>
+</RCC>
