@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="768"
+   viewBox="0 0 270.93332 203.20001"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="landing.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="1438.8603"
+     inkscape:cy="430.29612"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g38"
+     showgrid="false"
+     units="px"
+     width="1024px"
+     inkscape:snap-page="true"
+     inkscape:window-width="2560"
+     inkscape:window-height="1012"
+     inkscape:window-x="3840"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-93.799992)">
+    <rect
+       id="rect10"
+       width="270.93332"
+       height="203.2"
+       x="0"
+       y="93.799995"
+       style="stroke-width:0.26458332" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:31.55464745px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.78886616"
+       x="93.67083"
+       y="152.70908"
+       id="text14"><tspan
+         sodipodi:role="line"
+         id="tspan12"
+         x="93.67083"
+         y="152.70908"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Tahoma;-inkscape-font-specification:Tahoma;fill:#d3bc5f;stroke-width:0.78886616">Hiya!</tspan></text>
+    <g
+       id="g28">
+      <rect
+         y="196.08035"
+         x="23.056549"
+         height="59.720234"
+         width="91.092255"
+         id="rect16"
+         style="fill:#d3bc5f;stroke-width:0.26458332" />
+      <text
+         id="text20"
+         y="219.15422"
+         x="67.744522"
+         style="font-style:normal;font-weight:normal;font-size:17.57098198px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.43927455"
+         xml:space="preserve"><tspan
+           style="text-align:center;text-anchor:middle;stroke-width:0.43927455"
+           y="219.15422"
+           x="67.744522"
+           id="tspan18"
+           sodipodi:role="line">Read a</tspan><tspan
+           id="tspan22"
+           style="text-align:center;text-anchor:middle;stroke-width:0.43927455"
+           y="241.11795"
+           x="67.744522"
+           sodipodi:role="line">story</tspan></text>
+    </g>
+    <g
+       id="g38"
+       transform="translate(117.17262)">
+      <rect
+         style="fill:#d3bc5f;stroke-width:0.26458332"
+         id="rect30"
+         width="91.092255"
+         height="59.720234"
+         x="23.056549"
+         y="196.08035" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:17.57098198px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.43927455"
+         x="67.744522"
+         y="219.15422"
+         id="text36"><tspan
+           sodipodi:role="line"
+           x="67.744522"
+           y="219.15422"
+           style="text-align:center;text-anchor:middle;stroke-width:0.43927455"
+           id="tspan34">Play a</tspan><tspan
+           sodipodi:role="line"
+           x="67.744522"
+           y="241.11795"
+           style="text-align:center;text-anchor:middle;stroke-width:0.43927455"
+           id="tspan42">game</tspan></text>
+    </g>
+  </g>
+</svg>
