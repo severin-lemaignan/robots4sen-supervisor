@@ -1,8 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+//#include <QQmlDebuggingEnabler>
 
 int main(int argc, char *argv[])
 {
+       // QQmlDebuggingEnabler enabler;
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);

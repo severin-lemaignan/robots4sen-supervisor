@@ -2,21 +2,27 @@ import QtQuick 2.0
 import QtQuick.Controls 2.3
 
 Rectangle {
+    id: icon_button
+
     property var source
     property bool draggable: false
     property bool replicate: false
+    property bool disabled: false
+    property bool noborder: false
     property var duplicateOwner
+
+    property alias pressed: dragArea.pressed
 
     height: 70
     width: height
 
-    border.width: 4
+    border.width: noborder ? 0 : 4
     radius: height/2
 
 
     Image {
-        width: 0.8 * parent.width
-        height: 0.8 * parent.height
+        width: parent.width * (noborder ? 1 : 0.8)
+        height: width
         sourceSize.width: width
         sourceSize.height: height
         anchors.centerIn: parent
@@ -26,6 +32,8 @@ Rectangle {
 
     MouseArea {
             id: dragArea
+
+            enabled: !icon_button.disabled
             anchors.fill: parent
 
             drag.target: draggable ? parent:null
@@ -33,6 +41,7 @@ Rectangle {
                     console.log("Clicked!");
                     if (replicate) duplicateObject(x=mouse.x, y=mouse.y);
             }
+
     }
 
     function duplicateObject(x, y) {

@@ -23,8 +23,7 @@ Window {
             Discover {
                 id: peopleLocalisationTab
             }
-            Rectangle {
-                color: "blue"
+            Actions {
                 id: actionsTab
             }
             Item {

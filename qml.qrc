@@ -23,5 +23,13 @@
         <file>res/pepper-proxemics.svg</file>
         <file>IconButton.qml</file>
         <file>PhotoCapture.qml</file>
+        <file>Actions.qml</file>
+        <file>res/turn-left.svg</file>
+        <file>res/turn-right.svg</file>
+        <file>res/up.svg</file>
+        <file>res/down.svg</file>
+        <file>res/right.svg</file>
+        <file>res/left.svg</file>
+        <file>res/pepper-top.svg</file>
     </qresource>
 </RCC>
