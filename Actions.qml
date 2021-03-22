@@ -15,9 +15,11 @@ Item {
                     source: "res/pepper-top.svg"
                     rotation: -90
                     anchors.centerIn: parent
-                    disabled: true
                     noborder: true
                     height: parent.width * 0.25
+                    onPressedChanged: {
+                            naoqi.move("STOP", true)
+                    }
             }
 
             IconButton {
@@ -28,7 +30,7 @@ Item {
                     anchors.topMargin: 20
                     anchors.horizontalCenter: pepper.horizontalCenter
                     onPressedChanged: {
-                            console.log("Going down!")
+                            naoqi.move("BACKWARDS", pressed)
                     }
             }
             IconButton {
@@ -40,12 +42,7 @@ Item {
                     anchors.verticalCenter: pepper.verticalCenter
 
                     onPressedChanged: {
-                            if (pressed) {
-                                    console.log("Going up!")
-                            }
-                            else {
-                                    console.log("Stopping");
-                            }
+                            naoqi.move("LEFT", pressed)
                     }
             }
             IconButton {
@@ -57,7 +54,7 @@ Item {
                     anchors.verticalCenter: pepper.verticalCenter
 
                     onPressedChanged: {
-                            console.log("Going up!")
+                            naoqi.move("RIGHT", pressed)
                     }
             }
             IconButton {
@@ -69,7 +66,7 @@ Item {
                     anchors.horizontalCenter: pepper.horizontalCenter
 
                     onPressedChanged: {
-                            console.log("Going up!")
+                            naoqi.move("FORWARDS", pressed)
                     }
             }
             IconButton {
@@ -81,7 +78,7 @@ Item {
                     anchors.horizontalCenter: btn_right.horizontalCenter
 
                     onPressedChanged: {
-                            console.log("Going up!")
+                            naoqi.move("TURN_LEFT", pressed)
                     }
             }
             IconButton {
@@ -93,7 +90,7 @@ Item {
                     anchors.horizontalCenter: btn_left.horizontalCenter
 
                     onPressedChanged: {
-                            console.log("Going up!")
+                            naoqi.move("TURN_RIGHT", pressed)
                     }
             }
     }

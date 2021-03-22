@@ -38,7 +38,7 @@ Rectangle {
 
             drag.target: draggable ? parent:null
             onPressed: {
-                    console.log("Clicked!");
+                    //console.log("Clicked!");
                     if (replicate) duplicateObject(x=mouse.x, y=mouse.y);
             }
 

@@ -14,14 +14,14 @@ Item {
 
         IconButton {
             id: adult
-            source: "qrc:/res/account.svg"
+            source: "res/account.svg"
             replicate: true
             duplicateOwner: stage
         }
 
         IconButton {
             id: child
-            source: "qrc:/res/baby-face-outline.svg"
+            source: "res/baby-face-outline.svg"
             replicate: true
             duplicateOwner: stage
         }
@@ -29,7 +29,7 @@ Item {
 
         IconButton {
             id: remove
-            source: "qrc:/res/account-off.svg"
+            source: "res/account-off.svg"
              replicate: true
             duplicateOwner: stage
        }

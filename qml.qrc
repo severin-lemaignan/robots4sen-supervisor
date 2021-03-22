@@ -1,6 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Discover.qml</file>
+        <file>IconButton.qml</file>
+        <file>PhotoCapture.qml</file>
+        <file>Actions.qml</file>
         <file>res/access-point-check.svg</file>
         <file>res/access-point-remove.svg</file>
         <file>res/account-off.svg</file>
@@ -11,6 +15,12 @@
         <file>res/battery-alert.svg</file>
         <file>res/bell-alert.svg</file>
         <file>res/camera.svg</file>
+        <file>res/down.svg</file>
+        <file>res/hand-okay.svg</file>
+        <file>res/left.svg</file>
+        <file>res/pepper-proxemics.svg</file>
+        <file>res/pepper-top.svg</file>
+        <file>res/right.svg</file>
         <file>res/robot-angry-outline.svg</file>
         <file>res/robot-confused-outline.svg</file>
         <file>res/robot-dead-outline.svg</file>
@@ -18,18 +28,9 @@
         <file>res/robot-love-outline.svg</file>
         <file>res/robot-off-outline.svg</file>
         <file>res/robot-outline.svg</file>
-        <file>res/hand-okay.svg</file>
-        <file>Discover.qml</file>
-        <file>res/pepper-proxemics.svg</file>
-        <file>IconButton.qml</file>
-        <file>PhotoCapture.qml</file>
-        <file>Actions.qml</file>
+        <file>res/setup.pdf</file>
         <file>res/turn-left.svg</file>
         <file>res/turn-right.svg</file>
         <file>res/up.svg</file>
-        <file>res/down.svg</file>
-        <file>res/right.svg</file>
-        <file>res/left.svg</file>
-        <file>res/pepper-top.svg</file>
     </qresource>
 </RCC>

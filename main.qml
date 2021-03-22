@@ -45,14 +45,14 @@ Window {
             TabButton {
                 id: peopleLocalisationBtn
                 display: AbstractButton.IconOnly
-                icon.source: "qrc:/res/atom-variant.svg"
+                icon.source: "res/atom-variant.svg"
                 icon.height: parent.height * 0.7
                 icon.width: parent.height * 0.7            }
 
             TabButton {
                 id: actionsBtn
                 display: AbstractButton.IconOnly
-                icon.source: "qrc:/res/hand-okay.svg"
+                icon.source: "res/hand-okay.svg"
                 icon.height: parent.height * 0.7
                 icon.width: parent.height * 0.7
             }
@@ -60,7 +60,7 @@ Window {
             TabButton {
                 id: bookmarkBtn
                 display: AbstractButton.IconOnly
-                icon.source: "qrc:/res/bell-alert.svg"
+                icon.source: "res/bell-alert.svg"
                 icon.height: parent.height * 0.7
                 icon.width: parent.height * 0.7
            }
@@ -68,7 +68,7 @@ Window {
             TabButton {
                 id: captureBtn
                 display: AbstractButton.IconOnly
-                icon.source: "qrc:/res/camera.svg"
+                icon.source: "res/camera.svg"
                 icon.height: parent.height * 0.7
                 icon.width: parent.height * 0.7
             }
@@ -76,7 +76,7 @@ Window {
             TabButton {
                 id: settingsBtn
                 display: AbstractButton.IconOnly
-                icon.source: "qrc:/res/robot-confused-outline.svg"
+                icon.source: "res/robot-confused-outline.svg"
                 icon.height: parent.height * 0.7
                 icon.width: parent.height * 0.7
             }
