@@ -32,5 +32,27 @@
         <file>res/turn-left.svg</file>
         <file>res/turn-right.svg</file>
         <file>res/up.svg</file>
+        <file>Status.qml</file>
+        <file>res/robot-outline-white.svg</file>
+        <file>res/battery/battery-30.svg</file>
+        <file>res/battery/battery-20.svg</file>
+        <file>res/battery/battery-10.svg</file>
+        <file>res/battery/battery-charging-90.svg</file>
+        <file>res/battery/battery-charging-80.svg</file>
+        <file>res/battery/battery-charging-70.svg</file>
+        <file>res/battery/battery-charging-60.svg</file>
+        <file>res/battery/battery-charging-50.svg</file>
+        <file>res/battery/battery-charging-40.svg</file>
+        <file>res/battery/battery-charging-30.svg</file>
+        <file>res/battery/battery-charging-20.svg</file>
+        <file>res/battery/battery-charging-10.svg</file>
+        <file>res/battery/battery-charging.svg</file>
+        <file>res/battery/battery-90.svg</file>
+        <file>res/battery/battery-80.svg</file>
+        <file>res/battery/battery-70.svg</file>
+        <file>res/battery/battery-60.svg</file>
+        <file>res/battery/battery-50.svg</file>
+        <file>res/battery/battery-40.svg</file>
+        <file>res/battery/battery.svg</file>
     </qresource>
 </RCC>

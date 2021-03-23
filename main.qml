@@ -11,9 +11,15 @@ Window {
     height: 480
     title: qsTr("robots4SEN supervisor")
 
-       Page {
-           id: main
-           anchors.fill: parent
+    Page {
+        id: main
+        anchors.fill: parent
+
+        Status {
+            x: 15
+            y: 15
+
+        }
 
         SwipeView {
             anchors.fill:parent
@@ -36,6 +42,7 @@ Window {
                 id: settingsTab
             }
         }
+
 
 
         footer: TabBar {
@@ -63,7 +70,7 @@ Window {
                 icon.source: "res/bell-alert.svg"
                 icon.height: parent.height * 0.7
                 icon.width: parent.height * 0.7
-           }
+            }
 
             TabButton {
                 id: captureBtn
@@ -81,7 +88,7 @@ Window {
                 icon.width: parent.height * 0.7
             }
         }
-       }
+    }
 
 
 }

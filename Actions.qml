@@ -18,7 +18,7 @@ Item {
                     noborder: true
                     height: parent.width * 0.25
                     onPressedChanged: {
-                            naoqi.move("STOP", true)
+                            naoqi.move("STOP", true);
                     }
             }
 
@@ -30,7 +30,7 @@ Item {
                     anchors.topMargin: 20
                     anchors.horizontalCenter: pepper.horizontalCenter
                     onPressedChanged: {
-                            naoqi.move("BACKWARDS", pressed)
+                            naoqi.move("BACKWARDS", pressed);
                     }
             }
             IconButton {
@@ -66,7 +66,7 @@ Item {
                     anchors.horizontalCenter: pepper.horizontalCenter
 
                     onPressedChanged: {
-                            naoqi.move("FORWARDS", pressed)
+                            naoqi.move("FORWARDS", pressed);
                     }
             }
             IconButton {
