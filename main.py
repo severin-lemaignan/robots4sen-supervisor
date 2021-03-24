@@ -14,6 +14,10 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
 
+from naoqi import ALProxy, ALModule
+
+ROBOT_IP="hiccup.local"
+
 class NaoqiBridge(QObject):
 
     WATCHDOG_INTERVAL = 200 #ms
@@ -43,27 +47,57 @@ class NaoqiBridge(QObject):
         self._watchdog_timer.start()
 
         self.isConnected_changed.connect(self.on_isConnected_changed)
-        self.count = 0
+
+        self.connectToRobot()
+
+
+    def connectToRobot(self):
+
+        if self._connected:
+            return True
+
+        try:
+            logger.info("Trying to connect to %s:%s..." % (ROBOT_IP, 9559))
+            self.tts = ALProxy("ALTextToSpeech", ROBOT_IP, 9559)
+            self.almotion = ALProxy("ALMotion", ROBOT_IP, 9559)
+            self.albattery = ALProxy("ALBattery", ROBOT_IP, 9559)
+            self.almemory = ALProxy("ALMemory", ROBOT_IP, 9559)
+        except RuntimeError:
+            logger.info("Unable to connect. Robot unreachable.")
+            self._connected = False
+            return False
+        
+        logger.info("Robot connected!")
+        self._connected = True
+        self.isConnected_changed.emit(self._connected)
+
+        return True
 
 
     def checkAlive(self):
 
-        self._battery_level = (math.sin(self.count/10) + 1) / 2
-        self.battery_changed.emit(self._battery_level)
+        if not self._connected:
+            # try to reconnect...
+            if not self.connectToRobot():
+                return
 
-        if self.count < 5:
-            if self._connected != True:
-                self._connected = True
-                self.isConnected_changed.emit(self._connected)
-
-                print("Connected")
-        else:
-            if self._connected != False:
-                print("Disconnected")
+        try:
+            self._battery_level = self.albattery.getBatteryCharge()/100.
+        except RuntimeError:
+            if self._connected:
+                logger.error("Robot disconnected!")
                 self._connected = False
                 self.isConnected_changed.emit(self._connected)
-            
-        self.count += 1
+            return
+
+        self.battery_changed.emit(self._battery_level)
+
+        plugged = self.almemory.getData("ALBattery/ConnectedToChargingStation")
+        if plugged != self._plugged:
+            logger.warning("Robot plugged status = %s" % plugged)
+            self._plugged = plugged
+            self.isPlugged_changed.emit(self._plugged)
+
 
 
     @Property(bool, notify=isConnected_changed)
@@ -86,20 +120,46 @@ class NaoqiBridge(QObject):
     @Slot(str, bool)
     def move(self, direction, active):
 
+        if not self._connected:
+            logger.warning("Robot not connected. Can not perform 'move'")
+            return
+
         if direction == NaoqiBridge.STOP:
-            logger.info("Stopping now")
+            self.almotion.stopMove()
 
         elif direction == NaoqiBridge.FORWARDS:
             if active:
-                logger.info("Starting moving forward")
+                self.almotion.moveToward(0.5,0,0)
             else:
-                logger.info("Stopping moving forward")
+                self.almotion.stopMove()
 
         elif direction == NaoqiBridge.BACKWARDS:
             if active:
-                logger.info("Starting moving backward")
+                self.almotion.moveToward(-0.3,0,0)
             else:
-                logger.info("Stopping moving backward")
+                self.almotion.stopMove()
+
+        elif direction == NaoqiBridge.LEFT:
+            if active:
+                self.almotion.moveToward(0,0.2, 0)
+            else:
+                self.almotion.stopMove()
+
+        elif direction == NaoqiBridge.RIGHT:
+            if active:
+                self.almotion.moveToward(0,-0.2, 0)
+            else:
+                self.almotion.stopMove()
+        elif direction == NaoqiBridge.TURN_RIGHT:
+            if active:
+                self.almotion.moveToward(0,0, -0.2)
+            else:
+                self.almotion.stopMove()
+        elif direction == NaoqiBridge.TURN_LEFT:
+            if active:
+                self.almotion.moveToward(0,0, 0.2)
+            else:
+                self.almotion.stopMove()
 
 if __name__ == "__main__":
     app = QGuiApplication(sys.argv)
