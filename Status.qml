@@ -26,6 +26,7 @@ Item {
             id: battery
             anchors.left: connection.right
             anchors.leftMargin: 0
+            visible: naoqi.connected
             source: naoqi.plugged ? (
                         naoqi.battery < 0.1 ? "res/battery/battery-charging-10.svg":
                         naoqi.battery < 0.2 ? "res/battery/battery-charging-20.svg":
