@@ -1,6 +1,7 @@
 # utf-8
 
-import math
+
+import argparse
 
 import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
@@ -14,9 +15,7 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
 
-from naoqi import ALProxy, ALModule
-
-ROBOT_IP="hiccup.local"
+import qi
 
 class NaoqiBridge(QObject):
 
@@ -34,8 +33,12 @@ class NaoqiBridge(QObject):
     isPlugged_changed = Signal(bool)
     battery_changed = Signal(float)
 
-    def __init__(self):
+    def __init__(self, args):
         QObject.__init__(self)
+
+        self._ip = args.ip
+        self._port = str(args.port)
+        self._session = qi.Session()
 
         self._connected = False
         self._plugged = False
@@ -57,15 +60,18 @@ class NaoqiBridge(QObject):
             return True
 
         try:
-            logger.info("Trying to connect to %s:%s..." % (ROBOT_IP, 9559))
-            self.tts = ALProxy("ALTextToSpeech", ROBOT_IP, 9559)
-            self.almotion = ALProxy("ALMotion", ROBOT_IP, 9559)
-            self.albattery = ALProxy("ALBattery", ROBOT_IP, 9559)
-            self.almemory = ALProxy("ALMemory", ROBOT_IP, 9559)
+            logger.info("Trying to connect to %s:%s..." % (self._ip, self._port))
+            self._session.connect("tcp://" + self._ip + ":" + self._port)
         except RuntimeError:
-            logger.info("Unable to connect. Robot unreachable.")
+            logger.error("Can't connect to Naoqi at ip \"" + self._ip + "\" on port " + self._port +".\n"
+               "Please check your script arguments. Run with -h option for help.")
+        
             self._connected = False
             return False
+
+        self.almotion = self._session.service("ALMotion")
+        self.albattery = self._session.service("ALBattery")
+        self.almemory = self._session.service("ALMemory")
         
         logger.info("Robot connected!")
         self._connected = True
@@ -162,11 +168,22 @@ class NaoqiBridge(QObject):
                 self.almotion.stopMove()
 
 if __name__ == "__main__":
+
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--ip", type=str, default="127.0.0.1",
+                        help="Robot IP address. On robot or Local Naoqi: use '127.0.0.1'.")
+    parser.add_argument("--port", type=int, default=9559,
+                        help="Naoqi port number")
+
+    args = parser.parse_args()
+
+
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
 
     # Instance of the Python object
-    bridge = NaoqiBridge()
+    bridge = NaoqiBridge(args)
 
     # Expose the Python object to QML
     context = engine.rootContext()
