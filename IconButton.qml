@@ -10,6 +10,7 @@ Rectangle {
     property bool disabled: false
     property bool noborder: false
     property var duplicateOwner
+    property string label: ""
 
     property alias pressed: dragArea.pressed
 
@@ -21,6 +22,7 @@ Rectangle {
 
 
     Image {
+        id: icon
         width: parent.width * (noborder ? 1 : 0.8)
         height: width
         sourceSize.width: width
@@ -28,6 +30,16 @@ Rectangle {
         anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
         source: parent.source
+    }
+
+    Text {
+        id: icon_label
+        text: parent.label
+        styleColor: "#ffffff"
+        style: Text.Outline
+        anchors.bottom: icon.bottom
+        anchors.bottomMargin: 0
+        anchors.horizontalCenter: icon.horizontalCenter
     }
 
     MouseArea {
