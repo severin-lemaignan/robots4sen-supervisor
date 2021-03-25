@@ -108,6 +108,7 @@ Item {
             anchors.right: parent.right
             height: parent.height
             Item {
+                       visible:false
                     id: expressions
                     height: 86
                     anchors.left: parent.left
@@ -214,36 +215,48 @@ Item {
                             delegate: IconButton{
                                     noborder:true
                                     source:image //we use this name in ListModel
+                                    label: action
                                     onPressedChanged: {
-                                            console.log("Hello");
+                                                if (pressed) {
+                                                    naoqi.animate(action);
+                                                }
                                     }
+
                             }
                     }
                     ListModel {
 
                             id: list_gestures
                             ListElement {
+                                    action: "unknown"
                                     image: "res/robot-angry-outline.svg"
                             }
                             ListElement {
+                                    action: "hello"
                                     image: "res/robot-love-outline.svg"
                             }
                             ListElement {
+                                    action: "calm"
                                     image: "res/robot-angry-outline.svg"
                             }
                             ListElement {
+                                    action: "bored"
                                     image: "res/robot-love-outline.svg"
                             }
                             ListElement {
+                                    action: "disappointed"
                                     image: "res/robot-angry-outline.svg"
                             }
                             ListElement {
+                                    action: "embarassed"
                                     image: "res/robot-love-outline.svg"
                             }
                             ListElement {
+                                    action: "happy"
                                     image: "res/robot-angry-outline.svg"
                             }
                             ListElement {
+                                    action: "explain"
                                     image: "res/robot-love-outline.svg"
                             }
                     }

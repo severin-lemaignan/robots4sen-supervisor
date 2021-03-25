@@ -72,6 +72,7 @@ class NaoqiBridge(QObject):
         self.almotion = self._session.service("ALMotion")
         self.albattery = self._session.service("ALBattery")
         self.almemory = self._session.service("ALMemory")
+        self.alanimationplayer = self._session.service("ALAnimationPlayer")
         
         logger.info("Robot connected!")
         self._connected = True
@@ -121,6 +122,22 @@ class NaoqiBridge(QObject):
     @Slot()
     def on_isConnected_changed(self, value):
         logging.warning("Connection status changed! connected=%s" % value)
+
+
+    @Slot(str)
+    def animate(self, animation):
+        """
+        Argument is one of the available animation tag. See
+        http://doc.aldebaran.com/2-5/naoqi/motion/alanimationplayer-advanced.html#animationplayer-tags-pepper
+        """
+
+        if not self._connected:
+            logger.warning("Robot not connected. Can not perform 'animate'")
+            return
+
+        logging.debug("Running animation tag <%s>" % animation)
+        future = self.alanimationplayer.runTag("hello", _async=True)
+        future.value() # wait until the animation is complete
 
 
     @Slot(str, bool)
