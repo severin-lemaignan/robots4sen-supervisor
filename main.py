@@ -98,7 +98,7 @@ class NaoqiBridge(QObject):
 
         self.battery_changed.emit(self._battery_level)
 
-        plugged = self.almemory.getData("ALBattery/ConnectedToChargingStation")
+        plugged = self.almemory.getData("Device/SubDeviceList/Battery/Charge/Sensor/Power") > 0
         if plugged != self._plugged:
             logger.warning("Robot plugged status = %s" % plugged)
             self._plugged = plugged
