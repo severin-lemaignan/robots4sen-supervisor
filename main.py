@@ -135,35 +135,35 @@ class NaoqiBridge(QObject):
 
         elif direction == NaoqiBridge.FORWARDS:
             if active:
-                self.almotion.moveToward(0.5,0,0)
+                self.almotion.moveToward(0.6,0,0)
             else:
                 self.almotion.stopMove()
 
         elif direction == NaoqiBridge.BACKWARDS:
             if active:
-                self.almotion.moveToward(-0.3,0,0)
+                self.almotion.moveToward(-0.4,0,0)
             else:
                 self.almotion.stopMove()
 
         elif direction == NaoqiBridge.LEFT:
             if active:
-                self.almotion.moveToward(0,0.2, 0)
+                self.almotion.moveToward(0,0.3, 0)
             else:
                 self.almotion.stopMove()
 
         elif direction == NaoqiBridge.RIGHT:
             if active:
-                self.almotion.moveToward(0,-0.2, 0)
+                self.almotion.moveToward(0,-0.3, 0)
             else:
                 self.almotion.stopMove()
         elif direction == NaoqiBridge.TURN_RIGHT:
             if active:
-                self.almotion.moveToward(0,0, -0.2)
+                self.almotion.moveToward(0,0, -0.3)
             else:
                 self.almotion.stopMove()
         elif direction == NaoqiBridge.TURN_LEFT:
             if active:
-                self.almotion.moveToward(0,0, 0.2)
+                self.almotion.moveToward(0,0, 0.3)
             else:
                 self.almotion.stopMove()
 
