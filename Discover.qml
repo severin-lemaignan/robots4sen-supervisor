@@ -45,6 +45,22 @@ Item {
         source: "res/pepper-proxemics.svg"
         fillMode: Image.PreserveAspectFit
     }
+
+    Timer {
+        interval: 500; running: true; repeat: true
+        onTriggered: {
+            console.log("People:");
+            for(var idx in naoqi.people){
+                console.log("Person " + naoqi.people[idx].id + " at " + naoqi.people[idx].x + ", " + naoqi.people[idx].y);
+                //var component = Qt.createComponent("IconButton.qml");
+                //var sprite = component.createObject(discovery, {x: 100, y: 100});
+
+            }
+        }
+    }
+
+
+
     }
 
 
