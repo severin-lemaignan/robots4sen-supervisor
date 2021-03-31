@@ -20,14 +20,6 @@ Rectangle {
     border.width: noborder ? 0 : 4
     radius: height/2
 
-    onXChanged: {
-        console.log("X changed: " + x);
-    }
-
-    function test(double val) {
-        console.log("Got val " + val);
-    }
-
     Image {
         id: icon
         width: parent.width * (noborder ? 1 : 0.8)

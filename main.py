@@ -7,9 +7,9 @@ import sys
 from os.path import abspath, dirname, join
 
 from PySide2.QtGui import QGuiApplication
-from PySide2.QtQml import QQmlApplicationEngine
+from PySide2.QtQml import QQmlApplicationEngine,qmlRegisterType
 
-from naoqibridge import NaoqiBridge
+from naoqibridge import NaoqiBridge, Person
 
 if __name__ == "__main__":
 
@@ -24,6 +24,7 @@ if __name__ == "__main__":
 
 
     app = QGuiApplication(sys.argv)
+    qmlRegisterType(Person, 'Naoqi', 1, 0, 'Person')
     engine = QQmlApplicationEngine()
 
     # Instance of the Python object

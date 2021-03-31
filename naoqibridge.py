@@ -4,6 +4,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 logger = logging.getLogger("logger")
 
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
+
 import qi
 
 class People(QObject):
@@ -11,14 +12,13 @@ class People(QObject):
     def __init__(self):
         QObject.__init__(self)
 
-        self._people = {}
+        self._people = set()
 
-    onNewPerson = Signal(QObject)
+    onNewPerson = Signal(str)
 
     def update(self):
 
         p = self.add_person("hello")
-        p.setlocation([p.x + 5, p.y, 0])
         return
 
         # TODO: be more clever: only update coordinates when they are significantly different
@@ -37,23 +37,37 @@ class People(QObject):
 
         if id in self._people:
             print("Python: person %s is already known. Skipping" % id)
-            return self._people[id]
+            return False
 
         print("Python: adding new person %s" % id)
-        self._people[id] = Person(id)
-        self.onNewPerson.emit(self._people[id])
+        self._people.add(id)
+        self.onNewPerson.emit(id)
 
-        return self._people[id]
+        return True
 
 
 
 class Person(QObject):
 
-    def __init__(self, id):
+    def __init__(self):
         QObject.__init__(self)
 
-        self._id = id
+        self._person_id = "default"
         self._location = [0., 0., 0.]
+        print("Created new person %s" % self._person_id)
+
+        self._watchdog_timer = QTimer(self)
+        self._watchdog_timer.setInterval(NaoqiBridge.WATCHDOG_INTERVAL)
+        self._watchdog_timer.timeout.connect(self.update)
+        self._watchdog_timer.start()
+
+
+    def update(self):
+
+        self.setlocation([self.x + 5, self.y, 0])
+        return
+
+        self.almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % id)
 
     def setlocation(self, location):
         self._location = location
@@ -61,10 +75,19 @@ class Person(QObject):
         self.y_changed.emit(self.y)
         self.moved.emit()
 
-    def _get_id(self):
-        return self._id
+    person_id_changed = Signal(str)
 
-    id = Property(str, _get_id, constant=True)
+
+    def set_person_id(self, id):
+        self._person_id = id
+        self.person_id_changed.emit(id)
+        print("Person id now %s" % self._person_id)
+
+    def get_person_id(self):
+        return self._person_id
+
+    person_id = Property(str, get_person_id, set_person_id, notify=person_id_changed)
+
 
     moved = Signal()
 

@@ -3,6 +3,7 @@ import QtQuick.Controls 2.3
 
 Item {
     id: discovery
+
     Row {
         id: menu
         anchors.rightMargin: 10
@@ -39,47 +40,30 @@ Item {
         id: stage
         anchors.fill: parent
 
-    Image {
-        id: proxemics
-        anchors.fill: parent
-        source: "res/pepper-proxemics.svg"
-        fillMode: Image.PreserveAspectFit
-    }
-
-    Timer {
-        interval: 500; running: false; repeat: true
-        onTriggered: {
-            console.log("People:");
-            for(var idx in naoqi.people){
-                console.log("Person " + naoqi.people[idx].id + " at " + naoqi.people[idx].x + ", " + naoqi.people[idx].y);
-
-            }
+        Image {
+            id: proxemics
+            anchors.fill: parent
+            source: "res/pepper-proxemics.svg"
+            fillMode: Image.PreserveAspectFit
         }
     }
 
 
+    /////////////////////////////////////////////////////////////////////////
+    // connection with the naoqi.people object to create a new 'person' when
+    // detected
 
+    signal newPerson(string person)
+    
+    Component.onCompleted: {
+        naoqi.people.onNewPerson.connect(discovery.newPerson)
     }
-
-
-    Component.onCompleted: naoqi.people.onNewPerson.connect(discovery.newPerson)
-
-    signal newPerson(QtObject person)
 
     onNewPerson: {
-            console.log("tiptop: " + person.id + " arrived");
-            var component = Qt.createComponent("IconButton.qml");
-            //var icon = component.createObject(discovery, {x: Qt.binding(function(){person.x}), y: Qt.binding(function(){person.y}),source: "res/baby-face-outline.svg"});
-            var icon = component.createObject(discovery, {source: "res/baby-face-outline.svg"});
-
-            person.x_changed.connect(discovery.valChanged);
-            person.x_changed.connect(icon.test);
-        }
-
-
-    signal valChanged(double val)
-
-    onValChanged: {
-        console.log("got val: " + val);
+        var cmpt = Qt.createComponent("PersonIcon.qml");
+        cmpt.createObject(discovery, {person_id: person});
     }
+    /////////////////////////////////////////////////////////////////////////
+
+
 }
