@@ -10,13 +10,16 @@ import time
 
 import random
 
+#URL = "http://169.254.127.4:8000/"
+URL = "https://pepper.local/"
+
 def main(session):
 
     tabletService = session.service("ALTabletService")
     animation_player_service = session.service("ALAnimationPlayer")
 
     try:
-        tabletService.showWebview("https://research.skadge.org/robots4sen?" + str(random.randint(0,10000)))
+        tabletService.showWebview(URL + "?" + str(random.randint(0,10000)))
 
         # Javascript script for displaying a prompt
         # ALTabletBinding is a javascript binding inject in the web page displayed on the tablet

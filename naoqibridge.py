@@ -6,28 +6,74 @@ logger = logging.getLogger("logger")
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 import qi
 
+class People(QObject):
+
+    def __init__(self):
+        QObject.__init__(self)
+
+        self._people = {}
+
+    onNewPerson = Signal(QObject)
+
+    def update(self):
+
+        p = self.add_person("hello")
+        p.setlocation([p.x + 5, p.y, 0])
+        return
+
+        # TODO: be more clever: only update coordinates when they are significantly different
+        self._people = {}
+
+        for id in self.almemory.getData("PeoplePerception/PeopleList"):
+             self._people[str(id)] = self.almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % id)
+
+        self.person = Person('612102')
+        self.person.setlocation([1.4263619184494019, 0.09372032433748245, 0.48271995782852173])
+        self._people = [self.person,]
+
+        return self._people
+
+    def add_person(self, id):
+
+        if id in self._people:
+            print("Python: person %s is already known. Skipping" % id)
+            return self._people[id]
+
+        print("Python: adding new person %s" % id)
+        self._people[id] = Person(id)
+        self.onNewPerson.emit(self._people[id])
+
+        return self._people[id]
+
+
+
 class Person(QObject):
 
     def __init__(self, id):
         QObject.__init__(self)
 
         self._id = id
-        self._location = [0, 0, 0.]
+        self._location = [0., 0., 0.]
 
     def setlocation(self, location):
         self._location = location
+        self.x_changed.emit(self.x)
+        self.y_changed.emit(self.y)
+        self.moved.emit()
 
     def _get_id(self):
         return self._id
 
     id = Property(str, _get_id, constant=True)
 
-    x_changed = Signal(bool)
+    moved = Signal()
+
+    x_changed = Signal(float)
     @Property(float, notify=x_changed)
     def x(self):
         return self._location[0]
 
-    y_changed = Signal(bool)
+    y_changed = Signal(float)
     @Property(float, notify=y_changed)
     def y(self):
         return self._location[1]
@@ -52,8 +98,6 @@ class NaoqiBridge(QObject):
     isPlugged_changed = Signal(bool)
     battery_changed = Signal(float)
 
-    people_changed = Signal('QVariant')
-
     def __init__(self, args):
         QObject.__init__(self)
 
@@ -65,7 +109,7 @@ class NaoqiBridge(QObject):
         self._plugged = False
         self._battery_level = 0.5
 
-        self._people = {}
+        self._people = People()
 
         self._watchdog_timer = QTimer(self)
         self._watchdog_timer.setInterval(NaoqiBridge.WATCHDOG_INTERVAL)
@@ -111,21 +155,6 @@ class NaoqiBridge(QObject):
         self.almotion.setOrthogonalSecurityDistance(0.1)
         self.almotion.setTangentialSecurityDistance(0.05)
 
-    def getPeopleList(self):
-
-        # TODO: be more clever: only update coordinates when they are significantly different
-        self._people = {}
-
-        for id in self.almemory.getData("PeoplePerception/PeopleList"):
-             self._people[str(id)] = self.almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % id)
-
-        self.person = Person('612102')
-        self.person.setlocation([1.4263619184494019, 0.09372032433748245, 0.48271995782852173])
-        self._people = [self.person,]
-
-        self.people_changed.emit(self._people)
-        return self._people
-
     def checkAlive(self):
 
         if not self._connected:
@@ -155,7 +184,7 @@ class NaoqiBridge(QObject):
             self._plugged = plugged
             self.isPlugged_changed.emit(self._plugged)
 
-        self.getPeopleList()
+        self.people.update()
 
 
     @Property(bool, notify=isConnected_changed)
@@ -170,9 +199,9 @@ class NaoqiBridge(QObject):
     def battery(self):
         return self._battery_level
 
-    @Property('QVariantList', notify=people_changed)
-    def people(self):
+    def _get_people(self):
         return self._people
+    people = Property(QObject, _get_people, constant=True)
 
     @Slot()
     def on_isConnected_changed(self, value):
