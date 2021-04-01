@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
+
 import Naoqi 1.0
 
 Item {
@@ -19,6 +20,7 @@ Item {
     }
 
     IconButton {
+        id: icon
 
         x: person.x * meters_to_px
         y: -person.y * meters_to_px
@@ -30,9 +32,22 @@ Item {
 
         Behavior on x { PropertyAnimation {} }
         Behavior on y { PropertyAnimation {} }
-        
+
         source: "res/baby-face-outline.svg"
+
+        Rectangle {
+            id: indicator
+            anchors.left: parent.left
+            anchors.top: parent.top
+
+            width: 6
+            height: width
+            radius: width/2
+
+            color: person.known ? 'green' : 'orange'
+        }
     }
+
 
     signal disappearedPerson(string person_id)
 

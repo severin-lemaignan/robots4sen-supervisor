@@ -8,6 +8,7 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 import qi
 
 almemory = None
+alusersession = None
 
 class People(QObject):
 
@@ -27,6 +28,11 @@ class People(QObject):
 
         ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
 
+        #print("UserSession:" + str(alusersession.getOpenUserSessions()))
+        #for user_id in alusersession.getOpenUserSessions():
+        #    ppid = alusersession.getPpidFromUsid(user_id)
+        #    print("User <%s> -> Person <%s>" % (user_id, ppid))
+
         new_ids = ids - self._people
         vanished_ids = self._people - ids
 
@@ -40,24 +46,14 @@ class People(QObject):
 
         self._people = ids
 
-    def add_person(self, id):
-
-        if id in self._people:
-            print("Python: person %s is already known. Skipping" % id)
-            return False
-
-        print("Python: adding new person %s" % id)
-
-        return True
-
-
 
 class Person(QObject):
 
     def __init__(self):
         QObject.__init__(self)
 
-        self._person_id = "default"
+        self._person_id = 0
+        self._user_id = 0
         self._location = [0., 0., 0.]
 
         self.visible = True
@@ -70,11 +66,14 @@ class Person(QObject):
 
     def update(self):
 
-
-
         # connected yet?
         if not almemory:
             return
+
+        old_user_id = self._user_id
+        self._user_id = alusersession.getUsidFromPpid(self._person_id)
+        if self._user_id != old_user_id:
+            self.known_changed.emit(self.known)
 
         try:
             pose = almemory.getData("PeoplePerception/Person/%s/PositionInRobotFrame" % self._person_id)
@@ -94,17 +93,22 @@ class Person(QObject):
 
 
     def set_person_id(self, id):
-        self._person_id = id
-        self.person_id_changed.emit(id)
+        self._person_id = int(id)
+        self.person_id_changed.emit(str(id))
         print("Person id now %s" % self._person_id)
 
     def get_person_id(self):
-        return self._person_id
+        return str(self._person_id)
 
     person_id = Property(str, get_person_id, set_person_id, notify=person_id_changed)
 
 
     moved = Signal()
+
+    known_changed = Signal(bool)
+    @Property(bool, notify=known_changed)
+    def known(self):
+        return self._user_id != 0
 
     x_changed = Signal(float)
     @Property(float, notify=x_changed)
@@ -161,7 +165,7 @@ class NaoqiBridge(QObject):
 
 
     def connectToRobot(self):
-        global almemory
+        global almemory, alusersession
 
         if self._connected:
             return True
@@ -181,6 +185,7 @@ class NaoqiBridge(QObject):
         almemory = self._session.service("ALMemory")
         self.alanimationplayer = self._session.service("ALAnimationPlayer")
         self.alpeople = self._session.service("ALPeoplePerception")
+        alusersession = self._session.service("ALUserSession")
         
         logger.info("Robot connected!")
         self._connected = True
