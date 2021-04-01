@@ -25,4 +25,13 @@ Item {
         source: "res/baby-face-outline.svg"
     }
 
+    signal disappearedPerson(string person_id)
+
+    onDisappearedPerson: {
+        if (person_id == person.person_id) {
+            console.log("I, Person " + person_id + ", have disappeared!");
+            opacity = 0.5;
+        }
+    }
+
 }

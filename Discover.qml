@@ -56,12 +56,14 @@ Item {
     signal newPerson(string person)
     
     Component.onCompleted: {
-        naoqi.people.onNewPerson.connect(discovery.newPerson)
+        naoqi.people.newPerson.connect(discovery.newPerson)
     }
 
     onNewPerson: {
         var cmpt = Qt.createComponent("PersonIcon.qml");
-        cmpt.createObject(discovery, {person_id: person});
+        var person = cmpt.createObject(discovery, {person_id: person});
+        naoqi.people.disappearedPerson.connect(person.disappearedPerson)
+
     }
     /////////////////////////////////////////////////////////////////////////
 

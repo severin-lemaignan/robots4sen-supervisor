@@ -7,6 +7,8 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
 import qi
 
+almemory = None
+
 class People(QObject):
 
     def __init__(self):
@@ -14,24 +16,29 @@ class People(QObject):
 
         self._people = set()
 
-    onNewPerson = Signal(str)
+    newPerson = Signal(str)
+    disappearedPerson = Signal(str)
 
     def update(self):
 
-        p = self.add_person("hello")
-        return
+        # connected yet?
+        if not almemory:
+            return
 
-        # TODO: be more clever: only update coordinates when they are significantly different
-        self._people = {}
+        ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
 
-        for id in self.almemory.getData("PeoplePerception/PeopleList"):
-             self._people[str(id)] = self.almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % id)
+        new_ids = ids - self._people
+        vanished_ids = self._people - ids
 
-        self.person = Person('612102')
-        self.person.setlocation([1.4263619184494019, 0.09372032433748245, 0.48271995782852173])
-        self._people = [self.person,]
+        for id in new_ids:
+            logger.debug("New person <%s>" % id)
+            self.newPerson.emit(id)
 
-        return self._people
+        for id in vanished_ids:
+            logger.debug("Person <%s> disappeared" % id)
+            self.disappearedPerson.emit(id)
+
+        self._people = ids
 
     def add_person(self, id):
 
@@ -40,8 +47,6 @@ class People(QObject):
             return False
 
         print("Python: adding new person %s" % id)
-        self._people.add(id)
-        self.onNewPerson.emit(id)
 
         return True
 
@@ -67,7 +72,12 @@ class Person(QObject):
         self.setlocation([self.x + 5, self.y, 0])
         return
 
-        self.almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % id)
+
+        # connected yet?
+        if not almemory:
+            return
+
+        almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % id)
 
     def setlocation(self, location):
         self._location = location
@@ -145,6 +155,7 @@ class NaoqiBridge(QObject):
 
 
     def connectToRobot(self):
+        global almemory
 
         if self._connected:
             return True
@@ -161,7 +172,7 @@ class NaoqiBridge(QObject):
 
         self.almotion = self._session.service("ALMotion")
         self.albattery = self._session.service("ALBattery")
-        self.almemory = self._session.service("ALMemory")
+        almemory = self._session.service("ALMemory")
         self.alanimationplayer = self._session.service("ALAnimationPlayer")
         self.alpeople = self._session.service("ALPeoplePerception")
         
@@ -197,7 +208,7 @@ class NaoqiBridge(QObject):
         self.battery_changed.emit(self._battery_level)
 
         try:
-            plugged = self.almemory.getData("Device/SubDeviceList/Battery/Charge/Sensor/Power") > 0
+            plugged = almemory.getData("Device/SubDeviceList/Battery/Charge/Sensor/Power") > 0
         except RuntimeError:
             # not connected to the real robot -- the ALMemory key does not exist
             plugged = False
