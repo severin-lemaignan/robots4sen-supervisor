@@ -59,25 +59,30 @@ class Person(QObject):
 
         self._person_id = "default"
         self._location = [0., 0., 0.]
-        print("Created new person %s" % self._person_id)
+
+        self.visible = True
 
         self._watchdog_timer = QTimer(self)
-        self._watchdog_timer.setInterval(NaoqiBridge.WATCHDOG_INTERVAL)
+        self._watchdog_timer.setInterval(NaoqiBridge.PEOPLE_UPDATE_INTERVAL)
         self._watchdog_timer.timeout.connect(self.update)
         self._watchdog_timer.start()
 
 
     def update(self):
 
-        self.setlocation([self.x + 5, self.y, 0])
-        return
 
 
         # connected yet?
         if not almemory:
             return
 
-        almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % id)
+        try:
+            pose = almemory.getData("PeoplePerception/Person/%s/PositionInRobotFrame" % self._person_id)
+            self.setlocation(pose)
+
+        except RuntimeError:
+            self.visible = False
+
 
     def setlocation(self, location):
         self._location = location
@@ -118,6 +123,7 @@ class Person(QObject):
 class NaoqiBridge(QObject):
 
     WATCHDOG_INTERVAL = 200 #ms
+    PEOPLE_UPDATE_INTERVAL = 200 #ms
 
     STOP = "STOP"
     FORWARDS = "FORWARDS"

@@ -36,6 +36,7 @@ Rectangle {
         text: parent.label
         styleColor: "#ffffff"
         style: Text.Outline
+        font.pixelSize: 20/70 * parent.height
         anchors.bottom: icon.bottom
         anchors.bottomMargin: 0
         anchors.horizontalCenter: icon.horizontalCenter
