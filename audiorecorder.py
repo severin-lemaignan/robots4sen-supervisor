@@ -1,4 +1,8 @@
-# This Python file uses the following encoding: utf-8
+# utf-8
+
+import logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
+logger = logging.getLogger("audiorecorder")
 
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 from PySide2.QtMultimedia import QMultimedia, QAudioRecorder, QAudioEncoderSettings,QVideoEncoderSettings
@@ -60,9 +64,22 @@ class AudioRecorder(QObject):
             settings, QVideoEncoderSettings(), selected_container
         )
 
-        filename = "test.mp3"
-        self.recorder.setOutputLocation(QUrl.fromLocalFile(filename))
 
+    duration_changed = Signal(int)
+    @Property(int, notify=duration_changed)
+    def duration(self):
+        return self.recorder.duration
+
+    location_changed = Signal(QUrl)
+
+    def get_location(self):
+        return self.recorder.outputLocation()
+
+    def set_location(self, location):
+        logger.info("Recording to " + str(location))
+        self.recorder.setOutputLocation(location)
+
+    location = Property(QUrl, get_location, set_location, notify=location_changed)
 
     @Slot()
     def record(self):

@@ -13,15 +13,39 @@ Window {
     height: 480
     title: qsTr("robots4SEN supervisor")
 
-    AudioRecorder {}
 
     Page {
         id: main
         anchors.fill: parent
 
         Status {
+            id: status
             x: 15
             y: 15
+        }
+
+        IconButton {
+            anchors.left: status.left
+            anchors.top: status.bottom
+            anchors.topMargin: 20
+            height: status.height
+
+            source: "res/microphone.svg"
+
+            AudioRecorder {
+                id: audiorecorder
+                location: "test.ogg"
+            }
+
+            onPressedChanged: {
+                if (pressed) {
+                    audiorecorder.record();
+                }
+                else {
+                    audiorecorder.stop();
+                }
+            }
+
 
         }
 
@@ -99,6 +123,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:2;anchors_width:240;anchors_x:35;anchors_y:27}D{i:1;anchors_height:400;anchors_width:200}
+    D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/

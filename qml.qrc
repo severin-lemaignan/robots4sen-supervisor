@@ -54,5 +54,6 @@
         <file>res/battery/battery-50.svg</file>
         <file>res/battery/battery-40.svg</file>
         <file>res/battery/battery.svg</file>
+        <file>res/microphone.svg</file>
     </qresource>
 </RCC>
