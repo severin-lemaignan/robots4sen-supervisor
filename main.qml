@@ -3,6 +3,8 @@ import QtQuick.Window 2.10
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 
+import Naoqi 1.0
+
 
 Window {
     id: window
@@ -10,6 +12,8 @@ Window {
     width: 640
     height: 480
     title: qsTr("robots4SEN supervisor")
+
+    AudioRecorder {}
 
     Page {
         id: main
