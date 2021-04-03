@@ -64,11 +64,16 @@ class AudioRecorder(QObject):
             settings, QVideoEncoderSettings(), selected_container
         )
 
+        self.recorder.durationChanged.connect(self.handle_durationChanged)
+
+
+    def handle_durationChanged(self, progress):
+        self.duration_changed.emit(progress)
 
     duration_changed = Signal(int)
     @Property(int, notify=duration_changed)
     def duration(self):
-        return self.recorder.duration
+        return int(self.recorder.duration())
 
     location_changed = Signal(QUrl)
 

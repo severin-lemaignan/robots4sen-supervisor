@@ -24,25 +24,77 @@ Window {
             y: 15
         }
 
+        Rectangle {
+            anchors.right: record_btn.horizontalCenter
+            height: record_btn.height
+            anchors.top: record_btn.top
+            anchors.left: parent.left
+
+            color: "#f66151"
+        }
+
+        Rectangle {
+            id: record_modal
+            z: 10
+            anchors.fill: parent
+            visible: false
+
+            color: "#cc000000"
+
+            Image {
+                id: mic
+                anchors.centerIn: parent
+                source: "res/microphone.svg"
+                width: 100
+                height: width
+                sourceSize.width: width
+                sourceSize.height: height
+            }
+
+            Text {
+                anchors.horizontalCenter: mic.horizontalCenter
+                anchors.top: mic.bottom
+                anchors.topMargin: 30
+
+                font.pointSize: 12
+
+                //text: (audiorecorder.duration/1000).toFixed(2) + "s"
+                text: "(release to stop recording)"
+                color: "#cccccc"
+            }
+
+
+
+        }
+
+
         IconButton {
+            id: record_btn
+
             anchors.left: status.left
             anchors.top: status.bottom
-            anchors.topMargin: 20
-            height: status.height
+            anchors.topMargin: 30
+            height: 50
+
+            noborder: true
 
             source: "res/microphone.svg"
 
             AudioRecorder {
                 id: audiorecorder
-                location: "test.ogg"
+                location: "default.ogg"
             }
 
             onPressedChanged: {
                 if (pressed) {
+                    var dateTime = new Date().toLocaleString(Qt.locale("en_GB"), "yyyy-MM-dd-HH-mm-ss");
+                    audiorecorder.location = "./audionote-" + dateTime + ".ogg"
                     audiorecorder.record();
+                    record_modal.visible = true;
                 }
                 else {
                     audiorecorder.stop();
+                    record_modal.visible = false;
                 }
             }
 
