@@ -3,6 +3,8 @@
 
 import argparse
 
+import threading
+import os
 import sys
 from os.path import abspath, dirname, join
 
@@ -11,6 +13,8 @@ from PySide2.QtQml import QQmlApplicationEngine,qmlRegisterType
 
 from naoqibridge import NaoqiBridge, Person
 from audiorecorder import AudioRecorder
+
+from flask_server import server
 
 if __name__ == "__main__":
 
@@ -44,5 +48,14 @@ if __name__ == "__main__":
 
     if not engine.rootObjects():
         sys.exit(-1)
+
+
+    port = int(os.environ.get('PORT', 8000))
+    kwargs = {'host': '0.0.0.0', 'port': port , 'threaded' : True, 'use_reloader': False, 'debug':False}
+    flask_thread = threading.Thread(target=server.run, kwargs=kwargs)
+    flask_thread.setDaemon(True)
+    flask_thread.start()
+
+
 
     sys.exit(app.exec_())
