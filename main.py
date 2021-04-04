@@ -8,6 +8,8 @@ import os
 import sys
 from os.path import abspath, dirname, join
 
+from Queue import Queue
+
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine,qmlRegisterType
 
@@ -15,6 +17,25 @@ from naoqibridge import NaoqiBridge, Person
 from audiorecorder import AudioRecorder
 
 from flask_server import server
+
+from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
+
+class Metacognition(QObject):
+    def __init__(self):
+        QObject.__init__(self)
+
+        self._watchdog_timer = QTimer(self)
+        self._watchdog_timer.setInterval(1000)
+        self._watchdog_timer.timeout.connect(self.show_cmd_queue)
+        self._watchdog_timer.start()
+
+
+
+    def show_cmd_queue(self):
+        if not server.cmd_queue.empty():
+            print(server.cmd_queue.get())
+        else:
+            print("Empty")
 
 if __name__ == "__main__":
 
@@ -49,13 +70,17 @@ if __name__ == "__main__":
     if not engine.rootObjects():
         sys.exit(-1)
 
+    # inject a synchronised queue into Flask's thread
+    server.cmd_queue = Queue()
+
 
     port = int(os.environ.get('PORT', 8000))
-    kwargs = {'host': '0.0.0.0', 'port': port , 'threaded' : True, 'use_reloader': False, 'debug':False}
+    kwargs = {'host': '0.0.0.0', 'port': port , 'threaded' : True, 'use_reloader': False, 'debug':True}
     flask_thread = threading.Thread(target=server.run, kwargs=kwargs)
     flask_thread.setDaemon(True)
     flask_thread.start()
 
 
+    metacognition = Metacognition()
 
     sys.exit(app.exec_())

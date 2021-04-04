@@ -19,6 +19,9 @@ def main(action=None):
 
     txt, actions = story.next(action)
 
+    # server.cmd_queue is injected by main.py upon Flask's thread creation
+    server.cmd_queue.put("Hello")
+
     return render_template('index.html',
                            text = txt,
                            path = ASSETS,
