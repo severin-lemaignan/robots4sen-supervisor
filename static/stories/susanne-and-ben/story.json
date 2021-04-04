@@ -1,0 +1,5697 @@
+{
+    "format": "v1",
+    "title": "Pack title",
+    "version": 1,
+    "description": "",
+    "stageNodes": [
+        {
+            "uuid": "ce3a9003-e4b5-4915-9c31-f72e70bf05c0",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 30,
+                "y": 7721
+            },
+            "image": "e83e6330aad5ea49a34aadfb9b47ef9ff22ffa92.bmp",
+            "audio": "5cd7e304c5cb398793786652780ccf55d28bbf92.mp3",
+            "okTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "homeTransition": null,
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": false,
+                "pause": false,
+                "autoplay": false
+            },
+            "squareOne": true
+        },
+        {
+            "uuid": "ceb95bb4-8b17-43c5-98a3-2f98d63eef07",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 465,
+                "y": 7307
+            },
+            "image": null,
+            "audio": "c2f2ed238b117e997288d0b15580a279856fbdfb.mp3",
+            "okTransition": {
+                "actionNode": "347fa135-25c8-40f6-8a2c-854cac97509f",
+                "optionIndex": 0
+            },
+            "homeTransition": null,
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "183f7ebd-7ae4-4e61-94ee-186a01e6e3d2",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 900,
+                "y": 3481.75
+            },
+            "image": "7509ed24c2a74b9be00633f27dc241e4b327e6e6.bmp",
+            "audio": "27640ffadc2e48addf4b39198c623a4dd429f23d.mp3",
+            "okTransition": {
+                "actionNode": "266a37f4-010c-4e84-a70b-c658e2b7d6f1",
+                "optionIndex": 0
+            },
+            "homeTransition": null,
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "fd638797-f8c6-4a1a-92e2-726e91ebc679",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 900,
+                "y": 11223.25
+            },
+            "image": "3b53e44b4acaefa6ad36e84be931a3e1e4d9d445.bmp",
+            "audio": "3dd61fa7aa32e4db37833fd0ec2ece6223099df5.mp3",
+            "okTransition": {
+                "actionNode": "438eee3c-0194-49b9-b79e-b69aee3833f9",
+                "optionIndex": 0
+            },
+            "homeTransition": null,
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "a45202c4-bf3e-4db2-893e-2cfd9f9c9f8a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1335,
+                "y": 3532.25
+            },
+            "image": null,
+            "audio": "95aa73fb02c67e7420ace527ca7e56cfafcd0626.mp3",
+            "okTransition": {
+                "actionNode": "c035f17a-0f2c-49be-9683-d4b76a2ef8d9",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "fd5450c9-69b2-4b72-bba7-0fdb1e42e503",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1335,
+                "y": 11273.75
+            },
+            "image": null,
+            "audio": "95aa73fb02c67e7420ace527ca7e56cfafcd0626.mp3",
+            "okTransition": {
+                "actionNode": "e6be17a5-6e26-454d-8962-1c0796b5b542",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "773d73d3-ea9d-43e5-b671-09eaf452d282",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1770,
+                "y": 719.25
+            },
+            "image": "9e71be841554b895f4e0158e4a52a0c370c0fb6d.bmp",
+            "audio": "c0e81d58d9ac41a8fb20e105f8c4dccf21eb107a.mp3",
+            "okTransition": {
+                "actionNode": "84a9e4c3-b966-487e-8cab-8a25d3a2caa9",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "81fa8eb9-77e5-4a2c-8ed6-0aa9d8824fbe",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1770,
+                "y": 2572.25
+            },
+            "image": "9d289b13756269df93b88fa3004c333aa4becf59.bmp",
+            "audio": "251ab7e0c1de24181e6018f3235039e54b4794bc.mp3",
+            "okTransition": {
+                "actionNode": "ca4b35d9-561b-418d-a74a-e262703691e4",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "b5c95226-34fb-4e17-9607-11740ad1ad62",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1770,
+                "y": 4643.75
+            },
+            "image": "7f4b30db3358dd5ad0544393aa8fd5a947a2405a.bmp",
+            "audio": "8de34362a2c1fc081835f578f7cb21f5085df580.mp3",
+            "okTransition": {
+                "actionNode": "96de7fa7-838b-4a9e-b481-9f559aa7ff17",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "6eee444f-4ee6-4f82-a608-f35d03e1f8a2",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1770,
+                "y": 6496.75
+            },
+            "image": "d7164e1f3e0ac009fc12364af32627c3eeefdf93.bmp",
+            "audio": "d40a6e77dc8a2bc2952487bdbe7cb05c03bcda29.mp3",
+            "okTransition": {
+                "actionNode": "9c019570-83f7-4b67-876e-f7fdbc82a063",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "b0fe38c3-087d-4449-9c24-a40992d6576c",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1770,
+                "y": 8460.75
+            },
+            "image": "9e71be841554b895f4e0158e4a52a0c370c0fb6d.bmp",
+            "audio": "c0e81d58d9ac41a8fb20e105f8c4dccf21eb107a.mp3",
+            "okTransition": {
+                "actionNode": "f1e20b94-06ff-48b4-bd3f-c1bdef399300",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "f4d065c8-3f59-4411-8aea-3c705418c283",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1770,
+                "y": 10313.75
+            },
+            "image": "9d289b13756269df93b88fa3004c333aa4becf59.bmp",
+            "audio": "251ab7e0c1de24181e6018f3235039e54b4794bc.mp3",
+            "okTransition": {
+                "actionNode": "b322747a-37a0-4585-9b7b-c95b2f172d82",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "b3059327-bd3a-4119-858b-0508dc3a5ea1",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1770,
+                "y": 12385.25
+            },
+            "image": "7f4b30db3358dd5ad0544393aa8fd5a947a2405a.bmp",
+            "audio": "8de34362a2c1fc081835f578f7cb21f5085df580.mp3",
+            "okTransition": {
+                "actionNode": "3af65912-d0eb-4d1a-bae8-99241ac89078",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "dbe70b44-690a-47e3-9c92-ebcd90412114",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 1770,
+                "y": 14238.25
+            },
+            "image": "d7164e1f3e0ac009fc12364af32627c3eeefdf93.bmp",
+            "audio": "d40a6e77dc8a2bc2952487bdbe7cb05c03bcda29.mp3",
+            "okTransition": {
+                "actionNode": "b2877e92-0c82-4032-acab-551a8d116313",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "5c1e4e22-3978-4647-8cc2-e0013ea5150b",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2205,
+                "y": 769.75
+            },
+            "image": null,
+            "audio": "3646f3e2ede92b8e362cda395a511e250e21eea8.mp3",
+            "okTransition": {
+                "actionNode": "4725a9b2-0d38-4e25-a804-aa56f77c71c7",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "05ec4aac-4a3b-47fb-8d2a-062a5afc221a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2205,
+                "y": 2622.75
+            },
+            "image": null,
+            "audio": "3646f3e2ede92b8e362cda395a511e250e21eea8.mp3",
+            "okTransition": {
+                "actionNode": "a2d9304c-843d-4920-8925-7264f2defeb6",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "2efa0cc3-c3ec-4abc-9096-278f0a89e3a9",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2205,
+                "y": 4694.25
+            },
+            "image": null,
+            "audio": "3646f3e2ede92b8e362cda395a511e250e21eea8.mp3",
+            "okTransition": {
+                "actionNode": "4c981675-67d0-4066-ad7f-65532aa7b483",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "2a60a1c7-52bd-44d3-aa00-c7e1f52e48c5",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2205,
+                "y": 6547.25
+            },
+            "image": null,
+            "audio": "3646f3e2ede92b8e362cda395a511e250e21eea8.mp3",
+            "okTransition": {
+                "actionNode": "847ed654-da19-4d40-9c34-f7d55c2c5421",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "4f9cf0d3-97f7-45c6-9352-287ac726301e",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2205,
+                "y": 8511.25
+            },
+            "image": null,
+            "audio": "3646f3e2ede92b8e362cda395a511e250e21eea8.mp3",
+            "okTransition": {
+                "actionNode": "486c81bd-f61f-4188-9841-0d096a91bc48",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "c4bd8c95-fc88-482f-8b4f-641646845531",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2205,
+                "y": 10364.25
+            },
+            "image": null,
+            "audio": "3646f3e2ede92b8e362cda395a511e250e21eea8.mp3",
+            "okTransition": {
+                "actionNode": "467a00b3-e8eb-4d58-addc-b9ef83d84aab",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "06970582-7bbf-4302-b8ec-9a0269279f88",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2205,
+                "y": 12435.75
+            },
+            "image": null,
+            "audio": "3646f3e2ede92b8e362cda395a511e250e21eea8.mp3",
+            "okTransition": {
+                "actionNode": "98ba25c2-6eae-4fcb-b657-67ba031d2f97",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "3dfd2165-e138-4e33-87ec-a00756d4fa9f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2205,
+                "y": 14288.75
+            },
+            "image": null,
+            "audio": "3646f3e2ede92b8e362cda395a511e250e21eea8.mp3",
+            "okTransition": {
+                "actionNode": "82b97a1f-fa1e-4fe4-a7a1-3f2e2335f637",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "6d70808f-991a-4f21-8c1a-ade5934f92fc",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 141
+            },
+            "image": "0a91f7291d88a9ea3448563523647b2b31515cce.bmp",
+            "audio": "5572828adab44b98cc6c86a51e40ca8cdcac4f47.mp3",
+            "okTransition": {
+                "actionNode": "cbcc7806-9b9d-45e4-bdc2-a1043f095c62",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "3618182a-f4c0-486f-9f72-f0632486c6da",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 823
+            },
+            "image": "bd9ca69c03e0ed0e1a7dd7147b9fc2c2a357852a.bmp",
+            "audio": "619e30bc3f5d439c4228394873271c54e9a666e3.mp3",
+            "okTransition": {
+                "actionNode": "04935833-f3dd-46d7-b744-ec19ce85bbe6",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "92895f9c-3bca-4f5e-aea2-74540927d8cc",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 1418.5
+            },
+            "image": "daf8eb70f5439f160c2d57ea1680af14f4450cc1.bmp",
+            "audio": "d73ed43623e15763eeb588639c3b3c5402f62584.mp3",
+            "okTransition": {
+                "actionNode": "3c6da774-8cb6-49f8-9169-d162b39a6e98",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "3df92cf0-56d4-4ab4-94f2-c3b7160a7c41",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 1994
+            },
+            "image": "0c983bd89fc8127bfe629dc5d836324cf1401d37.bmp",
+            "audio": "a3c7e3e0fb5251c063fb1504feae4442409bbf0f.mp3",
+            "okTransition": {
+                "actionNode": "077e2966-d943-4fdb-8bc9-f245fb1b5471",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "81773217-f9e8-4a69-a28c-90d2a812a219",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 2676
+            },
+            "image": "9db9aaad7a89cf5ba28242d9afef345ca7eba553.bmp",
+            "audio": "da504f13e209737300cf6b8b7dc4d8889e203cee.mp3",
+            "okTransition": {
+                "actionNode": "5f6ab1e7-c1ad-46b3-b10d-274b775ab38e",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "114c034e-8dba-4a4d-b701-ed658b10b5b4",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 3271.5
+            },
+            "image": "e32d8944380404f7c8ad1363791dbabefeefb13e.bmp",
+            "audio": "36b823db539d57113b05c0b9908bfab9b8e61eed.mp3",
+            "okTransition": {
+                "actionNode": "054a1ddd-72af-40a3-bae5-c9bba2848043",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "1d967036-195e-4649-a36c-9de5100d590f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 4065.5
+            },
+            "image": "9458589c654beb8e0fcf171064fffcd15d72a4bb.bmp",
+            "audio": "1397b7c46058713b57df264c460c87a6baa0b71f.mp3",
+            "okTransition": {
+                "actionNode": "7d12fc15-54c1-49b0-bd73-fc945f613852",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "4ea29531-9171-48f7-b883-348e83aa474a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 4747.5
+            },
+            "image": "2db4a24000d4aa43f76b76017fdb0a5b75c029d5.bmp",
+            "audio": "05e1ac4255140986dc2464555f7263fb93370713.mp3",
+            "okTransition": {
+                "actionNode": "9dd3e994-4b13-473c-b1d8-502fdccc0ac0",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "19bf3518-9756-4cb0-ad4e-0dc896f99d49",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 5343
+            },
+            "image": "3924a616b8b89604cb77c0fa8a25babef7e09649.bmp",
+            "audio": "d41b4420f51fa2f93b1f7738ce26c7da720aa101.mp3",
+            "okTransition": {
+                "actionNode": "9611bc80-f4ff-4635-bb6e-a15f5c2817a9",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "31432f0d-ad9e-4d1f-9062-f4f67befbb31",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 5918.5
+            },
+            "image": "b9a4abc808ce641c0e15fcb1abd58df6085dc9c2.bmp",
+            "audio": "0a561fab854a8bb756389a0f894a2a36f0b42386.mp3",
+            "okTransition": {
+                "actionNode": "82e4f43d-09fd-499f-ae1a-9cce8f48bd3e",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "6f651d2a-d19c-4143-9c6f-8ac1629379eb",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 6600.5
+            },
+            "image": "3ab6f1de3553cc5994a6059013dd35c98e49b38c.bmp",
+            "audio": "2ab1c0b983482c4317acf52095fc1c0aafb2fc3e.mp3",
+            "okTransition": {
+                "actionNode": "86d10a61-dac8-4a0e-b7f2-d78571f2a5ce",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "b1b8f0c3-dab4-441b-8c98-f5e3edfaecdc",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 7196
+            },
+            "image": "7b41aa71093d5df509ae5f3aa192ca4a66029527.bmp",
+            "audio": "06cc81ec2db1174c81b75e4e7c77b3c1d38bbabc.mp3",
+            "okTransition": {
+                "actionNode": "01ee0c47-8510-4caf-8460-5a17c16b0027",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "43a93eb9-28e3-4437-b8db-4815f0fd5a6e",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 7882.5
+            },
+            "image": "0a91f7291d88a9ea3448563523647b2b31515cce.bmp",
+            "audio": "5572828adab44b98cc6c86a51e40ca8cdcac4f47.mp3",
+            "okTransition": {
+                "actionNode": "92b0ce60-7557-4efc-a7bc-9e679541e763",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "00047d78-f740-4e41-8624-d5f60d5293a5",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 8564.5
+            },
+            "image": "bd9ca69c03e0ed0e1a7dd7147b9fc2c2a357852a.bmp",
+            "audio": "619e30bc3f5d439c4228394873271c54e9a666e3.mp3",
+            "okTransition": {
+                "actionNode": "55bc6e27-17f3-4be4-afcd-ac2be41a4a36",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "7dd78667-68ab-41fb-aabc-86561a844870",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 9160
+            },
+            "image": "daf8eb70f5439f160c2d57ea1680af14f4450cc1.bmp",
+            "audio": "d73ed43623e15763eeb588639c3b3c5402f62584.mp3",
+            "okTransition": {
+                "actionNode": "dfc144bf-5acd-4371-bbea-41a821c8a536",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "8b901dc2-dde3-469e-a494-23f2f847f54f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 9735.5
+            },
+            "image": "0c983bd89fc8127bfe629dc5d836324cf1401d37.bmp",
+            "audio": "a3c7e3e0fb5251c063fb1504feae4442409bbf0f.mp3",
+            "okTransition": {
+                "actionNode": "6a6e7e77-d204-4ba9-a14c-c6e3ddae6aaf",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "8afd2a1c-d93b-4efd-9ad6-7240ca947d0f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 10417.5
+            },
+            "image": "9db9aaad7a89cf5ba28242d9afef345ca7eba553.bmp",
+            "audio": "da504f13e209737300cf6b8b7dc4d8889e203cee.mp3",
+            "okTransition": {
+                "actionNode": "f5b23330-6c01-47cf-ba8a-bd31f3c94cb5",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "d2830655-2418-4b84-9411-38527a09df64",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 11013
+            },
+            "image": "e32d8944380404f7c8ad1363791dbabefeefb13e.bmp",
+            "audio": "36b823db539d57113b05c0b9908bfab9b8e61eed.mp3",
+            "okTransition": {
+                "actionNode": "c6245a54-cce3-4f15-a151-800fa50c8ecd",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "8198e837-f000-4581-8343-5857cdf8d254",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 11807
+            },
+            "image": "9458589c654beb8e0fcf171064fffcd15d72a4bb.bmp",
+            "audio": "1397b7c46058713b57df264c460c87a6baa0b71f.mp3",
+            "okTransition": {
+                "actionNode": "703b32a5-bfbc-432b-b3a6-66c7669ced2a",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "0a2ef0cb-b6f6-4381-a791-a090eea80d94",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 12489
+            },
+            "image": "2db4a24000d4aa43f76b76017fdb0a5b75c029d5.bmp",
+            "audio": "05e1ac4255140986dc2464555f7263fb93370713.mp3",
+            "okTransition": {
+                "actionNode": "aa9dcde9-970b-43c6-95be-9c93e168b137",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "c4ea828a-138b-46df-a588-9b4921658f9b",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 13084.5
+            },
+            "image": "3924a616b8b89604cb77c0fa8a25babef7e09649.bmp",
+            "audio": "d41b4420f51fa2f93b1f7738ce26c7da720aa101.mp3",
+            "okTransition": {
+                "actionNode": "206eb5d6-ceb2-4cf2-8784-f85d5288fb8f",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "a5d9c1f2-e32d-41bb-800d-a62fcffd48e4",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 13660
+            },
+            "image": "b9a4abc808ce641c0e15fcb1abd58df6085dc9c2.bmp",
+            "audio": "0a561fab854a8bb756389a0f894a2a36f0b42386.mp3",
+            "okTransition": {
+                "actionNode": "19b7df8b-c327-4ab2-8983-fdb2f6f01884",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "22b19df7-ef01-4098-be2c-015b908e8b3c",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 14342
+            },
+            "image": "3ab6f1de3553cc5994a6059013dd35c98e49b38c.bmp",
+            "audio": "2ab1c0b983482c4317acf52095fc1c0aafb2fc3e.mp3",
+            "okTransition": {
+                "actionNode": "1849c3ea-db16-43fb-8f8f-cdfe0ad63bb5",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "00c37335-7702-45f7-8236-dd587b2c5eef",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 2640,
+                "y": 14937.5
+            },
+            "image": "7b41aa71093d5df509ae5f3aa192ca4a66029527.bmp",
+            "audio": "06cc81ec2db1174c81b75e4e7c77b3c1d38bbabc.mp3",
+            "okTransition": {
+                "actionNode": "90e70b39-0f0c-47df-9fec-70d9d3a78ff2",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "7c652774-65c8-4227-9cfc-3b6934c2b75a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 191.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "ca644e0e-51f7-40aa-9cfd-4b933b2610e3",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "65db6de2-076f-4ed4-a488-a0fe30dd2aab",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 873.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "f6c55d8d-ccd8-4e66-890f-2548ad02fe4e",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "50db0992-f8aa-4a23-8202-821be79103e3",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 1469
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "1b2b3e7b-4392-4359-a2d6-623aa128fddb",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "220acc56-e809-47a5-be52-f3c4d0dfd88d",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 2044.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "d3b20f2c-e28a-44ab-9959-cd3b6fb8ae1c",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "6e4bcd81-3b06-4f1f-89d1-57dfd341127d",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 2726.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "4769394c-a58b-45de-bf4c-ec9154e37ad1",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "956447d0-ed0c-4899-b06d-55d196a05f18",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 3322
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "288f30e9-d02e-4e40-84c8-8002cac34a04",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "928bd7d3-0e7a-465c-b118-a9ea3b025563",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 4116
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "c3c57fbf-64de-4036-9951-2cc96af3055c",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "799c4623-1a97-4652-9e25-38062c48fc63",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 4798
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "fc72c8ec-0c61-4310-9f36-dfca087f790a",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "2f151b76-2c25-47df-b636-25723a99a166",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 5393.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "7385a176-08e2-4ca4-8f37-a2552b6fa40b",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "85506725-47c8-499b-bf41-c66b209878aa",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 5969
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "9910cac2-ad39-4c7f-84c5-35ce3d28b19a",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "dac5cb38-9f56-4b07-ac29-1a7dd9881613",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 6651
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "4c8207fd-dda1-4fdd-81c7-0a6ff09f7e72",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "f7fef7be-cfea-409e-b9ca-fafe484d0bb2",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 7297
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "e8d053da-5c15-4987-9cb5-829627657751",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "fd77d0b3-2b57-46c9-b043-58a5c22bf3da",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 7933
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "060899cb-a8b2-480f-9ffd-e013bbf4ea0c",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "fca7cc44-2384-434e-9341-87d63e4b58e9",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 8615
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "cdd085fe-4a76-47dd-a5e1-6f4916b42e3b",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "d81c08b4-d8ee-41cc-a745-e9cf8c69f611",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 9210.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "16250f00-5e0a-4e4b-838a-abceaa997228",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "2a31f527-b695-4f70-abe7-b56f11ea2228",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 9786
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "a208033b-27c6-41b6-8461-f268b796c950",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "0a79de19-f4b2-4c36-b053-0220cef69477",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 10468
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "198d4890-5ff7-4b0c-8f2e-64ef6a9d25f4",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "222c6caf-75f5-4522-aa88-c7924335c787",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 11063.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "cf56c139-5671-4936-9af2-69b9a40f5e52",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "6cfd2548-a0db-4e32-84b8-797e1b5bb8c6",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 11857.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "585057f4-7da7-4d7e-84be-f0f2dd96324c",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "fb23ef88-cd5a-4508-a884-c19eed8ab805",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 12539.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "d81631df-7627-46ad-abb4-e7741a51abfa",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "b61590fe-3df7-4fd7-a496-55ec63935950",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 13135
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "2ef3abe8-1560-4a9e-83e3-3aa9596a7929",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "5146ac1f-06c6-4500-a619-72d91e8d816d",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 13710.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "dba9ed86-66d1-4f37-8446-c8978b4f26ce",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "4e90526b-b2ad-46d4-a7b2-26453b8d7cb9",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 14392.5
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "53f17d52-a15a-42b6-98e0-ed8c89252462",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "7fef9294-ff68-427a-8219-3e255e347feb",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3075,
+                "y": 14988
+            },
+            "image": null,
+            "audio": "584b2321e5940b97b3eb746c2850d9cf49dd4fb6.mp3",
+            "okTransition": {
+                "actionNode": "a392c675-b481-4c24-9e56-9ff45e3849a9",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "2d1dc72c-7ae8-4110-9166-93302e67d3b4",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 181.5
+            },
+            "image": null,
+            "audio": "82d77a782437cbcc3b5c710eb9cdf1db6d6c5a77.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "d00d6cfe-9498-4c4f-95e0-348f2a227590",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 30
+            },
+            "image": "5fb9114c2467c1f8b96d30531f212953c64d9c02.bmp",
+            "audio": "40ad99c9db37d1662b6e509193e87a4a28c2454e.mp3",
+            "okTransition": {
+                "actionNode": "d35c8479-fc4e-4905-a235-86f3c613d0de",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "0b670256-188b-4d42-9f27-529f679dad06",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 403.5
+            },
+            "image": "05944471a71a298bfe87b489eca8b3c60fb6f137.bmp",
+            "audio": "43f832af53ee1de426c41c92148b51a516c83b57.mp3",
+            "okTransition": {
+                "actionNode": "211506ce-e41a-487b-a076-43833b68ed27",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "c3bc5925-4c99-42a7-bd0e-ac59cc1f6c6c",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 454
+            },
+            "image": null,
+            "audio": "9ca50466fdbb8ba48b27c789aa4c5f1615e95395.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "a85c28cf-42a8-4328-bb80-8cad91b5eaed",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 605.5
+            },
+            "image": "02ef8551622f91acf03503894a17dcc18207eb9c.bmp",
+            "audio": "f8ec64a840650397fe2062659e0e1cbaf989b8df.mp3",
+            "okTransition": {
+                "actionNode": "3b7bd17f-38af-44a3-a7ce-0e829023742e",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "e8a3ca49-30c5-48c7-8bf1-df0812fcbdbe",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 1105.5
+            },
+            "image": "253ead58e3a672402db11c16422fccc3303328cd.bmp",
+            "audio": "428b84e23ed979cd667fb7fafe4453d3ff2aca4d.mp3",
+            "okTransition": {
+                "actionNode": "fa203a54-7c5f-49cc-881d-763dd0088d5c",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "b1967deb-e840-411e-a931-52b1f7a3fb01",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 1307.5
+            },
+            "image": "3035a7e3fefa7f588336e44add448044fec9d600.bmp",
+            "audio": "8292db37b8c001536ca0a63e9b767bc4bee391e1.mp3",
+            "okTransition": {
+                "actionNode": "9b9b4b77-0785-40ec-b6ba-c26022e8efbc",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "ae9d4357-50b4-4c99-a502-330f6e44005c",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 1681
+            },
+            "image": "5f520d609fe46ad8041e981e1f497076202e05ff.bmp",
+            "audio": "4554bf4adac30fece0ea075cca8c215bf661665d.mp3",
+            "okTransition": {
+                "actionNode": "549c6ea5-1397-4add-80df-f91a35ece99a",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "4b7ce744-039d-4a7f-adfd-315d56aa7e2e",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 860.75
+            },
+            "image": null,
+            "audio": "a6d33f13f0194296858619a43a1dff5c25f292fa.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "0d68b58a-54ed-4a4c-b7d2-ddc43b483c7a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 1156
+            },
+            "image": null,
+            "audio": "3abe4a648317e1fa72be3078104d6670002fc917.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "1dfff10c-cb20-4dc3-89d3-890157ecdacb",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 1459
+            },
+            "image": null,
+            "audio": "290cda5eeab13ad38805b269f8bf65ff8291f110.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "999209f5-5103-4420-bd6d-2106efbc6132",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 1731.5
+            },
+            "image": null,
+            "audio": "3e992cf9e99dc3e9a679912c15f1674bd866e8cd.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "33bfcdcc-89a7-401e-aa44-1bf5048b17e0",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 1883
+            },
+            "image": "96e2a26035aa6dbbbd01c82b3e12338c351c84d4.bmp",
+            "audio": "9906423678e3add62f31fe69edfcec8e2d8e012b.mp3",
+            "okTransition": {
+                "actionNode": "246becd2-2ba2-4303-a721-ad939a16560a",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "5839d7ce-0c5a-4d6c-a180-fc33240780ed",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 2256.5
+            },
+            "image": "f2c9d4f8079c8360885f036fbf86296071fd8f70.bmp",
+            "audio": "3b98c68721502fb84a099e44e2d1286129ff1704.mp3",
+            "okTransition": {
+                "actionNode": "09afaccb-3fee-4af9-a513-5b55b65c413e",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "6d08291e-9320-450a-acb4-8af0a9fc1fd2",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 2458.5
+            },
+            "image": "60f5392e262f9fbd855cfd4005c96e80208fe250.bmp",
+            "audio": "116e23b2b4548edf846fe6ca39009d5b2b1e4541.mp3",
+            "okTransition": {
+                "actionNode": "b39f6b4a-2669-4621-a332-986c20563d84",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "d2314c44-def7-4db3-b733-58ed434711b5",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 2958.5
+            },
+            "image": "fd99ff638d0d7949dafae099c271cea5e0fa7dd5.bmp",
+            "audio": "a74833dc75ef1da0ae2ecd125863c133292b3486.mp3",
+            "okTransition": {
+                "actionNode": "90a9938e-48cc-47e1-b8ea-d15e33d6897e",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "e9072e28-07e4-4fbf-a7f4-34bba4f07b2a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 3160.5
+            },
+            "image": "aa1830210a517be31b5f40a39f5d4f3de89ec5ac.bmp",
+            "audio": "acf241c2f94ef448bbdf3c31fcc9bd150ea907b7.mp3",
+            "okTransition": {
+                "actionNode": "eef4e736-d3d8-42eb-b816-1362b30cd0ae",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "9d5654bf-7bfa-40fb-86b1-976c0b0ec650",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 3752.5
+            },
+            "image": "0b081679fc0efae10516fed9cc83d502366c6d9a.bmp",
+            "audio": "30759452d51b4f5357f747efd7943aaf925b42da.mp3",
+            "okTransition": {
+                "actionNode": "377f7416-1a9e-4651-9eb4-23d0e0e785ce",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "a00bdeb1-9b54-4c4b-9db5-01fe4e2ff02d",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 3954.5
+            },
+            "image": "75945a33dccdd90558576dcc7eac9b374e793a50.bmp",
+            "audio": "574332ff418f36741dfb6c98ab67765d143007c8.mp3",
+            "okTransition": {
+                "actionNode": "de1e70b3-4c39-4776-b08d-c8c3ad76116e",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "f3f5177a-5d10-4946-82f8-04dcd0b832d4",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 4328
+            },
+            "image": "eebeaa677037b30c749a630b9a714a3d4e0d8b28.bmp",
+            "audio": "86802f8cc6b312327fe56bc48ba7bf6c987ce4e3.mp3",
+            "okTransition": {
+                "actionNode": "cc3f865d-85d1-4b7f-b05e-167b3488a716",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "9171d0f8-af6e-47cc-9a90-bfe8a9731747",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 4530
+            },
+            "image": "11c628bc3587822dbf6172b8299752e6e3173f2f.bmp",
+            "audio": "d6cb1aa25478ed7047025bef68a749c4a0585f36.mp3",
+            "okTransition": {
+                "actionNode": "bbd139e7-4321-4449-b38b-13e840a070ea",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "fa5f42c5-f3a2-44dd-93c4-cd1d60935d19",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 5030
+            },
+            "image": "95a81748d5087254b0ac244b13015b4e2bbbd563.bmp",
+            "audio": "f528f4a5cbc546051674a09344ea3c2d9c1854ea.mp3",
+            "okTransition": {
+                "actionNode": "5d414bfd-ca86-4b27-9aa1-29bd4abaf836",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "263adc11-ed9b-4623-9f27-f18483860cef",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 5232
+            },
+            "image": "ad902b33aca114bd8eda331553c3af6b4c7855a8.bmp",
+            "audio": "53a86235f9fbe89a1631aa7364bdc15daf8a13ed.mp3",
+            "okTransition": {
+                "actionNode": "7bef8768-435d-4481-b7fe-1abb8809904b",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "a1c94c91-b4a5-4661-a4fd-305050e6d602",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 5605.5
+            },
+            "image": "e4bb9fad73c94680ce4c322130d54465ecc6b27d.bmp",
+            "audio": "12d4082812cb55e0bc3cb5135fd0be10a43ce742.mp3",
+            "okTransition": {
+                "actionNode": "322f173e-d76c-4a0b-a662-aca82d14a2cb",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "b1341aaf-216d-4bc9-a3f9-df6272efd27f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 5807.5
+            },
+            "image": "cf326e11dabc97b8a8b7987ecb495a3579338a52.bmp",
+            "audio": "73b448202ad282524be2a3cf17e7af2642396829.mp3",
+            "okTransition": {
+                "actionNode": "ec4610e9-65e0-42e7-97d4-1cf541224825",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "0ae90c43-8a7d-4fa8-b985-411cb5c50b87",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 6181
+            },
+            "image": "16e481f87612b234d0d9fa912245b5a882195b38.bmp",
+            "audio": "1c760bab945ac27949e308937e5407fb488da355.mp3",
+            "okTransition": {
+                "actionNode": "bd20644b-2477-4e6a-ab51-79d75bff2eb9",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "4b220d21-66d5-4cb3-93cf-49dbf0ff2ff6",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 6383
+            },
+            "image": "70e5f69c9d62f09ad704b4c3ca369aa9bb8a2c1f.bmp",
+            "audio": "920259ff94e3c9dd76b513ee22ea3d8563f5665d.mp3",
+            "okTransition": {
+                "actionNode": "3f168925-0517-44a0-8d0c-041589035f14",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "38ba19c1-bc51-4999-851f-9dd75644fb8f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 6883
+            },
+            "image": "cbb5cfad4b72323ab3900c36df9e9243736097b4.bmp",
+            "audio": "3a1e8aee448af6778792bd3d17374120b1999503.mp3",
+            "okTransition": {
+                "actionNode": "0c7aa470-4946-4abe-a8ae-b7500b50f751",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "f51278b4-7b15-4c4a-a627-82d7c54d0810",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 7085
+            },
+            "image": "f8c86cc501b734f389f03bbea4d8e77794d49a78.bmp",
+            "audio": "c7e7a599335885d6726a179ffeb17bc1cf7ac891.mp3",
+            "okTransition": {
+                "actionNode": "5dbbecb4-5728-4812-b9b4-6d61fbc2a9c5",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "23fd530e-5db5-4598-ad71-05e49ebbffe3",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 7569.5
+            },
+            "image": "2e29d3c910c1a5821f84b06c73d08b2b844ccad4.bmp",
+            "audio": "3cf876bf8f0336e89cd2e3303ae419e648d72989.mp3",
+            "okTransition": {
+                "actionNode": "9028de6c-d474-449c-9d59-60a81596a17f",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "2f97a6b8-67ea-495e-9a2f-3585ffecb703",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 2034.5
+            },
+            "image": null,
+            "audio": "8fd92383ff4508b41e225f9e325fb78f805f5419.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "48962e3f-a4c6-4b9f-9f7f-7accd8ec006b",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 2307
+            },
+            "image": null,
+            "audio": "83feda032fc69f9055167f9f0b803483242da6ef.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "48b24f86-6573-402d-aada-77aa5cdcab87",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 2713.75
+            },
+            "image": null,
+            "audio": "3390f246135ed5a0524ab3194f81fda6ad7b0041.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "a1f4a93e-6f11-4a96-901f-effa57866188",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 3009
+            },
+            "image": null,
+            "audio": "7ca066df975ad40eb2ad0a492627003c28c5353a.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "a7343205-2ca9-4cd0-bf1c-5b989fd56c73",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 3421.25
+            },
+            "image": null,
+            "audio": "91378552dc93f857ea249614d4d09e78b2fa78f6.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "ff0c0183-8baa-4dcc-b2df-57af486a1cdb",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 3803
+            },
+            "image": null,
+            "audio": "57b75b54016ed1fdd6a730a82ac5ff5afbaf4208.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "b2f4a401-287b-411a-a9ee-3af4e67dd094",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 4106
+            },
+            "image": null,
+            "audio": "e66bd72074e6360b2a68d1510ffa582e05e6bbce.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "4fc7c702-2478-40ab-b091-5ce6a290b57a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 4378.5
+            },
+            "image": null,
+            "audio": "b0b80957d944341d084b3733a8ea71df7bd95f5a.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "9d60811b-57da-4fd0-b489-9928f73bf62b",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 4785.25
+            },
+            "image": null,
+            "audio": "9511f4d6786cdf18aa63bdd3308abdfcafbcfb7f.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "9a2b5cbd-869f-4881-a16f-ee17ad8a54d4",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 5080.5
+            },
+            "image": null,
+            "audio": "4ac51a33e74d5acc431a5c902244b85e22125312.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "5066858a-1c0c-43f8-a275-e761b5189822",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 5383.5
+            },
+            "image": null,
+            "audio": "5adb242e98085fccf3c448c3a4e8b4d482189204.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "a0d25b89-9e2d-44e9-b5dd-dfd3ebd75fc3",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 5656
+            },
+            "image": null,
+            "audio": "48e540199c6f95452ba7873f5f3bce2320710a7f.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "2ec4aa0b-7770-4f20-811d-2e40144df96b",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 5959
+            },
+            "image": null,
+            "audio": "b40982914db655d788d8cbd5844249fd2909f3f2.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "c398f0f3-3458-4f88-b037-583d26090e63",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 6231.5
+            },
+            "image": null,
+            "audio": "d8b7926d4acdacb40e005b323591fcf52f0316ee.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "770f35e4-e997-4137-9d65-293dc1e9c72a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 6638.25
+            },
+            "image": null,
+            "audio": "7b89daea16240e555b1932f5bbb4d466e019cbdc.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "171578ec-9b58-4ead-aaf1-55df520b94c0",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 6933.5
+            },
+            "image": null,
+            "audio": "adefb45304ebb4f87eec45088fced375bf3fdd9b.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "73815edb-41d3-48d1-b1ad-a14b6a80644c",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 7287
+            },
+            "image": null,
+            "audio": "e397d59fa885c34d989bb88c401f1c8eee32021e.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "5f00493a-ee01-444c-9ca3-d4d2727c99b7",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 7620
+            },
+            "image": null,
+            "audio": "4ca2c6f52525178264b8425b030abcf55635a227.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "4c66959c-3513-421b-ae32-3aa5c816fe05",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 7923
+            },
+            "image": null,
+            "audio": "23854e0069f954c04daf5b533c00bce3a969e720.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "e40cd904-40ae-434a-907d-5ea9a665eaef",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 7771.5
+            },
+            "image": "5fb9114c2467c1f8b96d30531f212953c64d9c02.bmp",
+            "audio": "40ad99c9db37d1662b6e509193e87a4a28c2454e.mp3",
+            "okTransition": {
+                "actionNode": "f37808f0-b78f-4ce3-ba2c-89e75676b3f3",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "f94a23b1-51e1-4403-92ec-ef28a3dd3762",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 8145
+            },
+            "image": "05944471a71a298bfe87b489eca8b3c60fb6f137.bmp",
+            "audio": "43f832af53ee1de426c41c92148b51a516c83b57.mp3",
+            "okTransition": {
+                "actionNode": "a5494cda-31da-437e-bbbf-3fed602109ef",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "c492e51c-372c-4738-a253-50319cfc92ef",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 8195.5
+            },
+            "image": null,
+            "audio": "62199d27eec17c98a5be4bc63ad255f5288c7ff9.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "b721abc4-8fd1-4791-9d6e-7511327eb20f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 8347
+            },
+            "image": "02ef8551622f91acf03503894a17dcc18207eb9c.bmp",
+            "audio": "f8ec64a840650397fe2062659e0e1cbaf989b8df.mp3",
+            "okTransition": {
+                "actionNode": "a00a4532-e493-47e3-ae45-db4074fc2492",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "8890f98b-ed4a-4c93-a743-914f41a06654",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 8847
+            },
+            "image": "253ead58e3a672402db11c16422fccc3303328cd.bmp",
+            "audio": "428b84e23ed979cd667fb7fafe4453d3ff2aca4d.mp3",
+            "okTransition": {
+                "actionNode": "75ac9e11-668d-4f0d-9da5-efc7e647e4c9",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "51f608bd-96fc-4bf0-aa55-f0e3b906cc3b",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 9049
+            },
+            "image": "3035a7e3fefa7f588336e44add448044fec9d600.bmp",
+            "audio": "8292db37b8c001536ca0a63e9b767bc4bee391e1.mp3",
+            "okTransition": {
+                "actionNode": "a1883204-2c5b-479b-beaa-78588c45cb10",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "22284dbc-687b-4f34-a458-e02c0c765bc2",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 9422.5
+            },
+            "image": "5f520d609fe46ad8041e981e1f497076202e05ff.bmp",
+            "audio": "4554bf4adac30fece0ea075cca8c215bf661665d.mp3",
+            "okTransition": {
+                "actionNode": "bf917dde-4ed6-47b6-b8b1-823aeed48047",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "f8788983-410d-4d31-8c27-70410600ddeb",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 8602.25
+            },
+            "image": null,
+            "audio": "f5bb587f9850e62e18a81fe2197e457f9c8d5f0a.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "040d157b-37f7-4756-bfba-35237486d13a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 8897.5
+            },
+            "image": null,
+            "audio": "ec3c781eebf26ec3566d657de6a0ab0c4653eb2b.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "7132f198-d62b-43cb-8e20-a9c8a519ff32",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 9200.5
+            },
+            "image": null,
+            "audio": "ba3751148911e5b6148b551131943b48adea1bd0.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "89f9f5fb-92a5-4d2d-b2b9-ac6dbe776dc9",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 9473
+            },
+            "image": null,
+            "audio": "0d230836598670414e45dd1b979eb1870f05a99a.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "97fdffba-6a8f-43f3-8b0a-2ed518a4fac5",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 9624.5
+            },
+            "image": "96e2a26035aa6dbbbd01c82b3e12338c351c84d4.bmp",
+            "audio": "9906423678e3add62f31fe69edfcec8e2d8e012b.mp3",
+            "okTransition": {
+                "actionNode": "b1bed2f3-22ca-4bee-b7c0-edba98081665",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "28b7247f-3f10-4127-b9ed-cf5b18b7c395",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 9998
+            },
+            "image": "f2c9d4f8079c8360885f036fbf86296071fd8f70.bmp",
+            "audio": "3b98c68721502fb84a099e44e2d1286129ff1704.mp3",
+            "okTransition": {
+                "actionNode": "61f03b57-4d79-4e54-a2a3-aecd73b6b8a9",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "78f4f4ac-0219-487c-9b2c-85f083acc925",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 10200
+            },
+            "image": "60f5392e262f9fbd855cfd4005c96e80208fe250.bmp",
+            "audio": "116e23b2b4548edf846fe6ca39009d5b2b1e4541.mp3",
+            "okTransition": {
+                "actionNode": "8838bcc5-1512-4e7c-ac31-76035bdb84f5",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "1e9ee8d2-744a-4f83-ac7b-f342f1fdcf5c",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 10700
+            },
+            "image": "fd99ff638d0d7949dafae099c271cea5e0fa7dd5.bmp",
+            "audio": "a74833dc75ef1da0ae2ecd125863c133292b3486.mp3",
+            "okTransition": {
+                "actionNode": "4536954c-7489-4cca-b7ee-6e6b1f77a681",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "fd667d30-4461-4ba4-8694-555ed67e208a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 10902
+            },
+            "image": "aa1830210a517be31b5f40a39f5d4f3de89ec5ac.bmp",
+            "audio": "acf241c2f94ef448bbdf3c31fcc9bd150ea907b7.mp3",
+            "okTransition": {
+                "actionNode": "d79ec086-ea27-4325-84a7-9fbd63b27ad3",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "2740b134-4c35-46a3-ac7c-e0b6fadd5db3",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 11494
+            },
+            "image": "0b081679fc0efae10516fed9cc83d502366c6d9a.bmp",
+            "audio": "30759452d51b4f5357f747efd7943aaf925b42da.mp3",
+            "okTransition": {
+                "actionNode": "9547f602-3dde-4ce8-8207-8e80fb134183",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "23d93884-9c6d-416a-a306-dcb7abfaf942",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 11696
+            },
+            "image": "75945a33dccdd90558576dcc7eac9b374e793a50.bmp",
+            "audio": "574332ff418f36741dfb6c98ab67765d143007c8.mp3",
+            "okTransition": {
+                "actionNode": "c98f90a2-6baa-401e-b7b6-a2a696f444ab",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "2e490d55-5440-4324-864f-274d335135a0",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 12069.5
+            },
+            "image": "eebeaa677037b30c749a630b9a714a3d4e0d8b28.bmp",
+            "audio": "86802f8cc6b312327fe56bc48ba7bf6c987ce4e3.mp3",
+            "okTransition": {
+                "actionNode": "693f6994-0305-4ac9-ac57-b3c7fdc42e57",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "f817d84b-a9ed-4db7-a635-c0529d92899e",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 12271.5
+            },
+            "image": "11c628bc3587822dbf6172b8299752e6e3173f2f.bmp",
+            "audio": "d6cb1aa25478ed7047025bef68a749c4a0585f36.mp3",
+            "okTransition": {
+                "actionNode": "a0c1b405-efef-4cbc-aee2-00beac5f0abb",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "62bfb444-d7dc-4607-b061-b38bb43d9bbe",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 12771.5
+            },
+            "image": "95a81748d5087254b0ac244b13015b4e2bbbd563.bmp",
+            "audio": "f528f4a5cbc546051674a09344ea3c2d9c1854ea.mp3",
+            "okTransition": {
+                "actionNode": "023adb30-0e32-43e3-a5f6-f159896a4852",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "1fee0d32-2171-454e-9d43-b21a8995a52b",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 12973.5
+            },
+            "image": "ad902b33aca114bd8eda331553c3af6b4c7855a8.bmp",
+            "audio": "53a86235f9fbe89a1631aa7364bdc15daf8a13ed.mp3",
+            "okTransition": {
+                "actionNode": "db44d5c0-d75c-47d5-ad25-f254916e8e95",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "b8263894-3279-4d22-b682-3678ec71abb2",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 13347
+            },
+            "image": "e4bb9fad73c94680ce4c322130d54465ecc6b27d.bmp",
+            "audio": "12d4082812cb55e0bc3cb5135fd0be10a43ce742.mp3",
+            "okTransition": {
+                "actionNode": "bca17e52-468c-4336-89d7-e698b4f83289",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "01b47066-ebd3-4802-82f5-cf04e19ad946",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 13549
+            },
+            "image": "cf326e11dabc97b8a8b7987ecb495a3579338a52.bmp",
+            "audio": "73b448202ad282524be2a3cf17e7af2642396829.mp3",
+            "okTransition": {
+                "actionNode": "4c28f7e8-3da6-404e-8bd9-26dbbec0377f",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "48ec174b-6b82-48bc-9f3f-0f1295ebda7a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 13922.5
+            },
+            "image": "16e481f87612b234d0d9fa912245b5a882195b38.bmp",
+            "audio": "1c760bab945ac27949e308937e5407fb488da355.mp3",
+            "okTransition": {
+                "actionNode": "48769d99-5efb-4bae-b156-9116bfd99011",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "dfc2ab92-7719-46a6-8386-f98d8ab494eb",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 14124.5
+            },
+            "image": "70e5f69c9d62f09ad704b4c3ca369aa9bb8a2c1f.bmp",
+            "audio": "920259ff94e3c9dd76b513ee22ea3d8563f5665d.mp3",
+            "okTransition": {
+                "actionNode": "7295df6e-6d17-4a39-836a-805d49d13873",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "04eaff0f-cb35-4164-ba1a-7f63904006f7",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 14624.5
+            },
+            "image": "cbb5cfad4b72323ab3900c36df9e9243736097b4.bmp",
+            "audio": "3a1e8aee448af6778792bd3d17374120b1999503.mp3",
+            "okTransition": {
+                "actionNode": "fbb12ab2-5883-49d3-9024-453b356af764",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "41382a52-4759-41ec-9ab5-aa670dee16b3",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 14826.5
+            },
+            "image": "f8c86cc501b734f389f03bbea4d8e77794d49a78.bmp",
+            "audio": "c7e7a599335885d6726a179ffeb17bc1cf7ac891.mp3",
+            "okTransition": {
+                "actionNode": "4625be46-f827-43ca-98be-d31b8787990b",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "ea0ded27-e1da-43ec-a3a3-034b89e7f7c9",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3510,
+                "y": 15200
+            },
+            "image": "2e29d3c910c1a5821f84b06c73d08b2b844ccad4.bmp",
+            "audio": "3cf876bf8f0336e89cd2e3303ae419e648d72989.mp3",
+            "okTransition": {
+                "actionNode": "56e0d8d4-4fc1-4f22-b085-79755c46d1f1",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": true,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": false
+            }
+        },
+        {
+            "uuid": "21666f0d-dbcc-4d77-bc9f-c8efaa7b429f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 9776
+            },
+            "image": null,
+            "audio": "6d576722c3a80ed21944ab85718b9a0446e4f6bc.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "76ab87b3-7230-49c1-9618-c9a323bcc41a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 10048.5
+            },
+            "image": null,
+            "audio": "1f632ef99c0502fb55b0a446ec59d4626489ec38.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "5deae7a5-62ba-4b49-b73c-9a8ab537a8df",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 10455.25
+            },
+            "image": null,
+            "audio": "696419db78e91160347e825d77a5e6e55bddeec8.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "aa5f0ca8-4748-459c-b3d9-a7467d04ab9d",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 10750.5
+            },
+            "image": null,
+            "audio": "fd8044be3bda1bbd01ea58f49ec692c04f161237.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "91b60799-a4ab-474a-9df6-8f9d0f5ac2e9",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 11162.75
+            },
+            "image": null,
+            "audio": "dae09794f02506bf954d1b851f23a39497c68783.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "cf58b1cb-5e8e-4241-86fe-551bef724e0a",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 11544.5
+            },
+            "image": null,
+            "audio": "f0c56b145caeb0db5bb24aa0cc22f10bb897505e.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "263b64a4-0bcd-431b-b77e-47e90ce929fa",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 11847.5
+            },
+            "image": null,
+            "audio": "c37e20eecc6f35daf1acf9aed6622f68a868b8b7.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "adabf6e3-6bf2-451f-87cb-21f7a5386a7f",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 12120
+            },
+            "image": null,
+            "audio": "db45ca0e2f60b4d960dba8a60f2a13e38ae21518.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "9c520aee-7ac5-46d4-bf68-cd3ec5ce8bea",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 12526.75
+            },
+            "image": null,
+            "audio": "e3bd336694b62d9e3b2de345e659d2943df8ec12.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "610826a6-1360-4510-8486-158d935bbc31",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 12822
+            },
+            "image": null,
+            "audio": "ab655c6849fe4d99c51b1193b087c4b502239a9a.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "ffc340a5-dd56-4857-bd15-3e15ba1987d9",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 13125
+            },
+            "image": null,
+            "audio": "ad54c30226177e0acf749027e4b49bfab7600f83.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "610778a3-0224-47eb-ab33-af050b94c35c",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 13397.5
+            },
+            "image": null,
+            "audio": "cff04ad3da43025d77c49be21158ff7a3cd0ddc4.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "a68cbf87-1bab-4e82-85fd-ce5953eb7fa6",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 13700.5
+            },
+            "image": null,
+            "audio": "32cb5752141f6a4f9f527e456385c2bf62158e85.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "e68f3600-00fe-4c98-a027-f5c9d2f7ecf4",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 13973
+            },
+            "image": null,
+            "audio": "3bf05467b31ef8c92aa67808226e13073041ef03.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "fa026336-908c-4018-a8ce-e403c4a43377",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 14379.75
+            },
+            "image": null,
+            "audio": "9d91bac231def781f3d6e41a8c16877a3cc63667.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "48c3263b-300b-43b8-b244-4efef9d7719c",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 14675
+            },
+            "image": null,
+            "audio": "ca578bca07812111526d9917d46cb3bd65e3e7e6.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "5a57201c-aba6-4ebc-b75f-76404c279dd0",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 14978
+            },
+            "image": null,
+            "audio": "d784b0756937184c7cd39e0441ee6638906ca975.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "12e43fb6-ac3b-4cfe-a7a1-fbaa25724060",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 3945,
+                "y": 15250.5
+            },
+            "image": null,
+            "audio": "3ae3d2077dfdcd03381a6db0009cd64750db235d.mp3",
+            "okTransition": {
+                "actionNode": "026d228d-5980-46e1-9961-88e8ae845e58",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": false,
+                "home": true,
+                "pause": true,
+                "autoplay": true
+            }
+        },
+        {
+            "uuid": "baa74850-a95c-4dcf-bfa3-b995a4aaf114",
+            "type": "stage",
+            "name": "Stage title",
+            "position": {
+                "x": 4380,
+                "y": 11830.75
+            },
+            "image": null,
+            "audio": "58aca82b5f9122f7872939477a9c671a85aa3c0b.mp3",
+            "okTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "homeTransition": {
+                "actionNode": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+                "optionIndex": 0
+            },
+            "controlSettings": {
+                "wheel": false,
+                "ok": true,
+                "home": true,
+                "pause": false,
+                "autoplay": true
+            }
+        }
+    ],
+    "actionNodes": [
+        {
+            "id": "a392c675-b481-4c24-9e56-9ff45e3849a9",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 14993.5
+            },
+            "options": [
+                "41382a52-4759-41ec-9ab5-aa670dee16b3",
+                "ea0ded27-e1da-43ec-a3a3-034b89e7f7c9"
+            ]
+        },
+        {
+            "id": "2ef3abe8-1560-4a9e-83e3-3aa9596a7929",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 13140.5
+            },
+            "options": [
+                "1fee0d32-2171-454e-9d43-b21a8995a52b",
+                "b8263894-3279-4d22-b682-3678ec71abb2"
+            ]
+        },
+        {
+            "id": "c6245a54-cce3-4f15-a151-800fa50c8ecd",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 11029.5
+            },
+            "options": [
+                "222c6caf-75f5-4522-aa88-c7924335c787"
+            ]
+        },
+        {
+            "id": "de1e70b3-4c39-4776-b08d-c8c3ad76116e",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 3971
+            },
+            "options": [
+                "b2f4a401-287b-411a-a9ee-3af4e67dd094"
+            ]
+        },
+        {
+            "id": "5dbbecb4-5728-4812-b9b4-6d61fbc2a9c5",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 7101.5
+            },
+            "options": [
+                "73815edb-41d3-48d1-b1ad-a14b6a80644c"
+            ]
+        },
+        {
+            "id": "198d4890-5ff7-4b0c-8f2e-64ef6a9d25f4",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 10473.5
+            },
+            "options": [
+                "78f4f4ac-0219-487c-9b2c-85f083acc925",
+                "1e9ee8d2-744a-4f83-ac7b-f342f1fdcf5c"
+            ]
+        },
+        {
+            "id": "266a37f4-010c-4e84-a70b-c658e2b7d6f1",
+            "name": "Action title",
+            "position": {
+                "x": 1135,
+                "y": 3498.25
+            },
+            "options": [
+                "a45202c4-bf3e-4db2-893e-2cfd9f9c9f8a"
+            ]
+        },
+        {
+            "id": "aa9dcde9-970b-43c6-95be-9c93e168b137",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 12505.5
+            },
+            "options": [
+                "fb23ef88-cd5a-4508-a884-c19eed8ab805"
+            ]
+        },
+        {
+            "id": "060899cb-a8b2-480f-9ffd-e013bbf4ea0c",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 7938.5
+            },
+            "options": [
+                "e40cd904-40ae-434a-907d-5ea9a665eaef",
+                "f94a23b1-51e1-4403-92ec-ef28a3dd3762"
+            ]
+        },
+        {
+            "id": "d79ec086-ea27-4325-84a7-9fbd63b27ad3",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 10918.5
+            },
+            "options": [
+                "91b60799-a4ab-474a-9df6-8f9d0f5ac2e9"
+            ]
+        },
+        {
+            "id": "16250f00-5e0a-4e4b-838a-abceaa997228",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 9216
+            },
+            "options": [
+                "51f608bd-96fc-4bf0-aa55-f0e3b906cc3b",
+                "22284dbc-687b-4f34-a458-e02c0c765bc2"
+            ]
+        },
+        {
+            "id": "ec4610e9-65e0-42e7-97d4-1cf541224825",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 5824
+            },
+            "options": [
+                "2ec4aa0b-7770-4f20-811d-2e40144df96b"
+            ]
+        },
+        {
+            "id": "4769394c-a58b-45de-bf4c-ec9154e37ad1",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 2732
+            },
+            "options": [
+                "6d08291e-9320-450a-acb4-8af0a9fc1fd2",
+                "d2314c44-def7-4db3-b733-58ed434711b5"
+            ]
+        },
+        {
+            "id": "4625be46-f827-43ca-98be-d31b8787990b",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 14843
+            },
+            "options": [
+                "5a57201c-aba6-4ebc-b75f-76404c279dd0"
+            ]
+        },
+        {
+            "id": "7295df6e-6d17-4a39-836a-805d49d13873",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 14141
+            },
+            "options": [
+                "fa026336-908c-4018-a8ce-e403c4a43377"
+            ]
+        },
+        {
+            "id": "288f30e9-d02e-4e40-84c8-8002cac34a04",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 3327.5
+            },
+            "options": [
+                "e9072e28-07e4-4fbf-a7f4-34bba4f07b2a",
+                "9d5654bf-7bfa-40fb-86b1-976c0b0ec650"
+            ]
+        },
+        {
+            "id": "5d414bfd-ca86-4b27-9aa1-29bd4abaf836",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 5046.5
+            },
+            "options": [
+                "9a2b5cbd-869f-4881-a16f-ee17ad8a54d4"
+            ]
+        },
+        {
+            "id": "9dd3e994-4b13-473c-b1d8-502fdccc0ac0",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 4764
+            },
+            "options": [
+                "799c4623-1a97-4652-9e25-38062c48fc63"
+            ]
+        },
+        {
+            "id": "c98f90a2-6baa-401e-b7b6-a2a696f444ab",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 11712.5
+            },
+            "options": [
+                "263b64a4-0bcd-431b-b77e-47e90ce929fa"
+            ]
+        },
+        {
+            "id": "206eb5d6-ceb2-4cf2-8784-f85d5288fb8f",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 13101
+            },
+            "options": [
+                "b61590fe-3df7-4fd7-a496-55ec63935950"
+            ]
+        },
+        {
+            "id": "322f173e-d76c-4a0b-a662-aca82d14a2cb",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 5622
+            },
+            "options": [
+                "a0d25b89-9e2d-44e9-b5dd-dfd3ebd75fc3"
+            ]
+        },
+        {
+            "id": "9c019570-83f7-4b67-876e-f7fdbc82a063",
+            "name": "Action title",
+            "position": {
+                "x": 2005,
+                "y": 6513.25
+            },
+            "options": [
+                "2a60a1c7-52bd-44d3-aa00-c7e1f52e48c5"
+            ]
+        },
+        {
+            "id": "4c981675-67d0-4066-ad7f-65532aa7b483",
+            "name": "Action title",
+            "position": {
+                "x": 2440,
+                "y": 4688.75
+            },
+            "options": [
+                "1d967036-195e-4649-a36c-9de5100d590f",
+                "4ea29531-9171-48f7-b883-348e83aa474a",
+                "19bf3518-9756-4cb0-ad4e-0dc896f99d49"
+            ]
+        },
+        {
+            "id": "fbb12ab2-5883-49d3-9024-453b356af764",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 14641
+            },
+            "options": [
+                "48c3263b-300b-43b8-b244-4efef9d7719c"
+            ]
+        },
+        {
+            "id": "1b2b3e7b-4392-4359-a2d6-623aa128fddb",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 1474.5
+            },
+            "options": [
+                "b1967deb-e840-411e-a931-52b1f7a3fb01",
+                "ae9d4357-50b4-4c99-a502-330f6e44005c"
+            ]
+        },
+        {
+            "id": "04935833-f3dd-46d7-b744-ec19ce85bbe6",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 839.5
+            },
+            "options": [
+                "65db6de2-076f-4ed4-a488-a0fe30dd2aab"
+            ]
+        },
+        {
+            "id": "db44d5c0-d75c-47d5-ad25-f254916e8e95",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 12990
+            },
+            "options": [
+                "ffc340a5-dd56-4857-bd15-3e15ba1987d9"
+            ]
+        },
+        {
+            "id": "e6be17a5-6e26-454d-8962-1c0796b5b542",
+            "name": "Action title",
+            "position": {
+                "x": 1570,
+                "y": 11257.25
+            },
+            "options": [
+                "b0fe38c3-087d-4449-9c24-a40992d6576c",
+                "f4d065c8-3f59-4411-8aea-3c705418c283",
+                "b3059327-bd3a-4119-858b-0508dc3a5ea1",
+                "dbe70b44-690a-47e3-9c92-ebcd90412114"
+            ]
+        },
+        {
+            "id": "cdd085fe-4a76-47dd-a5e1-6f4916b42e3b",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 8620.5
+            },
+            "options": [
+                "b721abc4-8fd1-4791-9d6e-7511327eb20f",
+                "8890f98b-ed4a-4c93-a743-914f41a06654"
+            ]
+        },
+        {
+            "id": "211506ce-e41a-487b-a076-43833b68ed27",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 420
+            },
+            "options": [
+                "c3bc5925-4c99-42a7-bd0e-ac59cc1f6c6c"
+            ]
+        },
+        {
+            "id": "6a6e7e77-d204-4ba9-a14c-c6e3ddae6aaf",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 9752
+            },
+            "options": [
+                "2a31f527-b695-4f70-abe7-b56f11ea2228"
+            ]
+        },
+        {
+            "id": "c3c57fbf-64de-4036-9951-2cc96af3055c",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 4121.5
+            },
+            "options": [
+                "a00bdeb1-9b54-4c4b-9db5-01fe4e2ff02d",
+                "f3f5177a-5d10-4946-82f8-04dcd0b832d4"
+            ]
+        },
+        {
+            "id": "026d228d-5980-46e1-9961-88e8ae845e58",
+            "name": "Action title",
+            "position": {
+                "x": 4180,
+                "y": 7838.5
+            },
+            "options": [
+                "baa74850-a95c-4dcf-bfa3-b995a4aaf114"
+            ]
+        },
+        {
+            "id": "246becd2-2ba2-4303-a721-ad939a16560a",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 1899.5
+            },
+            "options": [
+                "2f97a6b8-67ea-495e-9a2f-3585ffecb703"
+            ]
+        },
+        {
+            "id": "90e70b39-0f0c-47df-9fec-70d9d3a78ff2",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 14954
+            },
+            "options": [
+                "7fef9294-ff68-427a-8219-3e255e347feb"
+            ]
+        },
+        {
+            "id": "f5b23330-6c01-47cf-ba8a-bd31f3c94cb5",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 10434
+            },
+            "options": [
+                "0a79de19-f4b2-4c36-b053-0220cef69477"
+            ]
+        },
+        {
+            "id": "077e2966-d943-4fdb-8bc9-f245fb1b5471",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 2010.5
+            },
+            "options": [
+                "220acc56-e809-47a5-be52-f3c4d0dfd88d"
+            ]
+        },
+        {
+            "id": "9910cac2-ad39-4c7f-84c5-35ce3d28b19a",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 5974.5
+            },
+            "options": [
+                "b1341aaf-216d-4bc9-a3f9-df6272efd27f",
+                "0ae90c43-8a7d-4fa8-b985-411cb5c50b87"
+            ]
+        },
+        {
+            "id": "ca644e0e-51f7-40aa-9cfd-4b933b2610e3",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 197
+            },
+            "options": [
+                "d00d6cfe-9498-4c4f-95e0-348f2a227590",
+                "0b670256-188b-4d42-9f27-529f679dad06"
+            ]
+        },
+        {
+            "id": "53f17d52-a15a-42b6-98e0-ed8c89252462",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 14398
+            },
+            "options": [
+                "dfc2ab92-7719-46a6-8386-f98d8ab494eb",
+                "04eaff0f-cb35-4164-ba1a-7f63904006f7"
+            ]
+        },
+        {
+            "id": "92b0ce60-7557-4efc-a7bc-9e679541e763",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 7899
+            },
+            "options": [
+                "fd77d0b3-2b57-46c9-b043-58a5c22bf3da"
+            ]
+        },
+        {
+            "id": "7bef8768-435d-4481-b7fe-1abb8809904b",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 5248.5
+            },
+            "options": [
+                "5066858a-1c0c-43f8-a275-e761b5189822"
+            ]
+        },
+        {
+            "id": "b39f6b4a-2669-4621-a332-986c20563d84",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 2475
+            },
+            "options": [
+                "48b24f86-6573-402d-aada-77aa5cdcab87"
+            ]
+        },
+        {
+            "id": "1849c3ea-db16-43fb-8f8f-cdfe0ad63bb5",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 14358.5
+            },
+            "options": [
+                "4e90526b-b2ad-46d4-a7b2-26453b8d7cb9"
+            ]
+        },
+        {
+            "id": "377f7416-1a9e-4651-9eb4-23d0e0e785ce",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 3769
+            },
+            "options": [
+                "ff0c0183-8baa-4dcc-b2df-57af486a1cdb"
+            ]
+        },
+        {
+            "id": "703b32a5-bfbc-432b-b3a6-66c7669ced2a",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 11823.5
+            },
+            "options": [
+                "6cfd2548-a0db-4e32-84b8-797e1b5bb8c6"
+            ]
+        },
+        {
+            "id": "f1e20b94-06ff-48b4-bd3f-c1bdef399300",
+            "name": "Action title",
+            "position": {
+                "x": 2005,
+                "y": 8477.25
+            },
+            "options": [
+                "4f9cf0d3-97f7-45c6-9352-287ac726301e"
+            ]
+        },
+        {
+            "id": "75ac9e11-668d-4f0d-9da5-efc7e647e4c9",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 8863.5
+            },
+            "options": [
+                "040d157b-37f7-4756-bfba-35237486d13a"
+            ]
+        },
+        {
+            "id": "eef4e736-d3d8-42eb-b816-1362b30cd0ae",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 3177
+            },
+            "options": [
+                "a7343205-2ca9-4cd0-bf1c-5b989fd56c73"
+            ]
+        },
+        {
+            "id": "4725a9b2-0d38-4e25-a804-aa56f77c71c7",
+            "name": "Action title",
+            "position": {
+                "x": 2440,
+                "y": 764.25
+            },
+            "options": [
+                "6d70808f-991a-4f21-8c1a-ade5934f92fc",
+                "3618182a-f4c0-486f-9f72-f0632486c6da",
+                "92895f9c-3bca-4f5e-aea2-74540927d8cc"
+            ]
+        },
+        {
+            "id": "3f168925-0517-44a0-8d0c-041589035f14",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 6399.5
+            },
+            "options": [
+                "770f35e4-e997-4137-9d65-293dc1e9c72a"
+            ]
+        },
+        {
+            "id": "61f03b57-4d79-4e54-a2a3-aecd73b6b8a9",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 10014.5
+            },
+            "options": [
+                "76ab87b3-7230-49c1-9618-c9a323bcc41a"
+            ]
+        },
+        {
+            "id": "3af65912-d0eb-4d1a-bae8-99241ac89078",
+            "name": "Action title",
+            "position": {
+                "x": 2005,
+                "y": 12401.75
+            },
+            "options": [
+                "06970582-7bbf-4302-b8ec-9a0269279f88"
+            ]
+        },
+        {
+            "id": "d35c8479-fc4e-4905-a235-86f3c613d0de",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 46.5
+            },
+            "options": [
+                "2d1dc72c-7ae8-4110-9166-93302e67d3b4"
+            ]
+        },
+        {
+            "id": "9547f602-3dde-4ce8-8207-8e80fb134183",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 11510.5
+            },
+            "options": [
+                "cf58b1cb-5e8e-4241-86fe-551bef724e0a"
+            ]
+        },
+        {
+            "id": "585057f4-7da7-4d7e-84be-f0f2dd96324c",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 11863
+            },
+            "options": [
+                "23d93884-9c6d-416a-a306-dcb7abfaf942",
+                "2e490d55-5440-4324-864f-274d335135a0"
+            ]
+        },
+        {
+            "id": "4536954c-7489-4cca-b7ee-6e6b1f77a681",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 10716.5
+            },
+            "options": [
+                "aa5f0ca8-4748-459c-b3d9-a7467d04ab9d"
+            ]
+        },
+        {
+            "id": "847ed654-da19-4d40-9c34-f7d55c2c5421",
+            "name": "Action title",
+            "position": {
+                "x": 2440,
+                "y": 6541.75
+            },
+            "options": [
+                "31432f0d-ad9e-4d1f-9062-f4f67befbb31",
+                "6f651d2a-d19c-4143-9c6f-8ac1629379eb",
+                "b1b8f0c3-dab4-441b-8c98-f5e3edfaecdc"
+            ]
+        },
+        {
+            "id": "55bc6e27-17f3-4be4-afcd-ac2be41a4a36",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 8581
+            },
+            "options": [
+                "fca7cc44-2384-434e-9341-87d63e4b58e9"
+            ]
+        },
+        {
+            "id": "b2877e92-0c82-4032-acab-551a8d116313",
+            "name": "Action title",
+            "position": {
+                "x": 2005,
+                "y": 14254.75
+            },
+            "options": [
+                "3dfd2165-e138-4e33-87ec-a00756d4fa9f"
+            ]
+        },
+        {
+            "id": "dfc144bf-5acd-4371-bbea-41a821c8a536",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 9176.5
+            },
+            "options": [
+                "d81c08b4-d8ee-41cc-a745-e9cf8c69f611"
+            ]
+        },
+        {
+            "id": "84a9e4c3-b966-487e-8cab-8a25d3a2caa9",
+            "name": "Action title",
+            "position": {
+                "x": 2005,
+                "y": 735.75
+            },
+            "options": [
+                "5c1e4e22-3978-4647-8cc2-e0013ea5150b"
+            ]
+        },
+        {
+            "id": "5f6ab1e7-c1ad-46b3-b10d-274b775ab38e",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 2692.5
+            },
+            "options": [
+                "6e4bcd81-3b06-4f1f-89d1-57dfd341127d"
+            ]
+        },
+        {
+            "id": "a00a4532-e493-47e3-ae45-db4074fc2492",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 8363.5
+            },
+            "options": [
+                "f8788983-410d-4d31-8c27-70410600ddeb"
+            ]
+        },
+        {
+            "id": "09afaccb-3fee-4af9-a513-5b55b65c413e",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 2273
+            },
+            "options": [
+                "48962e3f-a4c6-4b9f-9f7f-7accd8ec006b"
+            ]
+        },
+        {
+            "id": "023adb30-0e32-43e3-a5f6-f159896a4852",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 12788
+            },
+            "options": [
+                "610826a6-1360-4510-8486-158d935bbc31"
+            ]
+        },
+        {
+            "id": "48769d99-5efb-4bae-b156-9116bfd99011",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 13939
+            },
+            "options": [
+                "e68f3600-00fe-4c98-a027-f5c9d2f7ecf4"
+            ]
+        },
+        {
+            "id": "4c28f7e8-3da6-404e-8bd9-26dbbec0377f",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 13565.5
+            },
+            "options": [
+                "a68cbf87-1bab-4e82-85fd-ce5953eb7fa6"
+            ]
+        },
+        {
+            "id": "fa203a54-7c5f-49cc-881d-763dd0088d5c",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 1122
+            },
+            "options": [
+                "0d68b58a-54ed-4a4c-b7d2-ddc43b483c7a"
+            ]
+        },
+        {
+            "id": "a2d9304c-843d-4920-8925-7264f2defeb6",
+            "name": "Action title",
+            "position": {
+                "x": 2440,
+                "y": 2617.25
+            },
+            "options": [
+                "3df92cf0-56d4-4ab4-94f2-c3b7160a7c41",
+                "81773217-f9e8-4a69-a28c-90d2a812a219",
+                "114c034e-8dba-4a4d-b701-ed658b10b5b4"
+            ]
+        },
+        {
+            "id": "dba9ed86-66d1-4f37-8446-c8978b4f26ce",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 13716
+            },
+            "options": [
+                "01b47066-ebd3-4802-82f5-cf04e19ad946",
+                "48ec174b-6b82-48bc-9f3f-0f1295ebda7a"
+            ]
+        },
+        {
+            "id": "a5494cda-31da-437e-bbbf-3fed602109ef",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 8161.5
+            },
+            "options": [
+                "c492e51c-372c-4738-a253-50319cfc92ef"
+            ]
+        },
+        {
+            "id": "a7d0800f-4e9c-46b6-8730-e5e8df7926c4",
+            "name": "Action title",
+            "position": {
+                "x": 265,
+                "y": 7737.5
+            },
+            "options": [
+                "ceb95bb4-8b17-43c5-98a3-2f98d63eef07"
+            ]
+        },
+        {
+            "id": "f6c55d8d-ccd8-4e66-890f-2548ad02fe4e",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 879
+            },
+            "options": [
+                "a85c28cf-42a8-4328-bb80-8cad91b5eaed",
+                "e8a3ca49-30c5-48c7-8bf1-df0812fcbdbe"
+            ]
+        },
+        {
+            "id": "bbd139e7-4321-4449-b38b-13e840a070ea",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 4546.5
+            },
+            "options": [
+                "9d60811b-57da-4fd0-b489-9928f73bf62b"
+            ]
+        },
+        {
+            "id": "cbcc7806-9b9d-45e4-bdc2-a1043f095c62",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 157.5
+            },
+            "options": [
+                "7c652774-65c8-4227-9cfc-3b6934c2b75a"
+            ]
+        },
+        {
+            "id": "01ee0c47-8510-4caf-8460-5a17c16b0027",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 7212.5
+            },
+            "options": [
+                "f7fef7be-cfea-409e-b9ca-fafe484d0bb2"
+            ]
+        },
+        {
+            "id": "9b9b4b77-0785-40ec-b6ba-c26022e8efbc",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 1324
+            },
+            "options": [
+                "1dfff10c-cb20-4dc3-89d3-890157ecdacb"
+            ]
+        },
+        {
+            "id": "f37808f0-b78f-4ce3-ba2c-89e75676b3f3",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 7788
+            },
+            "options": [
+                "4c66959c-3513-421b-ae32-3aa5c816fe05"
+            ]
+        },
+        {
+            "id": "86d10a61-dac8-4a0e-b7f2-d78571f2a5ce",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 6617
+            },
+            "options": [
+                "dac5cb38-9f56-4b07-ac29-1a7dd9881613"
+            ]
+        },
+        {
+            "id": "a208033b-27c6-41b6-8461-f268b796c950",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 9791.5
+            },
+            "options": [
+                "97fdffba-6a8f-43f3-8b0a-2ed518a4fac5",
+                "28b7247f-3f10-4127-b9ed-cf5b18b7c395"
+            ]
+        },
+        {
+            "id": "9028de6c-d474-449c-9d59-60a81596a17f",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 7586
+            },
+            "options": [
+                "5f00493a-ee01-444c-9ca3-d4d2727c99b7"
+            ]
+        },
+        {
+            "id": "bf917dde-4ed6-47b6-b8b1-823aeed48047",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 9439
+            },
+            "options": [
+                "89f9f5fb-92a5-4d2d-b2b9-ac6dbe776dc9"
+            ]
+        },
+        {
+            "id": "98ba25c2-6eae-4fcb-b657-67ba031d2f97",
+            "name": "Action title",
+            "position": {
+                "x": 2440,
+                "y": 12430.25
+            },
+            "options": [
+                "8198e837-f000-4581-8343-5857cdf8d254",
+                "0a2ef0cb-b6f6-4381-a791-a090eea80d94",
+                "c4ea828a-138b-46df-a588-9b4921658f9b"
+            ]
+        },
+        {
+            "id": "fc72c8ec-0c61-4310-9f36-dfca087f790a",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 4803.5
+            },
+            "options": [
+                "9171d0f8-af6e-47cc-9a90-bfe8a9731747",
+                "fa5f42c5-f3a2-44dd-93c4-cd1d60935d19"
+            ]
+        },
+        {
+            "id": "8838bcc5-1512-4e7c-ac31-76035bdb84f5",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 10216.5
+            },
+            "options": [
+                "5deae7a5-62ba-4b49-b73c-9a8ab537a8df"
+            ]
+        },
+        {
+            "id": "438eee3c-0194-49b9-b79e-b69aee3833f9",
+            "name": "Action title",
+            "position": {
+                "x": 1135,
+                "y": 11239.75
+            },
+            "options": [
+                "fd5450c9-69b2-4b72-bba7-0fdb1e42e503"
+            ]
+        },
+        {
+            "id": "347fa135-25c8-40f6-8a2c-854cac97509f",
+            "name": "Action title",
+            "position": {
+                "x": 700,
+                "y": 7312.5
+            },
+            "options": [
+                "183f7ebd-7ae4-4e61-94ee-186a01e6e3d2",
+                "fd638797-f8c6-4a1a-92e2-726e91ebc679"
+            ]
+        },
+        {
+            "id": "693f6994-0305-4ac9-ac57-b3c7fdc42e57",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 12086
+            },
+            "options": [
+                "adabf6e3-6bf2-451f-87cb-21f7a5386a7f"
+            ]
+        },
+        {
+            "id": "a1883204-2c5b-479b-beaa-78588c45cb10",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 9065.5
+            },
+            "options": [
+                "7132f198-d62b-43cb-8e20-a9c8a519ff32"
+            ]
+        },
+        {
+            "id": "3c6da774-8cb6-49f8-9169-d162b39a6e98",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 1435
+            },
+            "options": [
+                "50db0992-f8aa-4a23-8202-821be79103e3"
+            ]
+        },
+        {
+            "id": "486c81bd-f61f-4188-9841-0d096a91bc48",
+            "name": "Action title",
+            "position": {
+                "x": 2440,
+                "y": 8505.75
+            },
+            "options": [
+                "43a93eb9-28e3-4437-b8db-4815f0fd5a6e",
+                "00047d78-f740-4e41-8624-d5f60d5293a5",
+                "7dd78667-68ab-41fb-aabc-86561a844870"
+            ]
+        },
+        {
+            "id": "82e4f43d-09fd-499f-ae1a-9cce8f48bd3e",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 5935
+            },
+            "options": [
+                "85506725-47c8-499b-bf41-c66b209878aa"
+            ]
+        },
+        {
+            "id": "a0c1b405-efef-4cbc-aee2-00beac5f0abb",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 12288
+            },
+            "options": [
+                "9c520aee-7ac5-46d4-bf68-cd3ec5ce8bea"
+            ]
+        },
+        {
+            "id": "d3b20f2c-e28a-44ab-9959-cd3b6fb8ae1c",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 2050
+            },
+            "options": [
+                "33bfcdcc-89a7-401e-aa44-1bf5048b17e0",
+                "5839d7ce-0c5a-4d6c-a180-fc33240780ed"
+            ]
+        },
+        {
+            "id": "bca17e52-468c-4336-89d7-e698b4f83289",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 13363.5
+            },
+            "options": [
+                "610778a3-0224-47eb-ab33-af050b94c35c"
+            ]
+        },
+        {
+            "id": "82b97a1f-fa1e-4fe4-a7a1-3f2e2335f637",
+            "name": "Action title",
+            "position": {
+                "x": 2440,
+                "y": 14283.25
+            },
+            "options": [
+                "a5d9c1f2-e32d-41bb-800d-a62fcffd48e4",
+                "22b19df7-ef01-4098-be2c-015b908e8b3c",
+                "00c37335-7702-45f7-8236-dd587b2c5eef"
+            ]
+        },
+        {
+            "id": "7d12fc15-54c1-49b0-bd73-fc945f613852",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 4082
+            },
+            "options": [
+                "928bd7d3-0e7a-465c-b118-a9ea3b025563"
+            ]
+        },
+        {
+            "id": "ca4b35d9-561b-418d-a74a-e262703691e4",
+            "name": "Action title",
+            "position": {
+                "x": 2005,
+                "y": 2588.75
+            },
+            "options": [
+                "05ec4aac-4a3b-47fb-8d2a-062a5afc221a"
+            ]
+        },
+        {
+            "id": "b322747a-37a0-4585-9b7b-c95b2f172d82",
+            "name": "Action title",
+            "position": {
+                "x": 2005,
+                "y": 10330.25
+            },
+            "options": [
+                "c4bd8c95-fc88-482f-8b4f-641646845531"
+            ]
+        },
+        {
+            "id": "cf56c139-5671-4936-9af2-69b9a40f5e52",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 11069
+            },
+            "options": [
+                "fd667d30-4461-4ba4-8694-555ed67e208a",
+                "2740b134-4c35-46a3-ac7c-e0b6fadd5db3"
+            ]
+        },
+        {
+            "id": "d81631df-7627-46ad-abb4-e7741a51abfa",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 12545
+            },
+            "options": [
+                "f817d84b-a9ed-4db7-a635-c0529d92899e",
+                "62bfb444-d7dc-4607-b061-b38bb43d9bbe"
+            ]
+        },
+        {
+            "id": "9611bc80-f4ff-4635-bb6e-a15f5c2817a9",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 5359.5
+            },
+            "options": [
+                "2f151b76-2c25-47df-b636-25723a99a166"
+            ]
+        },
+        {
+            "id": "c035f17a-0f2c-49be-9683-d4b76a2ef8d9",
+            "name": "Action title",
+            "position": {
+                "x": 1570,
+                "y": 3515.75
+            },
+            "options": [
+                "773d73d3-ea9d-43e5-b671-09eaf452d282",
+                "81fa8eb9-77e5-4a2c-8ed6-0aa9d8824fbe",
+                "b5c95226-34fb-4e17-9607-11740ad1ad62",
+                "6eee444f-4ee6-4f82-a608-f35d03e1f8a2"
+            ]
+        },
+        {
+            "id": "19b7df8b-c327-4ab2-8983-fdb2f6f01884",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 13676.5
+            },
+            "options": [
+                "5146ac1f-06c6-4500-a619-72d91e8d816d"
+            ]
+        },
+        {
+            "id": "549c6ea5-1397-4add-80df-f91a35ece99a",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 1697.5
+            },
+            "options": [
+                "999209f5-5103-4420-bd6d-2106efbc6132"
+            ]
+        },
+        {
+            "id": "4c8207fd-dda1-4fdd-81c7-0a6ff09f7e72",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 6656.5
+            },
+            "options": [
+                "4b220d21-66d5-4cb3-93cf-49dbf0ff2ff6",
+                "38ba19c1-bc51-4999-851f-9dd75644fb8f"
+            ]
+        },
+        {
+            "id": "e8d053da-5c15-4987-9cb5-829627657751",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 7302.5
+            },
+            "options": [
+                "f51278b4-7b15-4c4a-a627-82d7c54d0810",
+                "23fd530e-5db5-4598-ad71-05e49ebbffe3"
+            ]
+        },
+        {
+            "id": "3b7bd17f-38af-44a3-a7ce-0e829023742e",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 622
+            },
+            "options": [
+                "4b7ce744-039d-4a7f-adfd-315d56aa7e2e"
+            ]
+        },
+        {
+            "id": "467a00b3-e8eb-4d58-addc-b9ef83d84aab",
+            "name": "Action title",
+            "position": {
+                "x": 2440,
+                "y": 10358.75
+            },
+            "options": [
+                "8b901dc2-dde3-469e-a494-23f2f847f54f",
+                "8afd2a1c-d93b-4efd-9ad6-7240ca947d0f",
+                "d2830655-2418-4b84-9411-38527a09df64"
+            ]
+        },
+        {
+            "id": "0c7aa470-4946-4abe-a8ae-b7500b50f751",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 6899.5
+            },
+            "options": [
+                "171578ec-9b58-4ead-aaf1-55df520b94c0"
+            ]
+        },
+        {
+            "id": "054a1ddd-72af-40a3-bae5-c9bba2848043",
+            "name": "Action title",
+            "position": {
+                "x": 2875,
+                "y": 3288
+            },
+            "options": [
+                "956447d0-ed0c-4899-b06d-55d196a05f18"
+            ]
+        },
+        {
+            "id": "56e0d8d4-4fc1-4f22-b085-79755c46d1f1",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 15216.5
+            },
+            "options": [
+                "12e43fb6-ac3b-4cfe-a7a1-fbaa25724060"
+            ]
+        },
+        {
+            "id": "bd20644b-2477-4e6a-ab51-79d75bff2eb9",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 6197.5
+            },
+            "options": [
+                "c398f0f3-3458-4f88-b037-583d26090e63"
+            ]
+        },
+        {
+            "id": "96de7fa7-838b-4a9e-b481-9f559aa7ff17",
+            "name": "Action title",
+            "position": {
+                "x": 2005,
+                "y": 4660.25
+            },
+            "options": [
+                "2efa0cc3-c3ec-4abc-9096-278f0a89e3a9"
+            ]
+        },
+        {
+            "id": "90a9938e-48cc-47e1-b8ea-d15e33d6897e",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 2975
+            },
+            "options": [
+                "a1f4a93e-6f11-4a96-901f-effa57866188"
+            ]
+        },
+        {
+            "id": "7385a176-08e2-4ca4-8f37-a2552b6fa40b",
+            "name": "Action title",
+            "position": {
+                "x": 3310,
+                "y": 5399
+            },
+            "options": [
+                "263adc11-ed9b-4623-9f27-f18483860cef",
+                "a1c94c91-b4a5-4661-a4fd-305050e6d602"
+            ]
+        },
+        {
+            "id": "b1bed2f3-22ca-4bee-b7c0-edba98081665",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 9641
+            },
+            "options": [
+                "21666f0d-dbcc-4d77-bc9f-c8efaa7b429f"
+            ]
+        },
+        {
+            "id": "cc3f865d-85d1-4b7f-b05e-167b3488a716",
+            "name": "Action title",
+            "position": {
+                "x": 3745,
+                "y": 4344.5
+            },
+            "options": [
+                "4fc7c702-2478-40ab-b091-5ce6a290b57a"
+            ]
+        }
+    ]
+}
