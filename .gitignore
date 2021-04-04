@@ -3,3 +3,6 @@ build/
 *.pyc
 *.ogg
 *.user
+*.bmp
+*.mp3
+*.wav
