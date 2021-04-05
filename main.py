@@ -20,7 +20,7 @@ from PySide2.QtCore import QUrl, QObject, QTimer
 from naoqibridge import NaoqiBridge, Person
 from audiorecorder import AudioRecorder
 
-from flask_server import server
+from flask_server import tablet_webserver
 from supervisor import Supervisor
 
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
     port = int(os.environ.get('PORT', 8000))
     kwargs = {'host': '0.0.0.0', 'port': port , 'threaded' : True, 'use_reloader': False, 'debug':True}
-    flask_thread = threading.Thread(target=server.run, kwargs=kwargs)
+    flask_thread = threading.Thread(target=tablet_webserver.run, kwargs=kwargs)
     flask_thread.setDaemon(True)
     flask_thread.start()
 
@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
 
     # share the supervisor's cmd_queue
-    server.cmd_queue = supervisor.cmd_queue
+    tablet_webserver.cmd_queue = supervisor.cmd_queue
     bridge.cmd_queue = supervisor.cmd_queue
 
     ##################################################################
