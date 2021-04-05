@@ -21,33 +21,10 @@ from naoqibridge import NaoqiBridge, Person
 from audiorecorder import AudioRecorder
 
 from flask_server import server
-from websocketserver import TabletWebSocketServer
+from supervisor import Supervisor
 
-class Metacognition(QObject):
-    def __init__(self, tablet_cmd_queue, ctrl_cmd_queue):
-        QObject.__init__(self)
-
-        self._watchdog_timer = QTimer(self)
-        self._watchdog_timer.setInterval(1000)
-        self._watchdog_timer.timeout.connect(self.show_cmd_queue)
-        self._watchdog_timer.start()
-
-        self.tablet_queue = tablet_cmd_queue
-        self.ctrl_queue = ctrl_cmd_queue
-
-        self.tablet = TabletWebSocketServer()
-
-
-    def show_cmd_queue(self):
-        if not self.tablet_queue.empty():
-            logger.info("GOT A TABLET CMD: " + str(self.tablet_queue.get()))
-
-        if not self.ctrl_queue.empty():
-            logger.info("GOT A CTRL CMD: " + str(self.ctrl_queue.get()))
-            self.tablet.setUrl("/")
 
 if __name__ == "__main__":
-
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--ip", type=str, default="127.0.0.1",
@@ -58,6 +35,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
 
+
+
+    ##################################################################
+    #################### CONTROL INTERFACE ###########################
+
     app = QGuiApplication(sys.argv)
     qmlRegisterType(Person, 'Naoqi', 1, 0, 'Person')
     qmlRegisterType(AudioRecorder, 'Naoqi', 1, 0, 'AudioRecorder')
@@ -65,6 +47,7 @@ if __name__ == "__main__":
 
     # Instance of the Python object
     bridge = NaoqiBridge(args)
+
 
     # Expose the Python object to QML
     context = engine.rootContext()
@@ -79,9 +62,11 @@ if __name__ == "__main__":
     if not engine.rootObjects():
         sys.exit(-1)
 
-    # inject a synchronised queue into Flask's thread
-    server.cmd_queue = Queue()
+    ##################################################################
 
+
+    ##################################################################
+    ########################  TABLET WEB SERVER ######################
 
     port = int(os.environ.get('PORT', 8000))
     kwargs = {'host': '0.0.0.0', 'port': port , 'threaded' : True, 'use_reloader': False, 'debug':True}
@@ -89,8 +74,25 @@ if __name__ == "__main__":
     flask_thread.setDaemon(True)
     flask_thread.start()
 
+    ##################################################################
 
-    metacognition = Metacognition(tablet_cmd_queue = server.cmd_queue,
-                                  ctrl_cmd_queue = bridge.cmd_queue)
+
+    ##################################################################
+    ######################## SUPERVISOR ##############################
+
+    supervisor = Supervisor()
+
+    supervisor_thread = threading.Thread(target=supervisor.run)
+    supervisor_thread.setDaemon(True)
+    supervisor_thread.start()
+
+
+    # share the supervisor's cmd_queue
+    server.cmd_queue = supervisor.cmd_queue
+    bridge.cmd_queue = supervisor.cmd_queue
+
+    ##################################################################
+
+
 
     sys.exit(app.exec_())

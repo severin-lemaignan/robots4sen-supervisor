@@ -7,15 +7,17 @@ import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 logger = logging.getLogger("tablet_websocket")
 
-from PySide2.QtCore import QUrl, QObject
+from PySide2.QtCore import QUrl, QObject, Signal, Slot
 from PySide2.QtWebSockets import QWebSocketServer
 from PySide2.QtNetwork import QHostAddress
 
 
 class TabletWebSocketServer(QObject):
-    def __init__(self):
 
-        super(QObject, self).__init__()
+    write = Signal(str)
+
+    def __init__(self):
+        QObject.__init__(self)
 
         self.server = QWebSocketServer("robotCtrl", QWebSocketServer.NonSecureMode)
         if self.server.listen(QHostAddress.LocalHost, 8080):
@@ -25,6 +27,8 @@ class TabletWebSocketServer(QObject):
         self.server.newConnection.connect(self.onNewConnection)
 
         print(self.server.isListening())
+
+        self.write.connect(self.sendMsg)
 
         # contains the socket to the tablet, once it connects
         self.tablet = None
@@ -39,12 +43,18 @@ class TabletWebSocketServer(QObject):
         logger.info("Tablet (re-)connecting")
         self.tablet = self.clientConnection
 
-        
-    def setUrl(self, url):
+    
+    def sendMsg(self, msg):
         if self.tablet:
-            self.tablet.sendTextMessage(url)
+            logger.debug("Sending msg to tablet ws: <%s>" % msg)
+            self.tablet.sendTextMessage(msg)
         else:
             logger.warning("Tablet not yet connected")
+
+
+    def setUrl(self, url):
+        logger.debug("Emitting websocket 'write' signal")
+        self.write.emit(url)
 
     def processTextMessage(self,  message):
         if (self.clientConnection):

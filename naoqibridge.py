@@ -9,6 +9,8 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
 import qi
 
+NAME = "CTRL"
+
 almemory = None
 alusersession = None
 
@@ -165,7 +167,8 @@ class NaoqiBridge(QObject):
 
         self.connectToRobot()
 
-        self.cmd_queue = Queue()
+        # cmd_queue is set in main.py to point to the supervisor cmd_queue
+        self.cmd_queue = None
 
     def connectToRobot(self):
         global almemory, alusersession
@@ -263,7 +266,7 @@ class NaoqiBridge(QObject):
         http://doc.aldebaran.com/2-5/naoqi/motion/alanimationplayer-advanced.html#animationplayer-tags-pepper
         """
         
-        self.cmd_queue.put(("animate", animation))
+        self.cmd_queue.put((NAME, "animate", animation))
 
 
     @Slot(str)
