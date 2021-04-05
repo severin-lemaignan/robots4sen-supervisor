@@ -46,14 +46,12 @@ class TabletWebSocketServer(QObject):
     
     def sendMsg(self, msg):
         if self.tablet:
-            logger.debug("Sending msg to tablet ws: <%s>" % msg)
             self.tablet.sendTextMessage(msg)
         else:
-            logger.warning("Tablet not yet connected")
+            logger.warning("Tablet not yet connected. Msg <%s> *not* sent." % msg)
 
 
     def setUrl(self, url):
-        logger.debug("Emitting websocket 'write' signal")
         self.write.emit(url)
 
     def processTextMessage(self,  message):
