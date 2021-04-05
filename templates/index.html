@@ -19,5 +19,21 @@
 
         <a href="animations.html">Test animations</a>
 
+        <script>
+            // Create WebSocket connection.
+            const socket = new WebSocket('ws://localhost:8080');
+
+            // Connection opened
+            socket.addEventListener('open', function (event) {
+                socket.send('helo');
+            });
+
+            // Listen for messages
+            socket.addEventListener('message', function (event) {
+                console.log('Message from robotCtrl. Going to: ', event.data);
+                location.href = event.data;
+            });
+        </script>
+
     </body>
 </html>
