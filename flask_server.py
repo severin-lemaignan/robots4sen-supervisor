@@ -9,20 +9,29 @@ from story_parser import Story
 server = Flask(__name__)
 
 
-ASSETS = "static/stories/susanne-and-ben/assets/"
+ASSETS = "/static/stories/susanne-and-ben/assets/"
 
 story = Story("static/stories/susanne-and-ben/story.json")
 
-@server.route('/<action>')
 @server.route('/')
-def main(action=None):
+def main():
+
+    # server.cmd_queue is injected by main.py upon Flask's thread creation
+    server.cmd_queue.put("INDEX")
+
+    return render_template('index.html')
+
+
+@server.route('/stories/<action>')
+@server.route('/stories/')
+def stories(action=None):
 
     txt, actions = story.next(action)
 
     # server.cmd_queue is injected by main.py upon Flask's thread creation
-    server.cmd_queue.put("Hello")
+    server.cmd_queue.put("STORIES")
 
-    return render_template('index.html',
+    return render_template('stories.html',
                            text = txt,
                            path = ASSETS,
                            actions = actions)

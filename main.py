@@ -1,5 +1,8 @@
 # utf-8
 
+import logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
+logger = logging.getLogger("main")
 
 import argparse
 
@@ -12,16 +15,16 @@ from Queue import Queue
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine,qmlRegisterType
+from PySide2.QtCore import QUrl, QObject, QTimer
 
 from naoqibridge import NaoqiBridge, Person
 from audiorecorder import AudioRecorder
 
 from flask_server import server
-
-from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
+from websocketserver import TabletWebSocketServer
 
 class Metacognition(QObject):
-    def __init__(self):
+    def __init__(self, tablet_cmd_queue, ctrl_cmd_queue):
         QObject.__init__(self)
 
         self._watchdog_timer = QTimer(self)
@@ -29,13 +32,19 @@ class Metacognition(QObject):
         self._watchdog_timer.timeout.connect(self.show_cmd_queue)
         self._watchdog_timer.start()
 
+        self.tablet_queue = tablet_cmd_queue
+        self.ctrl_queue = ctrl_cmd_queue
+
+        self.tablet = TabletWebSocketServer()
 
 
     def show_cmd_queue(self):
-        if not server.cmd_queue.empty():
-            print(server.cmd_queue.get())
-        else:
-            print("Empty")
+        if not self.tablet_queue.empty():
+            logger.info("GOT A TABLET CMD: " + str(self.tablet_queue.get()))
+
+        if not self.ctrl_queue.empty():
+            logger.info("GOT A CTRL CMD: " + str(self.ctrl_queue.get()))
+            self.tablet.setUrl("/")
 
 if __name__ == "__main__":
 
@@ -81,6 +90,7 @@ if __name__ == "__main__":
     flask_thread.start()
 
 
-    metacognition = Metacognition()
+    metacognition = Metacognition(tablet_cmd_queue = server.cmd_queue,
+                                  ctrl_cmd_queue = bridge.cmd_queue)
 
     sys.exit(app.exec_())

@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <title>Pepper's tablet</title>
-        <link rel="stylesheet" href="static/style.css" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="/static/style.css">
     </head>
+
     <body>
-      <div id="main" class="centered">
- 
+        <div id="main" class="centered">
+            <h1>Hiya!</h1>
 
-          <div class="text">{{ text }}</div>
 
-        <div class="container">
-            {% for id, action in actions.items() %}
-            <div class="item">
-                <a href="{{ id }}">
-                    <figure>
-                    <img class="selection_img" src="{{ path + action.img }}" />
-                    <figcaption>{{ action.label }}</figcaption>
-                    </figure>
-                </a>
+            <div class="centered">
+                <a href="stories"><button id="tell_story">Tell a story</button></a>
+                <a href="games"><button id="play_game">Play a game</button></a>
             </div>
-            {% endfor %}
         </div>
 
-      </div>
+        <a href="animations.html">Test animations</a>
+
     </body>
 </html>
-

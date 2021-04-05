@@ -1,7 +1,9 @@
 
 import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
-logger = logging.getLogger("logger")
+logger = logging.getLogger("naoqibridge")
+
+from Queue import Queue
 
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
@@ -163,6 +165,7 @@ class NaoqiBridge(QObject):
 
         self.connectToRobot()
 
+        self.cmd_queue = Queue()
 
     def connectToRobot(self):
         global almemory, alusersession
@@ -251,6 +254,16 @@ class NaoqiBridge(QObject):
     @Slot()
     def on_isConnected_changed(self, value):
         logging.warning("Connection status changed! connected=%s" % value)
+
+
+    @Slot(str)
+    def request_animate(self, animation):
+        """
+        Argument is one of the available animation tag. See
+        http://doc.aldebaran.com/2-5/naoqi/motion/alanimationplayer-advanced.html#animationplayer-tags-pepper
+        """
+        
+        self.cmd_queue.put(("animate", animation))
 
 
     @Slot(str)

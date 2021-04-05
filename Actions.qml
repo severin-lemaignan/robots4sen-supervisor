@@ -218,7 +218,7 @@ Item {
                                     label: action
                                     onPressedChanged: {
                                                 if (pressed) {
-                                                    naoqi.animate(action);
+                                                    naoqi.request_animate(action);
                                                 }
                                     }
 

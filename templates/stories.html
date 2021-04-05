@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pepper's tablet</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body>
+        <div id="main" class="centered">
+
+
+            <div class="text">{{ text }}</div>
+
+            <div class="container">
+                {% for id, action in actions.items() %}
+                <div class="item">
+                    <a href="{{ id }}">
+                        <figure>
+                            <img class="selection_img" src="{{ path + action.img }}" />
+                            <figcaption>{{ action.label }}</figcaption>
+                        </figure>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <script>
+            // Create WebSocket connection.
+            const socket = new WebSocket('ws://localhost:8080');
+
+            // Connection opened
+            socket.addEventListener('open', function (event) {
+                socket.send('helo');
+            });
+
+            // Listen for messages
+            socket.addEventListener('message', function (event) {
+                console.log('Message from robotCtrl. Going to: ', event.data);
+                location.href = event.data;
+            });
+        </script>
+    </body>
+</html>
+
