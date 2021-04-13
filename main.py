@@ -90,14 +90,14 @@ if __name__ == "__main__":
     flask_thread.setDaemon(True)
     flask_thread.start()
 
-    bridge.setTabletUrl("%s:%s/" % (get_ip(), port))
+    bridge.setTabletUrl("http://%s:%s/" % (get_ip(), port))
     ##################################################################
 
 
     ##################################################################
     ######################## SUPERVISOR ##############################
 
-    supervisor = Supervisor()
+    supervisor = Supervisor(bridge)
 
     supervisor_thread = threading.Thread(target=supervisor.run)
     supervisor_thread.setDaemon(True)

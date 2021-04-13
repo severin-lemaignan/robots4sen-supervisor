@@ -8,12 +8,15 @@ from PySide2.QtCore import QUrl, QObject
 
 from websocketserver import TabletWebSocketServer
 
+from constants import *
 
 class Supervisor(QObject):
-    def __init__(self):
+    def __init__(self, bridge):
         QObject.__init__(self)
 
         self.cmd_queue = Queue()
+
+        self.bridge = bridge
 
         # creates the websocket server to control the tablet content.
         # note that this server *must* run from the main thread (eg, the Qt app thread)
@@ -29,7 +32,10 @@ class Supervisor(QObject):
         source, cmd, args = self.cmd_queue.get()
         logger.info("GOT A %s CMD: %s (%s)" % (source, cmd, args))
 
-        if source == "CTRL":
-            self.tablet.setUrl("/")
+        if source == CTRL:
+            if cmd == SOCIAL_GESTURE:
+                self.bridge.animate(args)
+            else:
+                self.tablet.setUrl("/")
 
 

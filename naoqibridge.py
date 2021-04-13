@@ -185,6 +185,7 @@ class NaoqiBridge(QObject):
             return False
 
         self.almotion = self._session.service("ALMotion")
+        self.altracker = self._session.service("ALTracker")
         self.albattery = self._session.service("ALBattery")
         self.altablet = self._session.service("ALTabletService")
         almemory = self._session.service("ALMemory")
@@ -293,6 +294,14 @@ class NaoqiBridge(QObject):
         future = self.alanimationplayer.runTag("hello", _async=True)
         future.value() # wait until the animation is complete
 
+    @Slot(float, float, float)
+    def lookAt(self, x, y, z):
+
+        if not self._connected:
+            logger.warning("Robot not connected. Can not perform 'move'")
+            return
+
+        self.tracker.lookAt([x, y, z], 0.7, True) # pos, fraction speed, whole body
 
     @Slot(str, bool)
     def move(self, direction, active):
