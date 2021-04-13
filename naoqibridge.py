@@ -7,7 +7,7 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
 import qi
 
-NAME = "CTRL"
+from constants import *
 
 almemory = None
 alusersession = None
@@ -264,7 +264,7 @@ class NaoqiBridge(QObject):
         http://doc.aldebaran.com/2-5/naoqi/motion/alanimationplayer-advanced.html#animationplayer-tags-pepper
         """
         
-        self.cmd_queue.put((NAME, "animate", animation))
+        self.cmd_queue.put((CTRL, SOCIAL_GESTURE, animation))
 
 
     @Slot(str)
