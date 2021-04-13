@@ -186,11 +186,13 @@ class NaoqiBridge(QObject):
 
         self.almotion = self._session.service("ALMotion")
         self.albattery = self._session.service("ALBattery")
+        self.altablet = self._session.service("ALTabletService")
         almemory = self._session.service("ALMemory")
         self.alanimationplayer = self._session.service("ALAnimationPlayer")
         self.alpeople = self._session.service("ALPeoplePerception")
         alusersession = self._session.service("ALUserSession")
         
+
         logger.info("Robot connected!")
         self._connected = True
         self.isConnected_changed.emit(self._connected)
@@ -203,6 +205,15 @@ class NaoqiBridge(QObject):
     def configureRobot(self):
         self.almotion.setOrthogonalSecurityDistance(0.1)
         self.almotion.setTangentialSecurityDistance(0.05)
+
+        # Ensure that the tablet wifi is enable
+        self.altablet.enableWifi()
+
+    @Slot(str)
+    def setTabletUrl(self, url):
+        logger.info("Setting the robot's tablet to <%s>" % url)
+        self.altablet.showWebview(url)
+
 
     def checkAlive(self):
 
