@@ -1,8 +1,6 @@
 # utf-8
 
-import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
-logger = logging.getLogger("main")
+import logging;logger = logging.getLogger("robots.main")
 
 import argparse
 
@@ -21,7 +19,12 @@ from naoqibridge import NaoqiBridge, Person
 from audiorecorder import AudioRecorder
 
 from flask_server import tablet_webserver
+
+# NEEDS TO BE IMPORTED *AFTER* tablet_webserver
+# as new routes will be added to the Flask app for each activity
 from supervisor import Supervisor
+
+
 
 
 if __name__ == "__main__":

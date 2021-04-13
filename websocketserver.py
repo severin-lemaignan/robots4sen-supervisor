@@ -3,9 +3,7 @@ tablet connect. This makes it possible to instruct the tablet to go to
 any webpage at any time (via `setUrl`), eg, to push content to the tablet.
 """
 
-import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
-logger = logging.getLogger("tablet_websocket")
+import logging;logger = logging.getLogger("robots.tablet_websocket")
 
 from PySide2.QtCore import QUrl, QObject, Signal, Slot
 from PySide2.QtWebSockets import QWebSocketServer

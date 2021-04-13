@@ -1,8 +1,6 @@
 # utf-8
 
-import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
-logger = logging.getLogger("supervisor")
+import logging;logger = logging.getLogger("robots.supervisor")
 
 from Queue import Queue
 

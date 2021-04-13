@@ -1,7 +1,5 @@
 
-import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
-logger = logging.getLogger("naoqibridge")
+import logging;logger = logging.getLogger("robots.naoqibridge")
 
 from Queue import Queue
 
