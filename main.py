@@ -52,7 +52,7 @@ if __name__ == "__main__":
     parser.add_argument("--ssid", type=str, default="ECHOS-robot1",
                         help="Wifi SSID to which the robot's tablet should connect")
 
-    parser.add_argument("--passwd", type=str, default="ECHOSecho",
+    parser.add_argument("--passwd", type=str, default="ECHOSechos",
                         help="Wifi password (assumes WPA)")
 
 
