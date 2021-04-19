@@ -99,7 +99,6 @@ class Person(QObject):
 
     person_id_changed = Signal(str)
 
-
     def set_person_id(self, id):
         self._person_id = int(id)
         self.person_id_changed.emit(str(id))
@@ -192,7 +191,12 @@ class NaoqiBridge(QObject):
         self.almotion = self._session.service("ALMotion")
         self.altracker = self._session.service("ALTracker")
         self.albattery = self._session.service("ALBattery")
-        self.altablet = self._session.service("ALTabletService")
+        try:
+            self.altablet = self._session.service("ALTabletService")
+        except RuntimeError:
+            logger.warning("No ALTabletService! Running in simulator?")
+            self.altablet = None
+
         almemory = self._session.service("ALMemory")
         self.alanimationplayer = self._session.service("ALAnimationPlayer")
         self.alpeople = self._session.service("ALPeoplePerception")
@@ -213,6 +217,10 @@ class NaoqiBridge(QObject):
         self.almotion.setTangentialSecurityDistance(0.05)
 
     def connectTablet(self, ssid, encryption="open", passwd=""):
+
+        if not self.altablet:
+            logger.warning("No Pepper tablet!")
+            return
 
         if not passwd:
             encryption == "open"
@@ -243,6 +251,12 @@ class NaoqiBridge(QObject):
 
     @Slot(str)
     def setTabletUrl(self, url):
+
+        if not self.altablet:
+            logger.warning("No Pepper tablet!")
+            return
+
+
         logger.info("Setting the robot's tablet to <%s>" % url)
         self.altablet.showWebview(url)
 
