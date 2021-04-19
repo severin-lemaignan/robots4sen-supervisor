@@ -7,6 +7,8 @@ Item {
 
     property double meters_to_px: 100 // 1m == 100px
 
+    property bool is_tracked: false
+
     property alias person_id: person.person_id
 
     Person {
@@ -26,7 +28,8 @@ Item {
         y: -person.y * meters_to_px
 
         height: 0.3 * meters_to_px
-        noborder: true
+        noborder: !is_tracked
+        boder.color: "red"
 
         label: "(" + person.x.toFixed(2) + ", " + person.y.toFixed(2) + ")"
 
@@ -46,6 +49,17 @@ Item {
 
             color: person.known ? 'green' : 'orange'
         }
+
+        onPressed: {
+            if (is_tracked) {
+                naoqi.request_track(""); // cancel tracking
+            }
+            else {
+                naoqi.request_track(person.id);
+            }
+        }
+
+
     }
 
 
