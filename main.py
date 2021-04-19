@@ -10,12 +10,13 @@ import os
 import sys
 from os.path import abspath, dirname, join
 
-import socket # to get my own ip
 from Queue import Queue
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine,qmlRegisterType
 from PySide2.QtCore import QUrl, QObject, QTimer
+
+from helpers import get_ip
 
 from naoqibridge import NaoqiBridge, Person
 from audiorecorder import AudioRecorder
@@ -25,20 +26,6 @@ from flask_server import tablet_webserver
 # NEEDS TO BE IMPORTED *AFTER* tablet_webserver
 # as new routes will be added to the Flask app for each activity
 from supervisor import Supervisor
-
-
-# taken from https://stackoverflow.com/a/28950776
-def get_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        # doesn't even have to be reachable
-        s.connect(('10.255.255.255', 1))
-        IP = s.getsockname()[0]
-    except Exception:
-        IP = '127.0.0.1'
-    finally:
-        s.close()
-    return IP
 
 
 if __name__ == "__main__":
@@ -112,6 +99,8 @@ if __name__ == "__main__":
     supervisor_thread.setDaemon(True)
     supervisor_thread.start()
 
+    tablet_webserver.ws_ip = supervisor.tablet.WS_IP
+    tablet_webserver.ws_port = supervisor.tablet.WS_PORT
 
     # share the supervisor's cmd_queue
     tablet_webserver.cmd_queue = supervisor.cmd_queue

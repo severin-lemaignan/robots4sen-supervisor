@@ -21,7 +21,7 @@
 
         <script>
             // Create WebSocket connection.
-            const socket = new WebSocket('ws://localhost:8080');
+            const socket = new WebSocket('ws://{{ ws_server_ip }}:{{ ws_server_port }}');
 
             // Connection opened
             socket.addEventListener('open', function (event) {

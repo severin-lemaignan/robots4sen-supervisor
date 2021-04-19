@@ -17,6 +17,8 @@ def main():
         # server.cmd_queue is injected by main.py upon Flask's thread creation
         tablet_webserver.cmd_queue.put((TABLET, NONE, None))
 
-    return render_template('index.html')
+    return render_template('index.html',
+                        ws_server_ip = tablet_webserver.ws_ip,
+                        ws_server_port = tablet_webserver.ws_port)
 
 

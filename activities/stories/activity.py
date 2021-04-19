@@ -38,6 +38,9 @@ def web_stories(action=None):
     return render_template('stories.html',
                            text = txt,
                            path = assets,
-                           actions = actions)
+                           actions = actions,
+                           ws_server_ip = tablet_webserver.ws_ip,
+                           ws_server_port = tablet_webserver.ws_port)
+
 
 
