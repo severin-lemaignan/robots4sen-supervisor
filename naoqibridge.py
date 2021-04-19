@@ -3,6 +3,8 @@ import logging;logger = logging.getLogger("robots.naoqibridge")
 
 from Queue import Queue
 
+import time
+
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
 import qi
@@ -178,11 +180,10 @@ class NaoqiBridge(QObject):
             logger.info("Trying to connect to %s:%s..." % (self._ip, self._port))
             self._session.connect("tcp://" + self._ip + ":" + self._port)
         except RuntimeError:
-            logger.error("Can't connect to Naoqi at ip \"" + self._ip + "\" on port " + self._port +".\n"
+            raise RuntimeError("Can't connect to Naoqi at ip \"" + self._ip + "\" on port " + self._port +".\n"
                "Please check your script arguments. Run with -h option for help.")
+
         
-            self._connected = False
-            return False
 
         self.almotion = self._session.service("ALMotion")
         self.altracker = self._session.service("ALTracker")
@@ -207,8 +208,34 @@ class NaoqiBridge(QObject):
         self.almotion.setOrthogonalSecurityDistance(0.1)
         self.almotion.setTangentialSecurityDistance(0.05)
 
-        # Ensure that the tablet wifi is enable
+    def connectTablet(self, ssid, encryption="open", passwd=""):
+
+        if not passwd:
+            encryption == "open"
+
+        logger.info("Configuring and connecting the robot's tablet to wifi network <%s>. Please wait..." % ssid)
+
         self.altablet.enableWifi()
+        ok = self.altablet.configureWifi(encryption, ssid, passwd)
+        if not ok:
+            raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network: configuration invalid (%s:%s, %s)" % (ssid, passwd, encryption))
+
+        ok = self.altablet.connectWifi(ssid)
+        if not ok:
+            raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network. Error while attempting to connect")
+
+        total_time = 0
+        while self.altablet.getWifiStatus() != "CONNECTED":
+            time.sleep(0.2)
+            total_time += 0.2
+            logger.debug("Pepper's tablet wifi status: %s" % self.altablet.getWifiStatus())
+
+            if total_time > 5:
+                raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network. After 5sec, status is <%s>" % self.altablet.getWifiStatus())
+
+        logger.info("Pepper's tablet successfully connected.")
+
+
 
     @Slot(str)
     def setTabletUrl(self, url):

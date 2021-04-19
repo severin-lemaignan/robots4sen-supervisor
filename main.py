@@ -1,3 +1,4 @@
+#! /usr/bin/env python2
 # utf-8
 
 import logging;logger = logging.getLogger("robots.main")
@@ -48,6 +49,13 @@ if __name__ == "__main__":
     parser.add_argument("--port", type=int, default=9559,
                         help="Naoqi port number")
 
+    parser.add_argument("--ssid", type=str, default="ECHOS-robot1",
+                        help="Wifi SSID to which the robot's tablet should connect")
+
+    parser.add_argument("--passwd", type=str, default="ECHOSecho",
+                        help="Wifi password (assumes WPA)")
+
+
     args = parser.parse_args()
 
 
@@ -90,6 +98,7 @@ if __name__ == "__main__":
     flask_thread.setDaemon(True)
     flask_thread.start()
 
+    bridge.connectTablet(args.ssid, "wpa", args.passwd)
     bridge.setTabletUrl("http://%s:%s/" % (get_ip(), port))
     ##################################################################
 
