@@ -102,7 +102,7 @@ class Person(QObject):
     def set_person_id(self, id):
         self._person_id = int(id)
         self.person_id_changed.emit(str(id))
-        print("Person id now %s" % self._person_id)
+        logger.info("Person id now %s" % self._person_id)
 
     def get_person_id(self):
         return str(self._person_id)
