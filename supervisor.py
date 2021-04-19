@@ -35,7 +35,16 @@ class Supervisor(QObject):
         if source == CTRL:
             if cmd == SOCIAL_GESTURE:
                 self.bridge.animate(args)
+            elif cmd == LOOK_AT:
+                self.bridge.lookAt(*args)
+            elif cmd == TRACK:
+                if not args:
+                    self.bridge.stop_tracking()
+                else:
+                    self.bridge.track(args)
             else:
-                self.tablet.setUrl("/")
+                logger.error("UNKNOWN CMD FROM %s: %s" % (source, cmd)) 
+        else:
+            logger.error("UNKNOWN CMD FROM %s: %s" % (source, cmd)) 
 
 

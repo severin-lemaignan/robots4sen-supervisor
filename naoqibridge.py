@@ -324,7 +324,6 @@ class NaoqiBridge(QObject):
         self.cmd_queue.put((CTRL, SOCIAL_GESTURE, animation))
 
 
-    @Slot(str)
     def animate(self, animation):
         """
         Argument is one of the available animation tag. See
@@ -339,11 +338,37 @@ class NaoqiBridge(QObject):
         future = self.alanimationplayer.runTag("hello", _async=True)
         future.value() # wait until the animation is complete
 
+    @Slot(str)
+    def request_track(self, person_id):
+        self.cmd_queue.put((CTRL, TRACK, person_id))
+
+    def track(self, person_id):
+
+        if not self._connected:
+            logger.warning("Robot not connected. Can not perform 'track'")
+            return
+
+        self.tracker.registerTarget("People", [person_id,])
+        self.tracker.track("People")
+
+
+    @Slot()
+    def request_stop_tracking(self):
+        self.cmd_queue.put((CTRL, TRACK, ""))
+
+    def stop_tracking(self):
+        self.tracker.stopTracker()
+        self.tracker.unregisterAllTargets()
+
+
     @Slot(float, float, float)
+    def request_lookAt(self, x, y, z):
+        self.cmd_queue.put((CTRL, LOOK_AT, (x, y, z)))
+
     def lookAt(self, x, y, z):
 
         if not self._connected:
-            logger.warning("Robot not connected. Can not perform 'move'")
+            logger.warning("Robot not connected. Can not perform 'lookAt'")
             return
 
         self.tracker.lookAt([x, y, z], 0.7, True) # pos, fraction speed, whole body
