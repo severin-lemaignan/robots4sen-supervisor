@@ -88,6 +88,10 @@ class Person(QObject):
 
 
     def setlocation(self, location):
+        #TODO OPTIMIZATION: if new location close to prev, do not update
+        if location == self._location:
+            return
+
         self._location = location
         self.x_changed.emit(self.x)
         self.y_changed.emit(self.y)
