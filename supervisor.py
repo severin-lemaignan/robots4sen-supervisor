@@ -10,6 +10,12 @@ from websocketserver import TabletWebSocketServer
 
 from constants import *
 
+###########################################
+# ACTIVITIES
+from activities.stories import activity as stories
+
+###########################################
+
 class Supervisor(QObject):
     def __init__(self, bridge):
         QObject.__init__(self)
@@ -43,8 +49,8 @@ class Supervisor(QObject):
                 else:
                     self.bridge.track(args)
             else:
-                logger.error("UNKNOWN CMD FROM %s: %s" % (source, cmd)) 
+                logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
         else:
-            logger.error("UNKNOWN CMD FROM %s: %s" % (source, cmd)) 
+            logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
 
 
