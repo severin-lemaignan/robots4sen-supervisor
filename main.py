@@ -39,7 +39,7 @@ if __name__ == "__main__":
     parser.add_argument("--ssid", type=str, default="ECHOS-robot1",
                         help="Wifi SSID to which the robot's tablet should connect")
 
-    parser.add_argument("--passwd", type=str, default="ECHOSechos",
+    parser.add_argument("--passwd", type=str, default="",
                         help="Wifi password (assumes WPA)")
 
 
@@ -86,7 +86,6 @@ if __name__ == "__main__":
     flask_thread.start()
 
     bridge.connectTablet(args.ssid, "wpa", args.passwd)
-    bridge.setTabletUrl("http://%s:%s/" % (get_ip(), port))
     ##################################################################
 
 
@@ -101,6 +100,8 @@ if __name__ == "__main__":
 
     tablet_webserver.ws_ip = supervisor.tablet.WS_IP
     tablet_webserver.ws_port = supervisor.tablet.WS_PORT
+
+    bridge.setTabletUrl("http://%s:%s/" % (get_ip(), port))
 
     # share the supervisor's cmd_queue
     tablet_webserver.cmd_queue = supervisor.cmd_queue

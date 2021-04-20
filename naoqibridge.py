@@ -223,10 +223,11 @@ class NaoqiBridge(QObject):
             return
 
         if not passwd:
-            encryption == "open"
+            encryption = "open"
 
         logger.info("Configuring and connecting the robot's tablet to wifi network <%s>. Please wait..." % ssid)
 
+        #self.altablet.disableWifi()
         self.altablet.enableWifi()
         ok = self.altablet.configureWifi(encryption, ssid, passwd)
         if not ok:
@@ -236,14 +237,15 @@ class NaoqiBridge(QObject):
         if not ok:
             raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network. Error while attempting to connect")
 
+        MAX_WAIT_TIME_WIFI_CONNECTION = 10 #sec
         total_time = 0
         while self.altablet.getWifiStatus() != "CONNECTED":
-            time.sleep(0.2)
-            total_time += 0.2
+            time.sleep(0.4)
+            total_time += 0.4
             logger.debug("Pepper's tablet wifi status: %s" % self.altablet.getWifiStatus())
 
-            if total_time > 5:
-                raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network. After 5sec, status is <%s>" % self.altablet.getWifiStatus())
+            if total_time > MAX_WAIT_TIME_WIFI_CONNECTION:
+                raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network <%s>. After %ssec, status is <%s>" % (ssid, MAX_WAIT_TIME_WIFI_CONNECTION, self.altablet.getWifiStatus()))
 
         logger.info("Pepper's tablet successfully connected.")
 
