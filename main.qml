@@ -9,8 +9,8 @@ import Naoqi 1.0
 Window {
     id: window
     visible: true
-    width: 640
-    height: 480
+    width: 2736
+    height: 1824
     title: qsTr("robots4SEN supervisor")
 
 
