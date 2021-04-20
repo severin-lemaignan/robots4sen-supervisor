@@ -29,7 +29,7 @@ Item {
 
         height: 0.3 * meters_to_px
         noborder: !is_tracked
-        boder.color: "red"
+        border.color: "red"
 
         label: "(" + person.x.toFixed(2) + ", " + person.y.toFixed(2) + ")"
 
@@ -50,7 +50,7 @@ Item {
             color: person.known ? 'green' : 'orange'
         }
 
-        onPressed: {
+        onPressedChanged: {
             if (is_tracked) {
                 naoqi.request_track(""); // cancel tracking
             }

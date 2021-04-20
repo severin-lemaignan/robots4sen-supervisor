@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.3
 
 Rectangle {
-    property double meters_to_px: 100
+    property double meters_to_px
     property double radius_m: 1
 
     width: 2 * radius_m * meters_to_px

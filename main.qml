@@ -18,6 +18,29 @@ Window {
         id: main
         anchors.fill: parent
 
+
+        SwipeView {
+            anchors.fill:parent
+            currentIndex: tabBar.currentIndex
+            interactive: false // disable swipe gesture
+
+            Discover {
+                id: peopleLocalisationTab
+            }
+            Actions {
+                id: actionsTab
+            }
+            Item {
+                id: bookmarkTab
+            }
+            PhotoCapture {
+                id: captureTab
+            }
+            Item {
+                id: settingsTab
+            }
+        }
+
         Status {
             id: status
             x: 15
@@ -74,7 +97,7 @@ Window {
             anchors.left: status.left
             anchors.top: status.bottom
             anchors.topMargin: 30
-            height: 50
+            height: 100
 
             noborder: true
 
@@ -100,29 +123,6 @@ Window {
 
 
         }
-
-        SwipeView {
-            anchors.fill:parent
-            currentIndex: tabBar.currentIndex
-            interactive: false // disable swipe gesture
-
-            Discover {
-                id: peopleLocalisationTab
-            }
-            Actions {
-                id: actionsTab
-            }
-            Item {
-                id: bookmarkTab
-            }
-            PhotoCapture {
-                id: captureTab
-            }
-            Item {
-                id: settingsTab
-            }
-        }
-
 
 
         footer: TabBar {

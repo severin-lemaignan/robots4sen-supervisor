@@ -16,6 +16,7 @@ Rectangle {
 
     height: 70
     width: height
+    //color: "blue"
 
     border.width: noborder ? 0 : 4
     radius: height/2
@@ -36,9 +37,9 @@ Rectangle {
         text: parent.label
         styleColor: "#ffffff"
         style: Text.Outline
-        font.pixelSize: 20/70 * parent.height
-        anchors.bottom: icon.bottom
-        anchors.bottomMargin: 0
+        font.pixelSize: 15/70 * parent.height
+        anchors.top: icon.bottom
+        anchors.topMargin: -5
         anchors.horizontalCenter: icon.horizontalCenter
     }
 

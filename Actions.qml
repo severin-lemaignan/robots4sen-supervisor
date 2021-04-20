@@ -184,84 +184,70 @@ Item {
 
                     }
             }
-            Item {
-                    id: gestures
-                    height: 88
-                    anchors.top: expressions.bottom
-                    anchors.topMargin: 10
+
+            GridView{
+                    id:gestures
+                    height: parent.height/2
                     anchors.left: parent.left
+                    anchors.leftMargin: 50
                     anchors.right: parent.right
+                    anchors.rightMargin: 50
+                    anchors.top: parent.top
+                    model : list_gestures
+                    cellHeight: parent.width * 0.2
+                    cellWidth: cellHeight
 
-                    Text {
-                            id: label_gestures
-                            text: qsTr("Social gestures")
-                            anchors.leftMargin: 10
-                            anchors.left: parent.left
-                            anchors.top: parent.top
-                            font.pixelSize: parent.width * 0.05
+                    delegate: IconButton{
+                            height:gestures.cellHeight * 0.8
+                            noborder:true
+                            source:image //we use this name in ListModel
+                            label: action
+                            onPressedChanged: {
+                                        if (pressed) {
+                                            naoqi.request_animate(action);
+                                        }
+                            }
+
                     }
-                    ListView{
-                            id:slider
-                            height: 70
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.top: label_gestures.bottom
-                            spacing: 10
-                            orientation: ListView.Horizontal
-                            boundsBehavior: Flickable.StopAtBounds
-                            flickableDirection: Flickable.HorizontalFlick
-                            clip:true//setting it make item outside of view invisible
-                            model : list_gestures
-                            delegate: IconButton{
-                                    noborder:true
-                                    source:image //we use this name in ListModel
-                                    label: action
-                                    onPressedChanged: {
-                                                if (pressed) {
-                                                    naoqi.request_animate(action);
-                                                }
-                                    }
-
-                            }
-                    }
-                    ListModel {
-
-                            id: list_gestures
-                            ListElement {
-                                    action: "unknown"
-                                    image: "res/robot-angry-outline.svg"
-                            }
-                            ListElement {
-                                    action: "hello"
-                                    image: "res/robot-love-outline.svg"
-                            }
-                            ListElement {
-                                    action: "calm"
-                                    image: "res/robot-angry-outline.svg"
-                            }
-                            ListElement {
-                                    action: "bored"
-                                    image: "res/robot-love-outline.svg"
-                            }
-                            ListElement {
-                                    action: "disappointed"
-                                    image: "res/robot-angry-outline.svg"
-                            }
-                            ListElement {
-                                    action: "embarassed"
-                                    image: "res/robot-love-outline.svg"
-                            }
-                            ListElement {
-                                    action: "happy"
-                                    image: "res/robot-angry-outline.svg"
-                            }
-                            ListElement {
-                                    action: "explain"
-                                    image: "res/robot-love-outline.svg"
-                            }
-                    }
-
             }
+            ListModel {
+
+                    id: list_gestures
+                    ListElement {
+                            action: "unknown"
+                            image: "res/robot-angry-outline.svg"
+                    }
+                    ListElement {
+                            action: "hello"
+                            image: "res/robot-love-outline.svg"
+                    }
+                    ListElement {
+                            action: "calm"
+                            image: "res/robot-angry-outline.svg"
+                    }
+                    ListElement {
+                            action: "bored"
+                            image: "res/robot-love-outline.svg"
+                    }
+                    ListElement {
+                            action: "disappointed"
+                            image: "res/robot-angry-outline.svg"
+                    }
+                    ListElement {
+                            action: "embarrassed"
+                            image: "res/robot-love-outline.svg"
+                    }
+                    ListElement {
+                            action: "happy"
+                            image: "res/robot-angry-outline.svg"
+                    }
+                    ListElement {
+                            action: "explain"
+                            image: "res/robot-love-outline.svg"
+                    }
+            }
+
+
 
             Item {
                     id: activities
@@ -335,6 +321,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}
+    D{i:0;autoSize:true;formeditorZoom:0.66;height:1824;width:2736}
 }
 ##^##*/

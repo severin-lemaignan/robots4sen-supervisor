@@ -4,8 +4,8 @@ import QtQuick.Controls 2.3
 Item {
     id: discovery
 
-    readonly property double meters_to_px: 100 // 1m == 100px
-    readonly property point origin: Qt.point(200,200)
+    readonly property double meters_to_px: 200 // 1m == 200px
+    readonly property point origin: Qt.point(400,parent.height/2)
 
     Item {
         id: stage
@@ -22,17 +22,17 @@ Item {
             color: "red"
 
             Circle {
-                meters_to_px: meters_to_px
+                meters_to_px: discovery.meters_to_px
                 radius_m: 1
                 anchors.centerIn: parent
             }
             Circle {
-                meters_to_px: meters_to_px
+                meters_to_px: discovery.meters_to_px
                 radius_m: 2
                 anchors.centerIn: parent
             }
             Circle {
-                meters_to_px: meters_to_px
+                meters_to_px: discovery.meters_to_px
                 radius_m: 4
                 anchors.centerIn: parent
             }
