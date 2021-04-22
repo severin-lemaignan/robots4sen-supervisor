@@ -69,6 +69,7 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                             camera.imageCapture.capture();
+                            naoqi.take_picture();
                     }
             }
     Rectangle {
@@ -81,6 +82,9 @@ Rectangle {
     }
     }
 
+    Component.onCompleted : {
+        naoqi.prepare_take_picture();
+    }
 }
 
 /*##^##

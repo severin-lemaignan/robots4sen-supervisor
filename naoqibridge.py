@@ -191,11 +191,14 @@ class NaoqiBridge(QObject):
         self.almotion = self._session.service("ALMotion")
         self.altracker = self._session.service("ALTracker")
         self.albattery = self._session.service("ALBattery")
+
         try:
             self.altablet = self._session.service("ALTabletService")
+            self.alphoto = self._session.service("ALPhotoCapture")
         except RuntimeError:
-            logger.warning("No ALTabletService! Running in simulator?")
+            logger.warning("Some AL services are not available! Running in simulator?")
             self.altablet = None
+            self.alphoto = None
 
         almemory = self._session.service("ALMemory")
         self.alanimationplayer = self._session.service("ALAnimationPlayer")
@@ -420,3 +423,23 @@ class NaoqiBridge(QObject):
                 self.almotion.stopMove()
 
 
+    @Slot()
+    def prepare_take_picture(self):
+        if not self.alphoto:
+            logger.warning("ALPhotoCapture not initialised. Skipping")
+            return
+
+        logger.info("Preparing to take picture...")
+        self.alphoto.setResolution(4) # 2560*1920px -- cf http://doc.aldebaran.com/2-5/family/pepper_technical/video_2D_pep_v18a.html#cameraresolution-ov5640
+        self.alphoto.setPictureFormat("jpg")
+        self.alphoto.setHalfPressEnabled(True) # pre-subscribe to ALVideoDevice, for higher photo reactivity
+
+    @Slot()
+    def take_picture(self):
+        if not self.alphoto:
+            logger.warning("ALPhotoCapture not initialised. Skipping")
+            return
+
+        logger.info("Taking picture!")
+        self.alphoto.takePicture("/home/nao/recordings/", "robots4sen")
+        self.alphoto.setHalfPressEnabled(False) # usubscribe from ALVideoDevice
