@@ -1,3 +1,10 @@
+REQUEST = "request"
+
+# STATUS
+RUNNING = "running"
+STOPPING = "stopping"
+STOPPED = "stopped"
+PAUSED = "paused"
 
 # SOURCES
 TABLET = "tablet"

@@ -11,7 +11,7 @@ tablet_webserver.cmd_queue = None
 
 
 @tablet_webserver.route('/')
-def main():
+def home_screen():
 
     if tablet_webserver.cmd_queue:
         # server.cmd_queue is injected by main.py upon Flask's thread creation

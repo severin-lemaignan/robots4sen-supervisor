@@ -1,8 +1,11 @@
-import logging;logger = logging.getLogger("robots.activities.stories")
+import logging
+
+logger = logging.getLogger("robots.activities.stories")
 
 import time
 
-from flask import render_template
+from flask import render_template, redirect
+from flask.helpers import url_for
 
 from constants import *
 
@@ -13,27 +16,52 @@ story = Story("static/stories/susanne-and-ben/story.json")
 
 assets = "/static/stories/susanne-and-ben/assets/"
 
-def start_activity(robot, tablet, progress):
+class Story:
 
-    tablet.setUrl("/stories")
+    def __init__(self):
 
-    progress = 0
+        self.tablet = None
 
-    for i in range(10):
+        self.status = STOPPED
+        self.progress = 0
+
+    def __str__(self):
+        return "Story telling"
+
+    def start(self):
+        # TODO: need to improve setUrl to ensure the page is fully loaded
+        self.status = RUNNING
         time.sleep(1)
-        logger.info("Story progressing nicely. %s%% done" % progress)
-        progress+= 10
+        self.tablet.setUrl("/activity/stories")
+        time.sleep(1)
 
-    
+    def tick(self):
 
-@tablet_webserver.route('/stories/<action>')
-@tablet_webserver.route('/stories/')
+        #logger.info("Story progressing nicely. %s%% done" % self.progress)
+        #self.progress+= 10
+
+        return self.status
+
+story_activity = Story()
+
+def get_activity(tablet):
+    story_activity.tablet = tablet
+    return story_activity
+
+@tablet_webserver.route('/activity/stories/<action>')
+@tablet_webserver.route('/activity/stories/')
 def web_stories(action=None):
 
-    txt, actions = story.next(action)
+    if action and action == REQUEST:
+        # server.cmd_queue is injected by main.py upon Flask's thread creation
+        tablet_webserver.cmd_queue.put((TABLET, STORIES, (action,)))
+        return redirect(url_for('home_screen'))
 
-    # server.cmd_queue is injected by main.py upon Flask's thread creation
-    tablet_webserver.cmd_queue.put((TABLET, STORIES, (action,)))
+
+    txt, actions, status = story.next(action)
+
+    story_activity.status = status
+
 
     return render_template('stories.html',
                            text = txt,

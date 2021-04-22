@@ -33,8 +33,41 @@ In addition, the supervisor hosts a websocket server, to which the HTML page
 served to the robot connect. This is used to trigger content changes on the
 robot tablet.
 
-Network configuration
----------------------
+
+Command flows
+-------------
+
+### Running an activity
+
+1. the child presses the button 'Tell a story'. This creates a request to
+   `/activity/stories/request` to the Flask server
+2. the `/activity/stories` Flask endpoint has been previsouly created by
+   `activities/stories/activity.py`. The route callback push a `STORIES` command to the
+   supervisor queue, to request the story activity to be started.
+3. `Supervisor` decides to start the activity: it get the activity with
+   `get_activity()`, and
+   sets it as its active activity `Supervisor.activity`. Then, in
+   `Supervisor.run`, it calls the `tick()` method of the activity at a set
+   frequency, until `tick()` returns the status `STOPPED`.
+
+Pre-requisites
+--------------
+
+The project **requires** Python2 as the `naoqi` bindings do not support Python3.
+
+- `
+
+Running it
+----------
+
+```
+python2 main.py --ip <robot ip> --ssid <wifi network> --passwd <wifi passwd>
+```
+
+Check `main.py --help` for full list of options.
+
+
+### Network configuration
 
 Due to how the Pepper tablet works, the following netwrok configuration is
 required:
@@ -63,24 +96,3 @@ might not lead to sending the Pepper's tablet the right Wifi IP, renderin the
 Flask server inaccessible.
 
 
-Command flows
--------------
-
-### Command initiated on the robot's tablet
-
-
-Pre-requisites
---------------
-
-The project **requires** Python2 as the `naoqi` bindings do not support Python3.
-
-- `
-
-Running it
-----------
-
-```
-python2 main.py --ip <robot ip> --ssid <wifi network> --passwd <wifi passwd>
-```
-
-Check `main.py --help` for full list of options.

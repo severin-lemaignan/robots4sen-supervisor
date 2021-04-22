@@ -2,7 +2,7 @@
 
 import logging;logger = logging.getLogger("robots.supervisor")
 
-from Queue import Queue
+from Queue import Queue, Empty
 
 from PySide2.QtCore import QUrl, QObject
 
@@ -16,6 +16,8 @@ from activities.stories import activity as stories
 
 ###########################################
 
+TICK_PERIOD = 0.05 #sec
+
 class Supervisor(QObject):
     def __init__(self, bridge):
         QObject.__init__(self)
@@ -28,14 +30,25 @@ class Supervisor(QObject):
         # note that this server *must* run from the main thread (eg, the Qt app thread)
         self.tablet = TabletWebSocketServer()
 
+        self.activity = None
+
     def run(self):
 
         while True:
             self.process_queue()
+            if self.activity:
+                status = self.activity.tick()
+                if status == STOPPED:
+                    logger.info("Activity <%s> completed" % self.activity)
+                    self.activity = None
 
     def process_queue(self):
 
-        source, cmd, args = self.cmd_queue.get()
+        try:
+            source, cmd, args = self.cmd_queue.get(block=True, timeout=TICK_PERIOD)
+        except Empty:
+            return
+
         logger.info("GOT A %s CMD: %s (%s)" % (source, cmd, args))
 
         if source == CTRL:
@@ -50,6 +63,11 @@ class Supervisor(QObject):
                     self.bridge.track(args)
             else:
                 logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
+        elif source == TABLET:
+            if cmd == STORIES:
+                self.activity = stories.get_activity(self.tablet)
+                logger.info("Activity <%s> starting" % self.activity)
+                self.activity.start()
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
 
