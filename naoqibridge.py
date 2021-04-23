@@ -191,6 +191,7 @@ class NaoqiBridge(QObject):
         self.almotion = self._session.service("ALMotion")
         self.altracker = self._session.service("ALTracker")
         self.albattery = self._session.service("ALBattery")
+        self.alanimatedspeech = self._session.service("ALAnimatedSpeech")
 
         try:
             self.altablet = self._session.service("ALTabletService")
@@ -377,6 +378,17 @@ class NaoqiBridge(QObject):
             return
 
         self.tracker.lookAt([x, y, z], 0.7, True) # pos, fraction speed, whole body
+
+    @Slot(str)
+    def say(self, text):
+        """Returns a future on the 'say' action
+        """
+
+        if not self._connected:
+            logger.warning("Robot not connected. Can not perform 'say'")
+            return
+
+        return qi.async(self.alanimatedspeech.say, text)
 
     @Slot(str, bool)
     def move(self, direction, active):
