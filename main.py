@@ -1,7 +1,9 @@
 #! /usr/bin/env python2
 # utf-8
 
-import logging;logger = logging.getLogger("robots.main")
+import logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
+logger = logging.getLogger("robots.main")
 
 import argparse
 
