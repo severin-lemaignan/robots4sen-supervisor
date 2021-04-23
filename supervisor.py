@@ -65,9 +65,9 @@ class Supervisor(QObject):
                 logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
         elif source == TABLET:
             if cmd == STORIES:
-                self.activity = stories.get_activity(self.tablet)
+                self.activity = stories.get_activity()
                 logger.info("Activity <%s> starting" % self.activity)
-                self.activity.start()
+                self.activity.start(self.tablet, self.bridge)
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
 

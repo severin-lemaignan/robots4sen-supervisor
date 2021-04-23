@@ -8,29 +8,39 @@ from flask import render_template, redirect
 from flask.helpers import url_for
 
 from constants import *
+from dialogues import get_dialogue
 
 from flask_server import tablet_webserver
 from story_parser import Story
 
-story = Story("static/stories/susanne-and-ben/story.json")
 
 assets = "/static/stories/susanne-and-ben/assets/"
 
-class Story:
+class StoryActivity:
 
     def __init__(self):
+
+        self.story = Story("static/stories/susanne-and-ben/story.json")
 
         self.tablet = None
 
         self.status = STOPPED
         self.progress = 0
 
+        self.current_speech_action = None
+
+
     def __str__(self):
         return "Story telling"
 
-    def start(self):
+    def start(self, tablet, robot):
+
+        self.tablet = tablet
+        self.robot = robot
+
         # TODO: need to improve setUrl to ensure the page is fully loaded
         self.status = RUNNING
+        self.robot.say(get_dialogue("story_prompt")).wait()
         time.sleep(1)
         self.tablet.setUrl("/activity/stories")
         time.sleep(1)
@@ -42,10 +52,34 @@ class Story:
 
         return self.status
 
-story_activity = Story()
+    def next(self, action):
 
-def get_activity(tablet):
-    story_activity.tablet = tablet
+        # if the robot is still speaking, wait until it is done
+        if self.current_speech_action and \
+           not self.current_speech_action.isFinished():
+               self.current_speech_action.wait()
+
+        txt, actions = self.story.next(action)
+
+        if len(actions) > 1:
+            labels = [v["label"] for k, v in actions.items()]
+            choice_sentence = ", ".join(labels[:-1]) + " or %s" % labels[-1]
+            self.current_speech_action = self.robot.say("%s %s?" % (txt, choice_sentence))
+        else:
+            if len(txt) > 300: # it is the story, not just a confirmation
+                chuncks = txt.split(".")
+                for idx, c in enumerate(chuncks):
+                    logger.info("STORY [%s/%s]: %s" % (idx + 1, len(chuncks), c))
+                    self.robot.say(c).wait()
+
+            else:
+                return self.next(actions.keys()[0])
+
+        return txt, actions
+
+story_activity = StoryActivity()
+
+def get_activity():
     return story_activity
 
 @tablet_webserver.route('/activity/stories/<action>')
@@ -58,9 +92,8 @@ def web_stories(action=None):
         return redirect(url_for('home_screen'))
 
 
-    txt, actions, status = story.next(action)
+    txt, actions = story_activity.next(action)
 
-    story_activity.status = status
 
 
     return render_template('stories.html',
