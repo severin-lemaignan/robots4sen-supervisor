@@ -11,6 +11,8 @@ Window {
     visible: true
     width: 2736
     height: 1824
+    flags: Qt.Window | Qt.FramelessWindowHint
+    visibility: Window.FullScreen
     title: qsTr("robots4SEN supervisor")
 
 
