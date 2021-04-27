@@ -2,6 +2,10 @@
 
 import logging;logger = logging.getLogger("robots.supervisor")
 
+from csv_logging import create_csv_logger
+
+action_logger = create_csv_logger("actions.csv") 
+
 from Queue import Queue, Empty
 
 from PySide2.QtCore import QUrl, QObject
@@ -50,6 +54,7 @@ class Supervisor(QObject):
             return
 
         logger.info("GOT A %s CMD: %s (%s)" % (source, cmd, args))
+        action_logger.info("%s, %s, %s" % (source, cmd, args))
 
         if source == CTRL:
             if cmd == SOCIAL_GESTURE:

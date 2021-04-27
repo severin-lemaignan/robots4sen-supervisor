@@ -10,6 +10,9 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 import qi
 
 from constants import *
+from csv_logging import create_csv_logger
+
+people_logger = create_csv_logger("people.csv")
 
 almemory = None
 alusersession = None
@@ -82,6 +85,14 @@ class Person(QObject):
         try:
             pose = almemory.getData("PeoplePerception/Person/%s/PositionInRobotFrame" % self._person_id)
             self.setlocation(pose)
+
+            people_logger.info("%s,%s,%0.3f,%0.3f,%0.3f" % (
+                                    self._person_id,
+                                    self._user_id,
+                                    self._location[0],
+                                    self._location[1],
+                                    self._location[2])
+                              )
 
         except RuntimeError:
             self.visible = False
