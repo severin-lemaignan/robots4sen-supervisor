@@ -210,6 +210,10 @@ Item {
                             action: "robots4sen-brl/saxophone"
                             image: "res/robot-love-outline.svg"
                     }
+                    ListElement {
+                            action: "robots4sen-brl/dance-taichi"
+                            image: "res/robot-love-outline.svg"
+                    }
             }
 
     }
