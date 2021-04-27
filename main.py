@@ -29,8 +29,10 @@ from flask_server import tablet_webserver
 # as new routes will be added to the Flask app for each activity
 from supervisor import Supervisor
 
-
 if __name__ == "__main__":
+
+    from remote_debug import listen
+    listen()
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--ip", type=str, default="127.0.0.1",
