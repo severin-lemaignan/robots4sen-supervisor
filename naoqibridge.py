@@ -174,6 +174,9 @@ class NaoqiBridge(QObject):
         # cmd_queue is set in main.py to point to the supervisor cmd_queue
         self.cmd_queue = None
 
+    def tearDown(self):
+        self.altablet.hideWebview()
+
     def connectToRobot(self):
         global almemory, alusersession
 
