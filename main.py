@@ -44,6 +44,9 @@ if __name__ == "__main__":
     parser.add_argument("--passwd", type=str, default="",
                         help="Wifi password (assumes WPA)")
 
+    parser.add_argument("--force-tablet-reconnection", action="store_true",
+                        help="Force a reconnection of Pepper's tablet, even if already connected.")
+
 
     args = parser.parse_args()
 
@@ -87,7 +90,7 @@ if __name__ == "__main__":
     flask_thread.setDaemon(True)
     flask_thread.start()
 
-    bridge.connectTablet(args.ssid, "wpa", args.passwd)
+    bridge.connectTablet(args.ssid, "wpa", args.passwd, args.force_tablet_reconnection)
     ##################################################################
 
 

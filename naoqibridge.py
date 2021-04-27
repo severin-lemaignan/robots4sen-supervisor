@@ -221,7 +221,7 @@ class NaoqiBridge(QObject):
         self.almotion.setOrthogonalSecurityDistance(0.1)
         self.almotion.setTangentialSecurityDistance(0.05)
 
-    def connectTablet(self, ssid, encryption="open", passwd=""):
+    def connectTablet(self, ssid, encryption="open", passwd="", force=False):
 
         if not self.altablet:
             logger.warning("No Pepper tablet!")
@@ -232,11 +232,19 @@ class NaoqiBridge(QObject):
 
         logger.info("Configuring and connecting the robot's tablet to wifi network <%s>. Please wait..." % ssid)
 
-        #self.altablet.disableWifi()
+        if not force and self.altablet.getWifiStatus() == "CONNECTED":
+            logger.info("Pepper's tablet already connected. Skipping.")
+            return
+
+        logger.debug("Disconnecting wifi first...")
+        ok = False
+        while not self.altablet.getWifiStatus() == "DISCONNECTED":
+            ok = self.altablet.disconnectWifi()
+
         self.altablet.enableWifi()
         ok = self.altablet.configureWifi(encryption, ssid, passwd)
         if not ok:
-            raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network: configuration invalid (%s:%s, %s)" % (ssid, passwd, encryption))
+            raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network: configuration invalid (ssid: %s, pass: %s, encryption: %s)" % (ssid, passwd, encryption))
 
         ok = self.altablet.connectWifi(ssid)
         if not ok:
