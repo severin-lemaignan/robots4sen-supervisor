@@ -2,7 +2,7 @@
 # utf-8
 
 import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
 logger = logging.getLogger("robots.main")
 
 import argparse
