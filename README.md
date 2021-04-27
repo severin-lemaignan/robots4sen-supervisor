@@ -55,7 +55,9 @@ Pre-requisites
 
 The project **requires** Python2 as the `naoqi` bindings do not support Python3.
 
-- `
+- `pip install pyside2 flask`
+- the naoqi python SDK
+
 
 Running it
 ----------
@@ -96,3 +98,13 @@ might not lead to sending the Pepper's tablet the right Wifi IP, renderin the
 Flask server inaccessible.
 
 
+Adding new behaviours
+---------------------
+
+From choregraphe (attention: choregraphe 2.5 is required; does not work with
+2.8), load the `robots4sen` package, add a new behaviour (via the big '+' icon
+in the *Project files* panel) and rename it as appropriate, implement the
+behaviour, upload it to the robot (from the *Robot applications* panel).
+
+Next time you start the supervisor, your behaviour should be listed alongside
+the other ones (look for `Available robots4SEN behaviours` in the console).
