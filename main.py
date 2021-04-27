@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(n
 logger = logging.getLogger("robots.main")
 
 import argparse
-
+import time
 import threading
 import os
 import sys
@@ -47,6 +47,8 @@ if __name__ == "__main__":
     parser.add_argument("--force-tablet-reconnection", action="store_true",
                         help="Force a reconnection of Pepper's tablet, even if already connected.")
 
+    parser.add_argument("--no-tablet", action="store_true", help="Do not use Pepper's tablet")
+    parser.add_argument("--no-control-ui", action="store_true", help="Do not start the control iterface")
 
     args = parser.parse_args()
 
@@ -55,28 +57,31 @@ if __name__ == "__main__":
 
     ##################################################################
     #################### CONTROL INTERFACE ###########################
+    
+    if not args.no_control_ui:
 
-    app = QGuiApplication(sys.argv)
-    qmlRegisterType(Person, 'Naoqi', 1, 0, 'Person')
-    qmlRegisterType(AudioRecorder, 'Naoqi', 1, 0, 'AudioRecorder')
-    engine = QQmlApplicationEngine()
+        app = QGuiApplication(sys.argv)
+        qmlRegisterType(Person, 'Naoqi', 1, 0, 'Person')
+        qmlRegisterType(AudioRecorder, 'Naoqi', 1, 0, 'AudioRecorder')
+        engine = QQmlApplicationEngine()
 
     # Instance of the Python object
     bridge = NaoqiBridge(args)
 
 
-    # Expose the Python object to QML
-    context = engine.rootContext()
-    context.setContextProperty("naoqi", bridge)
+    if not args.no_control_ui:
+        # Expose the Python object to QML
+        context = engine.rootContext()
+        context.setContextProperty("naoqi", bridge)
 
 
-    # Get the path of the current directory, and then add the name
-    # of the QML file, to load it.
-    qmlFile = join(dirname(__file__), 'main.qml')
-    engine.load(abspath(qmlFile))
+        # Get the path of the current directory, and then add the name
+        # of the QML file, to load it.
+        qmlFile = join(dirname(__file__), 'main.qml')
+        engine.load(abspath(qmlFile))
 
-    if not engine.rootObjects():
-        sys.exit(-1)
+        if not engine.rootObjects():
+            sys.exit(-1)
 
     ##################################################################
 
@@ -84,13 +89,14 @@ if __name__ == "__main__":
     ##################################################################
     ########################  TABLET WEB SERVER ######################
 
-    port = int(os.environ.get('PORT', 8000))
-    kwargs = {'host': '0.0.0.0', 'port': port , 'threaded' : True, 'use_reloader': False, 'debug':True}
-    flask_thread = threading.Thread(target=tablet_webserver.run, kwargs=kwargs)
-    flask_thread.setDaemon(True)
-    flask_thread.start()
+    if not args.no_tablet:
+        port = int(os.environ.get('PORT', 8000))
+        kwargs = {'host': '0.0.0.0', 'port': port , 'threaded' : True, 'use_reloader': False, 'debug':True}
+        flask_thread = threading.Thread(target=tablet_webserver.run, kwargs=kwargs)
+        flask_thread.setDaemon(True)
+        flask_thread.start()
 
-    bridge.connectTablet(args.ssid, "wpa", args.passwd, args.force_tablet_reconnection)
+        bridge.connectTablet(args.ssid, "wpa", args.passwd, args.force_tablet_reconnection)
     ##################################################################
 
 
@@ -103,17 +109,33 @@ if __name__ == "__main__":
     supervisor_thread.setDaemon(True)
     supervisor_thread.start()
 
-    tablet_webserver.ws_ip = supervisor.tablet.WS_IP
-    tablet_webserver.ws_port = supervisor.tablet.WS_PORT
+    if not args.no_tablet:
+        tablet_webserver.ws_ip = supervisor.tablet.WS_IP
+        tablet_webserver.ws_port = supervisor.tablet.WS_PORT
 
-    bridge.setTabletUrl("http://%s:%s/" % (get_ip(), port))
+        bridge.setTabletUrl("http://%s:%s/" % (get_ip(), port))
 
-    # share the supervisor's cmd_queue
-    tablet_webserver.cmd_queue = supervisor.cmd_queue
+        # share the supervisor's cmd_queue with the tablet Flask server
+        tablet_webserver.cmd_queue = supervisor.cmd_queue
+
+    # share the supervisor's cmd_queue with naoqi bridge
     bridge.cmd_queue = supervisor.cmd_queue
 
     ##################################################################
 
 
 
-    sys.exit(app.exec_())
+    if not args.no_control_ui:
+        ok = app.exec_()
+    else:
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            ok = 0
+
+    logger.info("Closing down...")
+    bridge.tearDown()
+
+    logger.info("Bye bye!")
+    sys.exit(ok)
