@@ -70,6 +70,11 @@ class Person(QObject):
         self._watchdog_timer.timeout.connect(self.update)
         self._watchdog_timer.start()
 
+        self._logging_timer = QTimer(self)
+        self._logging_timer.setInterval(NaoqiBridge.PEOPLE_LOGGING_INTERVAL)
+        self._logging_timer.timeout.connect(self.log)
+        self._logging_timer.start()
+
 
     def update(self):
 
@@ -86,6 +91,13 @@ class Person(QObject):
             pose = almemory.getData("PeoplePerception/Person/%s/PositionInRobotFrame" % self._person_id)
             self.setlocation(pose)
 
+        except RuntimeError:
+            self.visible = False
+
+
+    def log(self):
+
+        if self.visible:
             people_logger.info("%s,%s,%0.3f,%0.3f,%0.3f" % (
                                     self._person_id,
                                     self._user_id,
@@ -93,10 +105,6 @@ class Person(QObject):
                                     self._location[1],
                                     self._location[2])
                               )
-
-        except RuntimeError:
-            self.visible = False
-
 
     def setlocation(self, location):
         #TODO OPTIMIZATION: if new location close to prev, do not update
@@ -147,6 +155,7 @@ class NaoqiBridge(QObject):
     SPEAKING_RATE = 75 # %
     WATCHDOG_INTERVAL = 200 #ms
     PEOPLE_UPDATE_INTERVAL = 200 #ms
+    PEOPLE_LOGGING_INTERVAL = 1000 #ms
 
     STOP = "STOP"
     FORWARDS = "FORWARDS"
