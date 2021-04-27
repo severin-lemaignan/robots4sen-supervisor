@@ -133,6 +133,7 @@ class Person(QObject):
 
 class NaoqiBridge(QObject):
 
+    SPEAKING_RATE = 75 # %
     WATCHDOG_INTERVAL = 200 #ms
     PEOPLE_UPDATE_INTERVAL = 200 #ms
 
@@ -388,7 +389,7 @@ class NaoqiBridge(QObject):
             logger.warning("Robot not connected. Can not perform 'say'")
             return
 
-        return qi.async(self.alanimatedspeech.say, text)
+        return qi.async(self.alanimatedspeech.say, "\\rspd=%s\\" % self.SPEAKING_RATE + text)
 
     @Slot(str, bool)
     def move(self, direction, active):
