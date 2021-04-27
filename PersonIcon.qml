@@ -8,6 +8,7 @@ Item {
     property double meters_to_px: 100 // 1m == 100px
 
     property bool is_tracked: false
+    property bool is_seen: true
 
     property alias person_id: person.person_id
 
@@ -36,6 +37,9 @@ Item {
         Behavior on x { PropertyAnimation {} }
         Behavior on y { PropertyAnimation {} }
 
+        opacity: is_seen ? 1 : 0
+        Behavior on opacity { PropertyAnimation { duration: 5000} }
+
         source: "res/baby-face-outline.svg"
 
         Rectangle {
@@ -43,7 +47,7 @@ Item {
             anchors.left: parent.left
             anchors.top: parent.top
 
-            width: 6
+            width: 12
             height: width
             radius: width/2
 
@@ -68,7 +72,7 @@ Item {
     onDisappearedPerson: {
         if (person_id == person.person_id) {
             console.log("I, Person " + person_id + ", have disappeared!");
-            opacity = 0.5;
+            is_seen = false;
         }
     }
 
