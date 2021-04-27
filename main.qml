@@ -38,7 +38,7 @@ Window {
             PhotoCapture {
                 id: captureTab
             }
-            Item {
+            Settings {
                 id: settingsTab
             }
         }

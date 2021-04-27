@@ -466,6 +466,21 @@ class NaoqiBridge(QObject):
 
         return qi.async(self.alanimatedspeech.say, "\\rspd=%s\\" % self.SPEAKING_RATE + text)
 
+    @Slot()
+    def rest(self):
+        self.almotion.rest()
+
+    @Slot()
+    def wakeup(self):
+        self.almotion.wakeUp()
+
+    @Slot()
+    def toggleArmsStiffness(self):
+        s = self.almotion.getStiffnesses("RArm")[0]
+        logger.debug("Current arm stiffness: %s" % s)
+        self.almotion.stiffnessInterpolation(["RArm", "LArm"], 0.0 if s > 0.2 else 1.0, 1.0)
+
+
     @Slot(str, bool)
     def move(self, direction, active):
 
