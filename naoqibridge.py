@@ -208,6 +208,8 @@ class NaoqiBridge(QObject):
         self.albattery = self._session.service("ALBattery")
         self.alanimatedspeech = self._session.service("ALAnimatedSpeech")
 
+        self.albehaviours = self._session.service("ALBehaviorManager")
+
         try:
             self.altablet = self._session.service("ALTabletService")
             self.alphoto = self._session.service("ALPhotoCapture")
@@ -234,6 +236,9 @@ class NaoqiBridge(QObject):
     def configureRobot(self):
         self.almotion.setOrthogonalSecurityDistance(0.1)
         self.almotion.setTangentialSecurityDistance(0.05)
+
+        logger.info("Available robots4SEN behaviours: %s" % ", ".join(self.getBehaviours()))
+
 
     def connectTablet(self, ssid, encryption="open", passwd="", force=False):
 
@@ -366,6 +371,34 @@ class NaoqiBridge(QObject):
         logging.debug("Running animation tag <%s>" % animation)
         future = self.alanimationplayer.runTag(animation, _async=True)
         future.value() # wait until the animation is complete
+
+    @Slot(str)
+    def request_behaviour(self, behaviour):
+        """
+        Argument is one of the available installed behaviour.
+        """
+        
+        self.cmd_queue.put((CTRL, BEHAVIOUR, behaviour))
+
+
+    def run_behaviour(self, behaviour):
+        """
+        Argument is one of the available installed behaviour.
+        """
+
+        if not self._connected:
+            logger.warning("Robot not connected. Can not perform 'run_behaviour'")
+            return
+
+        logging.debug("Running behaviour <%s>" % behaviour)
+        self.albehaviours.startBehavior(behaviour)
+
+    @Slot()
+    def getBehaviours(self):
+        behaviours = [b for b in self.albehaviours.getInstalledBehaviors() if b.startswith("robots4sen")]
+
+
+        return behaviours
 
     @Slot(str)
     def request_track(self, person_id):

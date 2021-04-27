@@ -14,6 +14,7 @@ CTRL = "control"
 NONE = None
 STORIES = "stories"
 SOCIAL_GESTURE = "social gesture"
+BEHAVIOUR = "generic behaviour"
 LOOK_AT = "look at"
 TRACK = "track"
 INTERRUPT = "interrupt"

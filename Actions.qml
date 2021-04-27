@@ -107,85 +107,8 @@ Item {
             anchors.left: separator.right
             anchors.right: parent.right
             height: parent.height
-            Item {
-                       visible:false
-                    id: expressions
-                    height: 86
-                    anchors.left: parent.left
-                    anchors.right: parent.right
 
-                    Text {
-                            id: label_expression
-                            text: qsTr("Expressions")
-                            anchors.leftMargin: 10
-                            anchors.left: parent.left
-                            anchors.top: parent.top
-                            font.pixelSize: parent.width * 0.05
-                    }
-
-                    Item {
-                            height: 81
-                            anchors.top: label_expression.bottom
-                            anchors.topMargin: 10
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.leftMargin: 10
-                            anchors.rightMargin: 10
-
-
-
-                            IconButton {
-                                    id: btn_expr_neutral
-                                    source: "res/robot-outline.svg"
-                                    anchors.left: parent.left
-                                    anchors.leftMargin: 10
-
-                                    height: parent.width * 0.15
-                                    Layout.fillWidth: true
-                                    onPressedChanged: {
-                                            console.log("Neutral")
-                                    }
-                                    noborder:true
-                            }
-                            IconButton {
-                                    id: btn_expr_excited
-                                    source: "res/robot-excited-outline.svg"
-                                    anchors.left: btn_expr_neutral.right
-                                    anchors.leftMargin: 10
-
-                                    height: parent.width * 0.15
-                                    noborder:true
-                                    onPressedChanged: {
-                                            console.log("Excited")
-                                    }
-                            }
-                            IconButton {
-                                    id: btn_expr_love
-                                    source: "res/robot-love-outline.svg"
-                                    anchors.left: btn_expr_excited.right
-                                    anchors.leftMargin: 10
-                                    height: parent.width * 0.15
-                                    noborder:true
-                                    onPressedChanged: {
-                                            console.log("Love")
-                                    }
-                            }
-                            IconButton {
-                                    id: btn_expr_angry
-                                    source: "res/robot-angry-outline.svg"
-                                    anchors.left: btn_expr_love.right
-                                    anchors.leftMargin: 10
-                                    height: parent.width * 0.15
-                                    noborder:true
-                                    onPressedChanged: {
-                                            console.log("Angry")
-                                    }
-                            }
-
-                    }
-            }
-
-            GridView{
+            GridView {
                     id:gestures
                     height: parent.height/2
                     anchors.left: parent.left
@@ -210,6 +133,34 @@ Item {
 
                     }
             }
+
+            GridView {
+                    id:animations
+                    height: parent.height/2
+                    anchors.left: parent.left
+                    anchors.leftMargin: 50
+                    anchors.right: parent.right
+                    anchors.rightMargin: 50
+                    anchors.top: gestures.bottom
+                    anchors.topMargin: 50
+                    model : list_animations
+                    cellHeight: parent.width * 0.2
+                    cellWidth: cellHeight
+
+                    delegate: IconButton{
+                            height:gestures.cellHeight * 0.8
+                            noborder:true
+                            source:image //we use this name in ListModel
+                            label: action.split("/")[1]
+                            onPressedChanged: {
+                                        if (pressed) {
+                                            naoqi.request_behaviour(action);
+                                        }
+                            }
+
+                    }
+            }
+
             ListModel {
 
                     id: list_gestures
@@ -248,71 +199,17 @@ Item {
             }
 
 
+            ListModel {
 
-            Item {
-                    id: activities
-                    anchors.top: gestures.bottom
-                    anchors.topMargin: 10
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-
-                    Text {
-                            id: label_activities
-                            text: qsTr("Activities")
-                            anchors.leftMargin: 10
-                            anchors.left: parent.left
-                            anchors.top: parent.top
-                            font.pixelSize: parent.width * 0.05
+                    id: list_animations
+                    ListElement {
+                            action: "robots4sen-brl/elephant"
+                            image: "res/robot-angry-outline.svg"
                     }
-                    ListView{
-                            id:list_view_activities
-                            height: 70
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.top: label_activities.bottom
-                            spacing: 10
-                            orientation: ListView.Horizontal
-                            boundsBehavior: Flickable.StopAtBounds
-                            flickableDirection: Flickable.HorizontalFlick
-                            clip:true//setting it make item outside of view invisible
-                            model : list_activities
-                            delegate: IconButton{
-                                    noborder:true
-                                    source:image //we use this name in ListModel
-                                    onPressedChanged: {
-                                            console.log("Hello");
-                                    }
-                            }
+                    ListElement {
+                            action: "robots4sen-brl/saxophone"
+                            image: "res/robot-love-outline.svg"
                     }
-                    ListModel {
-
-                            id: list_activities
-                            ListElement {
-                                    image: "res/robot-angry-outline.svg"
-                            }
-                            ListElement {
-                                    image: "res/robot-love-outline.svg"
-                            }
-                            ListElement {
-                                    image: "res/robot-angry-outline.svg"
-                            }
-                            ListElement {
-                                    image: "res/robot-love-outline.svg"
-                            }
-                            ListElement {
-                                    image: "res/robot-angry-outline.svg"
-                            }
-                            ListElement {
-                                    image: "res/robot-love-outline.svg"
-                            }
-                            ListElement {
-                                    image: "res/robot-angry-outline.svg"
-                            }
-                            ListElement {
-                                    image: "res/robot-love-outline.svg"
-                            }
-                    }
-
             }
 
     }

@@ -59,6 +59,8 @@ class Supervisor(QObject):
         if source == CTRL:
             if cmd == SOCIAL_GESTURE:
                 self.bridge.animate(args)
+            elif cmd == BEHAVIOUR:
+                self.bridge.run_behaviour(args)
             elif cmd == LOOK_AT:
                 self.bridge.lookAt(*args)
             elif cmd == TRACK:
