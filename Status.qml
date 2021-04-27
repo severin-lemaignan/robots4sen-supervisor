@@ -3,8 +3,8 @@ import QtGraphicalEffects 1.12
 
 Item {
     id: element
-    width: 60
-    height: 40
+    width: 150
+    height: 150
 
 
 

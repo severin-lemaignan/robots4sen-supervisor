@@ -99,7 +99,7 @@ Window {
             anchors.left: status.left
             anchors.top: status.bottom
             anchors.topMargin: 30
-            height: 100
+            height: 200
 
             noborder: true
 

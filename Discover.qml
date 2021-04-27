@@ -4,7 +4,7 @@ import QtQuick.Controls 2.3
 Item {
     id: discovery
 
-    readonly property double meters_to_px: 200 // 1m == 200px
+    readonly property double meters_to_px: 300 // 1m == 200px
     readonly property point origin: Qt.point(400,parent.height/2)
 
     Item {
