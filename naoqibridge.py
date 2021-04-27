@@ -363,8 +363,8 @@ class NaoqiBridge(QObject):
             logger.warning("Robot not connected. Can not perform 'track'")
             return
 
-        self.tracker.registerTarget("People", [person_id,])
-        self.tracker.track("People")
+        self.altracker.registerTarget("People", [person_id,])
+        self.altracker.track("People")
 
 
     @Slot()
@@ -372,8 +372,8 @@ class NaoqiBridge(QObject):
         self.cmd_queue.put((CTRL, TRACK, ""))
 
     def stop_tracking(self):
-        self.tracker.stopTracker()
-        self.tracker.unregisterAllTargets()
+        self.altracker.stopTracker()
+        self.altracker.unregisterAllTargets()
 
 
     @Slot(float, float, float)
@@ -386,7 +386,18 @@ class NaoqiBridge(QObject):
             logger.warning("Robot not connected. Can not perform 'lookAt'")
             return
 
-        self.tracker.lookAt([x, y, z], 0.7, True) # pos, fraction speed, whole body
+        self.altracker.lookAt([x, y, z], 0.7, True) # pos, fraction speed, whole body
+
+    def glanceAtTablet(self):
+
+        if not self._connected:
+            logger.warning("Robot not connected. Can not perform 'glanceAtTablet'")
+            return
+
+        logger.info("Looking at tablet")
+        #self.altracker.lookAt([0.2, 0, 0], 1, True)
+        return qi.async(self.altracker.lookAt, [0.2, 0, 0], 1, False) # pos, fraction speed, whole body
+
 
     @Slot(str)
     def say(self, text):

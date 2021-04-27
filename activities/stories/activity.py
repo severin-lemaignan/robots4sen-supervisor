@@ -57,6 +57,7 @@ class StoryActivity:
         # if the robot is still speaking, wait until it is done
         if self.current_speech_action and \
            not self.current_speech_action.isFinished():
+               logger.warning("Still speaking... waiting for the sentence to finish...")
                self.current_speech_action.wait()
 
         txt, actions = self.story.next(action)
@@ -64,10 +65,12 @@ class StoryActivity:
         if len(actions) > 1:
             labels = [v["label"] for k, v in actions.items()]
             choice_sentence = ", ".join(labels[:-1]) + " or %s" % labels[-1]
+            self.robot.glanceAtTablet()
             self.current_speech_action = self.robot.say("%s %s?" % (txt, choice_sentence))
         else:
             if len(txt) > 300: # it is the story, not just a confirmation
-                chuncks = txt.split(".")
+                #chuncks = txt.split(".")
+                chuncks = ["NOT IMPLEMENTED. BUT SOON WILL BE."]
                 for idx, c in enumerate(chuncks):
                     logger.info("STORY [%s/%s]: %s" % (idx + 1, len(chuncks), c))
                     self.robot.say(c).wait()
