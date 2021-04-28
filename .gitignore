@@ -1,3 +1,4 @@
+logs/
 build/
 *.pro.user
 *.pyc

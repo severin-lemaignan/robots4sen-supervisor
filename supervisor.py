@@ -4,7 +4,7 @@ import logging;logger = logging.getLogger("robots.supervisor")
 
 from csv_logging import create_csv_logger
 
-action_logger = create_csv_logger("actions.csv") 
+action_logger = create_csv_logger("logs/actions.csv") 
 
 from Queue import Queue, Empty
 

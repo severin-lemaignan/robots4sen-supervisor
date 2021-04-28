@@ -113,7 +113,7 @@ Window {
             onPressedChanged: {
                 if (pressed) {
                     var dateTime = new Date().toLocaleString(Qt.locale("en_GB"), "yyyy-MM-dd-HH-mm-ss");
-                    audiorecorder.location = "./audionote-" + dateTime + ".ogg"
+                    audiorecorder.location = "./logs/notes/audionote-" + dateTime + ".ogg"
                     audiorecorder.record();
                     record_modal.visible = true;
                 }

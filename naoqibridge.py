@@ -12,7 +12,7 @@ import qi
 from constants import *
 from csv_logging import create_csv_logger
 
-people_logger = create_csv_logger("people.csv")
+people_logger = create_csv_logger("logs/people.csv")
 
 almemory = None
 alusersession = None
