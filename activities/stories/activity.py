@@ -112,6 +112,9 @@ def web_stories(action=None):
 
     txt, actions = story_activity.next(action)
 
+    if not txt:
+        return redirect(url_for("home_screen"))
+
 
 
     return render_template('stories.html',

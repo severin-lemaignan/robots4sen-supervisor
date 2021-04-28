@@ -35,22 +35,11 @@ class Story:
     def start(self):
         self.do_next_step(self.root)
 
-    def get_line(self, id):
-        nonprocessed_filename = os.path.join(self.root_path, "assets", self.stage_nodes[id]["audio"] + ".txt")
-        processed_filename = os.path.join(self.root_path, "assets", self.stage_nodes[id]["audio"][:-4] + ".txt")
-
-        if os.path.exists(processed_filename):
-            with open(processed_filename) as txt:
-                return txt.readlines()[0]
-        else:
-            with open(nonprocessed_filename) as txt:
-                return txt.readlines()[0]
-
 
     def get_txt(self, id):
         audio_id = self.stage_nodes[id]["audio"]
 
-        FALLBACK_STORY = "d784b0756937184c7cd39e0441ee6638906ca975.mp3"
+        FALLBACK_STORY = "d784b0756937184c7cd39e0441ee6638906ca975"
 
         fallback_filename = os.path.join(self.root_path, "assets", FALLBACK_STORY + ".txt")
         processed_filename = os.path.join(self.root_path, "assets", self.stage_nodes[id]["audio"][:-4] + ".txt")
@@ -59,7 +48,7 @@ class Story:
             with open(processed_filename) as txt:
                 return txt.readlines()
         else:
-            logger.warning("Unprocessed Lunii story: %s. Using fallback story." % id)
+            logger.warning("Unprocessed Lunii story: %s. Using fallback story." % audio_id)
             with open(fallback_filename) as txt:
                 return txt.readlines()
 
@@ -78,7 +67,7 @@ class Story:
         if len(actions) == 1:
             return txt, {actions[0]: {"img":"check-circle.svg", "label":""}}
         else:
-            actions = {id: {"img": self.stage_nodes[id]["image"][:-4] + ".png", "label":self.get_line(id)} for id in actions}
+            actions = {id: {"img": self.stage_nodes[id]["image"][:-4] + ".png", "label":self.get_txt(id)[0]} for id in actions}
             return txt, actions
 
 
