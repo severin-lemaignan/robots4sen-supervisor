@@ -4,7 +4,9 @@ DIALOGUES = {
     "story_prompt": ["I love stories! Let's find one!",
                     "You want to listen to a story? Great!",
                     "Let see what story we can come up with...",
-                    "Ok! Let me tell you a story."]
+                    "Ok! Let me tell you a story."],
+    "story_end": ["The story is finished! I hope you liked it.",
+                  "The end. Did you like the story?"]
     }
 
 def get_dialogue(type):

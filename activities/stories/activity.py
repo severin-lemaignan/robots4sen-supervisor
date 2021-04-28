@@ -58,6 +58,10 @@ class StoryActivity:
             if self.step == len(self.story_txt): # story finished!
                 logger.info("STORY FINISHED")
                 self.status = STOPPED
+                time.sleep(1)
+                self.robot.say(get_dialogue("story_end")).wait()
+                time.sleep(1)
+                self.tablet.setUrl("/")
             else:
                 sentence = self.story_txt[self.step]
                 logger.info("STORY [%s/%s]: %s" % (self.step + 1, len(self.story_txt), sentence))
