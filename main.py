@@ -49,8 +49,9 @@ if __name__ == "__main__":
     parser.add_argument("--force-tablet-reconnection", action="store_true",
                         help="Force a reconnection of Pepper's tablet, even if already connected.")
 
-    parser.add_argument("--no-tablet", action="store_true", help="Do not use Pepper's tablet")
-    parser.add_argument("--no-control-ui", action="store_true", help="Do not start the control iterface")
+    parser.add_argument("--no-tablet", action="store_true", help="[debug] Do not use Pepper's tablet")
+    parser.add_argument("--no-control-ui", action="store_true", help="[debug] Do not start the control iterface")
+    parser.add_argument("--no-robot", action="store_true", help="[debug] Run without a robot, simulated or real")
 
     args = parser.parse_args()
 

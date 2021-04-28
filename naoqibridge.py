@@ -17,6 +17,13 @@ people_logger = create_csv_logger("people.csv")
 almemory = None
 alusersession = None
 
+class MockFuture():
+    def wait(self):
+        time.sleep(1)
+        pass
+    def isFinished(self):
+        return True
+
 class People(QObject):
 
     def __init__(self):
@@ -172,6 +179,8 @@ class NaoqiBridge(QObject):
     def __init__(self, args):
         QObject.__init__(self)
 
+        self._with_robot = not args.no_robot
+
         self._ip = args.ip
         self._port = str(args.port)
         self._session = qi.Session()
@@ -189,13 +198,15 @@ class NaoqiBridge(QObject):
 
         self.isConnected_changed.connect(self.on_isConnected_changed)
 
-        self.connectToRobot()
+        if self._with_robot:
+            self.connectToRobot()
 
         # cmd_queue is set in main.py to point to the supervisor cmd_queue
         self.cmd_queue = None
 
     def tearDown(self):
-        self.altablet.hideWebview()
+        if self._with_robot:
+            self.altablet.hideWebview()
 
     def connectToRobot(self):
         global almemory, alusersession
@@ -251,7 +262,7 @@ class NaoqiBridge(QObject):
 
     def connectTablet(self, ssid, encryption="open", passwd="", force=False):
 
-        if not self.altablet:
+        if not self._with_robot or not self.altablet:
             logger.warning("No Pepper tablet!")
             return
 
@@ -295,6 +306,10 @@ class NaoqiBridge(QObject):
     @Slot(str)
     def setTabletUrl(self, url):
 
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: setTAbletUrl: %s" % url)
+            return
+
         if not self.altablet:
             logger.warning("No Pepper tablet!")
             return
@@ -305,6 +320,11 @@ class NaoqiBridge(QObject):
 
 
     def checkAlive(self):
+
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: checkAlive")
+            return
+
 
         if not self._connected:
             # try to reconnect...
@@ -372,6 +392,9 @@ class NaoqiBridge(QObject):
         Argument is one of the available animation tag. See
         http://doc.aldebaran.com/2-5/naoqi/motion/alanimationplayer-advanced.html#animationplayer-tags-pepper
         """
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: animate: %s" % animation)
+            return
 
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'animate'")
@@ -395,6 +418,10 @@ class NaoqiBridge(QObject):
         Argument is one of the available installed behaviour.
         """
 
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: run_behaviour: %s" % behaviour)
+            return
+
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'run_behaviour'")
             return
@@ -404,6 +431,10 @@ class NaoqiBridge(QObject):
 
     @Slot()
     def getBehaviours(self):
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: getBehaviour")
+            return ["robots4sen-brl/mock_behaviour1","robots4sen-brl/mock_behaviour2"]
+
         behaviours = [b for b in self.albehaviours.getInstalledBehaviors() if b.startswith("robots4sen")]
 
 
@@ -414,6 +445,10 @@ class NaoqiBridge(QObject):
         self.cmd_queue.put((CTRL, TRACK, person_id))
 
     def track(self, person_id):
+
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: track: %s" % person_id)
+            return
 
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'track'")
@@ -428,6 +463,10 @@ class NaoqiBridge(QObject):
         self.cmd_queue.put((CTRL, TRACK, ""))
 
     def stop_tracking(self):
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: stop_tracking")
+            return
+
         self.altracker.stopTracker()
         self.altracker.unregisterAllTargets()
 
@@ -438,6 +477,10 @@ class NaoqiBridge(QObject):
 
     def lookAt(self, x, y, z):
 
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: lookAt: %s %s %s" % (x,y,z))
+            return
+
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'lookAt'")
             return
@@ -445,6 +488,10 @@ class NaoqiBridge(QObject):
         self.altracker.lookAt([x, y, z], 0.7, True) # pos, fraction speed, whole body
 
     def glanceAtTablet(self):
+
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: glanceAtTablet")
+            return
 
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'glanceAtTablet'")
@@ -459,6 +506,10 @@ class NaoqiBridge(QObject):
     def say(self, text):
         """Returns a future on the 'say' action
         """
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: say: %s" % text)
+            return MockFuture()
+
 
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'say'")
@@ -468,14 +519,29 @@ class NaoqiBridge(QObject):
 
     @Slot()
     def rest(self):
+        
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: rest")
+            return
+
         self.almotion.rest()
 
     @Slot()
     def wakeup(self):
+
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: wakeup")
+            return
+
         self.almotion.wakeUp()
 
     @Slot()
     def toggleArmsStiffness(self):
+
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: toggleArmsStiffness")
+            return
+
         s = self.almotion.getStiffnesses("RArm")[0]
         logger.debug("Current arm stiffness: %s" % s)
         self.almotion.stiffnessInterpolation(["RArm", "LArm"], 0.0 if s > 0.2 else 1.0, 1.0)
@@ -483,6 +549,10 @@ class NaoqiBridge(QObject):
 
     @Slot(str, bool)
     def move(self, direction, active):
+
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: move: %s (active: %s)" % (direction, active))
+            return
 
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'move'")
@@ -528,6 +598,11 @@ class NaoqiBridge(QObject):
 
     @Slot()
     def prepare_take_picture(self):
+
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: prepare_take_picture")
+            return
+
         if not self.alphoto:
             logger.warning("ALPhotoCapture not initialised. Skipping")
             return
@@ -539,6 +614,11 @@ class NaoqiBridge(QObject):
 
     @Slot()
     def take_picture(self):
+
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: take_picture")
+            return
+
         if not self.alphoto:
             logger.warning("ALPhotoCapture not initialised. Skipping")
             return
