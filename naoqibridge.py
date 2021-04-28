@@ -322,7 +322,6 @@ class NaoqiBridge(QObject):
     def checkAlive(self):
 
         if not self._with_robot:
-            logger.warning("MOCK ROBOT: checkAlive")
             return
 
 
