@@ -107,13 +107,13 @@ def web_stories(action=None):
     if action and action == REQUEST:
         # server.cmd_queue is injected by main.py upon Flask's thread creation
         tablet_webserver.cmd_queue.put((TABLET, STORIES, (action,)))
-        return redirect(url_for('home_screen'))
+        return redirect(url_for('activities'))
 
 
     txt, actions = story_activity.next(action)
 
     if not txt:
-        return redirect(url_for("home_screen"))
+        return redirect(url_for("waiting"))
 
 
 
