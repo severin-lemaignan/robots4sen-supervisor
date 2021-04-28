@@ -452,7 +452,7 @@ class NaoqiBridge(QObject):
 
         logger.info("Looking at tablet")
         #self.altracker.lookAt([0.2, 0, 0], 1, True)
-        return qi.async(self.altracker.lookAt, [0.2, 0, 0], 1, False) # pos, fraction speed, whole body
+        return qi.async(self.altracker.lookAt, [0.2, 0, 0], 0.5, False) # pos, fraction speed, whole body
 
 
     @Slot(str)

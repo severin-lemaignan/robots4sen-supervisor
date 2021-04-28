@@ -45,10 +45,24 @@ class StoryActivity:
         self.tablet.setUrl("/activity/stories")
         time.sleep(1)
 
+        self.story_txt = []
+        self.step = 0
+
     def tick(self):
 
         #logger.info("Story progressing nicely. %s%% done" % self.progress)
         #self.progress+= 10
+        
+        if self.story_txt:
+            
+            if self.step == len(self.story_txt): # story finished!
+                logger.info("STORY FINISHED")
+                self.status = STOPPED
+            else:
+                sentence = self.story_txt[self.step]
+                logger.info("STORY [%s/%s]: %s" % (self.step + 1, len(self.story_txt), sentence))
+                self.robot.say(sentence).wait()
+                self.step += 1
 
         return self.status
 
@@ -66,19 +80,20 @@ class StoryActivity:
             labels = [v["label"] for k, v in actions.items()]
             choice_sentence = ", ".join(labels[:-1]) + " or %s" % labels[-1]
             self.robot.glanceAtTablet()
-            self.current_speech_action = self.robot.say("%s %s?" % (txt, choice_sentence))
+            self.current_speech_action = self.robot.say("%s %s?" % (txt[0], choice_sentence))
+            return txt[0], actions
         else:
-            if len(txt) > 300: # it is the story, not just a confirmation
-                #chuncks = txt.split(".")
-                chuncks = ["NOT IMPLEMENTED. BUT SOON WILL BE."]
-                for idx, c in enumerate(chuncks):
-                    logger.info("STORY [%s/%s]: %s" % (idx + 1, len(chuncks), c))
-                    self.robot.say(c).wait()
+            if len(txt) > 1: # it is a processed story, not just a confirmation
+
+                # let's start the story itself!
+                self.story_txt = txt
+
+                # clear the tablet
+                return None, None
 
             else:
-                return self.next(actions.keys()[0])
+                return self.next(actions.keys()[0]) # a Lunii confirmation -- we skip those
 
-        return txt, actions
 
 story_activity = StoryActivity()
 

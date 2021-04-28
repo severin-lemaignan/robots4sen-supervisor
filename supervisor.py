@@ -44,6 +44,7 @@ class Supervisor(QObject):
                 status = self.activity.tick()
                 if status == STOPPED:
                     logger.info("Activity <%s> completed" % self.activity)
+                    action_logger.info("%s, %s, %s" % (self.activity, status))
                     self.activity = None
 
     def process_queue(self):
@@ -74,6 +75,7 @@ class Supervisor(QObject):
             if cmd == STORIES:
                 self.activity = stories.get_activity()
                 logger.info("Activity <%s> starting" % self.activity)
+                action_logger.info("%s, %s, %s" % (self.activity, RUNNING))
                 self.activity.start(self.tablet, self.bridge)
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 

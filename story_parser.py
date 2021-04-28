@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger("story_parser")
+
 import json
 import os.path
 
@@ -46,17 +49,19 @@ class Story:
 
     def get_txt(self, id):
         audio_id = self.stage_nodes[id]["audio"]
-        nonprocessed_filename = os.path.join(self.root_path, "assets", self.stage_nodes[id]["audio"] + ".txt")
+
+        FALLBACK_STORY = "d784b0756937184c7cd39e0441ee6638906ca975.mp3"
+
+        fallback_filename = os.path.join(self.root_path, "assets", FALLBACK_STORY + ".txt")
         processed_filename = os.path.join(self.root_path, "assets", self.stage_nodes[id]["audio"][:-4] + ".txt")
 
         if os.path.exists(processed_filename):
             with open(processed_filename) as txt:
-                for l in txt.readlines():
-                    return l
+                return txt.readlines()
         else:
-            with open(nonprocessed_filename) as txt:
-                for l in txt.readlines():
-                    return l
+            logger.warning("Unprocessed Lunii story: %s. Using fallback story." % id)
+            with open(fallback_filename) as txt:
+                return txt.readlines()
 
     def next(self, id=None):
 
@@ -84,12 +89,11 @@ class Story:
         audio_id = self.stage_nodes[id]["audio"]
 
         print("\n===================================== %s" % audio_id)
-        print(txt)
-        print()
+        print(" ".join(txt))
 
         actions_ids = list(actions.keys())
         if len(actions_ids) == 1:
-            input("(press Enter to continue)")
+            raw_input("(press Enter to continue)")
             self.do_next_step(actions_ids[0])
         else:
             for idx, a in enumerate(actions_ids):
@@ -101,5 +105,5 @@ class Story:
 
 
 if __name__ == "__main__":
-    story = Story("assets/stories/susanne-and-ben/story.json")
+    story = Story("static/stories/susanne-and-ben/story.json")
     story.start()
