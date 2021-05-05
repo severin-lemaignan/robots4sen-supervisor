@@ -69,6 +69,8 @@ class Person(QObject):
         self._person_id = 0
         self._user_id = 0
         self._location = [0., 0., 0.]
+        self._world_location = [0., 0., 0.]
+        self._looking_at_robot = 0.
 
         self.visible = True
 
@@ -95,8 +97,15 @@ class Person(QObject):
             self.known_changed.emit(self.known)
 
         try:
-            pose = almemory.getData("PeoplePerception/Person/%s/PositionInRobotFrame" % self._person_id)
-            self.setlocation(pose)
+            self._world_location = almemory.getData("PeoplePerception/Person/%s/PositionInWorldFrame" % self._person_id)
+            local_pose = almemory.getData("PeoplePerception/Person/%s/PositionInWorldFrame" % self._person_id)
+            self.setlocation(local_pose)
+
+            looking_at_robot = almemory.getData("PeoplePerception/Person/%s/LookingAtRobotScore" % self._person_id)
+
+            if abs(looking_at_robot - self._looking_at_robot) > 0.05:
+                self._looking_at_robot = looking_at_robot
+                self.looking_at_robot_changed.emit(self._looking_at_robot)
 
         except RuntimeError:
             self.visible = False
@@ -153,6 +162,10 @@ class Person(QObject):
     def y(self):
         return self._location[1]
 
+    looking_at_robot_changed = Signal(float)
+    @Property(float, notify=looking_at_robot_changed)
+    def looking_at_robot(self):
+        return self._looking_at_robot
 
 
 
