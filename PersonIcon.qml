@@ -40,7 +40,7 @@ Item {
         opacity: is_seen ? 1 : 0
         Behavior on opacity { PropertyAnimation { duration: 5000} }
 
-        source: "res/baby-face-outline.svg"
+        source: person.age == "child" ? "res/baby-face-outline.svg" : (person.age == "adult" ? "res/account.svg" : "res/account-unsure.svg")
 
         Rectangle {
             id: indicator

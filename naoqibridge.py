@@ -63,6 +63,11 @@ class People(QObject):
 
 class Person(QObject):
 
+    # age groups
+    UNKNOWN = "unknown"
+    ADULT = "adult"
+    CHILD = "child"
+
     def __init__(self):
         QObject.__init__(self)
 
@@ -71,6 +76,8 @@ class Person(QObject):
         self._location = [0., 0., 0.]
         self._world_location = [0., 0., 0.]
         self._looking_at_robot = 0.
+
+        self._age = self.UNKNOWN
 
         self.visible = True
 
@@ -107,6 +114,13 @@ class Person(QObject):
                 self._looking_at_robot = looking_at_robot
                 self.looking_at_robot_changed.emit(self._looking_at_robot)
 
+            age_estimate = almemory.getData("PeoplePerception/Person/%s/AgeProperties" % self._person_id)
+            if age_estimate:
+                age, confidence = age_estimate
+                if confidence > 0.3:
+                    self.setage(age)
+
+
         except RuntimeError:
             self.visible = False
 
@@ -123,6 +137,21 @@ class Person(QObject):
                                     self._looking_at_robot
                                 )
                               )
+
+    def setage(self, age):
+
+        if age > 17:
+
+            if self._age == self.UNKNOWN or self._age == self.CHILD:
+                logger.warning("Person <%s> detected as an adult (~%s years)" % (self._person_id, age))
+                self._age = self.ADULT
+                self.age_changed.emit(self._age)
+        else:
+            if self._age == self.UNKNOWN or self._age == self.ADULT:
+                logger.warning("Person <%s> detected as a child (~%s years)" % (self._person_id, age))
+                self._age = self.CHILD
+                self.age_changed.emit(self._age)
+
 
     def setlocation(self, location):
         #TODO OPTIMIZATION: if new location close to prev, do not update
@@ -169,6 +198,10 @@ class Person(QObject):
     def looking_at_robot(self):
         return self._looking_at_robot
 
+    age_changed = Signal(str)
+    @Property(str, notify=age_changed)
+    def age(self):
+        return self._age
 
 
 
