@@ -44,7 +44,7 @@ class Supervisor(QObject):
                 status = self.activity.tick()
                 if status == STOPPED:
                     logger.info("Activity <%s> completed" % self.activity)
-                    action_logger.info("%s, %s" % (self.activity, status))
+                    action_logger.info((self.activity, status))
                     self.activity = None
 
     def process_queue(self):
@@ -55,7 +55,7 @@ class Supervisor(QObject):
             return
 
         logger.info("GOT A %s CMD: %s (%s)" % (source, cmd, args))
-        action_logger.info("%s, %s, %s" % (source, cmd, args))
+        action_logger.info((source, cmd, args))
 
         if source == CTRL:
             if cmd == SOCIAL_GESTURE:
@@ -75,7 +75,7 @@ class Supervisor(QObject):
             if cmd == STORIES:
                 self.activity = stories.get_activity()
                 logger.info("Activity <%s> starting" % self.activity)
-                action_logger.info("%s, %s" % (self.activity, RUNNING))
+                action_logger.info((self.activity, RUNNING))
                 self.activity.start(self.tablet, self.bridge)
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 

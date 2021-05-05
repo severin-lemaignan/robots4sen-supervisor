@@ -10,7 +10,7 @@ class CsvFormatter(logging.Formatter):
         self.writer = csv.writer(self.output)
 
     def format(self, record):
-        self.writer.writerow([record.created, record.levelname] + record.msg.split(","))
+        self.writer.writerow([record.created, record.levelname] + list(record.msg))
         data = self.output.getvalue()
         self.output.truncate(0)
         self.output.seek(0)
