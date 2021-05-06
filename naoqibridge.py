@@ -131,10 +131,14 @@ class Person(QObject):
             people_logger.info((
                                     self._person_id,
                                     self._user_id,
+                                    self._location[0],
+                                    self._location[1],
+                                    self._location[2],
                                     self._world_location[0],
                                     self._world_location[1],
                                     self._world_location[2],
-                                    self._looking_at_robot
+                                    self._looking_at_robot,
+                                    self._age
                                 )
                               )
 
