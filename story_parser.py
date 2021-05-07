@@ -35,9 +35,34 @@ class Story:
     def start(self):
         self.do_next_step(self.root)
 
+    def print_tree(self,node=None,level=0,prefix=""):
+        import sys
+        txt, actions = self.next(node)
+
+        if txt[0].startswith("Do you want"):
+            return
+
+
+#        if len(actions) == 1:
+#            print(str(level) + ": " + "".join(" " * level) + txt[0] + " (%s)" % self.get_audio_id(node))
+ 
+        if len(actions) == 1:
+            if level in [2,4,6,8]:
+                prefix += "-%s"  % txt[0]
+            if level == 9:
+                sys.stdout.write(prefix + ":%s\n" % self.get_audio_id(node))
+               
+        for k,v in actions.items():
+            self.print_tree(k, level +1, prefix)
+
+    def get_audio_id(self, id):
+        if id in self.stage_nodes:
+            return self.stage_nodes[id]["audio"]
+        else:
+            return ""
 
     def get_txt(self, id):
-        audio_id = self.stage_nodes[id]["audio"]
+        audio_id = self.get_audio_id(id)
 
         FALLBACK_STORY = "d784b0756937184c7cd39e0441ee6638906ca975"
 
@@ -95,4 +120,5 @@ class Story:
 
 if __name__ == "__main__":
     story = Story("static/stories/susanne-and-ben/story.json")
-    story.start()
+    #story.start()
+    story.print_tree()
