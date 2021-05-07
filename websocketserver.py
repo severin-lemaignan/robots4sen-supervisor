@@ -9,6 +9,10 @@ from PySide2.QtCore import QUrl, QObject, Signal, Slot
 from PySide2.QtWebSockets import QWebSocketServer
 from PySide2.QtNetwork import QHostAddress
 
+from Queue import Queue, Empty
+
+import json
+
 from helpers import get_ip
 
 class TabletWebSocketServer(QObject):
@@ -19,6 +23,8 @@ class TabletWebSocketServer(QObject):
 
     def __init__(self):
         QObject.__init__(self)
+
+        self.response_queue = Queue()
 
         self.WS_IP = get_ip()
 
@@ -56,12 +62,23 @@ class TabletWebSocketServer(QObject):
             logger.warning("Tablet not yet connected. Msg <%s> *not* sent." % msg)
 
 
-    def setUrl(self, url):
-        self.write.emit(url)
+    def debug(self, msg):
+        self.write.emit(json.dumps({"type":"debug", "msg":msg}))
 
-    def processTextMessage(self,  message):
+    def setUrl(self, url):
+        self.write.emit(json.dumps({"type":"redirect", "url":url}))
+
+    def setOptions(self, options):
+        self.write.emit(json.dumps({"type":"set_options", "options":options}))
+
+    def showOption(self, id):
+        self.write.emit(json.dumps({"type":"show_option", "id":id}))
+
+    def processTextMessage(self,  raw):
         if (self.clientConnection):
-            print("Received <%s>" % message)
+            msg = json.loads(raw)
+            print("Received <%s>" % msg)
+            self.response_queue.put(msg["id"])
             #self.clientConnection.sendTextMessage(message)
 
     #def processBinaryMessage(self,  message):

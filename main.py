@@ -26,7 +26,7 @@ from audiorecorder import AudioRecorder
 from flask_server import tablet_webserver
 
 # NEEDS TO BE IMPORTED *AFTER* tablet_webserver
-# as new routes will be added to the Flask app for each activity
+# as new routes might be added to the Flask app for each activity
 from supervisor import Supervisor
 
 if __name__ == "__main__":
@@ -113,13 +113,13 @@ if __name__ == "__main__":
     supervisor_thread.start()
 
     if not args.no_tablet:
-        tablet_webserver.ws_ip = supervisor.tablet.WS_IP
-        tablet_webserver.ws_port = supervisor.tablet.WS_PORT
+        tablet_webserver.ws_ip = bridge.tablet.WS_IP
+        tablet_webserver.ws_port = bridge.tablet.WS_PORT
 
         bridge.setTabletUrl("http://%s:%s/" % (get_ip(), port))
 
-        # share the supervisor's cmd_queue with the tablet Flask server
-        tablet_webserver.cmd_queue = supervisor.cmd_queue
+        ## share the supervisor's cmd_queue with the tablet Flask server
+        #tablet_webserver.cmd_queue = supervisor.cmd_queue
 
     # share the supervisor's cmd_queue with naoqi bridge
     bridge.cmd_queue = supervisor.cmd_queue

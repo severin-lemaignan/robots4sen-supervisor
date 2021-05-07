@@ -46,11 +46,11 @@ class Story:
 
         if os.path.exists(processed_filename):
             with open(processed_filename) as txt:
-                return txt.readlines()
+                return [l.rstrip() for l in txt.readlines()]
         else:
             logger.warning("Unprocessed Lunii story: %s. Using fallback story." % audio_id)
             with open(fallback_filename) as txt:
-                return txt.readlines()
+                return [l.rstrip() for l in txt.readlines()]
 
     def next(self, id=None):
 

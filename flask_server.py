@@ -14,20 +14,26 @@ tablet_webserver.cmd_queue = None
 def home_screen():
 
     return render_template('index.html',
+                        options = {},
                         ws_server_ip = tablet_webserver.ws_ip,
                         ws_server_port = tablet_webserver.ws_port)
 
 @tablet_webserver.route('/activities')
 def activities():
 
-    return render_template('activities.html',
+    options = {"music": {"img":"images/music.svg", 
+                         "label":"Music"}
+              }
+    return render_template('index.html',
+                        options = options,
                         ws_server_ip = tablet_webserver.ws_ip,
                         ws_server_port = tablet_webserver.ws_port)
 
 @tablet_webserver.route('/waiting')
 def waiting():
 
-    return render_template('waiting.html',
+    return render_template('index.html',
+                        options = {},
                         ws_server_ip = tablet_webserver.ws_ip,
                         ws_server_port = tablet_webserver.ws_port)
 

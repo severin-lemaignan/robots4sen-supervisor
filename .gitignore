@@ -2,7 +2,6 @@ logs/
 build/
 *.pro.user
 *.pyc
-*.ogg
 *.user
 *.bmp
 *.mp3

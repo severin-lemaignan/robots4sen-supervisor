@@ -136,7 +136,7 @@ Item {
 
             GridView {
                     id:animations
-                    height: parent.height/2
+                    height: parent.height/4
                     anchors.left: parent.left
                     anchors.leftMargin: 50
                     anchors.right: parent.right
@@ -155,6 +155,33 @@ Item {
                             onPressedChanged: {
                                         if (pressed) {
                                             naoqi.request_behaviour(action);
+                                        }
+                            }
+
+                    }
+            }
+
+            GridView {
+                    id:activities
+                    height: parent.height/4
+                    anchors.left: parent.left
+                    anchors.leftMargin: 50
+                    anchors.right: parent.right
+                    anchors.rightMargin: 50
+                    anchors.top: animations.bottom
+                    anchors.topMargin: 50
+                    model : list_activities
+                    cellHeight: parent.width * 0.2
+                    cellWidth: cellHeight
+
+                    delegate: IconButton{
+                            height:gestures.cellHeight * 0.8
+                            noborder:true
+                            source:image //we use this name in ListModel
+                            label: action
+                            onPressedChanged: {
+                                        if (pressed) {
+                                            naoqi.request_activity(action);
                                         }
                             }
 
@@ -215,6 +242,16 @@ Item {
                             image: "res/robot-love-outline.svg"
                     }
             }
+
+            ListModel {
+
+                    id: list_activities
+                    ListElement {
+                            action: "stories"
+                            image: "res/robot-angry-outline.svg"
+                    }
+            }
+
 
     }
 

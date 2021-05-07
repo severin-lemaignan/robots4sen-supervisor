@@ -1,0 +1,39 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 4em; /* currently ems cause chrome bug misinterpreting rems on body element */
+    line-height: 1.6;
+    font-weight: 600;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #222; 
+
+    background-color: #252423;
+}
+
+.container {
+    padding: 0px 10% 0px 10%;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+
+    background-color: #FD940A;
+    background-image: radial-gradient(circle, #F9A72B 0%, #FA9026 70%, #FB6C1F 100%);
+}
+
+.col {
+    flex: 1;
+}
+
+.square {
+    opacity: 0;
+}
+
+figure>img {
+    width:100%;
+}
+
+figcaption {
+    text-align: center;
+}

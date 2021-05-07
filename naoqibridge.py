@@ -1,8 +1,9 @@
 
 import logging;logger = logging.getLogger("robots.naoqibridge")
 
+import json
 from Queue import Queue
-
+import re
 import time
 
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
@@ -11,6 +12,8 @@ import qi
 
 from constants import *
 from csv_logging import create_csv_logger
+
+from websocketserver import TabletWebSocketServer
 
 people_logger = create_csv_logger("logs/people.csv")
 
@@ -253,6 +256,10 @@ class NaoqiBridge(QObject):
         if self._with_robot:
             self.connectToRobot()
 
+        # creates the websocket server to control the tablet content.
+        # note that this server *must* run from the main thread (eg, the Qt app thread)
+        self.tablet = TabletWebSocketServer()
+
         # cmd_queue is set in main.py to point to the supervisor cmd_queue
         self.cmd_queue = None
 
@@ -480,6 +487,15 @@ class NaoqiBridge(QObject):
         logging.debug("Running behaviour <%s>" % behaviour)
         self.albehaviours.startBehavior(behaviour)
 
+    @Slot(str)
+    def request_activity(self, activity):
+        """
+        Argument is one of the available installed behaviour.
+        """
+        
+        self.cmd_queue.put((CTRL, ACTIVITY, activity))
+
+
     @Slot()
     def getBehaviours(self):
         if not self._with_robot:
@@ -553,10 +569,22 @@ class NaoqiBridge(QObject):
         return qi.async(self.altracker.lookAt, [0.2, 0, 0], 0.5, False) # pos, fraction speed, whole body
 
 
+    def extract_options(self, raw):
+        option_re = r'\\option=(.*?)\\'
+        text = re.sub(option_re,"", raw)
+        options = re.findall(option_re,raw)
+        options = [json.loads(o) for o in options]
+        return text, options
+
     @Slot(str)
     def say(self, text):
         """Returns a future on the 'say' action
         """
+
+        text, options = self.extract_options(text)
+        if options:
+            self.tablet.setOptions(options)
+
         if not self._with_robot:
             logger.warning("MOCK ROBOT: say: %s" % text)
             return MockFuture()

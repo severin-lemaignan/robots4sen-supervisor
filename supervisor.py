@@ -10,7 +10,6 @@ from Queue import Queue, Empty
 
 from PySide2.QtCore import QUrl, QObject
 
-from websocketserver import TabletWebSocketServer
 
 from constants import *
 
@@ -29,10 +28,6 @@ class Supervisor(QObject):
         self.cmd_queue = Queue()
 
         self.bridge = bridge
-
-        # creates the websocket server to control the tablet content.
-        # note that this server *must* run from the main thread (eg, the Qt app thread)
-        self.tablet = TabletWebSocketServer()
 
         self.activity = None
 
@@ -56,7 +51,7 @@ class Supervisor(QObject):
 
         logger.info("GOT A %s CMD: %s (%s)" % (source, cmd, args))
         action_logger.info((source, cmd, args))
-
+        
         if source == CTRL:
             if cmd == SOCIAL_GESTURE:
                 self.bridge.animate(args)
@@ -69,14 +64,16 @@ class Supervisor(QObject):
                     self.bridge.stop_tracking()
                 else:
                     self.bridge.track(args)
+            elif cmd == ACTIVITY:
+                    if args == "stories":
+                        self.activity = stories.get_activity()
+                        logger.info("Activity <%s> starting" % self.activity)
+                        action_logger.info((self.activity, RUNNING))
+                        self.activity.start(self.bridge)
             else:
                 logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
         elif source == TABLET:
-            if cmd == STORIES:
-                self.activity = stories.get_activity()
-                logger.info("Activity <%s> starting" % self.activity)
-                action_logger.info((self.activity, RUNNING))
-                self.activity.start(self.tablet, self.bridge)
+            pass
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
 

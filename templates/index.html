@@ -1,36 +1,179 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
+
         <meta charset="utf-8">
+        <title>Pepper tablet</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="/static/style.css">
+
+        <link href="/static/css/fonts.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="/static/css/normalize.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/shapes.css">
+
+        <link rel="icon" type="image/png" href="/static/images/favicon.png">
+
+        <script src="/static/js/anime.min.js"></script>
+        <script src="/static/js/jquery-3.6.0.min.js"></script>
     </head>
-
     <body>
-        <div id="main" class="centered">
-            <h1>Hello!</h1>
 
-
-            <div class="centered">
-                <a href="activities"><button>Activities</button></a>
-            </div>
+        <div id="options_container" class="container">
+            <div class="col"></div>
+            <div class="col"></div>
         </div>
 
         <script>
+
+            function popOut(el) {
+                anime({
+                    targets: el,
+                    //translateX: 250,
+                    scale: 2,
+                    opacity: {
+                        value: 1,
+                        duration: 200
+                    },
+                    easing: 'easeOutElastic',
+                    duration: 1000
+                });
+                anime({
+                    targets: ".container",
+                    //translateX: 250,
+                    opacity: {
+                        value: 0
+                    },
+                    //rotate: '1turn',
+                    duration: 1000,
+                    delay:1000,
+
+                    complete: function(anim) {
+                        send(el.id);
+                    }
+                });
+
+            };
+
+            function show(el) {
+                anime({
+                    targets: el,
+                    //translateX: 250,
+                    opacity: 0.7,
+                    easing: 'easeOutQuad',
+                    duration: 5000
+                });
+            };
+
+            function hideAll() {
+
+                anime({
+                    targets: ".popout",
+                    //translateX: 250,
+                    scale: 0,
+                    opacity: {
+                        value: 0
+                    },
+                    //rotate: '1turn',
+                    easing: 'easeInElastic',
+                    duration: 1000
+                });
+                anime({
+                    targets: ".container",
+                    //translateX: 250,
+                    opacity: {
+                        value: 0
+                    },
+                    //rotate: '1turn',
+                    duration: 2000,
+                    delay:850
+                });
+            };
+
             // Create WebSocket connection.
             const socket = new WebSocket('ws://{{ ws_server_ip }}:{{ ws_server_port }}');
 
             // Connection opened
             //socket.addEventListener('open', function (event) {
-            //    socket.send('helo');
-            //});
+                //    socket.send('helo');
+                //});
+
+
+            function send(id) {
+                var msg = {
+                    type: "choice",
+                    id: id
+                };
+
+                console.log(JSON.stringify(msg));
+                socket.send(JSON.stringify(msg));
+            }
 
             // Listen for messages
             socket.addEventListener('message', function (event) {
-                console.log('Message from robotCtrl. Going to: ', event.data);
-                location.href = event.data;
-            });
-        </script>
+                console.log('Message from robotCtrl: ', event.data);
+                var msg = JSON.parse(event.data);
+                switch(msg.type) {
 
+                    // redirect to a different page
+                    case "redirect":
+                        location.href = msg.url;
+                        break;
+
+                    // creates one 'icon' per option
+                    case "set_options":
+
+                        $("#options_container").empty()
+
+                        $("<div class=\"col\">").appendTo("#options_container");
+
+                        for (let i = 0; i < msg.options.length; i++) {
+                            var option = msg.options[i];
+
+                            var col = $("<div class=\"col\">");
+                            var fig = $("<figure id=\"" + option.id + "\" class=\"square popout\">");
+                            var img = $("<img src=\"/static/" + option.img + "\" />");
+                            var figcaption = $("<figcaption>" + option.label + "</figcaption>");
+
+                            img.appendTo(fig);
+                            figcaption.appendTo(fig);
+                            fig.appendTo(col);
+                            col.appendTo("#options_container");
+                        }
+
+                        $("<div class=\"col\">").appendTo("#options_container");
+
+                        anime({
+                            targets: ".container",
+                            opacity: 1,
+                            duration: 1000,
+
+                        });
+
+                         anime({
+                             targets: ".popout",
+                             opacity: 0.7,
+                             delay: anime.stagger(500, {start: 2000}),
+                             easing: 'easeOutQuad',
+                             duration: 2000
+
+                         });
+
+                        $(".popout").click(function () {popOut(this);});
+                        break;
+
+                    case "show_option":
+                        show($(msg.id)[0]);
+                        break;
+
+                    case "debug":
+                        console.log("DEBUG MSG FROM robotCtrl: " + msg.msg);
+                        break;
+                }
+            });
+
+        </script>
     </body>
 </html>
