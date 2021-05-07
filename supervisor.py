@@ -41,6 +41,7 @@ class Supervisor(QObject):
                     logger.info("Activity <%s> completed" % self.activity)
                     action_logger.info((self.activity, status))
                     self.activity = None
+                    self.bridge.tablet.default()
 
     def process_queue(self):
 

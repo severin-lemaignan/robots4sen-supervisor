@@ -31,7 +31,6 @@
             function popOut(el) {
                 anime({
                     targets: el,
-                    //translateX: 250,
                     scale: 2,
                     opacity: {
                         value: 1,
@@ -42,14 +41,9 @@
                 });
                 anime({
                     targets: ".container",
-                    //translateX: 250,
-                    opacity: {
-                        value: 0
-                    },
-                    //rotate: '1turn',
+                    opacity: 0,
                     duration: 1000,
                     delay:1000,
-
                     complete: function(anim) {
                         send(el.id);
                     }
@@ -64,31 +58,6 @@
                     opacity: 0.7,
                     easing: 'easeOutQuad',
                     duration: 5000
-                });
-            };
-
-            function hideAll() {
-
-                anime({
-                    targets: ".popout",
-                    //translateX: 250,
-                    scale: 0,
-                    opacity: {
-                        value: 0
-                    },
-                    //rotate: '1turn',
-                    easing: 'easeInElastic',
-                    duration: 1000
-                });
-                anime({
-                    targets: ".container",
-                    //translateX: 250,
-                    opacity: {
-                        value: 0
-                    },
-                    //rotate: '1turn',
-                    duration: 2000,
-                    delay:850
                 });
             };
 
@@ -170,6 +139,39 @@
 
                     case "debug":
                         console.log("DEBUG MSG FROM robotCtrl: " + msg.msg);
+                        break;
+
+                    case "default":
+
+                        $("#options_container").empty()
+
+                        $("<div class=\"col\">").appendTo("#options_container");
+
+                        var col = $("<div class=\"col\">");
+                        var img = $("<img id=\"default\" class=\"wavy hand\" src=\"/static/images/hand.svg\" />");
+
+                        img.appendTo(col);
+                        col.appendTo("#options_container");
+
+                        $("<div class=\"col\">").appendTo("#options_container");
+
+                        anime({
+                            targets: ".container",
+                            opacity: 1,
+                            duration: 1000,
+
+                        });
+
+                         anime({
+                             targets: ".wavy.hand",
+                             rotate:[-30,30],
+                             direction: "alternate",
+                             loop: true,
+                             easing: 'easeInOutSine',
+                             duration: 2000
+                         });
+
+                        $(".wavy.hand").click(function () {popOut(this);});
                         break;
                 }
             });

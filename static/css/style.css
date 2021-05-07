@@ -17,6 +17,7 @@ body {
     display: flex;
     height: 100vh;
     align-items: center;
+    justify-content: center;
 
     background-color: #FD940A;
     background-image: radial-gradient(circle, #F9A72B 0%, #FA9026 70%, #FB6C1F 100%);
@@ -24,6 +25,7 @@ body {
 
 .col {
     flex: 1;
+    text-align:center;
 }
 
 .square {
@@ -36,4 +38,12 @@ figure>img {
 
 figcaption {
     text-align: center;
+}
+
+.wavy.hand {
+  position: relative;
+  opacity:0.5;
+  width: 20vh;
+  height: 20vh;
+  transform-origin: 50% 100%;
 }

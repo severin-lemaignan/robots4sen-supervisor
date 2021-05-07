@@ -54,6 +54,8 @@ class TabletWebSocketServer(QObject):
         logger.info("Tablet (re-)connecting")
         self.tablet = self.clientConnection
 
+        self.default()
+
     
     def sendMsg(self, msg):
         if self.tablet:
@@ -61,6 +63,10 @@ class TabletWebSocketServer(QObject):
         else:
             logger.warning("Tablet not yet connected. Msg <%s> *not* sent." % msg)
 
+
+    def default(self):
+        # set the default 'wavy hand' animation
+        self.write.emit(json.dumps({"type":"default"}))
 
     def debug(self, msg):
         self.write.emit(json.dumps({"type":"debug", "msg":msg}))
