@@ -250,6 +250,10 @@ Item {
                             action: "stories"
                             image: "res/robot-angry-outline.svg"
                     }
+                    ListElement {
+                            action: "all_activities"
+                            image: "res/robot-angry-outline.svg"
+                    }
             }
 
 

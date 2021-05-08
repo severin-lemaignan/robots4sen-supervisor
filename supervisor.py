@@ -16,6 +16,7 @@ from constants import *
 ###########################################
 # ACTIVITIES
 from activities.stories import activity as stories
+from activities.mood_board import activity as moodboard
 
 ###########################################
 
@@ -71,10 +72,19 @@ class Supervisor(QObject):
                         logger.info("Activity <%s> starting" % self.activity)
                         action_logger.info((self.activity, RUNNING))
                         self.activity.start(self.bridge)
+                    elif args == "all_activities":
+                        self.activity = moodboard.get_activity()
+                        logger.info("Activity <%s> starting" % self.activity)
+                        action_logger.info((self.activity, RUNNING))
+                        self.activity.start(self.bridge, mood=None)
+
             else:
                 logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
         elif source == TABLET:
-            pass
+            if cmd == ALL:
+                pass
+            else:
+                logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
 
