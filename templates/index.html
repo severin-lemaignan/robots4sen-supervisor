@@ -94,7 +94,6 @@
                     // creates one 'icon' per option
                     case "set_options":
 
-                        $("#options_container").empty()
 
                         $("<div class=\"col\">").appendTo("#options_container");
 
@@ -131,6 +130,10 @@
                          });
 
                         $(".popout").click(function () {popOut(this);});
+                        break;
+
+                    case "clear_options":
+                        $("#options_container").empty()
                         break;
 
                     case "show_option":

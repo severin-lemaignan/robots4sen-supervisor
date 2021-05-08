@@ -74,6 +74,9 @@ class TabletWebSocketServer(QObject):
     def setUrl(self, url):
         self.write.emit(json.dumps({"type":"redirect", "url":url}))
 
+    def clearOptions(self):
+        self.write.emit(json.dumps({"type":"clear_options"}))
+
     def setOptions(self, options):
         self.write.emit(json.dumps({"type":"set_options", "options":options}))
 

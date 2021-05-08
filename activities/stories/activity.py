@@ -38,6 +38,7 @@ class StoryActivity:
 
         # TODO: need to improve setUrl to ensure the page is fully loaded
         self.status = RUNNING
+        self.robot.tablet.clearOptions()
         self.robot.say(get_dialogue("story_prompt")).wait()
         time.sleep(1)
         self.robot.tablet.debug("activity/stories")
