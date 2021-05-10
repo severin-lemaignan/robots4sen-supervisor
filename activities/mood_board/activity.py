@@ -62,7 +62,6 @@ class MoodBoardActivity:
 
         logger.info("Waiting for mood...")
 
-        mood = None
         while self.response_queue.empty():
             yield RUNNING
         mood = self.response_queue.get()["id"]
@@ -81,7 +80,8 @@ class MoodBoardActivity:
         ### OFFER ACTIVITIES BASED ON MOOD
 
         sentences = [
-                'Do you feel like listening to music?\\option={"id":"music","img":"images/music.svg","label":"Music"}\\',
+                'Do you feel like listening to a story?\\option={"id":"%s","img":"images/story.svg","label":"Story"}\\' % STORY,
+                'or some music?\\option={"id":"music","img":"images/music.svg","label":"Music"}\\',
                 'or maybe I could do a fun dance?\\option={"id":"fun_dance","img":"images/party.svg","label":"Fun dance"}\\']
 
         for s in sentences:
@@ -93,7 +93,7 @@ class MoodBoardActivity:
         ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
 
         logger.info("Waiting for action selection...")
-        action = None
+
         while self.response_queue.empty(): 
             yield RUNNING
         
@@ -101,6 +101,10 @@ class MoodBoardActivity:
 
         logger.info("Got action: %s" % action)
         self.robot.tablet.debug("Got action: %s" % action)
+
+        if action == STORY:
+            self.cmd_queue.put((TABLET, ACTIVITY, STORY))
+
 
 
     def tick(self):

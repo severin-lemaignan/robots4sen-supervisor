@@ -85,7 +85,7 @@ class Supervisor(QObject):
             action_logger.info((self.activity, RUNNING))
 
         elif cmd == ACTIVITY:
-                if args == "stories":
+                if args == STORY:
                     self.activity = stories.get_activity()
                     logger.info("Activity <%s> starting" % self.activity)
                     self.activity.start(self.bridge, self.cmd_queue)
