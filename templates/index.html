@@ -77,7 +77,7 @@
                     id: id
                 };
 
-                console.log(JSON.stringify(msg));
+                console.log("Sending back message to robot ctrl: " + JSON.stringify(msg));
                 socket.send(JSON.stringify(msg));
             }
 
@@ -86,6 +86,11 @@
                 console.log('Message from robotCtrl: ', event.data);
                 var msg = JSON.parse(event.data);
                 switch(msg.type) {
+
+                    case "helo":
+                        console.log("Sending back 'helo'");
+                        socket.send(JSON.stringify('helo'));
+                        break;
 
                     // redirect to a different page
                     case "redirect":

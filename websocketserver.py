@@ -42,20 +42,23 @@ class TabletWebSocketServer(QObject):
 
         # contains the socket to the tablet, once it connects
         self.tablet = None
+        self.is_connected = False
 
+    def isConnected(self):
+        return self.is_connected
 
     def onNewConnection(self):
-        self.clientConnection = self.server.nextPendingConnection()
-        self.clientConnection.textMessageReceived.connect(self.processTextMessage)
+        if self.tablet:
+            logger.warning("Attempting tablet connection, but I am already connected to a tablet!")
+            logger.warning("...attempting to close previous socket")
+            self.socketDisconnected()
 
-        #self.clientConnection.binaryMessageReceived.connect(self.processBinaryMessage)
-        self.clientConnection.disconnected.connect(self.socketDisconnected)
+        self.tablet = self.server.nextPendingConnection()
+        self.tablet.textMessageReceived.connect(self.processTextMessage)
+        self.tablet.disconnected.connect(self.socketDisconnected)
 
-        logger.info("Tablet (re-)connecting")
-        self.tablet = self.clientConnection
-
-        self.default()
-
+        logger.info("Trying to connect to tablet...")
+        self.sendMsg(json.dumps({"type":"helo"}))
     
     def sendMsg(self, msg):
         if self.tablet:
@@ -84,22 +87,24 @@ class TabletWebSocketServer(QObject):
         self.write.emit(json.dumps({"type":"show_option", "id":id}))
 
     def processTextMessage(self,  raw):
-        if (self.clientConnection):
-            msg = json.loads(raw)
-            logger.debug("Received <%s>" % msg)
-            if not self.response_queue.empty():
-                logger.warning("Tablet's response queue not empty! skipping the last mesage (%s)" % msg)
-            else:
-                self.response_queue.put(msg["id"])
-            #self.clientConnection.sendTextMessage(message)
 
-    #def processBinaryMessage(self,  message):
-    #    if (self.clientConnection):
-    #        self.clientConnection.sendBinaryMessage(message)
+        if (self.tablet):
+            msg = json.loads(raw)
+
+            if msg == "helo":
+                logger.info("Tablet (re-)connected (port: %s)" % self.tablet.peerPort())
+                self.is_connected = True
+            else:
+                logger.debug("Received [port %s]: <%s>" % (self.tablet.peerPort(), msg))
+                if not self.response_queue.empty():
+                    logger.warning("Tablet's response queue not empty! skipping the last mesage (%s)" % msg)
+                else:
+                    self.response_queue.put(msg)
 
     def socketDisconnected(self):
-        if (self.clientConnection):
+        if (self.tablet):
+            self.tablet.deleteLater() # tell Qt to destroy the underlying Qt object
             self.tablet = None
-            self.clientConnection.deleteLater()
+            self.is_connected = False
 
 
