@@ -23,95 +23,94 @@ class StoryActivity:
 
         self.story = Story("static/stories/susanne-and-ben/story.json")
 
-        self.status = STOPPED
-        self.progress = 0
-
         self.current_speech_action = None
 
 
     def __str__(self):
         return "Story telling"
 
-    def start(self, robot):
+    def start(self, robot, cmd_queue):
 
         self.robot = robot
+        self.cmd_queue = cmd_queue
+        self.response_queue = self.robot.tablet.response_queue
 
-        # TODO: need to improve setUrl to ensure the page is fully loaded
-        self.status = RUNNING
+        self.robot.tablet.debug("activity/stories")
+
+        # self._behaviour is a generator returning the current activity status;
+        # self.tick() (called by the supervisor) will progress through it
+        self._behaviour = self.behaviour()
+
+    def behaviour(self):
+
+        ####################################################################
+        ### ASK FOR MOOD
+ 
         self.robot.tablet.clearOptions()
         self.robot.say(get_dialogue("story_prompt")).wait()
-        time.sleep(1)
-        self.robot.tablet.debug("activity/stories")
-        #self.tablet.setUrl("/activity/stories")
-        #time.sleep(1)
+        yield RUNNING
 
-        self.story_txt = []
-        self.step = 0
-
-        # this start the story building tree
-        self.next(None)
-
-    def tick(self):
-
-        #logger.info("Story progressing nicely. %s%% done" % self.progress)
-        #self.progress+= 10
         
-        if self.story_txt:
-            
-            if self.step == len(self.story_txt): # story finished!
-                logger.info("STORY FINISHED")
-                self.status = STOPPED
-                time.sleep(1)
-                self.robot.say(get_dialogue("story_end")).wait()
-                time.sleep(1)
-            else:
-                sentence = self.story_txt[self.step]
-                logger.info("STORY [%s/%s]: %s" % (self.step + 1, len(self.story_txt), sentence))
-                self.robot.say(sentence).wait()
-                self.step += 1
+        ####################################################################
+        ### START THE STORY-BUILDING TREE
 
-        return self.status
+        txt, actions = self.story.next()
 
-    def next(self, action):
+        while len(actions) > 1 \
+              or len(txt) == 1: # Lunii confirmation step -- skip it
 
-        # if the robot is still speaking, wait until it is done
-        if self.current_speech_action and \
-           not self.current_speech_action.isFinished():
-               logger.warning("Still speaking... waiting for the sentence to finish...")
-               self.current_speech_action.wait()
+            if len(actions) == 1: # Lunii confirmation step -- skip it
 
-        txt, actions = self.story.next(action)
+                txt, actions = self.story.next(actions.keys()[0])
+                continue
 
-        if len(actions) > 1:
             labels = [v["label"] for k, v in actions.items()]
             choice_sentence = ", ".join(labels[:-1]) + " or %s" % labels[-1]
             options = [{"id":k, "label": v["label"], "img": assets_path + v["img"]} for k, v in actions.items()]
             options_text = "".join(["\\option=%s\\" % json.dumps(o) for o in options])
             self.robot.glanceAtTablet()
-            self.current_speech_action = self.robot.say("%s\\pau=500\\" % txt[0]).wait()
-            self.current_speech_action = self.robot.say("%s %s?" % (options_text, choice_sentence))
+            self.robot.tablet.clearOptions()
+            self.robot.say("%s\\pau=500\\" % txt[0]).wait()
+            yield RUNNING
+            self.robot.say("%s %s?" % (options_text, choice_sentence))
+            yield RUNNING
             
-            # blocking call: we wait until the user chose what option he/she wants
-            next_action = self.robot.tablet.response_queue.get()
+            while self.response_queue.empty():
+                yield RUNNING
+            next_action = self.response_queue.get()["id"]
 
-            return self.next(next_action)
 
-        else:
-            if len(txt) > 1: # it is a processed story, not just a confirmation
+            txt, actions = self.story.next(next_action)
 
-                time.sleep(1)
-                self.robot.say(get_dialogue("story_start")).wait()
-                time.sleep(1)
+        ####################################################################
+        ### STARTS THE STORY ITSELF
 
-                # let's start the story itself!
-                self.story_txt = txt
+        assert(len(txt) > 1) # it is a processed story, not just a confirmation
 
-                # clear the tablet
-                return None, None
+        time.sleep(1)
+        yield RUNNING
+        self.robot.say(get_dialogue("story_start")).wait()
+        yield RUNNING
+        time.sleep(1)
+        yield RUNNING
 
-            else:
-                return self.next(actions.keys()[0]) # a Lunii confirmation -- we skip those
+        for idx, sentence in enumerate(txt):
+            logger.info("STORY [%s/%s]: %s" % (idx + 1, len(txt), sentence))
+            self.robot.say(sentence).wait()
+            yield RUNNING
 
+        logger.info("STORY FINISHED")
+        time.sleep(1)
+        yield RUNNING
+        self.robot.say(get_dialogue("story_end")).wait()
+        yield RUNNING
+        time.sleep(1)
+
+    def tick(self):
+        try:
+            return next(self._behaviour)
+        except StopIteration:
+            return STOPPED
 
 story_activity = StoryActivity()
 
