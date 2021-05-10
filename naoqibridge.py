@@ -255,6 +255,10 @@ class NaoqiBridge(QObject):
 
         if self._with_robot:
             self.connectToRobot()
+        else:
+            import pyttsx3
+            self.tts_engine = pyttsx3.init()
+
 
         # creates the websocket server to control the tablet content.
         # note that this server *must* run from the main thread (eg, the Qt app thread)
@@ -587,6 +591,8 @@ class NaoqiBridge(QObject):
 
         if not self._with_robot:
             logger.warning("MOCK ROBOT: say: %s" % text)
+            self.tts_engine.say(text)
+            self.tts_engine.runAndWait()
             return MockFuture()
 
 
