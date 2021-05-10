@@ -29,6 +29,7 @@
         <script>
 
             function popOut(el) {
+                $(el).css('z-index', 10);
                 anime({
                     targets: el,
                     scale: 2,
