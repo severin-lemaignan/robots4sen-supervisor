@@ -2,8 +2,12 @@
 # utf-8
 
 import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
+#logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
 logger = logging.getLogger("robots.main")
+
+import coloredlogs
+coloredlogs.install(level=logging.DEBUG)
+
 
 import argparse
 import time

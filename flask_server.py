@@ -3,6 +3,9 @@ import json
 
 from flask import Flask, url_for,render_template
 
+import logging
+logging.getLogger("werkzeug").setLevel(logging.WARNING)
+
 from constants import *
 
 tablet_webserver = Flask(__name__)
