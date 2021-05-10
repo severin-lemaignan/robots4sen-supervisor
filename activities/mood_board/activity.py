@@ -13,7 +13,6 @@ class MoodBoardActivity:
 
     def __init__(self):
 
-        self.status = STOPPED
         self.progress = 0
 
         self.current_speech_action = None
@@ -37,22 +36,48 @@ class MoodBoardActivity:
         self.robot.tablet.clearOptions()
         self.robot.tablet.setOptions(options)
 
-    def start(self, robot, mood=None):
+    def start(self, robot, cmd_queue):
 
         self.robot = robot
+        self.cmd_queue = cmd_queue
 
-        self.status = RUNNING
         self.robot.tablet.debug("activity/mood_board")
+
+        # self._behaviour is a generator returning the current activity status;
+        # self.tick() (called by the supervisor) will progress through it
+        self._behaviour = self.behaviour()
+
+    def behaviour(self):
+
+        ####################################################################
+        ### ASK FOR MOOD
 
         self.robot.say(get_dialogue("mood_prompt")).wait()
         self.moods()
-        logger.info("[BLOCKING] Waiting for mood...")
-        mood = self.robot.tablet.response_queue.get()
+        yield RUNNING
+
+        ####################################################################
+        ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
+
+        logger.info("Waiting for mood...")
+
+        mood = None
+        while not mood: 
+            mood = self.robot.tablet.response_queue.get()
+            yield RUNNING
+
         logger.info("Got mood: %s" % mood)
         self.robot.tablet.debug("Got mood: %s" % mood)
-
         self.robot.tablet.clearOptions()
 
+        ####################################################################
+        ### PROMPT 'let do smthg'
+
+        self.robot.say(get_dialogue("mood_prompt_activities")).wait()
+        yield RUNNING
+
+        ####################################################################
+        ### OFFER ACTIVITIES BASED ON MOOD
 
         sentences = [
                 'Do you feel like listening to music?\\option={"id":"music","img":"images/music.svg","label":"Music"}\\',
@@ -61,16 +86,26 @@ class MoodBoardActivity:
         for s in sentences:
             self.robot.say(s).wait()
 
-        # blocking call: we wait until the user chose what option he/she wants
-        logger.info("[BLOCKING] Waiting for action selection...")
-        action = self.robot.tablet.response_queue.get()
+        yield RUNNING
 
-        self.status = STOPPED
+        ####################################################################
+        ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
+
+        logger.info("Waiting for action selection...")
+        action = None
+        while not action: 
+            action = self.robot.tablet.response_queue.get()
+            yield RUNNING
+
+        logger.info("Got action: %s" % action)
+        self.robot.tablet.debug("Got action: %s" % action)
+
 
     def tick(self):
-
-        return self.status
-
+        try:
+            return next(self._behaviour)
+        except StopIteration:
+            return STOPPED
 
 mood_board_activity = MoodBoardActivity()
 
