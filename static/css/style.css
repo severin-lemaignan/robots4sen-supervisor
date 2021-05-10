@@ -9,7 +9,10 @@ body {
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222; 
 
-    background-color: #252423;
+/*    background-color: #252423;*/
+
+    background-color: #FD940A;
+    background-image: radial-gradient(circle, #F9A72B 0%, #FA9026 70%, #FB6C1F 100%);
 }
 
 .container {
@@ -20,9 +23,6 @@ body {
     width:80%;
     align-items: center;
     justify-content: center;
-
-    background-color: #FD940A;
-    background-image: radial-gradient(circle, #F9A72B 0%, #FA9026 70%, #FB6C1F 100%);
 }
 
 .col {
