@@ -40,6 +40,7 @@ body {
 figure>img {
     width:100%;
     filter: drop-shadow(0 0 1vh black);
+    -webkit-filter: drop-shadow(0 0 1vh black);
 }
 
 figcaption {
