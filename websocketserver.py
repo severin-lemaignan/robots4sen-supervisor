@@ -86,8 +86,11 @@ class TabletWebSocketServer(QObject):
     def processTextMessage(self,  raw):
         if (self.clientConnection):
             msg = json.loads(raw)
-            print("Received <%s>" % msg)
-            self.response_queue.put(msg["id"])
+            logger.debug("Received <%s>" % msg)
+            if not self.response_queue.empty():
+                logger.warning("Tablet's response queue not empty! skipping the last mesage (%s)" % msg)
+            else:
+                self.response_queue.put(msg["id"])
             #self.clientConnection.sendTextMessage(message)
 
     #def processBinaryMessage(self,  message):
