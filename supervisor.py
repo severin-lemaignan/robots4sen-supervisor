@@ -15,8 +15,9 @@ from constants import *
 
 ###########################################
 # ACTIVITIES
-from activities.stories import activity as stories
+from activities.default import activity as default_activity
 from activities.mood_board import activity as moodboard
+from activities.stories import activity as stories
 
 ###########################################
 
@@ -35,6 +36,7 @@ class Supervisor(QObject):
     def run(self):
 
         while True:
+            #logger.debug("Supervisor ticking")
             self.process_queue()
             if self.activity:
                 status = self.activity.tick()
@@ -42,7 +44,13 @@ class Supervisor(QObject):
                     logger.info("Activity <%s> completed" % self.activity)
                     action_logger.info((self.activity, status))
                     self.activity = None
-                    self.bridge.tablet.default()
+
+            # if no active activity, and no activity was enqueue, fall back to the
+            # default activity (eg, the waving hand)
+            else:
+                self.activity = default_activity.get_activity()
+                self.activity.start(self.bridge, self.cmd_queue)
+
 
     def process_queue(self):
 
