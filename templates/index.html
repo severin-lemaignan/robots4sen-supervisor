@@ -168,11 +168,24 @@
 
                          anime({
                              targets: ".wavy.hand",
-                             rotate:[-30,30],
-                             direction: "alternate",
+                             rotate:[
+                                {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
+                                {easing:'easeInOutQuad', value: 30, duration: 300},
+                                {easing:'easeInOutQuad', value: -30, duration: 300},
+                                {easing:'easeInOutQuad', value: 30, duration: 300},
+                                {easing:'easeOutQuad', value: 0, duration: 150},
+                                {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
+                                {easing:'easeInOutQuad', value: 30, duration: 300},
+                                {easing:'easeInOutQuad', value: -30, duration: 300},
+                                {easing:'easeInOutQuad', value: 30, duration: 300},
+                                {easing:'easeOutQuad', value: 0, duration: 150},
+                             ],
+                             opacity:[
+                                {value: 0.5, duration: 1000},
+                                {value: 0., duration: 1000, delay:4000},
+                                {value: 0., duration: 500, delay:5000}
+                             ],
                              loop: true,
-                             easing: 'easeInOutSine',
-                             duration: 2000
                          });
 
                         $(".wavy.hand").click(function () {popOut(this);});
