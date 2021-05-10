@@ -100,9 +100,6 @@
                     // creates one 'icon' per option
                     case "set_options":
 
-
-                        //$("<div class=\"col\">").appendTo("#options_container");
-
                         for (let i = 0; i < msg.options.length; i++) {
                             var option = msg.options[i];
 
@@ -115,9 +112,8 @@
                             figcaption.appendTo(fig);
                             fig.appendTo(col);
                             col.appendTo("#options_container");
+                            $(fig).click(function () {popOut(this);});
                         }
-
-                        //$("<div class=\"col\">").appendTo("#options_container");
 
                         anime({
                             targets: ".container",
@@ -135,7 +131,6 @@
 
                          });
 
-                        $(".popout").click(function () {popOut(this);});
                         break;
 
                     case "clear_options":
