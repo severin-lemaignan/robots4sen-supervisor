@@ -51,41 +51,38 @@ class Supervisor(QObject):
         except Empty:
             return
 
-        logger.info("GOT A %s CMD: %s (%s)" % (source, cmd, args))
+        logger.debug("GOT A %s CMD: %s (%s)" % (source, cmd, args))
         action_logger.info((source, cmd, args))
         
-        if source == CTRL:
-            if cmd == SOCIAL_GESTURE:
-                self.bridge.animate(args)
-            elif cmd == BEHAVIOUR:
-                self.bridge.run_behaviour(args)
-            elif cmd == LOOK_AT:
-                self.bridge.lookAt(*args)
-            elif cmd == TRACK:
-                if not args:
-                    self.bridge.stop_tracking()
-                else:
-                    self.bridge.track(args)
-            elif cmd == ACTIVITY:
-                    if args == "stories":
-                        self.activity = stories.get_activity()
-                        logger.info("Activity <%s> starting" % self.activity)
-                        action_logger.info((self.activity, RUNNING))
-                        self.activity.start(self.bridge)
-                    elif args == "all_activities":
-                        self.activity = moodboard.get_activity()
-                        logger.info("Activity <%s> starting" % self.activity)
-                        action_logger.info((self.activity, RUNNING))
-                        self.activity.start(self.bridge, mood=None)
+        if cmd == SOCIAL_GESTURE:
+            self.bridge.animate(args)
+        elif cmd == BEHAVIOUR:
+            self.bridge.run_behaviour(args)
+        elif cmd == LOOK_AT:
+            self.bridge.lookAt(*args)
+        elif cmd == TRACK:
+            if not args:
+                self.bridge.stop_tracking()
+            else:
+                self.bridge.track(args)
+        elif cmd == MOODBOARD:
+            self.activity = moodboard.get_activity()
+            logger.info("Activity <%s> starting" % self.activity)
+            self.activity.start(self.bridge, self.cmd_queue)
+            action_logger.info((self.activity, RUNNING))
 
-            else:
-                logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
-        elif source == TABLET:
-            if cmd == ALL:
-                pass
-            else:
-                logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
+        elif cmd == ACTIVITY:
+                if args == "stories":
+                    self.activity = stories.get_activity()
+                    logger.info("Activity <%s> starting" % self.activity)
+                    self.activity.start(self.bridge, self.cmd_queue)
+                    action_logger.info((self.activity, RUNNING))
+                elif args == "all_activities":
+                    self.activity = moodboard.get_activity()
+                    logger.info("Activity <%s> starting" % self.activity)
+                    self.activity.start(self.bridge, self.cmd_queue)
+                    action_logger.info((self.activity, RUNNING))
+
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
-
 
