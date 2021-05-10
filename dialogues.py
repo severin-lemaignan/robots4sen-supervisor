@@ -9,7 +9,9 @@ DIALOGUES = {
                     "Good, good! Let's start the story"],
     "story_end": ["The story is finished! I hope you liked it.",
                   "The end. Did you like the story?"],
-    "mood_prompt": ["What do we do?",
+    "mood_prompt": ["How do you feel?",
+                   "How are you?"],
+    "mood_prompt_activities": ["What do we do?",
                    "Ok! What would you like to do?"]
     }
 
