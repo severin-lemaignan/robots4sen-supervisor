@@ -40,6 +40,7 @@ class MoodBoardActivity:
 
         self.robot = robot
         self.cmd_queue = cmd_queue
+        self.response_queue = self.robot.tablet.response_queue
 
         self.robot.tablet.debug("activity/mood_board")
 
@@ -62,9 +63,9 @@ class MoodBoardActivity:
         logger.info("Waiting for mood...")
 
         mood = None
-        while not mood: 
-            mood = self.robot.tablet.response_queue.get()
+        while self.response_queue.empty():
             yield RUNNING
+        mood = self.response_queue.get()["id"]
 
         logger.info("Got mood: %s" % mood)
         self.robot.tablet.debug("Got mood: %s" % mood)
@@ -93,9 +94,10 @@ class MoodBoardActivity:
 
         logger.info("Waiting for action selection...")
         action = None
-        while not action: 
-            action = self.robot.tablet.response_queue.get()
+        while self.response_queue.empty(): 
             yield RUNNING
+        
+        action = self.response_queue.get()["id"]
 
         logger.info("Got action: %s" % action)
         self.robot.tablet.debug("Got action: %s" % action)
