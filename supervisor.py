@@ -48,8 +48,13 @@ class Supervisor(QObject):
             # if no active activity, and no activity was enqueue, fall back to the
             # default activity (eg, the waving hand)
             else:
-                self.activity = default_activity.get_activity()
-                self.activity.start(self.bridge, self.cmd_queue)
+                if self.bridge.tablet.isConnected():
+                    logger.info("Starting default activity")
+                    self.activity = default_activity.get_activity()
+                    self.activity.start(self.bridge, self.cmd_queue)
+                else:
+                    pass
+                    #logger.warning("Waiting for Pepper's tablet to be connected")
 
 
     def process_queue(self):
