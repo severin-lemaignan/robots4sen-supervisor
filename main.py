@@ -81,15 +81,6 @@ if __name__ == "__main__":
         context = engine.rootContext()
         context.setContextProperty("naoqi", bridge)
 
-
-        # Get the path of the current directory, and then add the name
-        # of the QML file, to load it.
-        qmlFile = join(dirname(__file__), 'main.qml')
-        engine.load(abspath(qmlFile))
-
-        if not engine.rootObjects():
-            sys.exit(-1)
-
     ##################################################################
 
 
@@ -119,6 +110,13 @@ if __name__ == "__main__":
     if not args.no_control_ui:
         context.setContextProperty("naoqi_supervisor", supervisor)
 
+        # Get the path of the current directory, and then add the name
+        # of the QML file, to load it.
+        qmlFile = join(dirname(__file__), 'main.qml')
+        engine.load(abspath(qmlFile))
+
+        if not engine.rootObjects():
+            sys.exit(-1)
 
     if not args.no_tablet:
         tablet_webserver.ws_ip = bridge.tablet.WS_IP
