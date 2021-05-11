@@ -17,7 +17,7 @@ Item {
                     anchors.centerIn: parent
                     noborder: true
                     height: parent.width * 0.25
-                    onPressedChanged: {
+                    onClicked: {
                             naoqi.move("STOP", true);
                     }
             }
@@ -138,10 +138,8 @@ Item {
                             label: "interrupt"
                             visible: naoqi_supervisor.currentActivity ? true : false
 
-                            onPressedChanged: {
-                                        if (pressed) {
+                            onClicked: {
                                             naoqi_supervisor.interruptCurrentActivity();
-                                        }
                             }
 
                     }
@@ -166,10 +164,8 @@ Item {
                             noborder:true
                             source:image //we use this name in ListModel
                             label: action
-                            onPressedChanged: {
-                                        if (pressed) {
+                            onClicked: {
                                             naoqi.request_animate(action);
-                                        }
                             }
 
                     }
@@ -193,10 +189,8 @@ Item {
                             noborder:true
                             source:image //we use this name in ListModel
                             label: action.split("/")[1]
-                            onPressedChanged: {
-                                        if (pressed) {
+                            onClicked: {
                                             naoqi.request_behaviour(action);
-                                        }
                             }
 
                     }
@@ -220,10 +214,8 @@ Item {
                             noborder:true
                             source:image //we use this name in ListModel
                             label: action
-                            onPressedChanged: {
-                                        if (pressed) {
+                            onClicked: {
                                             naoqi.request_activity(action);
-                                        }
                             }
 
                     }

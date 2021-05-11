@@ -13,6 +13,8 @@ Rectangle {
     property string label: ""
 
     property alias pressed: dragArea.pressed
+    signal clicked(var mouse)
+    signal pressAndHold(var mouse)
 
     height: 70
     width: height
@@ -50,12 +52,19 @@ Rectangle {
             anchors.fill: parent
 
             drag.target: draggable ? parent:null
-            onPressed: {
+            onClicked: {
                     //console.log("Clicked!");
                     if (replicate) duplicateObject(x=mouse.x, y=mouse.y);
             }
 
+
+            Component.onCompleted: {
+                clicked.connect(parent.clicked);
+                pressAndHold.connect(parent.pressAndHold);
+            }
+
     }
+
 
     function duplicateObject(x, y) {
 

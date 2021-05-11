@@ -34,8 +34,17 @@ class People(QObject):
 
         self._people = set()
 
-    newPerson = Signal(str)
+        self.mock_id_idx = 0
+
+    newPerson = Signal(str, bool, str) # str: person id; bool: true -> auto tracked; false: manually tracked; str -> age group (child or adult)
     disappearedPerson = Signal(str)
+
+    @Slot(str)
+    def createMockPerson(self, type):
+        logger.warning("Adding a mock %s" % type)
+
+        self.mock_id_idx -= 1
+        self.newPerson.emit(str(self.mock_id_idx), False, type)
 
     def update(self):
 
@@ -55,7 +64,7 @@ class People(QObject):
 
         for id in new_ids:
             logger.debug("New person <%s>" % id)
-            self.newPerson.emit(id)
+            self.newPerson.emit(id, True, Person.UNKNOWN)
 
         for id in vanished_ids:
             logger.debug("Person <%s> disappeared" % id)
@@ -76,7 +85,7 @@ class Person(QObject):
 
         self._person_id = 0
         self._user_id = 0
-        self._location = [0., 0., 0.]
+        self._location = [3., 0., 0.]
         self._world_location = [0., 0., 0.]
         self._looking_at_robot = 0.
 
@@ -121,7 +130,7 @@ class Person(QObject):
             if age_estimate:
                 age, confidence = age_estimate
                 if confidence > 0.3:
-                    self.setage(age)
+                    self.setage(self.ADULT if age > 17 else self.CHILD)
 
 
         except RuntimeError:
@@ -145,21 +154,7 @@ class Person(QObject):
                                 )
                               )
 
-    def setage(self, age):
-
-        if age > 17:
-
-            if self._age == self.UNKNOWN or self._age == self.CHILD:
-                logger.warning("Person <%s> detected as an adult (~%s years)" % (self._person_id, age))
-                self._age = self.ADULT
-                self.age_changed.emit(self._age)
-        else:
-            if self._age == self.UNKNOWN or self._age == self.ADULT:
-                logger.warning("Person <%s> detected as a child (~%s years)" % (self._person_id, age))
-                self._age = self.CHILD
-                self.age_changed.emit(self._age)
-
-
+    @Slot(list) # the slot is used when we 'mock' users, to set their positions
     def setlocation(self, location):
         #TODO OPTIMIZATION: if new location close to prev, do not update
         if location == self._location:
@@ -205,11 +200,28 @@ class Person(QObject):
     def looking_at_robot(self):
         return self._looking_at_robot
 
+
+    def setage(self, age):
+
+        if age == self.ADULT:
+
+            if self._age == self.UNKNOWN or self._age == self.CHILD:
+                logger.warning("Person <%s> detected as an adult" % self._person_id)
+                self._age = self.ADULT
+                self.age_changed.emit(self._age)
+        else:
+            if self._age == self.UNKNOWN or self._age == self.ADULT:
+                logger.warning("Person <%s> detected as a child" % self._person_id)
+                self._age = self.CHILD
+                self.age_changed.emit(self._age)
+
+
+
     age_changed = Signal(str)
-    @Property(str, notify=age_changed)
-    def age(self):
+    def getage(self):
         return self._age
 
+    age = Property(str, getage, setage, notify=age_changed)
 
 
 class NaoqiBridge(QObject):

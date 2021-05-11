@@ -11,7 +11,6 @@ Item {
         id: stage
         anchors.fill: parent
 
-
         Rectangle {
             id: robot
             x: origin.x
@@ -64,6 +63,10 @@ Item {
             source: "res/account.svg"
             replicate: true
             duplicateOwner: stage
+
+            onClicked: {
+                    naoqi.people.createMockPerson("adult");
+            }
         }
 
         IconButton {
@@ -71,6 +74,11 @@ Item {
             source: "res/baby-face-outline.svg"
             replicate: true
             duplicateOwner: stage
+
+            onClicked: {
+                    naoqi.people.createMockPerson("child");
+            }
+
         }
 
 
@@ -95,7 +103,7 @@ Item {
     // connection with the naoqi.people object to create a new 'person' when
     // detected
 
-    signal newPerson(string person)
+    signal newPerson(string person, bool robot_tracked, string age)
 
     Component.onCompleted: {
         naoqi.people.newPerson.connect(discovery.newPerson)
@@ -104,6 +112,8 @@ Item {
     onNewPerson: {
         var cmpt = Qt.createComponent("PersonIcon.qml");
         var person = cmpt.createObject(robot, {person_id: person, 
+                                               robot_tracked: robot_tracked,
+                                               age: age,
                                                meters_to_px: meters_to_px
                                               });
         naoqi.people.disappearedPerson.connect(person.disappearedPerson)
