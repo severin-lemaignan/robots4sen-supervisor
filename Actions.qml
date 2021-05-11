@@ -108,16 +108,57 @@ Item {
             anchors.right: parent.right
             height: parent.height
 
-            GridView {
-                    id:gestures
-                    height: parent.height/2
+            Item {
+                    id: currentActivity
+                    height: parent.height/4
                     anchors.left: parent.left
                     anchors.leftMargin: 50
                     anchors.right: parent.right
                     anchors.rightMargin: 50
                     anchors.top: parent.top
+
+                    Text {
+                        id: activity_label
+                        text: "Currently doing:\n" + (naoqi_supervisor.currentActivity ? naoqi_supervisor.currentActivity : "no activity")
+                        font.pixelSize: 15/70 * parent.height
+                        anchors.left: parent.left
+                        anchors.leftMargin: 20
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    IconButton {
+                            anchors.left: activity_label.right
+                            anchors.leftMargin: 50
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            height: 100
+
+                            noborder:true
+                            source: "res/stop-circle.svg"
+                            label: "interrupt"
+                            visible: naoqi_supervisor.currentActivity ? true : false
+
+                            onPressedChanged: {
+                                        if (pressed) {
+                                            naoqi_supervisor.interruptCurrentActivity();
+                                        }
+                            }
+
+                    }
+
+
+            }
+
+            GridView {
+                    id:gestures
+                    height: parent.height/4
+                    anchors.left: parent.left
+                    anchors.leftMargin: 50
+                    anchors.right: parent.right
+                    anchors.rightMargin: 50
+                    anchors.top: currentActivity.bottom
                     model : list_gestures
-                    cellHeight: parent.width * 0.2
+                    cellHeight: parent.width * 0.12
                     cellWidth: cellHeight
 
                     delegate: IconButton{
@@ -144,7 +185,7 @@ Item {
                     anchors.top: gestures.bottom
                     anchors.topMargin: 50
                     model : list_animations
-                    cellHeight: parent.width * 0.2
+                    cellHeight: parent.width * 0.12
                     cellWidth: cellHeight
 
                     delegate: IconButton{
@@ -171,7 +212,7 @@ Item {
                     anchors.top: animations.bottom
                     anchors.topMargin: 50
                     model : list_activities
-                    cellHeight: parent.width * 0.2
+                    cellHeight: parent.width * 0.12
                     cellWidth: cellHeight
 
                     delegate: IconButton{

@@ -8,7 +8,7 @@ action_logger = create_csv_logger("logs/actions.csv")
 
 from Queue import Queue, Empty
 
-from PySide2.QtCore import QUrl, QObject
+from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property
 
 
 from constants import *
@@ -32,6 +32,20 @@ class Supervisor(QObject):
         self.bridge = bridge
 
         self.activity = None
+        self.request_interrupt = False
+    
+    isCurrentActivity_changed = Signal(str)
+    @Property(str, notify=isCurrentActivity_changed)
+    def currentActivity(self):
+        return str(self.activity) if self.activity else ""
+
+    @Slot()
+    def interruptCurrentActivity(self):
+
+        if self.activity:
+            logger.warning("Ctrl tablet requests <%s> to stop" % self.activity)
+            self.request_interrupt = True
+
 
     def run(self):
 
@@ -39,11 +53,13 @@ class Supervisor(QObject):
             #logger.debug("Supervisor ticking")
             self.process_queue()
             if self.activity:
-                status = self.activity.tick()
+                status = self.activity.tick(self.request_interrupt)
                 if status == STOPPED:
                     logger.info("Activity <%s> completed" % self.activity)
                     action_logger.info((self.activity, status))
                     self.activity = None
+                    self.request_interrupt = False
+                    self.isCurrentActivity_changed.emit(str(self.activity))
 
             # if no active activity, and no activity was enqueue, fall back to the
             # default activity (eg, the waving hand)
@@ -56,6 +72,13 @@ class Supervisor(QObject):
                     pass
                     #logger.warning("Waiting for Pepper's tablet to be connected")
 
+    def startActivity(self, activity):
+        self.activity = activity
+        logger.info("Activity <%s> starting" % self.activity)
+        self.activity.start(self.bridge, self.cmd_queue)
+        action_logger.info((self.activity, RUNNING))
+        self.isCurrentActivity_changed.emit(str(self.activity))
+
 
     def process_queue(self):
 
@@ -67,7 +90,10 @@ class Supervisor(QObject):
         logger.debug("GOT A %s CMD: %s (%s)" % (source, cmd, args))
         action_logger.info((source, cmd, args))
         
-        if cmd == SOCIAL_GESTURE:
+        if cmd == INTERRUPT:
+            if self.activity:
+                self.request_interrupt = True
+        elif cmd == SOCIAL_GESTURE:
             self.bridge.animate(args)
         elif cmd == BEHAVIOUR:
             self.bridge.run_behaviour(args)
@@ -79,22 +105,11 @@ class Supervisor(QObject):
             else:
                 self.bridge.track(args)
         elif cmd == MOODBOARD:
-            self.activity = moodboard.get_activity()
-            logger.info("Activity <%s> starting" % self.activity)
-            self.activity.start(self.bridge, self.cmd_queue)
-            action_logger.info((self.activity, RUNNING))
+            self.startActivity(moodboard.get_activity())
 
         elif cmd == ACTIVITY:
                 if args == STORY:
-                    self.activity = stories.get_activity()
-                    logger.info("Activity <%s> starting" % self.activity)
-                    self.activity.start(self.bridge, self.cmd_queue)
-                    action_logger.info((self.activity, RUNNING))
-                elif args == "all_activities":
-                    self.activity = moodboard.get_activity()
-                    logger.info("Activity <%s> starting" % self.activity)
-                    self.activity.start(self.bridge, self.cmd_queue)
-                    action_logger.info((self.activity, RUNNING))
+                    self.startActivity(stories.get_activity())
 
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 

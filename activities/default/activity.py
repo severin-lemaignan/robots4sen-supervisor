@@ -44,7 +44,7 @@ class DefaultActivity:
 
         self.cmd_queue.put((TABLET, MOODBOARD, None))
 
-    def tick(self):
+    def tick(self, interrupt_requested):
         try:
             return next(self._behaviour)
         except StopIteration:

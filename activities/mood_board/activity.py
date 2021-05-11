@@ -107,7 +107,11 @@ class MoodBoardActivity:
 
 
 
-    def tick(self):
+    def tick(self, interrupt_requested=False):
+
+        if interrupt_requested:
+            return STOPPED
+
         try:
             return next(self._behaviour)
         except StopIteration:

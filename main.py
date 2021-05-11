@@ -116,6 +116,10 @@ if __name__ == "__main__":
     supervisor_thread.setDaemon(True)
     supervisor_thread.start()
 
+    if not args.no_control_ui:
+        context.setContextProperty("naoqi_supervisor", supervisor)
+
+
     if not args.no_tablet:
         tablet_webserver.ws_ip = bridge.tablet.WS_IP
         tablet_webserver.ws_port = bridge.tablet.WS_PORT

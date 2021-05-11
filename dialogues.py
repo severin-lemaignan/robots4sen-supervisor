@@ -12,6 +12,8 @@ DIALOGUES = {
     "story_end": ["The story is finished! I hope you liked it.",
                   "The end. Did you like the story?"],
 
+    "story_interrupted": ["Alright, I stop the story."],
+
     "mood_prompt": ["Hey! Good to see you! How do you feel?",
                    "Hi! How are you?",
                    "Nice to see you! How are you?"],

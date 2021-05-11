@@ -106,7 +106,12 @@ class StoryActivity:
         yield RUNNING
         time.sleep(1)
 
-    def tick(self):
+    def tick(self, interrupt_requested=False):
+
+        if interrupt_requested:
+            self.robot.say(get_dialogue("story_interrupted")).wait()
+            return STOPPED
+
         try:
             return next(self._behaviour)
         except StopIteration:
