@@ -61,8 +61,6 @@ Item {
         IconButton {
             id: adult
             source: "res/account.svg"
-            replicate: true
-            duplicateOwner: stage
 
             onClicked: {
                     naoqi.people.createMockPerson("adult");
@@ -72,8 +70,6 @@ Item {
         IconButton {
             id: child
             source: "res/baby-face-outline.svg"
-            replicate: true
-            duplicateOwner: stage
 
             onClicked: {
                     naoqi.people.createMockPerson("child");
@@ -85,8 +81,6 @@ Item {
         IconButton {
             id: remove
             source: "res/account-off.svg"
-            replicate: true
-            duplicateOwner: stage
         }
     }
 
