@@ -31,7 +31,7 @@ Fancy that\pau=700\. "Is that why you live alone in the woods?"\pau=700\The elf 
 "Yes, that's why I live here. To be able to heal animals when they need me, and also because the mushrooms I need to cook my healing potion only grow in this forest.
 I was going to look for some when I saw you hanging around my house"\pau=700\.
 Ben is sorry, one more minute and he would have snatched the poor little elf's house\pau=700\.
-"Can I do something to be forgiven?""Well, now that you mention it... I'm a bit tired and I see that you"re carrying a basket full of mushrooms.
+"Can I do something to be forgiven?" "Well, now that you mention it... I'm a bit tired and I see that you"re carrying a basket full of mushrooms.
 Would you agree to swap it for this basket of chestnuts I've picked this morning?"\pau=700\Ben is a bit reluctant to give all his mushrooms away, but if that'll help with healing the animals, then there's no need to hesitate.
 He hands his basket of mushrooms over and takes the chestnuts instead\pau=700\.
 "Thanks a lot," says the elf. "If you ever come back here, don't hesitate to visit me, I would be delighted to welcome you".
