@@ -42,6 +42,7 @@ Item {
             }
         }
 
+        color: person.engaged ? "green" : "transparent"
         height: 0.3 * meters_to_px
         noborder: !is_tracked
         border.color: "red"

@@ -5,6 +5,7 @@ import json
 from Queue import Queue
 import re
 import time
+import math
 
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
@@ -86,6 +87,9 @@ class Person(QObject):
     ADULT = "adult"
     CHILD = "child"
 
+    ENGAGEMENT_DISTANCE = 2 #m
+    ENGAGEMENT_MIN_DURATION = 4. #sec -> number of seconds to consider a child as trying to engage with the robot
+
     def __init__(self):
         QObject.__init__(self)
 
@@ -94,6 +98,9 @@ class Person(QObject):
         self._location = [3., 0., 0.]
         self._world_location = [0., 0., 0.]
         self._looking_at_robot = 0.
+
+        self._in_engagement_zone_entry_time = None
+        self._engaged = False
 
         self._age = self.UNKNOWN
 
@@ -111,6 +118,23 @@ class Person(QObject):
 
 
     def update(self):
+
+        if self.distance() < Person.ENGAGEMENT_DISTANCE:
+            if self._in_engagement_zone_entry_time is None:
+                self._in_engagement_zone_entry_time = time.time()
+            else:
+                if not self._engaged and \
+                   time.time() - self._in_engagement_zone_entry_time > Person.ENGAGEMENT_MIN_DURATION:
+                    logger.warning("Person <%s> is engaging" % self._person_id)
+                    self._engaged = True
+                    self.engaged_changed.emit(self._engaged)
+                    self._in_engagement_zone_entry_time = None
+        else:
+            if self._engaged:
+                logger.warning("Person <%s> disengaged" % self._person_id)
+                self._engaged = False
+                self._in_engagement_zone_entry_time = None
+                self.engaged_changed.emit(self._engaged)
 
         # connected yet?
         if not almemory:
@@ -160,6 +184,10 @@ class Person(QObject):
                                 )
                               )
 
+    def distance(self):
+        x,y,z=self._location
+        return math.sqrt(x*x+y*y+z*z)
+
     @Slot(list) # the slot is used when we 'mock' users, to set their positions
     def setlocation(self, location):
         #TODO OPTIMIZATION: if new location close to prev, do not update
@@ -206,6 +234,10 @@ class Person(QObject):
     def looking_at_robot(self):
         return self._looking_at_robot
 
+    engaged_changed = Signal(bool)
+    @Property(bool, notify=engaged_changed)
+    def engaged(self):
+        return self._engaged
 
     def setage(self, age):
 
