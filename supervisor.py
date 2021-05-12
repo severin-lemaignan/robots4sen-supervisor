@@ -55,11 +55,15 @@ class Supervisor(QObject):
         while True:
             #logger.debug("Supervisor ticking")
             self.process_queue()
+            
+            logger.warning("%s people detected" % len(self.bridge.people.getpeople()))
+
             if self.activity:
 
                 evt = None
                 if self.request_interrupt:
                     evt = ActivityEvent(ActivityEvent.INTERRUPTED)
+
 
                 status = self.activity.tick(evt)
 

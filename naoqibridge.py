@@ -38,6 +38,11 @@ class People(QObject):
         self.mock_id_idx = -1
         self._mock_people = set()
 
+        self._watchdog_timer = QTimer(self)
+        self._watchdog_timer.setInterval(NaoqiBridge.PEOPLE_UPDATE_INTERVAL)
+        self._watchdog_timer.timeout.connect(self.update)
+        self._watchdog_timer.start()
+
     newPerson = Signal(str, bool, str) # str: person id; bool: true -> auto tracked; false: manually tracked; str -> age group (child or adult)
     disappearedPerson = Signal(str)
 
@@ -79,6 +84,8 @@ class People(QObject):
 
         self._people = ids
 
+    def getpeople(self):
+        return self._people
 
 class Person(QObject):
 
@@ -466,7 +473,6 @@ class NaoqiBridge(QObject):
             self._plugged = plugged
             self.isPlugged_changed.emit(self._plugged)
 
-        self.people.update()
 
 
     @Property(bool, notify=isConnected_changed)
