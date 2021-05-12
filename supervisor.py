@@ -53,17 +53,25 @@ class Supervisor(QObject):
     def run(self):
 
         while True:
-            #logger.debug("Supervisor ticking")
             self.process_queue()
             
-            logger.warning("%s people detected" % len(self.bridge.people.getpeople()))
-            logger.warning("%s people engaged" % len(self.bridge.people.getengagedpeople()))
+            #logger.debug("%s people detected" % len(self.bridge.people.getpeople()))
+            #logger.debug("%s people engaged" % len(self.bridge.people.getengagedpeople()))
 
             if self.activity:
+
+                if self.activity == default_activity.get_activity():
+                    if len(self.bridge.people.getengagedpeople()) > 0:
+                        logger.info("Someone is engaging! Start moodboard")
+                        self.activity = moodboard.get_activity()
+                        self.activity.start(self.bridge, self.cmd_queue)
+                        
 
                 evt = None
                 if self.request_interrupt:
                     evt = ActivityEvent(ActivityEvent.INTERRUPTED)
+                if len(self.bridge.people.getengagedpeople()) == 0:
+                    evt = ActivityEvent(ActivityEvent.NO_ONE_ENGAGED)
 
 
                 status = self.activity.tick(evt)

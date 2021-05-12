@@ -111,8 +111,11 @@ class MoodBoardActivity:
 
     def tick(self, evt=None):
 
-        if evt and evt.type == ActivityEvent.INTERRUPTED:
-            return STOPPED
+        if evt:
+            if evt.type == ActivityEvent.INTERRUPTED:
+                return STOPPED
+            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+                return STOPPED
 
         try:
             return next(self._behaviour)

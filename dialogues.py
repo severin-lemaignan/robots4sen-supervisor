@@ -12,7 +12,9 @@ DIALOGUES = {
     "story_end": ["The story is finished! I hope you liked it.",
                   "The end. Did you like the story?"],
 
-    "story_interrupted": ["Alright, I stop the story."],
+    "story_interrupted": ["\pau=500\Alright, I stop the story."],
+
+    "story_no_one_left": ["\pau=500\No one to listen to my story? Alright."],
 
     "mood_prompt": ["Hey! Good to see you! How do you feel?",
                    "Hi! How are you?",

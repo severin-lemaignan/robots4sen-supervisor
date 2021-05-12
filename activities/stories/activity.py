@@ -109,9 +109,13 @@ class StoryActivity:
 
     def tick(self, evt=None):
 
-        if evt and evt.type == ActivityEvent.INTERRUPTED:
-            self.robot.say(get_dialogue("story_interrupted")).wait()
-            return STOPPED
+        if evt:
+            if evt.type == ActivityEvent.INTERRUPTED:
+                self.robot.say(get_dialogue("story_interrupted")).wait()
+                return STOPPED
+            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+                self.robot.say(get_dialogue("story_no_one_left")).wait()
+                return STOPPED
 
         try:
             return next(self._behaviour)
