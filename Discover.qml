@@ -105,12 +105,17 @@ Item {
 
     onNewPerson: {
         var cmpt = Qt.createComponent("PersonIcon.qml");
-        var person = cmpt.createObject(robot, {person_id: person, 
+        var person_qml = cmpt.createObject(robot, {person_id: person, 
                                                robot_tracked: robot_tracked,
                                                age: age,
                                                meters_to_px: meters_to_px
                                               });
-        naoqi.people.disappearedPerson.connect(person.disappearedPerson)
+        if (!person_qml) {
+            console.log(cmpt.errorString());
+        }
+        else {
+            naoqi.people.disappearedPerson.connect(person_qml.disappearedPerson)
+        }
 
     }
     /////////////////////////////////////////////////////////////////////////
