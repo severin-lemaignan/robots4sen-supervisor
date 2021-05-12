@@ -180,6 +180,7 @@ class Person(QObject):
                                     self._world_location[1],
                                     self._world_location[2],
                                     self._looking_at_robot,
+                                    self._engaged,
                                     self._age
                                 )
                               )
