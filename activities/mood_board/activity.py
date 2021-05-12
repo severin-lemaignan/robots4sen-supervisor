@@ -1,3 +1,4 @@
+from events import ActivityEvent
 import logging
 
 logger = logging.getLogger("robots.activities.moodboard")
@@ -7,6 +8,7 @@ import time
 
 from constants import *
 from dialogues import get_dialogue
+from events import ActivityEvent
 
 
 class MoodBoardActivity:
@@ -107,9 +109,9 @@ class MoodBoardActivity:
 
 
 
-    def tick(self, interrupt_requested=False):
+    def tick(self, evt=None):
 
-        if interrupt_requested:
+        if evt and evt.type == ActivityEvent.INTERRUPTED:
             return STOPPED
 
         try:

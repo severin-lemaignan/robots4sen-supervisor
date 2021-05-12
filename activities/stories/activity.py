@@ -10,6 +10,7 @@ from flask.helpers import url_for
 
 from constants import *
 from dialogues import get_dialogue
+from events import ActivityEvent
 
 from flask_server import tablet_webserver
 from story_parser import Story
@@ -106,9 +107,9 @@ class StoryActivity:
         yield RUNNING
         time.sleep(1)
 
-    def tick(self, interrupt_requested=False):
+    def tick(self, evt=None):
 
-        if interrupt_requested:
+        if evt and evt.type == ActivityEvent.INTERRUPTED:
             self.robot.say(get_dialogue("story_interrupted")).wait()
             return STOPPED
 

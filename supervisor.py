@@ -1,5 +1,6 @@
 # utf-8
 
+from events import ActivityEvent
 import logging;logger = logging.getLogger("robots.supervisor")
 
 from csv_logging import create_csv_logger
@@ -12,6 +13,8 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property
 
 
 from constants import *
+
+from events import ActivityEvent
 
 ###########################################
 # ACTIVITIES
@@ -53,7 +56,13 @@ class Supervisor(QObject):
             #logger.debug("Supervisor ticking")
             self.process_queue()
             if self.activity:
-                status = self.activity.tick(self.request_interrupt)
+
+                evt = None
+                if self.request_interrupt:
+                    evt = ActivityEvent(ActivityEvent.INTERRUPTED)
+
+                status = self.activity.tick(evt)
+
                 if status == STOPPED:
                     logger.info("Activity <%s> completed" % self.activity)
                     action_logger.info((self.activity, status))
