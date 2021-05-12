@@ -34,7 +34,8 @@ class People(QObject):
 
         self._people = set()
 
-        self.mock_id_idx = 0
+        self.mock_id_idx = -1
+        self._mock_people = set()
 
     newPerson = Signal(str, bool, str) # str: person id; bool: true -> auto tracked; false: manually tracked; str -> age group (child or adult)
     disappearedPerson = Signal(str)
@@ -43,16 +44,21 @@ class People(QObject):
     def createMockPerson(self, type):
         logger.warning("Adding a mock %s" % type)
 
-        self.mock_id_idx -= 1
         self.newPerson.emit(str(self.mock_id_idx), False, type)
+        self._mock_people.add(str(self.mock_id_idx))
+
+        self.mock_id_idx -= 1
 
     def update(self):
 
         # connected yet?
         if not almemory:
+            self._people = self._mock_people
             return
 
         ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
+
+        ids = ids | self._mock_people
 
         #print("UserSession:" + str(alusersession.getOpenUserSessions()))
         #for user_id in alusersession.getOpenUserSessions():
