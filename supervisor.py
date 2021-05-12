@@ -57,6 +57,7 @@ class Supervisor(QObject):
             self.process_queue()
             
             logger.warning("%s people detected" % len(self.bridge.people.getpeople()))
+            logger.warning("%s people engaged" % len(self.bridge.people.getengagedpeople()))
 
             if self.activity:
 

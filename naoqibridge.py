@@ -30,6 +30,9 @@ class MockFuture():
 
 class People(QObject):
 
+    PEOPLE_UPDATE_INTERVAL = 200 #ms
+    PEOPLE_LOGGING_INTERVAL = 1000 #ms
+
     def __init__(self):
         QObject.__init__(self)
 
@@ -39,7 +42,7 @@ class People(QObject):
         self._mock_people = set()
 
         self._watchdog_timer = QTimer(self)
-        self._watchdog_timer.setInterval(NaoqiBridge.PEOPLE_UPDATE_INTERVAL)
+        self._watchdog_timer.setInterval(People.PEOPLE_UPDATE_INTERVAL)
         self._watchdog_timer.timeout.connect(self.update)
         self._watchdog_timer.start()
 
@@ -59,20 +62,18 @@ class People(QObject):
 
         # connected yet?
         if not almemory:
-            self._people = self._mock_people
             return
 
         ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
-
-        ids = ids | self._mock_people
 
         #print("UserSession:" + str(alusersession.getOpenUserSessions()))
         #for user_id in alusersession.getOpenUserSessions():
         #    ppid = alusersession.getPpidFromUsid(user_id)
         #    print("User <%s> -> Person <%s>" % (user_id, ppid))
 
-        new_ids = ids - self._people
-        vanished_ids = self._people - ids
+        current_ids = set([p.person_id for p in self._people])
+        new_ids = ids - current_ids
+        vanished_ids = current_ids - ids
 
         for id in new_ids:
             logger.debug("New person <%s>" % id)
@@ -82,10 +83,24 @@ class People(QObject):
             logger.debug("Person <%s> disappeared" % id)
             self.disappearedPerson.emit(id)
 
-        self._people = ids
-
     def getpeople(self):
         return self._people
+
+    def getengagedpeople(self):
+        return set([p for p in self._people if p._engaged])
+
+    def addperson(self, person):
+        logger.warning("Added person <%s>" % person.person_id)
+        self._people.add(person)
+
+    def removeperson(self, person):
+        logger.warning("Removed person <%s>" % person.person_id)
+        self._people.remove(person)
+
+# !! creating a global here !!
+# needed for each Person instance (created from QML) to add itself to the list of
+# people
+people = People()
 
 class Person(QObject):
 
@@ -114,14 +129,17 @@ class Person(QObject):
         self.visible = True
 
         self._watchdog_timer = QTimer(self)
-        self._watchdog_timer.setInterval(NaoqiBridge.PEOPLE_UPDATE_INTERVAL)
+        self._watchdog_timer.setInterval(People.PEOPLE_UPDATE_INTERVAL)
         self._watchdog_timer.timeout.connect(self.update)
         self._watchdog_timer.start()
 
         self._logging_timer = QTimer(self)
-        self._logging_timer.setInterval(NaoqiBridge.PEOPLE_LOGGING_INTERVAL)
+        self._logging_timer.setInterval(People.PEOPLE_LOGGING_INTERVAL)
         self._logging_timer.timeout.connect(self.log)
         self._logging_timer.start()
+
+
+        people.addperson(self)
 
 
     def update(self):
@@ -274,8 +292,6 @@ class NaoqiBridge(QObject):
 
     SPEAKING_RATE = 75 # %
     WATCHDOG_INTERVAL = 200 #ms
-    PEOPLE_UPDATE_INTERVAL = 200 #ms
-    PEOPLE_LOGGING_INTERVAL = 1000 #ms
 
     STOP = "STOP"
     FORWARDS = "FORWARDS"
@@ -302,7 +318,7 @@ class NaoqiBridge(QObject):
         self._plugged = False
         self._battery_level = 0.5
 
-        self._people = People()
+        self._people = people # !! using the `people` global
 
         self._watchdog_timer = QTimer(self)
         self._watchdog_timer.setInterval(NaoqiBridge.WATCHDOG_INTERVAL)
