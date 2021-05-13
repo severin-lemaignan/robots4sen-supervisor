@@ -33,6 +33,7 @@ Item {
         // and y by dragging on the screen.
         Component.onCompleted : {
             if (robot_tracked) {
+                console.log("Person <" + person.person_id + ">automatically tracked by the robot");
                 x = Qt.binding(function() {return person.x * meters_to_px;});
                 y = Qt.binding(function() {return -person.y * meters_to_px;});
             }
