@@ -409,6 +409,7 @@ class NaoqiBridge(QObject):
         logger.info("Configuring and connecting the robot's tablet to wifi network <%s>. Please wait..." % ssid)
 
         if not force and self.altablet.getWifiStatus() == "CONNECTED":
+            self.altablet.resetTablet() # clears the webbrowser cache
             logger.info("Pepper's tablet already connected. Skipping.")
             return
 
@@ -436,6 +437,7 @@ class NaoqiBridge(QObject):
             if total_time > MAX_WAIT_TIME_WIFI_CONNECTION:
                 raise RuntimeError("Impossible to connect Pepper's tablet to the wifi network <%s>. After %ssec, status is <%s>" % (ssid, MAX_WAIT_TIME_WIFI_CONNECTION, self.altablet.getWifiStatus()))
 
+        self.altablet.resetTablet() # clears the webbrowser cache
         logger.info("Pepper's tablet successfully connected.")
 
 
