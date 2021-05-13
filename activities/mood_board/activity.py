@@ -113,8 +113,10 @@ class MoodBoardActivity:
 
         if evt:
             if evt.type == ActivityEvent.INTERRUPTED:
+                logger.warning("Activity mood-board stopped: interrupt request!");
                 return STOPPED
             if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+                logger.warning("Activity mood-board stopped: no one in front of the robot!");
                 return STOPPED
 
         try:

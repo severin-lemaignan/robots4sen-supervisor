@@ -111,9 +111,11 @@ class StoryActivity:
 
         if evt:
             if evt.type == ActivityEvent.INTERRUPTED:
+                logger.warning("Activity story stopped: interrupt request!");
                 self.robot.say(get_dialogue("story_interrupted")).wait()
                 return STOPPED
             if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+                logger.warning("Activity story stopped: no one in front of the robot!");
                 self.robot.say(get_dialogue("story_no_one_left")).wait()
                 return STOPPED
 
