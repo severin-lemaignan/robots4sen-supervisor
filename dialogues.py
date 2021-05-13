@@ -21,7 +21,11 @@ DIALOGUES = {
                    "Nice to see you! How are you?"],
 
     "mood_prompt_activities": ["What do we do?",
-                   "Ok! What would you like to do?"]
+                   "Ok! What would you like to do?"],
+
+    "fun_dances_start": ["Let's dance!", 
+                         "Time to move our bodies!"],
+
     }
 
 def get_dialogue(type):

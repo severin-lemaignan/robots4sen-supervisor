@@ -21,6 +21,7 @@ from events import ActivityEvent
 from activities.default import activity as default_activity
 from activities.mood_board import activity as moodboard
 from activities.stories import activity as stories
+from activities.fun_dances import activity as fun_dances
 
 ###########################################
 
@@ -132,6 +133,9 @@ class Supervisor(QObject):
         elif cmd == ACTIVITY:
                 if args == STORY:
                     self.startActivity(stories.get_activity())
+
+                if args == FUN_DANCES:
+                    self.startActivity(fun_dances.get_activity())
 
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
