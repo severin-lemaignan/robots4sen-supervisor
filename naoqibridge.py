@@ -145,16 +145,18 @@ class Person(QObject):
 
     def update(self):
 
-        if self.distance() < Person.ENGAGEMENT_DISTANCE and self._looking_at_robot > 0.3:
-            if self._in_engagement_zone_entry_time is None:
-                self._in_engagement_zone_entry_time = time.time()
-            else:
-                if not self._engaged and \
-                   time.time() - self._in_engagement_zone_entry_time > Person.ENGAGEMENT_MIN_DURATION:
-                    logger.warning("Person <%s> is engaging" % self._person_id)
-                    self._engaged = True
-                    self.engaged_changed.emit(self._engaged)
-                    self._in_engagement_zone_entry_time = None
+        if self.distance() < Person.ENGAGEMENT_DISTANCE:
+
+            if self._looking_at_robot > 0.3:
+                if self._in_engagement_zone_entry_time is None:
+                    self._in_engagement_zone_entry_time = time.time()
+                else:
+                    if not self._engaged and \
+                    time.time() - self._in_engagement_zone_entry_time > Person.ENGAGEMENT_MIN_DURATION:
+                        logger.warning("Person <%s> is engaging" % self._person_id)
+                        self._engaged = True
+                        self.engaged_changed.emit(self._engaged)
+                        self._in_engagement_zone_entry_time = None
         else:
             if self._engaged:
                 logger.warning("Person <%s> disengaged" % self._person_id)
