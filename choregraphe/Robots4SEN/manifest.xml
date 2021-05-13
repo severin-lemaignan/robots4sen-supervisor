@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package uuid="robots4sen-brl" version="0.0.1">
+<package installOnlyAtStartup="false" version="0.0.1" uuid="robots4sen-brl">
  <names>
   <name lang="en_US">Robots4SEN</name>
  </names>
@@ -9,20 +9,21 @@
  <contents>
   <behaviorContent path="elephant">
    <nature>interactive</nature>
-   <triggerSentences/>
-   <loadingResponses/>
    <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="saxophone">
    <nature>interactive</nature>
-   <triggerSentences/>
-   <loadingResponses/>
-   <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="dance-taichi">
    <nature>interactive</nature>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="macarena">
+   <nature>interactive</nature>
+   <autonomous/>
    <permissions/>
   </behaviorContent>
  </contents>
