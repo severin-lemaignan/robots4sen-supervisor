@@ -108,3 +108,11 @@ behaviour, upload it to the robot (from the *Robot applications* panel).
 
 Next time you start the supervisor, your behaviour should be listed alongside
 the other ones (look for `Available robots4SEN behaviours` in the console).
+
+Others
+------
+
+Pepper's tablet user-agent:
+```
+Mozilla/5.0 (Linux; Android 4.0.4; ALY001LG Build/LPT-100SB) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Mobile Crosswalk/10.39.235.15 Safari/537.36
+```
