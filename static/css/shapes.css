@@ -1,12 +1,12 @@
 .square,
 .circle {
   position: relative;
-  width: 25vh;
-  height: 25vh;
+  width: 200px;
+  height: 200px;
   margin: 1px;
   /*background-color: rgba(255,255,255,0.6);*/
   border-radius: 5%;
-  padding: 1vh;
+  padding: 8px;
 }
 
 .circle {

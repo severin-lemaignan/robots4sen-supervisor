@@ -17,7 +17,7 @@
         <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
 
         <script src="/static/js/anime.min.js"></script>
-        <script src="/static/js/jquery-3.6.0.min.js"></script>
+        <script src="/static/js/jquery-1.12.4.min.js"></script>
     </head>
     <body>
 
@@ -46,7 +46,7 @@
                     duration: 1000,
                     delay:1000,
                     complete: function(anim) {
-                        send(el.id);
+                      send(el.id);
                     }
                 });
 
@@ -100,7 +100,7 @@
                     // creates one 'icon' per option
                     case "set_options":
 
-                        for (let i = 0; i < msg.options.length; i++) {
+                        for (var i = 0; i < msg.options.length; i++) {
                             var option = msg.options[i];
 
                             var col = $("<div class=\"col\">");
@@ -121,6 +121,7 @@
                             duration: 1000,
 
                         });
+
 
                          anime({
                              targets: ".popout",
@@ -182,8 +183,8 @@
                              ],
                              opacity:[
                                 {value: 0.5, duration: 1000},
-                                {value: 0., duration: 1000, delay:4000},
-                                {value: 0., duration: 500, delay:5000}
+                                {value: 0., duration: 2000, delay:4000},
+                                {value: 0., duration: 500, delay:4000}
                              ],
                              loop: true,
                          });
