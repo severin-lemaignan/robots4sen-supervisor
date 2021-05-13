@@ -100,7 +100,8 @@ class People(QObject):
 # !! creating a global here !!
 # needed for each Person instance (created from QML) to add itself to the list of
 # people
-people = People()
+# instantiated in main.py
+people = None
 
 class Person(QObject):
 
@@ -306,6 +307,8 @@ class NaoqiBridge(QObject):
     battery_changed = Signal(float)
 
     def __init__(self, args):
+        global people
+
         QObject.__init__(self)
 
         self._with_robot = not args.no_robot
@@ -318,6 +321,7 @@ class NaoqiBridge(QObject):
         self._plugged = False
         self._battery_level = 0.5
 
+        people = People()
         self._people = people # !! using the `people` global
 
         self._watchdog_timer = QTimer(self)
