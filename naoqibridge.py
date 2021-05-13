@@ -564,7 +564,7 @@ class NaoqiBridge(QObject):
             return
 
         logging.debug("Running behaviour <%s>" % behaviour)
-        self.albehaviours.startBehavior(behaviour)
+        return qi.async(self.albehaviours.runBehavior, behaviour)
 
     @Slot(str)
     def request_activity(self, activity):
