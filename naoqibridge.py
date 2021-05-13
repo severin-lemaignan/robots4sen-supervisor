@@ -172,7 +172,7 @@ class Person(QObject):
 
         try:
             self._world_location = almemory.getData("PeoplePerception/Person/%s/PositionInWorldFrame" % self._person_id)
-            local_pose = almemory.getData("PeoplePerception/Person/%s/PositionInWorldFrame" % self._person_id)
+            local_pose = almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % self._person_id)
             self.setlocation(local_pose)
 
             looking_at_robot = almemory.getData("PeoplePerception/Person/%s/LookingAtRobotScore" % self._person_id)
