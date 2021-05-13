@@ -145,7 +145,7 @@ class Person(QObject):
 
     def update(self):
 
-        if self.distance() < Person.ENGAGEMENT_DISTANCE:
+        if self.distance() < Person.ENGAGEMENT_DISTANCE and self._looking_at_robot > 0.3:
             if self._in_engagement_zone_entry_time is None:
                 self._in_engagement_zone_entry_time = time.time()
             else:
