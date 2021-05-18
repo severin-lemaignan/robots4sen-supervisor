@@ -9,7 +9,6 @@ import math
 
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
-import qi
 
 from constants import *
 from csv_logging import create_csv_logger
@@ -317,7 +316,10 @@ class NaoqiBridge(QObject):
 
         self._ip = args.ip
         self._port = str(args.port)
-        self._session = qi.Session()
+
+        if self._with_robot:
+            import qi
+            self._session = qi.Session()
 
         self._connected = False
         self._plugged = False
