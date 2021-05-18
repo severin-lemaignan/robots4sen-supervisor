@@ -141,12 +141,15 @@ class Person(QObject):
 
         people.addperson(self)
 
+    def is_mock_person(self):
+        return self._person_id < 0
+
 
     def update(self):
 
         if self.distance() < Person.ENGAGEMENT_DISTANCE:
 
-            if self._looking_at_robot > 0.3:
+            if self._looking_at_robot > 0.3 or self.is_mock_person():
                 if self._in_engagement_zone_entry_time is None:
                     self._in_engagement_zone_entry_time = time.time()
                 else:
