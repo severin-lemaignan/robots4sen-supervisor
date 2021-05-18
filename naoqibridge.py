@@ -338,8 +338,13 @@ class NaoqiBridge(QObject):
         if self._with_robot:
             self.connectToRobot()
         else:
-            import pyttsx3
-            self.tts_engine = pyttsx3.init()
+            try:
+                import pyttsx3
+                self.tts_engine = pyttsx3.init()
+            except:
+                logger.error("No speech engine installed. Install pyttsx3 to mock out speech synthesis.")
+                self.tts_engine = None
+
 
 
         # creates the websocket server to control the tablet content.
@@ -674,8 +679,9 @@ class NaoqiBridge(QObject):
 
         if not self._with_robot:
             logger.warning("MOCK ROBOT: say: %s" % text)
-            self.tts_engine.say(text)
-            self.tts_engine.runAndWait()
+            if self.tts_engine:
+                self.tts_engine.say(text)
+                self.tts_engine.runAndWait()
             return MockFuture()
 
 
