@@ -104,7 +104,7 @@ class MoodBoardActivity:
                 {"id": TIRED, "img": "images/tired.svg", "label": "Tired"},
                 {"id": SAD, "img": "images/sad.svg", "label": "Sad"},
                 {"id": ANGRY, "img": "images/angry.svg", "label": "Angry"},
-                {"id": ALL, "img": "images/flash.svg", "label": "Skip", "footer": True}
+                {"id": ALL, "img": "images/arrow.svg", "label": "Skip", "footer": True}
                 ]
 
         self.robot.tablet.clearOptions()

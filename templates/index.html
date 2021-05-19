@@ -26,6 +26,9 @@
             <div class="col"></div>
         </div>
 
+        <div id="footer">
+        </div>
+
         <script>
 
             function popOut(el) {
@@ -111,7 +114,12 @@
                             img.appendTo(fig);
                             figcaption.appendTo(fig);
                             fig.appendTo(col);
-                            col.appendTo("#options_container");
+                            if ('footer' in option && option.footer) {
+                                col.appendTo("#footer");
+                            }
+                            else {
+                                col.appendTo("#options_container");
+                            }
                             $(fig).click(function () {popOut(this);});
                         }
 
