@@ -52,9 +52,9 @@ class JokesActivity:
             self.robot.say(joke).wait()
             yield RUNNING
 
-            self.robot.say(get_dialogue("jokes_inbetween")).wait()
-            
-            yield RUNNING
+            if self.jokes:
+                self.robot.say(get_dialogue("jokes_inbetween")).wait()
+                yield RUNNING
 
         self.robot.say(get_dialogue("jokes_end")).wait()
 
