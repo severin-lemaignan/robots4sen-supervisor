@@ -84,6 +84,7 @@ class MoodBoardActivity:
         sentences = [
                 'Do you feel like listening to a story?\\option={"id":"%s","img":"images/story.svg","label":"Story"}\\' % STORY,
                 'or some music?\\option={"id":"music","img":"images/music.svg","label":"Music"}\\',
+                'or a good joke or two?\\option={"id":"%s","img":"images/joke.svg","label":"Jokes"}\\' % JOKES,
                 'or maybe I could do a fun dance?\\option={"id":"%s","img":"images/party.svg","label":"Fun dance"}\\' % FUN_DANCES]
 
         for s in sentences:
@@ -106,6 +107,8 @@ class MoodBoardActivity:
 
         if action == STORY:
             self.cmd_queue.put((TABLET, ACTIVITY, STORY))
+        elif action == JOKES:
+            self.cmd_queue.put((TABLET, ACTIVITY, JOKES))
         elif action == FUN_DANCES:
             self.cmd_queue.put((TABLET, ACTIVITY, FUN_DANCES))
 
