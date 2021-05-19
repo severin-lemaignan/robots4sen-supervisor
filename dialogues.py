@@ -3,7 +3,7 @@ import random
 DIALOGUES = {
     "story_prompt":         ["I love stories! ^startTag(estimate)Let's find one!",
                             "^startTag(enthusiatic)You want to listen to a story? Great!",
-                            "^startTag(estimate)Let see what story we can come up with...",
+                            "^startTag(think)Let see what story we can come up with...",
                             "Ok! Let me tell you a story."],
 
     "story_start":          ["Alright, let start the story.", 
@@ -18,6 +18,15 @@ DIALOGUES = {
 
     "jokes_start":          ["^startTag(excited)Joke time!",
                             "^startTag(estimate)Let me think of a good joke...\\pau=500\\"],
+
+    "jokes_inbetween":      ["^runTag(happy)Another one!\\pau=500\\",
+                             "^runTag(happy)I've got another one!\\pau=500\\",
+                             "^runTag(happy)What about that one?\\pau=500\\",
+                             "^runTag(happy)Wait, I know another one\\pau=500\\",
+                             "^runTag(happy)Ok, that one now!\\pau=500\\",
+                             "^runTag(happy)And do you know that one?\\pau=500\\",
+                             "^runTag(happy)Do you know that one?\\pau=500\\",
+                            ],
 
     "jokes_end":            ["\\pau=1000\\I love these jokes!",
                             "\\pau=900\\Hope you liked these jokes!"],
