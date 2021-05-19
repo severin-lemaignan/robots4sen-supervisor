@@ -16,7 +16,7 @@ JOKES = [
             "When you look for something, why is it always in the last place you look?\\pau=1400\\Because when you find it, you stop looking.",
             "Why did the kid cross the playground?\\pau=1400\\To get to the other slide.",
             "Why was 6 afraid of 7?\\pau=1800\\Because 7 8 9.",
-            "What is a witch’s favorite subject in school?\\pau=1300\\Spelling!",
+            "What is a witch's favorite subject in school?\\pau=1300\\Spelling!",
         ]
 
 class JokesActivity:
