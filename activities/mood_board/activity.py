@@ -5,6 +5,7 @@ logger = logging.getLogger("robots.activities.moodboard")
 
 import json
 import time
+import random
 
 from constants import *
 from dialogues import get_dialogue
@@ -12,6 +13,48 @@ from events import ActivityEvent
 
 
 class MoodBoardActivity:
+
+    ACTIVITIES = {
+            CALM_DANCE: ['do', 'a dance?\\option={"id":"%s","img":"images/calm_dance.svg","label":"Calm dance"}\\' % CALM_DANCE],
+            CALM_MUSIC: ['listen', 'some music?\\option={"id":"%s","img":"images/music.svg","label":"Music"}\\' % CALM_MUSIC],
+            CUDDLE: ['do', 'a cuddle?\\option={"id":"%s","img":"images/cuddle.svg","label":"Cuddle"}\\' % CUDDLE],
+            FUN_DANCES: ['do', 'a fun dance?\\option={"id":"%s","img":"images/party.svg","label":"Fun dance"}\\' % FUN_DANCES],
+            JOKES: ['listen', 'a good joke or two?\\option={"id":"%s","img":"images/joke.svg","label":"Jokes"}\\' % JOKES],
+            LISTENING: ['other', 'simply listen to you?\\option={"id":"%s","img":"images/speak.svg","label":"Talking"}\\' % LISTENING],
+            RELAX_SOUNDS: ['listen', 'relaxing sounds?\\option={"id":"%s","img":"images/relax.svg","label":"Sounds"}\\' % RELAX_SOUNDS],
+            ROCK_SCISSOR_PAPER: ['play', 'rock paper scissors?\\option={"id":"%s","img":"images/scissors.svg","label":"Rock Paper Scissors"}\\' % ROCK_SCISSOR_PAPER],
+            STORY: ['listen', 'a story?\\option={"id":"%s","img":"images/story.svg","label":"Story"}\\' % STORY],
+            }
+
+    MOODS_FEEDBACK = {
+            PARTYMOOD: ["Cool!", "Full of energy!", "Good, I like that!"],
+            HAPPY: ["Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
+            CONFUSED: ["Not to sure? Let see.","A bit lost? Let see.", "That's ok.", "A bit confused? That's ok.", "Let see what we can do."],
+            TIRED: ["A bit tired? Ok, let see.", "Ok, that's fine.", "Not too much energy? no worries.", "Ok, that's fine to be tired sometimes!"],
+            SAD: ["Oh, sorry to hear that you feel sad", "You feel sad? Let see what we can do.", "That's ok, let see.", "Ok, thank you for letting me know."],
+            ANGRY: ["Oh! You feel angry? Let see.", "You feel angry? Ok, thanks for telling me", "Ok, let see if we can calm down a little then", "That's ok to feel angry. Let see what we can do."],
+            }
+
+
+    MOODS_ACTIVITIES = {
+            ALL: [
+                CALM_DANCE, 
+                CALM_MUSIC, 
+                CUDDLE,
+                FUN_DANCES, 
+                JOKES, 
+                LISTENING, 
+                RELAX_SOUNDS, 
+                ROCK_SCISSOR_PAPER, 
+                STORY, 
+                ],
+            PARTYMOOD: [JOKES, FUN_DANCES, ROCK_SCISSOR_PAPER],
+            HAPPY: [JOKES, FUN_DANCES, STORY, ROCK_SCISSOR_PAPER],
+            CONFUSED: [STORY, CALM_DANCE, CALM_MUSIC, RELAX_SOUNDS, CUDDLE],
+            TIRED: [STORY, CALM_DANCE, CALM_MUSIC, RELAX_SOUNDS, CUDDLE, FUN_DANCES],
+            SAD: [STORY, CALM_DANCE, CALM_MUSIC, RELAX_SOUNDS, LISTENING, CUDDLE, JOKES],
+            ANGRY: [STORY, CALM_DANCE, CALM_MUSIC, RELAX_SOUNDS, LISTENING, CUDDLE],
+            }
 
     def __init__(self):
 
@@ -23,16 +66,45 @@ class MoodBoardActivity:
     def __str__(self):
         return "Mood board"
 
+    def make_activity_sentences(self, activities):
+        res = []
+        lastverb = None
+        for verb, activity in [self.ACTIVITIES[a] for a in activities]:
+            if not lastverb or lastverb != verb:
+                if verb == "listen":
+                    lastverb = verb
+                    if len(res) == 0:
+                        res.append("Would you like to listen to %s" % activity)
+                    else:
+                        res.append("Or do you feel like listening to %s" % activity)
+                elif verb == "do":
+                    lastverb = verb
+                    if len(res) == 0:
+                        res.append("Do you want me to do %s" % activity)
+                    else:
+                        res.append("Or I could do %s" % activity)
+                else:
+                    lastverb = None
+                    if len(res) == 0:
+                        res.append("Do you want me to %s" % activity)
+                    else:
+                        res.append("Or I could %s" % activity)
+
+            else:
+                res.append("or %s" % activity)
+
+        return res
+
     def moods(self):
 
         options = [
-                {"id": "partymood", "img": "images/partymood.svg", "label": "Party!"},
-                {"id": "happy", "img": "images/happy.svg", "label": "Happy"},
-                {"id": "confused", "img": "images/confused.svg", "label": "Not sure"},
-                {"id": "tired", "img": "images/tired.svg", "label": "Tired"},
-                {"id": "sad", "img": "images/sad.svg", "label": "Sad"},
-                {"id": "angry", "img": "images/angry.svg", "label": "Angry"},
-                {"id": "skip", "img": "images/flash.svg", "label": "Skip", "footer": True}
+                {"id": PARTYMOOD, "img": "images/partymood.svg", "label": "Party!"},
+                {"id": HAPPY, "img": "images/happy.svg", "label": "Happy"},
+                {"id": CONFUSED, "img": "images/confused.svg", "label": "Not sure"},
+                {"id": TIRED, "img": "images/tired.svg", "label": "Tired"},
+                {"id": SAD, "img": "images/sad.svg", "label": "Sad"},
+                {"id": ANGRY, "img": "images/angry.svg", "label": "Angry"},
+                {"id": ALL, "img": "images/flash.svg", "label": "Skip", "footer": True}
                 ]
 
         self.robot.tablet.clearOptions()
@@ -66,7 +138,7 @@ class MoodBoardActivity:
 
         while self.response_queue.empty():
             yield RUNNING
-        mood = self.response_queue.get()["id"]
+        mood = self.response_queue.get()["id"].encode()
 
         logger.info("Got mood: %s" % mood)
         self.robot.tablet.debug("Got mood: %s" % mood)
@@ -75,22 +147,30 @@ class MoodBoardActivity:
         ####################################################################
         ### PROMPT 'let do smthg'
 
+        if mood != ALL:
+            self.robot.say(random.choice(self.MOODS_FEEDBACK[mood])).wait()
+            yield RUNNING
+
         self.robot.say(get_dialogue("mood_prompt_activities")).wait()
         yield RUNNING
 
         ####################################################################
         ### OFFER ACTIVITIES BASED ON MOOD
 
-        sentences = [
-                'Do you feel like listening to a story?\\option={"id":"%s","img":"images/story.svg","label":"Story"}\\' % STORY,
-                'or some music?\\option={"id":"music","img":"images/music.svg","label":"Music"}\\',
-                'or a good joke or two?\\option={"id":"%s","img":"images/joke.svg","label":"Jokes"}\\' % JOKES,
-                'or maybe I could do a fun dance?\\option={"id":"%s","img":"images/party.svg","label":"Fun dance"}\\' % FUN_DANCES]
+        if mood != ALL:
+            activities = random.sample(self.MOODS_ACTIVITIES[mood], random.randint(2,4))
+        else:
+            activities = random.sample(self.MOODS_ACTIVITIES[mood], 8)
+
+        logger.info("Offering the following activities: %s" % activities)
+        sentences = self.make_activity_sentences(activities)
 
         for s in sentences:
             self.robot.say(s).wait()
+            if not self.response_queue.empty(): 
+                break
+            yield RUNNING
 
-        yield RUNNING
 
         ####################################################################
         ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
@@ -105,12 +185,7 @@ class MoodBoardActivity:
         logger.info("Got action: %s" % action)
         self.robot.tablet.debug("Got action: %s" % action)
 
-        if action == STORY:
-            self.cmd_queue.put((TABLET, ACTIVITY, STORY))
-        elif action == JOKES:
-            self.cmd_queue.put((TABLET, ACTIVITY, JOKES))
-        elif action == FUN_DANCES:
-            self.cmd_queue.put((TABLET, ACTIVITY, FUN_DANCES))
+        self.cmd_queue.put((TABLET, ACTIVITY, action))
 
 
 

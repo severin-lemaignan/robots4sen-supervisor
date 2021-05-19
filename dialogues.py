@@ -38,8 +38,10 @@ DIALOGUES = {
                             "^startTag(happy)Hi! How are you?",
                             "^startTag(happy)Nice to see you! How are you?"],
 
-    "mood_prompt_activities": ["What do we do?",
-                            "Ok! What would you like to do?"],
+
+    "mood_prompt_activities": ["What can we do?",
+                              "What should we do?",
+                              "What would you like to do?"],
 
     "fun_dances_start":     ["Let's dance!", 
                             "Time to move our bodies!"],
