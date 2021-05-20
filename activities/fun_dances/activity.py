@@ -10,6 +10,8 @@ from events import ActivityEvent
 
 class FunDancesActivity:
 
+    type = FUN_DANCES
+
     def __init__(self):
         pass
 

@@ -24,7 +24,7 @@ from activities.stories import activity as stories
 from activities.jokes import activity as jokes
 from activities.fun_dances import activity as fun_dances
 from activities.calm_music import activity as calm_music
-from activities.calm_dances import activity as calm_dance
+from activities.calm_dances import activity as calm_dances
 from activities.relax_sounds import activity as relax_sounds
 
 ###########################################
@@ -145,8 +145,8 @@ class Supervisor(QObject):
                     self.startActivity(calm_music.get_activity())
                 elif args == RELAX_SOUNDS:
                     self.startActivity(relax_sounds.get_activity())
-                elif args == CALM_DANCE:
-                    self.startActivity(calm_dance.get_activity())
+                elif args == CALM_DANCES:
+                    self.startActivity(calm_dances.get_activity())
 
 
         else:

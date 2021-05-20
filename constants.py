@@ -1,3 +1,6 @@
+YES = "yes"
+NO = "no"
+
 REQUEST = "request"
 
 # STATUS
@@ -32,7 +35,7 @@ RELAX_SOUNDS = "relaxing sounds"
 LISTENING = "listening"
 CUDDLE = "cuddle"
 ROCK_SCISSOR_PAPER = "rock-scissor-paper"
-CALM_DANCE = "calm dance"
+CALM_DANCES = "calm dances"
 
 # MOODS
 PARTYMOOD = "partymood"

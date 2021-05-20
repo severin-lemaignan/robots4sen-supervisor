@@ -1,6 +1,6 @@
 import logging
 
-logger = logging.getLogger("robots.activities.fun_dances")
+logger = logging.getLogger("robots.activities.calm_music")
 
 import random
 
@@ -8,13 +8,15 @@ from constants import *
 from dialogues import get_dialogue
 from events import ActivityEvent
 
-class FunDancesActivity:
+class CalmMusicActivity:
+
+    type = CALM_MUSIC
 
     def __init__(self):
         pass
 
     def __str__(self):
-        return "Fun dances"
+        return "Calm music"
 
     def start(self, robot, cmd_queue):
 
@@ -22,7 +24,7 @@ class FunDancesActivity:
         self.cmd_queue = cmd_queue
         self.response_queue = self.robot.tablet.response_queue
 
-        self.robot.tablet.debug("activity/fun_dances")
+        self.robot.tablet.debug("activity/calm_music")
 
         self.stop_dance = False
 
@@ -33,7 +35,7 @@ class FunDancesActivity:
     def behaviour(self):
 
         self.robot.tablet.clearOptions()
-        self.robot.say(get_dialogue("fun_dances_start")).wait()
+        self.robot.say(get_dialogue("calm_music_start")).wait()
         yield RUNNING
 
         dances = ["robots4sen-brl/saxophone",
@@ -51,11 +53,11 @@ class FunDancesActivity:
 
         if evt:
             if evt.type == ActivityEvent.INTERRUPTED:
-                logger.warning("Activity 'fun dances' stopped: interrupt request!");
+                logger.warning("Activity 'calm music' stopped: interrupt request!");
                 self.stop_dance = True
                 return STOPPED
             if evt.type == ActivityEvent.NO_ONE_ENGAGED:
-                logger.warning("Activity 'fun dances' stopped: no one in front of the robot!");
+                logger.warning("Activity 'calm music' stopped: no one in front of the robot!");
                 self.stop_dance = True
                 return STOPPED
 
@@ -64,7 +66,7 @@ class FunDancesActivity:
         except StopIteration:
             return STOPPED
 
-activity = FunDancesActivity()
+activity = CalmMusicActivity()
 
 def get_activity():
     return activity

@@ -10,6 +10,8 @@ from constants import *
 
 class DefaultActivity:
 
+    type = DEFAULT
+
     def __init__(self):
         pass
 

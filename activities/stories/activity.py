@@ -19,6 +19,8 @@ assets_path = "stories/susanne-and-ben/assets/"
 
 class StoryActivity:
 
+    type = STORY
+
     def __init__(self):
 
         self.story = Story("static/stories/susanne-and-ben/story.json")

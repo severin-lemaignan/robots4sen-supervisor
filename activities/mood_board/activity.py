@@ -14,8 +14,10 @@ from events import ActivityEvent
 
 class MoodBoardActivity:
 
+    type = MOODBOARD
+
     ACTIVITIES = {
-            CALM_DANCE: ['do', 'a dance?\\option={"id":"%s","img":"images/calm_dance.svg","label":"Calm dance"}\\' % CALM_DANCE],
+            CALM_DANCES: ['do', 'a dance?\\option={"id":"%s","img":"images/calm_dance.svg","label":"Calm dance"}\\' % CALM_DANCES],
             CALM_MUSIC: ['listen', 'some music?\\option={"id":"%s","img":"images/music.svg","label":"Music"}\\' % CALM_MUSIC],
             CUDDLE: ['do', 'a cuddle?\\option={"id":"%s","img":"images/cuddle.svg","label":"Cuddle"}\\' % CUDDLE],
             FUN_DANCES: ['do', 'a fun dance?\\option={"id":"%s","img":"images/party.svg","label":"Fun dance"}\\' % FUN_DANCES],
@@ -38,7 +40,7 @@ class MoodBoardActivity:
 
     MOODS_ACTIVITIES = {
             ALL: [
-                CALM_DANCE, 
+                CALM_DANCES, 
                 CALM_MUSIC, 
                 CUDDLE,
                 FUN_DANCES, 
@@ -50,10 +52,10 @@ class MoodBoardActivity:
                 ],
             PARTYMOOD: [JOKES, FUN_DANCES, ROCK_SCISSOR_PAPER],
             HAPPY: [JOKES, FUN_DANCES, STORY, ROCK_SCISSOR_PAPER],
-            CONFUSED: [STORY, CALM_DANCE, CALM_MUSIC, RELAX_SOUNDS, CUDDLE],
-            TIRED: [STORY, CALM_DANCE, CALM_MUSIC, RELAX_SOUNDS, CUDDLE, FUN_DANCES],
-            SAD: [STORY, CALM_DANCE, CALM_MUSIC, RELAX_SOUNDS, LISTENING, CUDDLE, JOKES],
-            ANGRY: [STORY, CALM_DANCE, CALM_MUSIC, RELAX_SOUNDS, LISTENING, CUDDLE],
+            CONFUSED: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, CUDDLE],
+            TIRED: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, CUDDLE, FUN_DANCES],
+            SAD: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, LISTENING, CUDDLE, JOKES],
+            ANGRY: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, LISTENING, CUDDLE],
             }
 
     def __init__(self):

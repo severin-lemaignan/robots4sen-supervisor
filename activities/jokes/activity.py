@@ -21,6 +21,8 @@ JOKES = [
 
 class JokesActivity:
 
+    type = JOKES
+
     def __init__(self):
         pass
 
