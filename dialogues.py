@@ -40,8 +40,20 @@ DIALOGUES = {
 
 
     "mood_prompt_activities": ["What can we do?",
+                              "So. What do you feel doing?",
+                              "Let see what we have.",
                               "What should we do?",
                               "What would you like to do?"],
+
+    "mood_prompt_continuation": ["Do you want to do something else?",
+                              "You want to continue?",
+                              "You want another activity?",
+                              "We do something else?",
+                              "Do you want to continue?"],
+
+    "mood_end":             ["Ok! How do you feel now?",
+                            "Thank you for your time! How do you feel now?",
+                            "Feel any different?"],
 
     "fun_dances_start":     ["Let's dance!", 
                             "Time to move our bodies!"],

@@ -67,9 +67,8 @@ class Supervisor(QObject):
 
                 if self.activity.type == DEFAULT:
                     if len(self.bridge.people.getengagedpeople()) > 0:
-                        logger.info("Someone is engaging! Start moodboard")
-                        self.activity = moodboard.get_activity()
-                        self.activity.start(self.bridge, self.cmd_queue)
+                        logger.warning("Someone is engaging! Start moodboard")
+                        self.startActivity(moodboard.get_activity())
 
                 evt = None
                 if self.activity.type != DEFAULT:
@@ -88,10 +87,14 @@ class Supervisor(QObject):
 
                 if status == STOPPED:
                     logger.info("Activity <%s> completed" % self.activity)
-                    action_logger.info((self.activity, status))
-                    self.activity = None
-                    self.request_interrupt = False
-                    self.isCurrentActivity_changed.emit(str(self.activity))
+                    action_logger.info((self.activity.type, status))
+                    if self.activity == moodboard.get_activity():
+                        self.activity = None
+                        self.request_interrupt = False
+                        self.isCurrentActivity_changed.emit(None)
+                    else:
+                        logger.warning("Returning to moodboard")
+                        self.startActivity(moodboard.get_activity(), True) # continuation = True
 
             # if no active activity, and no activity was enqueue, fall back to the
             # default activity (eg, the waving hand)
@@ -104,11 +107,16 @@ class Supervisor(QObject):
                     pass
                     #logger.warning("Waiting for Pepper's tablet to be connected")
 
-    def startActivity(self, activity):
+    def startActivity(self, activity, *args):
         self.activity = activity
         logger.info("Activity <%s> starting" % self.activity)
-        self.activity.start(self.bridge, self.cmd_queue)
-        action_logger.info((self.activity, RUNNING))
+
+        if args:
+            self.activity.start(self.bridge, self.cmd_queue, *args)
+        else:
+            self.activity.start(self.bridge, self.cmd_queue)
+
+        action_logger.info((self.activity.type, RUNNING))
         self.isCurrentActivity_changed.emit(str(self.activity))
 
 

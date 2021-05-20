@@ -3,7 +3,6 @@ tablet connect. This makes it possible to instruct the tablet to go to
 any webpage at any time (via `setUrl`), eg, to push content to the tablet.
 """
 
-from constants import INTERRUPT
 import logging;logger = logging.getLogger("robots.tablet_websocket")
 
 from PySide2.QtCore import QUrl, QObject, Signal, Slot
@@ -14,6 +13,7 @@ from Queue import Queue, Empty
 
 import json
 
+from constants import *
 from helpers import get_ip
 
 class TabletWebSocketServer(QObject):
@@ -96,6 +96,15 @@ class TabletWebSocketServer(QObject):
         btn = {"id": INTERRUPT, "img": "images/stop.svg", "label": "Stop", "footer": True}
 
         self.setOptions([btn])
+
+    def yesNoBtns(self):
+        btns = [
+                {"id": YES, "img": "images/yes.svg", "label": "Yes"},
+                {"id": NO, "img": "images/no.svg", "label": "No"}
+               ]
+
+        self.setOptions(btns)
+
 
     def isCancellationRequested(self):
 

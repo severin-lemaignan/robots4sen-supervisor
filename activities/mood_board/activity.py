@@ -1,7 +1,10 @@
 from events import ActivityEvent
 import logging
 
+from csv_logging import create_csv_logger
+
 logger = logging.getLogger("robots.activities.moodboard")
+mood_logger = create_csv_logger("logs/moods.csv") 
 
 import json
 import time
@@ -32,7 +35,7 @@ class MoodBoardActivity:
     MOODS_FEEDBACK = {
             PARTYMOOD: ["Cool!", "Full of energy!", "Good, I like that!"],
             HAPPY: ["Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
-            CONFUSED: ["Not to sure? Let see.","A bit lost? Let see.", "That's ok.", "A bit confused? That's ok.", "Let see what we can do."],
+            CONFUSED: ["Not too sure? Let see.","A bit lost? Let see.", "That's ok.", "A bit confused? That's ok.", "Let see what we can do."],
             TIRED: ["A bit tired? Ok, let see.", "Ok, that's fine.", "Not too much energy? no worries.", "Ok, that's fine to be tired sometimes!"],
             SAD: ["Oh, sorry to hear that you feel sad", "You feel sad? Let see what we can do.", "That's ok, let see.", "Ok, thank you for letting me know."],
             ANGRY: ["Oh! You feel angry? Let see.", "You feel angry? Ok, thanks for telling me", "Ok, let see if we can calm down a little then", "That's ok to feel angry. Let see what we can do."],
@@ -64,6 +67,8 @@ class MoodBoardActivity:
         self.progress = 0
 
         self.current_speech_action = None
+
+        self.activities_done = []
 
 
     def __str__(self):
@@ -113,7 +118,11 @@ class MoodBoardActivity:
         self.robot.tablet.clearOptions()
         self.robot.tablet.setOptions(options)
 
-    def start(self, robot, cmd_queue):
+    def start(self, robot, cmd_queue, continuation=False):
+        """
+        continuation: if True, means that mood-board is re-started at the
+        end of another activity.
+        """
 
         self.robot = robot
         self.cmd_queue = cmd_queue
@@ -123,7 +132,15 @@ class MoodBoardActivity:
 
         # self._behaviour is a generator returning the current activity status;
         # self.tick() (called by the supervisor) will progress through it
-        self._behaviour = self.behaviour()
+        if not continuation:
+
+            self.mood = None
+            self.activities_done = []
+
+            self._behaviour = self.behaviour()
+
+        else:
+            self._behaviour = self.continuation_behaviour()
 
     def behaviour(self):
 
@@ -141,17 +158,17 @@ class MoodBoardActivity:
 
         while self.response_queue.empty():
             yield RUNNING
-        mood = self.response_queue.get()["id"].encode()
+        self.mood = self.response_queue.get()["id"].encode()
 
-        logger.info("Got mood: %s" % mood)
-        self.robot.tablet.debug("Got mood: %s" % mood)
+        logger.info("Got mood: %s" % self.mood)
+        self.robot.tablet.debug("Got mood: %s" % self.mood)
         self.robot.tablet.clearAll()
 
         ####################################################################
         ### PROMPT 'let do smthg'
 
-        if mood != ALL:
-            self.robot.say(random.choice(self.MOODS_FEEDBACK[mood])).wait()
+        if self.mood != ALL:
+            self.robot.say(random.choice(self.MOODS_FEEDBACK[self.mood])).wait()
             yield RUNNING
 
         self.robot.say(get_dialogue("mood_prompt_activities")).wait()
@@ -160,10 +177,11 @@ class MoodBoardActivity:
         ####################################################################
         ### OFFER ACTIVITIES BASED ON MOOD
 
-        if mood != ALL:
-            activities = random.sample(self.MOODS_ACTIVITIES[mood], random.randint(2,4))
+        if self.mood != ALL:
+            activities = random.sample(self.MOODS_ACTIVITIES[self.mood],
+                                       random.randint(2,4))
         else:
-            activities = random.sample(self.MOODS_ACTIVITIES[mood], 8)
+            activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
 
         logger.info("Offering the following activities: %s" % activities)
         sentences = self.make_activity_sentences(activities)
@@ -188,9 +206,86 @@ class MoodBoardActivity:
         logger.info("Got action: %s" % action)
         self.robot.tablet.debug("Got action: %s" % action)
 
+        self.activities_done.append(action)
         action_logger.info((action, self.mood))
         self.cmd_queue.put((TABLET, ACTIVITY, action))
 
+    def continuation_behaviour(self):
+
+        self.robot.tablet.clearAll()
+        self.robot.tablet.yesNoBtns()
+        self.robot.say(get_dialogue("mood_prompt_continuation")).wait()
+
+        while self.response_queue.empty():
+            yield RUNNING
+        want_continue = self.response_queue.get()["id"].encode()
+
+        self.robot.tablet.clearAll()
+
+        if want_continue == YES:
+
+            ####################################################################
+            ### PROMPT 'let do smthg'
+
+            self.robot.say(get_dialogue("mood_prompt_activities")).wait()
+            yield RUNNING
+
+            ####################################################################
+            ### OFFER ACTIVITIES BASED ON MOOD
+
+            if self.mood != ALL:
+                activities = random.sample(self.MOODS_ACTIVITIES[self.mood], random.randint(2,4))
+            else:
+                activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
+
+            logger.info("Offering the following activities: %s" % activities)
+            sentences = self.make_activity_sentences(activities)
+
+            for s in sentences:
+                self.robot.say(s).wait()
+                if not self.response_queue.empty(): 
+                    break
+                yield RUNNING
+
+
+            ####################################################################
+            ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
+
+            logger.info("Waiting for action selection...")
+
+            while self.response_queue.empty(): 
+                yield RUNNING
+            
+            action = self.response_queue.get()["id"]
+
+            logger.info("Got action: %s" % action)
+            self.robot.tablet.debug("Got action: %s" % action)
+
+            self.activities_done.append(action)
+            self.cmd_queue.put((TABLET, ACTIVITY, action))
+
+        else:
+
+            ####################################################################
+            ### ASK FOR MOOD
+
+            self.robot.say(get_dialogue("mood_end")).wait()
+            self.moods()
+            yield RUNNING
+
+            ####################################################################
+            ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
+
+            logger.info("Waiting for final mood...")
+
+            while self.response_queue.empty():
+                yield RUNNING
+
+            final_mood = self.response_queue.get()["id"].encode()
+
+            logger.info("Got final mood: %s" % final_mood)
+            mood_logger.info((self.mood, final_mood, self.activities_done))
+            self.robot.tablet.clearAll()
 
 
     def tick(self, evt=None):
