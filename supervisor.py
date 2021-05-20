@@ -65,18 +65,23 @@ class Supervisor(QObject):
 
             if self.activity:
 
-                if self.activity == default_activity.get_activity():
+                if self.activity.type == DEFAULT:
                     if len(self.bridge.people.getengagedpeople()) > 0:
                         logger.info("Someone is engaging! Start moodboard")
                         self.activity = moodboard.get_activity()
                         self.activity.start(self.bridge, self.cmd_queue)
 
                 evt = None
-                if self.request_interrupt or self.bridge.tablet.isCancellationRequested():
-                    evt = ActivityEvent(ActivityEvent.INTERRUPTED)
+                if self.activity.type != DEFAULT:
+                    if self.request_interrupt or self.bridge.tablet.isCancellationRequested():
 
-                if len(self.bridge.people.getengagedpeople()) == 0:
-                    evt = ActivityEvent(ActivityEvent.NO_ONE_ENGAGED)
+                        src = ActivityEvent.CTRL_TABLET if self.request_interrupt else ActivityEvent.PEPPER_TABLET
+                        evt = ActivityEvent(ActivityEvent.INTERRUPTED,src)
+                        action_logger.info((self.activity.type, str(evt)))
+
+                    if len(self.bridge.people.getengagedpeople()) == 0:
+                        evt = ActivityEvent(ActivityEvent.NO_ONE_ENGAGED)
+                        action_logger.info((self.activity.type, str(evt)))
 
 
                 status = self.activity.tick(evt)
@@ -115,7 +120,6 @@ class Supervisor(QObject):
             return
 
         logger.debug("GOT A %s CMD: %s (%s)" % (source, cmd, args))
-        action_logger.info((source, cmd, args))
         
         if cmd == INTERRUPT:
             if self.activity:

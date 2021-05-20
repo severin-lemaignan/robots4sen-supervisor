@@ -1,7 +1,11 @@
+# GENERAL
+
 YES = "yes"
 NO = "no"
 
 REQUEST = "request"
+ACTIVITY = "activity"
+NONE = None
 
 # STATUS
 RUNNING = "running"
@@ -13,11 +17,9 @@ PAUSED = "paused"
 TABLET = "tablet"
 CTRL = "control"
 
-# ACTIVITIES & BEHAVIOURS
-NONE = None
+# BEHAVIOURS
 SOCIAL_GESTURE = "social gesture"
 BEHAVIOUR = "generic behaviour"
-ACTIVITY = "activity"
 LOOK_AT = "look at"
 TRACK = "track"
 INTERRUPT = "interrupt"

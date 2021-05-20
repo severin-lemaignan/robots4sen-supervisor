@@ -11,6 +11,7 @@ from constants import *
 from dialogues import get_dialogue
 from events import ActivityEvent
 
+from supervisor import action_logger
 
 class MoodBoardActivity:
 
@@ -187,6 +188,7 @@ class MoodBoardActivity:
         logger.info("Got action: %s" % action)
         self.robot.tablet.debug("Got action: %s" % action)
 
+        action_logger.info((action, self.mood))
         self.cmd_queue.put((TABLET, ACTIVITY, action))
 
 
