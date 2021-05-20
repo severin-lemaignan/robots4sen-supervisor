@@ -23,6 +23,9 @@ from activities.mood_board import activity as moodboard
 from activities.stories import activity as stories
 from activities.jokes import activity as jokes
 from activities.fun_dances import activity as fun_dances
+from activities.calm_music import activity as calm_music
+from activities.calm_dance import activity as calm_dance
+from activities.relax_sounds import activity as relax_sounds
 
 ###########################################
 
@@ -138,6 +141,13 @@ class Supervisor(QObject):
                     self.startActivity(jokes.get_activity())
                 elif args == FUN_DANCES:
                     self.startActivity(fun_dances.get_activity())
+                elif args == CALM_MUSIC:
+                    self.startActivity(calm_music.get_activity())
+                elif args == RELAX_SOUNDS:
+                    self.startActivity(relax_sounds.get_activity())
+                elif args == CALM_DANCE:
+                    self.startActivity(calm_dance.get_activity())
+
 
         else:
             logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
