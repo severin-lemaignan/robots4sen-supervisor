@@ -9,40 +9,38 @@ NONE = None
 
 # STATUS
 RUNNING = "running"
-STOPPING = "stopping"
 STOPPED = "stopped"
 PAUSED = "paused"
+INTERRUPT = "interrupt"
 
 # SOURCES
-TABLET = "tablet"
 CTRL = "control"
+TABLET = "tablet"
 
 # BEHAVIOURS
 SOCIAL_GESTURE = "social gesture"
 BEHAVIOUR = "generic behaviour"
 LOOK_AT = "look at"
 TRACK = "track"
-INTERRUPT = "interrupt"
-ALL = "all"
-MOODBOARD = "mood board"
-DEFAULT = "default"
-SKIP = "skip"
 
 # ACTIVITIES
-STORY = "story"
+ALL = "all"
+CALM_DANCES = "calm dances"
+CALM_MUSIC = "calm music"
+CUDDLE = "cuddle"
+DEFAULT = "default"
 FUN_DANCES = "fun dances"
 JOKES = "jokes"
-CALM_MUSIC = "calm music"
-RELAX_SOUNDS = "relaxing sounds"
 LISTENING = "listening"
-CUDDLE = "cuddle"
+MOODBOARD = "mood board"
+RELAX_SOUNDS = "relaxing sounds"
 ROCK_SCISSOR_PAPER = "rock-scissor-paper"
-CALM_DANCES = "calm dances"
+STORY = "story"
 
 # MOODS
-PARTYMOOD = "partymood"
-HAPPY = "happy"
-CONFUSED = "confused"
-TIRED = "tired"
-SAD = "sad"
 ANGRY = "angry"
+CONFUSED = "confused"
+HAPPY = "happy"
+PARTYMOOD = "partymood"
+SAD = "sad"
+TIRED = "tired"
