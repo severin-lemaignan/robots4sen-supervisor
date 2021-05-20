@@ -665,7 +665,7 @@ class NaoqiBridge(QObject):
 
 
     def extract_options(self, raw):
-        option_re = r'\\option=(.*?)\\'
+        option_re = r'\\\\option=(.*?)\\\\'
         text = re.sub(option_re,"", raw)
         options = re.findall(option_re,raw)
         options = [json.loads(o) for o in options]
@@ -683,6 +683,8 @@ class NaoqiBridge(QObject):
         if not self._with_robot:
             logger.warning("MOCK ROBOT: say: %s" % text)
             if self.tts_engine:
+                option_re = r'\\\\.*?\\\\|\^.*?\)' # remove annotations like \\pau=...\\ and ^start(...)
+                text = re.sub(option_re,"", text)
                 self.tts_engine.say(text)
                 self.tts_engine.runAndWait()
             return MockFuture()
