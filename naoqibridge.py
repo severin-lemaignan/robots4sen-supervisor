@@ -17,6 +17,8 @@ from csv_logging import create_csv_logger
 
 from websocketserver import TabletWebSocketServer
 
+from person import Person, PersonState
+
 people_logger = create_csv_logger("logs/people.csv")
 
 almemory = None
@@ -78,7 +80,7 @@ class People(QObject):
 
         for id in new_ids:
             logger.debug("New person <%s>" % id)
-            self.newPerson.emit(id, True, Person.UNKNOWN)
+            self.newPerson.emit(id, True, NaoqiPerson.AGE_UNKNOWNN)
 
         for id in vanished_ids:
             logger.debug("Person <%s> disappeared" % id)
@@ -88,7 +90,7 @@ class People(QObject):
         return self._people
 
     def getengagedpeople(self):
-        return set([p for p in self._people if p._engaged])
+        return set([p for p in self._people if p.person.is_engaged()])
 
     def addperson(self, person):
         logger.warning("Added person <%s>" % person.person_id)
@@ -104,31 +106,23 @@ class People(QObject):
 # instantiated in main.py
 people = None
 
-class Person(QObject):
+class NaoqiPerson(QObject):
 
     # age groups
-    UNKNOWN = "unknown"
+    AGE_UNKNOWNN = "unknown"
     ADULT = "adult"
     CHILD = "child"
-
-    ENGAGEMENT_DISTANCE = 2 #m
-    ENGAGEMENT_MIN_DURATION = 4. #sec -> number of seconds to consider a child as trying to engage with the robot
 
     def __init__(self):
         QObject.__init__(self)
 
-        self._person_id = 0
-        self._user_id = 0
-        self._location = [3., 0., 0.]
+        # the Person class manages the engagement state machine
+        self.person = Person()
+
         self._world_location = [0., 0., 0.]
-        self._looking_at_robot = 0.
 
-        self._in_engagement_zone_entry_time = None
-        self._engaged = False
+        self._age = self.AGE_UNKNOWNN
 
-        self._age = self.UNKNOWN
-
-        self.visible = True
 
         self._watchdog_timer = QTimer(self)
         self._watchdog_timer.setInterval(People.PEOPLE_UPDATE_INTERVAL)
@@ -143,91 +137,75 @@ class Person(QObject):
 
         people.addperson(self)
 
-    def is_mock_person(self):
-        return self._person_id < 0
-
-
     def update(self):
 
-        if self.distance() < Person.ENGAGEMENT_DISTANCE:
+        # we are connected to naoqi
+        if almemory and not self.person.is_mock_person():
 
-            if self._looking_at_robot > 0.3 or self.is_mock_person():
-                if self._in_engagement_zone_entry_time is None:
-                    self._in_engagement_zone_entry_time = time.time()
-                else:
-                    if not self._engaged and \
-                    time.time() - self._in_engagement_zone_entry_time > Person.ENGAGEMENT_MIN_DURATION:
-                        logger.warning("Person <%s> is engaging" % self._person_id)
-                        self._engaged = True
-                        self.engaged_changed.emit(self._engaged)
-                        self._in_engagement_zone_entry_time = None
-        else:
-            if self._engaged:
-                logger.warning("Person <%s> disengaged" % self._person_id)
-                self._engaged = False
-                self._in_engagement_zone_entry_time = None
-                self.engaged_changed.emit(self._engaged)
-
-        # connected yet?
-        if not almemory:
-            return
-
-        old_user_id = self._user_id
-        self._user_id = alusersession.getUsidFromPpid(self._person_id)
-        if self._user_id != old_user_id:
-            self.known_changed.emit(self.known)
-
-        try:
-            self._world_location = almemory.getData("PeoplePerception/Person/%s/PositionInWorldFrame" % self._person_id)
-            local_pose = almemory.getData("PeoplePerception/Person/%s/PositionInTorsoFrame" % self._person_id)
-            self.setlocation(local_pose)
-
-            looking_at_robot = almemory.getData("PeoplePerception/Person/%s/LookingAtRobotScore" % self._person_id)
-
-            if abs(looking_at_robot - self._looking_at_robot) > 0.05:
-                self._looking_at_robot = looking_at_robot
-                self.looking_at_robot_changed.emit(self._looking_at_robot)
-
-            age_estimate = almemory.getData("PeoplePerception/Person/%s/AgeProperties" % self._person_id)
-            if age_estimate:
-                age, confidence = age_estimate
-                if confidence > 0.3:
-                    self.setage(self.ADULT if age > 17 else self.CHILD)
+            self.person.user_id = alusersession.getUsidFromPpid(self.person.person_id)
 
 
-        except RuntimeError:
-            self.visible = False
+            try:
+                #####################
+                ##   LOCATION
+
+                self._world_location = almemory.getData("PeoplePerception/Person/%s/PositionInWorldFrame" % self.person.person_id)
+                local_pose = almemory.getData("PeoplePerception/Person/%s/PositionInRobotFrame" % self.person.person_id)
+                self.setlocation(local_pose)
+
+                #######################
+                ##   GAZE DIRECTION
+                looking_at_robot = almemory.getData("PeoplePerception/Person/%s/LookingAtRobotScore" % self.person.person_id)
+
+                if abs(looking_at_robot - self._looking_at_robot) > 0.05:
+                    self.person.looking_at_robot = looking_at_robot
+                    self.looking_at_robot_changed.emit(looking_at_robot)
+
+                ######################
+                ##   AGE
+
+                age_estimate = almemory.getData("PeoplePerception/Person/%s/AgeProperties" % self.person.person_id)
+                if age_estimate:
+                    age, confidence = age_estimate
+                    if confidence > 0.3:
+                        self.setage(self.ADULT if age > 17 else self.CHILD)
+
+
+            except RuntimeError:
+                # almemory keys missing for that person -> person not seen anymore!
+                self.person.person_id = 0
+
+        is_state_same = self.person.update()
+        if not is_state_same:
+            self.state_changed.emit(self.person.state)
 
 
     def log(self):
 
-        if self.visible:
+        if self.person.state != PersonState.UNKNOWN:
             people_logger.info((
-                                    self._person_id,
-                                    self._user_id,
-                                    self._location[0],
-                                    self._location[1],
-                                    self._location[2],
+                                    self.person.person_id,
+                                    self.person.user_id,
+                                    self.person.location[0],
+                                    self.person.location[1],
+                                    self.person.location[2],
                                     self._world_location[0],
                                     self._world_location[1],
                                     self._world_location[2],
-                                    self._looking_at_robot,
-                                    self._engaged,
+                                    self.person.looking_at_robot,
+                                    self.person.state,
                                     self._age
                                 )
                               )
 
-    def distance(self):
-        x,y,z=self._location
-        return math.sqrt(x*x+y*y+z*z)
+    moved = Signal()
 
     @Slot(list) # the slot is used when we 'mock' users, to set their positions
     def setlocation(self, location):
-        #TODO OPTIMIZATION: if new location close to prev, do not update
-        if location == self._location:
+        if self.person.distance_to(*location) < 0.1: # less than 10cm? don't update
             return
 
-        self._location = location
+        self.person.location = location
         self.x_changed.emit(self.x)
         self.y_changed.emit(self.y)
         self.moved.emit()
@@ -235,54 +213,46 @@ class Person(QObject):
     person_id_changed = Signal(str)
 
     def set_person_id(self, id):
-        self._person_id = int(id)
+        self.person.person_id = int(id)
         self.person_id_changed.emit(str(id))
-        logger.info("Person id now %s" % self._person_id)
+        logger.info("Person id now %s" % self.person.person_id)
 
     def get_person_id(self):
-        return str(self._person_id)
+        return str(self.person.person_id)
 
     person_id = Property(str, get_person_id, set_person_id, notify=person_id_changed)
-
-
-    moved = Signal()
-
-    known_changed = Signal(bool)
-    @Property(bool, notify=known_changed)
-    def known(self):
-        return self._user_id != 0
 
     x_changed = Signal(float)
     @Property(float, notify=x_changed)
     def x(self):
-        return self._location[0]
+        return self.person.location[0]
 
     y_changed = Signal(float)
     @Property(float, notify=y_changed)
     def y(self):
-        return self._location[1]
+        return self.person.location[1]
 
     looking_at_robot_changed = Signal(float)
     @Property(float, notify=looking_at_robot_changed)
     def looking_at_robot(self):
-        return self._looking_at_robot
+        return self.person.looking_at_robot
 
-    engaged_changed = Signal(bool)
-    @Property(bool, notify=engaged_changed)
-    def engaged(self):
-        return self._engaged
+    state_changed = Signal(str)
+    @Property(str, notify=state_changed)
+    def state(self):
+        return self.person.state
 
     def setage(self, age):
 
         if age == self.ADULT:
 
-            if self._age == self.UNKNOWN or self._age == self.CHILD:
-                logger.warning("Person <%s> detected as an adult" % self._person_id)
+            if self._age == self.AGE_UNKNOWNN or self._age == self.CHILD:
+                logger.warning("%s detected as an adult" % self.person)
                 self._age = self.ADULT
                 self.age_changed.emit(self._age)
         else:
-            if self._age == self.UNKNOWN or self._age == self.ADULT:
-                logger.warning("Person <%s> detected as a child" % self._person_id)
+            if self._age == self.AGE_UNKNOWNN or self._age == self.ADULT:
+                logger.warning("%s detected as a child" % self.person)
                 self._age = self.CHILD
                 self.age_changed.emit(self._age)
 

@@ -27,7 +27,7 @@ from PySide2.QtCore import QUrl, QObject, QTimer
 
 from helpers import get_ip
 
-from naoqibridge import NaoqiBridge, Person
+from naoqibridge import NaoqiBridge, NaoqiPerson
 from audiorecorder import AudioRecorder
 
 from flask_server import tablet_webserver
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     if not args.no_control_ui:
 
         app = QGuiApplication(sys.argv)
-        qmlRegisterType(Person, 'Naoqi', 1, 0, 'Person')
+        qmlRegisterType(NaoqiPerson, 'Naoqi', 1, 0, 'Person')
         qmlRegisterType(AudioRecorder, 'Naoqi', 1, 0, 'AudioRecorder')
         engine = QQmlApplicationEngine()
 

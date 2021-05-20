@@ -43,7 +43,7 @@ Item {
             }
         }
 
-        color: person.engaged ? "green" : "transparent"
+        color: person.state == "engaged" ? "green" : (person.state == "disengaging" ? "orange" : "transparent")
         height: 0.3 * meters_to_px
         noborder: !is_tracked
         border.color: "red"
@@ -69,7 +69,7 @@ Item {
             height: width
             radius: width/2
 
-            color: person.known ? 'green' : 'orange'
+            color: ["unknown","seen"].indexOf(person.state) == -1  ? 'green' : 'orange'
         }
 
         onClicked: {
