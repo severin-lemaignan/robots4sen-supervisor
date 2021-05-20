@@ -3,6 +3,7 @@ tablet connect. This makes it possible to instruct the tablet to go to
 any webpage at any time (via `setUrl`), eg, to push content to the tablet.
 """
 
+from constants import INTERRUPT
 import logging;logger = logging.getLogger("robots.tablet_websocket")
 
 from PySide2.QtCore import QUrl, QObject, Signal, Slot
@@ -80,11 +81,38 @@ class TabletWebSocketServer(QObject):
     def clearOptions(self):
         self.write.emit(json.dumps({"type":"clear_options"}))
 
+    def clearAll(self):
+        """ Clears both options and (possible) footer.
+        """ 
+        self.write.emit(json.dumps({"type":"clear_all"}))
+
     def setOptions(self, options):
         self.write.emit(json.dumps({"type":"set_options", "options":options}))
 
     def showOption(self, id):
         self.write.emit(json.dumps({"type":"show_option", "id":id}))
+
+    def addCancelBtn(self):
+        btn = {"id": INTERRUPT, "img": "images/stop.svg", "label": "Stop", "footer": True}
+
+        self.setOptions([btn])
+
+    def isCancellationRequested(self):
+
+        to_requeue = []
+        while not self.response_queue.empty():
+            action = self.response_queue.get()
+            if action["id"] == INTERRUPT:
+                return True
+            else:
+                # we've got an action from the tablet, but not a 'cancel' -> probably another
+                # btn pressed. Save it to re-enqueue it later
+                to_requeue.append(action)
+
+        for a in to_requeue:
+            self.response_queue.put(a)
+
+        return False
 
     def processTextMessage(self,  raw):
 

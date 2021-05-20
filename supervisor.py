@@ -67,11 +67,11 @@ class Supervisor(QObject):
                         logger.info("Someone is engaging! Start moodboard")
                         self.activity = moodboard.get_activity()
                         self.activity.start(self.bridge, self.cmd_queue)
-                        
 
                 evt = None
-                if self.request_interrupt:
+                if self.request_interrupt or self.bridge.tablet.isCancellationRequested():
                     evt = ActivityEvent(ActivityEvent.INTERRUPTED)
+
                 if len(self.bridge.people.getengagedpeople()) == 0:
                     evt = ActivityEvent(ActivityEvent.NO_ONE_ENGAGED)
 

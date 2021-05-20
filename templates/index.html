@@ -115,6 +115,7 @@
                             figcaption.appendTo(fig);
                             fig.appendTo(col);
                             if ('footer' in option && option.footer) {
+                                $("#footer").empty();
                                 col.appendTo("#footer");
                             }
                             else {
@@ -143,7 +144,12 @@
                         break;
 
                     case "clear_options":
-                        $("#options_container").empty()
+                        $("#options_container").empty();
+                        break;
+
+                    case "clear_all":
+                        $("#options_container").empty();
+                        $("#footer").empty();
                         break;
 
                     case "show_option":

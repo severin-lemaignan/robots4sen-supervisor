@@ -15,7 +15,6 @@ from events import ActivityEvent
 from flask_server import tablet_webserver
 from story_parser import Story
 
-
 assets_path = "stories/susanne-and-ben/assets/"
 
 class StoryActivity:
@@ -44,13 +43,12 @@ class StoryActivity:
 
     def behaviour(self):
 
-        ####################################################################
-        ### ASK FOR MOOD
  
-        self.robot.tablet.clearOptions()
+        self.robot.tablet.clearAll()
         self.robot.say(get_dialogue("story_prompt")).wait()
         yield RUNNING
 
+        self.robot.tablet.addCancelBtn()
         
         ####################################################################
         ### START THE STORY-BUILDING TREE
@@ -64,6 +62,7 @@ class StoryActivity:
 
                 txt, actions = self.story.next(actions.keys()[0])
                 continue
+
 
             labels = [v["label"] for k, v in actions.items()]
             choice_sentence = ", ".join(labels[:-1]) + " or %s" % labels[-1]

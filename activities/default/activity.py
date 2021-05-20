@@ -24,6 +24,7 @@ class DefaultActivity:
         self.robot.tablet.debug("activity/default")
 
         # display the waving hand
+        self.robot.tablet.clearAll()
         self.robot.tablet.default()
 
         # self._behaviour is a generator returning the current activity status;

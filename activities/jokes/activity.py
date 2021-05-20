@@ -43,9 +43,11 @@ class JokesActivity:
 
     def behaviour(self):
 
-        self.robot.tablet.clearOptions()
+        self.robot.tablet.clearAll()
         self.robot.say(get_dialogue("jokes_start")).wait()
         yield RUNNING
+
+        self.robot.tablet.addCancelBtn()
 
         while self.jokes:
             joke = self.jokes.pop()

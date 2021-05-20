@@ -142,7 +142,7 @@ class MoodBoardActivity:
 
         logger.info("Got mood: %s" % mood)
         self.robot.tablet.debug("Got mood: %s" % mood)
-        self.robot.tablet.clearOptions()
+        self.robot.tablet.clearAll()
 
         ####################################################################
         ### PROMPT 'let do smthg'
