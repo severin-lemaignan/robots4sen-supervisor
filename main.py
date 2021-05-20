@@ -1,6 +1,8 @@
 #! /usr/bin/env python2
 # utf-8
 
+
+
 import logging
 #logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s')
 logger = logging.getLogger("robots.main")
@@ -13,7 +15,8 @@ import argparse
 import time
 import threading
 import os
-import sys
+import sys 
+sys.path.append("/home/echos/nao/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages")
 from os.path import abspath, dirname, join
 
 from Queue import Queue

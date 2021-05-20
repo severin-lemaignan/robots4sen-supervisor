@@ -7,6 +7,8 @@ import re
 import time
 import math
 
+import qi
+
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
 
