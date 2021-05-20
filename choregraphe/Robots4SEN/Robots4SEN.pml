@@ -6,6 +6,7 @@
         <BehaviorDescription name="behavior" src="saxophone" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="dance-taichi" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="macarena" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="disco" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
@@ -13,6 +14,7 @@
         <File name="epicsax" src="saxophone/epicsax.ogg" />
         <File name="taichimove" src="dance-taichi/taichimove.pmt" />
         <File name="manifest" src="macarena/manifest.xml" />
+        <File name="Know-Myself-Patrick-Patrikios_4" src="disco/disco.ogg" />
     </Resources>
     <Topics />
     <IgnoredPaths />
