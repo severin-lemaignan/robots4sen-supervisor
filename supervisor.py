@@ -24,7 +24,7 @@ from activities.stories import activity as stories
 from activities.jokes import activity as jokes
 from activities.fun_dances import activity as fun_dances
 from activities.calm_music import activity as calm_music
-from activities.calm_dance import activity as calm_dance
+from activities.calm_dances import activity as calm_dance
 from activities.relax_sounds import activity as relax_sounds
 
 ###########################################
