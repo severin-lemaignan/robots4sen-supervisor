@@ -17,6 +17,10 @@
         <File name="manifest" src="macarena/manifest.xml" />
         <File name="Know-Myself-Patrick-Patrikios_4" src="disco/disco.ogg" />
         <File name="A-Quiet-Thought-Wayne-Jones" src="calm_music/A-Quiet-Thought-Wayne-Jones.ogg" />
+        <File name="In-the-Temple-Garden-Aaron-Kenny" src="calm_music/In-the-Temple-Garden-Aaron-Kenny.ogg" />
+        <File name="Lullaby-JVNA" src="calm_music/Lullaby-JVNA.ogg" />
+        <File name="Timeless-Lauren-Duski" src="calm_music/Timeless-Lauren-Duski.ogg" />
+        <File name="Checkmate-Nathan-Moore" src="calm_music/Checkmate-Nathan-Moore.ogg" />
     </Resources>
     <Topics />
     <IgnoredPaths />
