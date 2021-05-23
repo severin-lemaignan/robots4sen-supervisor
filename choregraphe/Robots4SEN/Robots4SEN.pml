@@ -7,6 +7,7 @@
         <BehaviorDescription name="behavior" src="dance-taichi" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="macarena" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="disco" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="calm_music" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
@@ -15,6 +16,7 @@
         <File name="taichimove" src="dance-taichi/taichimove.pmt" />
         <File name="manifest" src="macarena/manifest.xml" />
         <File name="Know-Myself-Patrick-Patrikios_4" src="disco/disco.ogg" />
+        <File name="A-Quiet-Thought-Wayne-Jones" src="calm_music/A-Quiet-Thought-Wayne-Jones.ogg" />
     </Resources>
     <Topics />
     <IgnoredPaths />

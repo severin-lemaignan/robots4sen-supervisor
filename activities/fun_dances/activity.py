@@ -10,8 +10,6 @@ from events import ActivityEvent
 
 class FunDancesActivity:
 
-    type = FUN_DANCES
-
     def __init__(self):
         pass
 
@@ -39,8 +37,9 @@ class FunDancesActivity:
         yield RUNNING
 
         dances = ["robots4sen-brl/saxophone",
-                  "robots4sen-brl/macarena"]
-                
+                  "robots4sen-brl/macarena",
+                  "robots4sen-brl/disco"]]
+
         dance = self.robot.run_behaviour(random.choice(dances))
 
         while dance.isRunning():
@@ -70,4 +69,3 @@ activity = FunDancesActivity()
 
 def get_activity():
     return activity
-
