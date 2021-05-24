@@ -38,7 +38,7 @@ class FunDancesActivity:
 
         dances = ["robots4sen-brl/saxophone",
                   "robots4sen-brl/macarena",
-                  "robots4sen-brl/disco"]]
+                  "robots4sen-brl/disco"]
 
         dance = self.robot.run_behaviour(random.choice(dances))
 
