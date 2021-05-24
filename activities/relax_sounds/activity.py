@@ -38,9 +38,8 @@ class RelaxSoundsActivity:
         self.robot.say(get_dialogue("relax_sounds_start")).wait()
         yield RUNNING
 
-        dances = ["robots4sen-brl/saxophone",
-                  "robots4sen-brl/macarena"]
-                
+        dances = ["robots4sen-brl/relax_sounds"]
+
         dance = self.robot.run_behaviour(random.choice(dances))
 
         while dance.isRunning():
@@ -70,4 +69,3 @@ activity = RelaxSoundsActivity()
 
 def get_activity():
     return activity
-
