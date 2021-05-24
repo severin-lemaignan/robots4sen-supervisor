@@ -9,6 +9,9 @@
  <contents>
   <behaviorContent path="elephant">
    <nature>interactive</nature>
+   <triggerSentences/>
+   <loadingResponses/>
+   <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="saxophone">
@@ -21,6 +24,9 @@
   </behaviorContent>
   <behaviorContent path="macarena">
    <nature>interactive</nature>
+   <triggerSentences/>
+   <loadingResponses/>
+   <autonomous/>
    <permissions/>
   </behaviorContent>
   <behaviorContent path="disco">
@@ -29,6 +35,9 @@
   </behaviorContent>
   <behaviorContent path="calm_music">
    <nature>interactive</nature>
+   <triggerSentences/>
+   <loadingResponses/>
+   <autonomous/>
    <permissions/>
   </behaviorContent>
  </contents>
