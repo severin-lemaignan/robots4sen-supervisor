@@ -9,6 +9,7 @@
         <BehaviorDescription name="behavior" src="disco" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="calm_music" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="relax_sounds" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="cuddle" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
@@ -23,7 +24,6 @@
         <File name="Timeless-Lauren-Duski" src="calm_music/Timeless-Lauren-Duski.ogg" />
         <File name="Checkmate-Nathan-Moore" src="calm_music/Checkmate-Nathan-Moore.ogg" />
         <File name="Macarena-Los-del-Rio-_128-kbps__3" src="macarena/Macarena-Los-del-Rio.ogg" />
-        <File name="swiftswords_ext" src="dance-taichi/swiftswords_ext.mp3" />
         <File name="birds_0" src="relax_sounds/birds_0.ogg" />
         <File name="birds_1" src="relax_sounds/birds_1.ogg" />
         <File name="crickets" src="relax_sounds/crickets.ogg" />
