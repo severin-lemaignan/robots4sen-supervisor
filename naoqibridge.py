@@ -67,7 +67,8 @@ class People(QObject):
         if not almemory:
             return
 
-        ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
+        detected_ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
+        detected_ids = detected_ids | self._mock_people
 
         #print("UserSession:" + str(alusersession.getOpenUserSessions()))
         #for user_id in alusersession.getOpenUserSessions():
@@ -75,12 +76,14 @@ class People(QObject):
         #    print("User <%s> -> Person <%s>" % (user_id, ppid))
 
         current_ids = set([p.person_id for p in self._people])
-        new_ids = ids - current_ids
-        vanished_ids = current_ids - ids
+        new_ids = detected_ids - current_ids
+        vanished_ids = current_ids - detected_ids
 
         for id in new_ids:
             logger.debug("New person <%s>" % id)
-            self.newPerson.emit(id, True, NaoqiPerson.AGE_UNKNOWNN)
+            if int(id) > 0: # else, signal already emitted in createMockPerson()
+                self.newPerson.emit(id, True, NaoqiPerson.AGE_UNKNOWNN)
+
 
         for id in vanished_ids:
             logger.debug("Person <%s> disappeared" % id)
@@ -174,6 +177,8 @@ class NaoqiPerson(QObject):
             except RuntimeError:
                 # almemory keys missing for that person -> person not seen anymore!
                 self.person.person_id = 0
+                people.removeperson(self)
+
 
         is_state_same = self.person.update()
         if not is_state_same:
@@ -199,6 +204,7 @@ class NaoqiPerson(QObject):
                               )
 
     moved = Signal()
+
 
     @Slot(list) # the slot is used when we 'mock' users, to set their positions
     def setlocation(self, location):
