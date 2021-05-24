@@ -6,7 +6,7 @@ DIALOGUES = {
                             "^startTag(think)Let see what story we can come up with...",
                             "Ok! Let me tell you a story."],
 
-    "story_start":          ["Alright, let start the story.", 
+    "story_start":          ["Alright, let start the story.",
                             "Good, good! Let's start the story"],
 
     "story_end":            ["The story is finished! I hope you liked it.",
@@ -59,18 +59,20 @@ DIALOGUES = {
                             "Thank you for your time! How do you feel now?",
                             "Feel any different?"],
 
-    "fun_dances_start":     ["Let's dance!", 
+    "fun_dances_start":     ["Let's dance!",
                             "Time to move our bodies!"],
 
-    "calm_dances_start":     ["^startTag(becalm)Alright, something calm.", 
+    "calm_dances_start":     ["^startTag(becalm)Alright, something calm.",
                             "^startTag(becalm)Let's do something slow."],
 
+    "cuddle_start":     ["^startTag(becalm)Okay, let's cuddle.",
+                            "^startTag(becalm)Sure! Cuddles are great."],
 
-    "calm_music_start":     ["^startTag(becalm)Let me choose some quiet music to listen.", 
+    "calm_music_start":     ["^startTag(becalm)Let me choose some quiet music to listen.",
                             "^startTag(becalm)Good idea, a bit a calm music."],
 
 
-    "relax_sounds_start":  ["^startTag(becalm)What about listening to that sound?", 
+    "relax_sounds_start":  ["^startTag(becalm)What about listening to that sound?",
                             "^startTag(becalm)I find that sound relaxing.",
                             "^startTag(becalm)I like that sound."],
 

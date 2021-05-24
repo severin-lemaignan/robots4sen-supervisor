@@ -5,7 +5,7 @@ import logging;logger = logging.getLogger("robots.supervisor")
 
 from csv_logging import create_csv_logger
 
-action_logger = create_csv_logger("logs/actions.csv") 
+action_logger = create_csv_logger("logs/actions.csv")
 
 from Queue import Queue, Empty
 
@@ -26,6 +26,7 @@ from activities.fun_dances import activity as fun_dances
 from activities.calm_music import activity as calm_music
 from activities.calm_dances import activity as calm_dances
 from activities.relax_sounds import activity as relax_sounds
+from activities.cuddle import activity as cuddle
 
 ###########################################
 
@@ -41,7 +42,7 @@ class Supervisor(QObject):
 
         self.activity = None
         self.request_interrupt = False
-    
+
     isCurrentActivity_changed = Signal(str)
     @Property(str, notify=isCurrentActivity_changed)
     def currentActivity(self):
@@ -59,7 +60,7 @@ class Supervisor(QObject):
 
         while True:
             self.process_queue()
-            
+
             #logger.debug("%s people detected" % len(self.bridge.people.getpeople()))
             #logger.debug("%s people engaged" % len(self.bridge.people.getengagedpeople()))
 
@@ -128,7 +129,7 @@ class Supervisor(QObject):
             return
 
         logger.debug("GOT A %s CMD: %s (%s)" % (source, cmd, args))
-        
+
         if cmd == INTERRUPT:
             if self.activity:
                 self.request_interrupt = True
@@ -159,8 +160,8 @@ class Supervisor(QObject):
                     self.startActivity(relax_sounds.get_activity())
                 elif args == CALM_DANCES:
                     self.startActivity(calm_dances.get_activity())
-
+                elif args == CUDDLE:
+                    self.startActivity(cuddle.get_activity())
 
         else:
-            logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd)) 
-
+            logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd))
