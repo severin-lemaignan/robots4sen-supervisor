@@ -38,8 +38,7 @@ class CalmDancesActivity:
         self.robot.say(get_dialogue("calm_dances_start")).wait()
         yield RUNNING
 
-        dances = ["robots4sen-brl/saxophone",
-                  "robots4sen-brl/macarena"]
+        dances = ["robots4sen-brl/dance-taichi"]
                 
         dance = self.robot.run_behaviour(random.choice(dances))
 

@@ -62,6 +62,10 @@ DIALOGUES = {
     "fun_dances_start":     ["Let's dance!", 
                             "Time to move our bodies!"],
 
+    "calm_dances_start":     ["^startTag(becalm)Alright, something calm.", 
+                            "^startTag(becalm)Let's do something slow."],
+
+
     "calm_music_start":     ["^startTag(becalm)Let me choose some quiet music to listen.", 
                             "^startTag(becalm)Good idea, a bit a calm music."],
 
