@@ -21,6 +21,7 @@
         <File name="Lullaby-JVNA" src="calm_music/Lullaby-JVNA.ogg" />
         <File name="Timeless-Lauren-Duski" src="calm_music/Timeless-Lauren-Duski.ogg" />
         <File name="Checkmate-Nathan-Moore" src="calm_music/Checkmate-Nathan-Moore.ogg" />
+        <File name="Macarena-Los-del-Rio-_128-kbps__3" src="macarena/Macarena-Los-del-Rio.ogg" />
     </Resources>
     <Topics />
     <IgnoredPaths />
