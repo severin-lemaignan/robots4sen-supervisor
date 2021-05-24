@@ -23,17 +23,13 @@
         <File name="Timeless-Lauren-Duski" src="calm_music/Timeless-Lauren-Duski.ogg" />
         <File name="Checkmate-Nathan-Moore" src="calm_music/Checkmate-Nathan-Moore.ogg" />
         <File name="Macarena-Los-del-Rio-_128-kbps__3" src="macarena/Macarena-Los-del-Rio.ogg" />
-        <File name="water_stream_1" src="relax_sounds/water_stream_1.mp3" />
-        <File name="stream_0" src="relax_sounds/stream_0.mp3" />
-        <File name="brownian_noise" src="relax_sounds/brownian_noise.mp3" />
-        <File name="birds_1" src="relax_sounds/birds_1.mp3" />
-        <File name="birds_0" src="relax_sounds/birds_0.mp3" />
-        <File name="night_1" src="relax_sounds/night_1.mp3" />
-        <File name="night_0" src="relax_sounds/night_0.mp3" />
-        <File name="palm_trees_1" src="relax_sounds/palm_trees_1.mp3" />
-        <File name="palm_trees_0" src="relax_sounds/palm_trees_0.mp3" />
-        <File name="wind_chimes_of_shells" src="relax_sounds/wind_chimes_of_shells.mp3" />
-        <File name="seaside" src="relax_sounds/seaside.mp3" />
+        <File name="swiftswords_ext" src="dance-taichi/swiftswords_ext.mp3" />
+        <File name="birds_0" src="relax_sounds/birds_0.ogg" />
+        <File name="birds_1" src="relax_sounds/birds_1.ogg" />
+        <File name="crickets" src="relax_sounds/crickets.ogg" />
+        <File name="heavy_rain" src="relax_sounds/heavy_rain.ogg" />
+        <File name="morning_in_a_village" src="relax_sounds/morning_in_a_village.ogg" />
+        <File name="seaside" src="relax_sounds/seaside.ogg" />
     </Resources>
     <Topics />
     <IgnoredPaths />

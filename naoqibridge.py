@@ -25,9 +25,15 @@ almemory = None
 alusersession = None
 
 class MockFuture():
+    def __init__(self, waiting_time = 1):
+        self.waiting_time = waiting_time
+
     def wait(self):
-        time.sleep(1)
-        pass
+        time.sleep(self.waiting_time)
+
+    def isRunning(self):
+        return False
+
     def isFinished(self):
         return True
 
@@ -67,7 +73,8 @@ class People(QObject):
         if not almemory:
             return
 
-        ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
+        detected_ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
+        detected_ids = detected_ids | self._mock_people
 
         #print("UserSession:" + str(alusersession.getOpenUserSessions()))
         #for user_id in alusersession.getOpenUserSessions():
@@ -75,12 +82,14 @@ class People(QObject):
         #    print("User <%s> -> Person <%s>" % (user_id, ppid))
 
         current_ids = set([p.person_id for p in self._people])
-        new_ids = ids - current_ids
-        vanished_ids = current_ids - ids
+        new_ids = detected_ids - current_ids
+        vanished_ids = current_ids - detected_ids
 
         for id in new_ids:
             logger.debug("New person <%s>" % id)
-            self.newPerson.emit(id, True, NaoqiPerson.AGE_UNKNOWNN)
+            if int(id) > 0: # else, signal already emitted in createMockPerson()
+                self.newPerson.emit(id, True, NaoqiPerson.AGE_UNKNOWNN)
+
 
         for id in vanished_ids:
             logger.debug("Person <%s> disappeared" % id)
@@ -174,6 +183,8 @@ class NaoqiPerson(QObject):
             except RuntimeError:
                 # almemory keys missing for that person -> person not seen anymore!
                 self.person.person_id = 0
+                people.removeperson(self)
+
 
         is_state_same = self.person.update()
         if not is_state_same:
@@ -199,6 +210,7 @@ class NaoqiPerson(QObject):
                               )
 
     moved = Signal()
+
 
     @Slot(list) # the slot is used when we 'mock' users, to set their positions
     def setlocation(self, location):
@@ -545,7 +557,7 @@ class NaoqiBridge(QObject):
 
         if not self._with_robot:
             logger.warning("MOCK ROBOT: run_behaviour: %s" % behaviour)
-            return
+            return MockFuture()
 
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'run_behaviour'")
@@ -641,7 +653,7 @@ class NaoqiBridge(QObject):
         text = re.sub(option_re,"", raw)
         options = re.findall(option_re,raw)
         options = [json.loads(o) for o in options]
-        return text, options
+        return text.strip(), options
 
     @Slot(str)
     def say(self, text):
@@ -652,21 +664,26 @@ class NaoqiBridge(QObject):
         if options:
             self.tablet.setOptions(options)
 
-        if not self._with_robot:
-            logger.warning("MOCK ROBOT: say: %s" % text)
-            if self.tts_engine:
-                option_re = r'\\.*?\\|\^.*?\)' # remove annotations like \pau=...\ and ^start(...)
-                text = re.sub(option_re,"", text)
-                self.tts_engine.say(text)
-                self.tts_engine.runAndWait()
-            return MockFuture()
+        if text:
+
+            if not self._with_robot:
+                logger.warning("MOCK ROBOT: say: %s" % text)
+                if self.tts_engine:
+                    option_re = r'\\.*?\\|\^.*?\)' # remove annotations like \pau=...\ and ^start(...)
+                    text = re.sub(option_re,"", text)
+                    self.tts_engine.say(text)
+                    self.tts_engine.runAndWait()
+                return MockFuture()
 
 
-        if not self._connected:
-            logger.warning("Robot not connected. Can not perform 'say'")
-            return
+            if not self._connected:
+                logger.warning("Robot not connected. Can not perform 'say'")
+                return
 
-        return qi.async(self.alanimatedspeech.say, "\\rspd=%s\\" % self.SPEAKING_RATE + text)
+            return qi.async(self.alanimatedspeech.say, "\\rspd=%s\\" % self.SPEAKING_RATE + text)
+
+        else:
+            return MockFuture(0)
 
     @Slot()
     def rest(self):

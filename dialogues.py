@@ -45,6 +45,10 @@ DIALOGUES = {
                               "What should we do?",
                               "What would you like to do?"],
 
+    "mood_all_activities":    ["Alright, here other options.",
+                               "Ok, here some more activities.",
+                               "Alright, you want to do something else. Let see."],
+
     "mood_prompt_continuation": ["Do you want to do something else?",
                               "You want to continue?",
                               "You want another activity?",
@@ -57,6 +61,15 @@ DIALOGUES = {
 
     "fun_dances_start":     ["Let's dance!", 
                             "Time to move our bodies!"],
+
+    "calm_music_start":     ["^startTag(becalm)Let me choose some quiet music to listen.", 
+                            "^startTag(becalm)Good idea, a bit a calm music."],
+
+
+    "relax_sounds_start":  ["^startTag(becalm)What about listening to that sound?", 
+                            "^startTag(becalm)I find that sound relaxing.",
+                            "^startTag(becalm)I like that sound."],
+
 
     }
 

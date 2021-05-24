@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    font-size: 3.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
+    font-size: 18px;
     line-height: 1.6;
     font-weight: 600;
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
