@@ -8,6 +8,7 @@
         <BehaviorDescription name="behavior" src="macarena" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="disco" xar="behavior.xar" />
         <BehaviorDescription name="behavior" src="calm_music" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="relax_sounds" xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
