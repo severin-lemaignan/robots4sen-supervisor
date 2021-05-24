@@ -45,6 +45,10 @@ DIALOGUES = {
                               "What should we do?",
                               "What would you like to do?"],
 
+    "mood_all_activities":    ["Alright, here other options.",
+                               "Ok, here some more activities.",
+                               "Alright, you want to do something else. Let see."],
+
     "mood_prompt_continuation": ["Do you want to do something else?",
                               "You want to continue?",
                               "You want another activity?",

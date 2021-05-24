@@ -101,6 +101,7 @@ class MoodBoardActivity:
             else:
                 res.append("or %s" % activity)
 
+        res.append('\\option={"id":"%s","img":"images/again.svg","label": "All","footer":true}\\' % ALL)
         return res
 
     def moods(self):
@@ -114,6 +115,7 @@ class MoodBoardActivity:
                 {"id": ANGRY, "img": "images/angry.svg", "label": "Angry"},
                 {"id": ALL, "img": "images/arrow.svg", "label": "Skip", "footer": True}
                 ]
+        
 
         self.robot.tablet.clearOptions()
         self.robot.tablet.setOptions(options)
@@ -183,28 +185,37 @@ class MoodBoardActivity:
         else:
             activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
 
-        logger.info("Offering the following activities: %s" % activities)
-        sentences = self.make_activity_sentences(activities)
+        while True:
+            logger.info("Offering the following activities: %s" % activities)
+            sentences = self.make_activity_sentences(activities)
 
-        for s in sentences:
-            self.robot.say(s).wait()
-            if not self.response_queue.empty(): 
+            for s in sentences:
+                self.robot.say(s).wait()
+                if not self.response_queue.empty(): 
+                    break
+                yield RUNNING
+
+
+            ####################################################################
+            ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
+
+            logger.info("Waiting for action selection...")
+
+            while self.response_queue.empty(): 
+                yield RUNNING
+            
+            action = self.response_queue.get()["id"]
+
+            logger.info("Got action: %s" % action)
+            self.robot.tablet.debug("Got action: %s" % action)
+
+            if action == ALL:
+                self.robot.tablet.clearAll()
+                self.robot.say(get_dialogue("mood_all_activities")).wait()
+                yield RUNNING
+                activities = random.sample(self.MOODS_ACTIVITIES[ALL], 8)
+            else:
                 break
-            yield RUNNING
-
-
-        ####################################################################
-        ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
-
-        logger.info("Waiting for action selection...")
-
-        while self.response_queue.empty(): 
-            yield RUNNING
-        
-        action = self.response_queue.get()["id"]
-
-        logger.info("Got action: %s" % action)
-        self.robot.tablet.debug("Got action: %s" % action)
 
         self.activities_done.append(action)
         action_logger.info((action, self.mood))
@@ -238,28 +249,38 @@ class MoodBoardActivity:
             else:
                 activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
 
-            logger.info("Offering the following activities: %s" % activities)
-            sentences = self.make_activity_sentences(activities)
+            while True:
+                logger.info("Offering the following activities: %s" % activities)
+                sentences = self.make_activity_sentences(activities)
 
-            for s in sentences:
-                self.robot.say(s).wait()
-                if not self.response_queue.empty(): 
+                for s in sentences:
+                    self.robot.say(s).wait()
+                    if not self.response_queue.empty(): 
+                        break
+                    yield RUNNING
+
+
+                ####################################################################
+                ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
+
+                logger.info("Waiting for action selection...")
+
+                while self.response_queue.empty(): 
+                    yield RUNNING
+                
+                action = self.response_queue.get()["id"]
+
+                logger.info("Got action: %s" % action)
+                self.robot.tablet.debug("Got action: %s" % action)
+
+                if action == ALL:
+                    self.robot.tablet.clearAll()
+                    self.robot.say(get_dialogue("mood_all_activities")).wait()
+                    yield RUNNING
+                    activities = random.sample(self.MOODS_ACTIVITIES[ALL], 8)
+                else:
                     break
-                yield RUNNING
 
-
-            ####################################################################
-            ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
-
-            logger.info("Waiting for action selection...")
-
-            while self.response_queue.empty(): 
-                yield RUNNING
-            
-            action = self.response_queue.get()["id"]
-
-            logger.info("Got action: %s" % action)
-            self.robot.tablet.debug("Got action: %s" % action)
 
             self.activities_done.append(action)
             self.cmd_queue.put((TABLET, ACTIVITY, action))

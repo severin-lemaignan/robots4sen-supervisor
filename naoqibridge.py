@@ -25,9 +25,15 @@ almemory = None
 alusersession = None
 
 class MockFuture():
+    def __init__(self, waiting_time = 1):
+        self.waiting_time = waiting_time
+
     def wait(self):
-        time.sleep(1)
-        pass
+        time.sleep(self.waiting_time)
+
+    def isRunning(self):
+        return False
+
     def isFinished(self):
         return True
 
@@ -551,7 +557,7 @@ class NaoqiBridge(QObject):
 
         if not self._with_robot:
             logger.warning("MOCK ROBOT: run_behaviour: %s" % behaviour)
-            return
+            return MockFuture()
 
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'run_behaviour'")
@@ -647,7 +653,7 @@ class NaoqiBridge(QObject):
         text = re.sub(option_re,"", raw)
         options = re.findall(option_re,raw)
         options = [json.loads(o) for o in options]
-        return text, options
+        return text.strip(), options
 
     @Slot(str)
     def say(self, text):
@@ -658,21 +664,26 @@ class NaoqiBridge(QObject):
         if options:
             self.tablet.setOptions(options)
 
-        if not self._with_robot:
-            logger.warning("MOCK ROBOT: say: %s" % text)
-            if self.tts_engine:
-                option_re = r'\\.*?\\|\^.*?\)' # remove annotations like \pau=...\ and ^start(...)
-                text = re.sub(option_re,"", text)
-                self.tts_engine.say(text)
-                self.tts_engine.runAndWait()
-            return MockFuture()
+        if text:
+
+            if not self._with_robot:
+                logger.warning("MOCK ROBOT: say: %s" % text)
+                if self.tts_engine:
+                    option_re = r'\\.*?\\|\^.*?\)' # remove annotations like \pau=...\ and ^start(...)
+                    text = re.sub(option_re,"", text)
+                    self.tts_engine.say(text)
+                    self.tts_engine.runAndWait()
+                return MockFuture()
 
 
-        if not self._connected:
-            logger.warning("Robot not connected. Can not perform 'say'")
-            return
+            if not self._connected:
+                logger.warning("Robot not connected. Can not perform 'say'")
+                return
 
-        return qi.async(self.alanimatedspeech.say, "\\rspd=%s\\" % self.SPEAKING_RATE + text)
+            return qi.async(self.alanimatedspeech.say, "\\rspd=%s\\" % self.SPEAKING_RATE + text)
+
+        else:
+            return MockFuture(0)
 
     @Slot()
     def rest(self):
