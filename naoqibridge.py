@@ -148,6 +148,7 @@ class NaoqiPerson(QObject):
 
     def update(self):
 
+
         # we are connected to naoqi
         if almemory and not self.person.is_mock_person():
 
@@ -162,11 +163,19 @@ class NaoqiPerson(QObject):
                 local_pose = almemory.getData("PeoplePerception/Person/%s/PositionInRobotFrame" % self.person.person_id)
                 self.setlocation(local_pose)
 
+            except RuntimeError as re:
+                logger.info("%s not seen anymore" % self.person)
+                ## almemory keys missing for that person -> person not seen anymore!
+                #people.removeperson(self)
+                #self.person.person_id = 0
+                #self._watchdog_timer.stop()
+
+            try:
                 #######################
                 ##   GAZE DIRECTION
                 looking_at_robot = almemory.getData("PeoplePerception/Person/%s/LookingAtRobotScore" % self.person.person_id)
 
-                if abs(looking_at_robot - self._looking_at_robot) > 0.05:
+                if abs(looking_at_robot - self.person.looking_at_robot) > 0.05:
                     self.person.looking_at_robot = looking_at_robot
                     self.looking_at_robot_changed.emit(looking_at_robot)
 
@@ -178,12 +187,9 @@ class NaoqiPerson(QObject):
                     age, confidence = age_estimate
                     if confidence > 0.3:
                         self.setage(self.ADULT if age > 17 else self.CHILD)
-
-
             except RuntimeError:
-                # almemory keys missing for that person -> person not seen anymore!
-                self.person.person_id = 0
-                people.removeperson(self)
+                pass
+
 
 
         is_state_same = self.person.update()
