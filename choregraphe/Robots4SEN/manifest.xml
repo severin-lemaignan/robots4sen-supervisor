@@ -40,5 +40,9 @@
    <autonomous/>
    <permissions/>
   </behaviorContent>
+  <behaviorContent path="relax_sounds">
+   <nature>interactive</nature>
+   <permissions/>
+  </behaviorContent>
  </contents>
 </package>

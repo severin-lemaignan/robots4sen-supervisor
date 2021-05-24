@@ -26,7 +26,7 @@ class RelaxSoundsActivity:
 
         self.robot.tablet.debug("activity/relax_sounds")
 
-        self.stop_dance = False
+        self.stop_behaviour = False
 
         # self._behaviour is a generator returning the current activity status;
         # self.tick() (called by the supervisor) will progress through it
@@ -38,15 +38,14 @@ class RelaxSoundsActivity:
         self.robot.say(get_dialogue("relax_sounds_start")).wait()
         yield RUNNING
 
-        dances = ["robots4sen-brl/saxophone",
-                  "robots4sen-brl/macarena"]
+        behaviours = ["robots4sen-brl/relax_sounds"]
                 
-        dance = self.robot.run_behaviour(random.choice(dances))
+        behaviour = self.robot.run_behaviour(random.choice(behaviours))
 
-        while dance.isRunning():
-            if self.stop_dance:
-                dance.cancel()
-                self.stop_dance = False
+        while behaviour.isRunning():
+            if self.stop_behaviour:
+                behaviour.cancel()
+                self.stop_behaviour = False
             yield RUNNING
 
     def tick(self, evt=None):
@@ -54,11 +53,11 @@ class RelaxSoundsActivity:
         if evt:
             if evt.type == ActivityEvent.INTERRUPTED:
                 logger.warning("Activity 'relax sounds' stopped: interrupt request!");
-                self.stop_dance = True
+                self.stop_behaviour = True
                 return STOPPED
             if evt.type == ActivityEvent.NO_ONE_ENGAGED:
                 logger.warning("Activity 'relax sounds' stopped: no one in front of the robot!");
-                self.stop_dance = True
+                self.stop_behaviour = True
                 return STOPPED
 
         try:
