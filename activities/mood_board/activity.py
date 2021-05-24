@@ -179,7 +179,7 @@ class MoodBoardActivity:
 
         if self.mood != ALL:
             activities = random.sample(self.MOODS_ACTIVITIES[self.mood],
-                                       random.randint(2,4))
+                                       random.randint(2,3))
         else:
             activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
 
@@ -234,7 +234,7 @@ class MoodBoardActivity:
             ### OFFER ACTIVITIES BASED ON MOOD
 
             if self.mood != ALL:
-                activities = random.sample(self.MOODS_ACTIVITIES[self.mood], random.randint(2,4))
+                activities = random.sample(self.MOODS_ACTIVITIES[self.mood], random.randint(2,3))
             else:
                 activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
 
