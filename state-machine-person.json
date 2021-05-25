@@ -1,0 +1,183 @@
+{
+   "connections" : [
+      {
+         "from" : "6db3cc55-4062-4208-84ef-215e2c00aff5:close & looking",
+         "name" : "anonymous",
+         "to" : "35cd237d-d38a-42ae-9b58-0be7fd0dcf98:input",
+         "uuid" : "fe5cb025-718c-4286-813f-74b3e30b6422"
+      },
+      {
+         "from" : "6db3cc55-4062-4208-84ef-215e2c00aff5:!seen",
+         "name" : "anonymous",
+         "to" : "ce68ac2e-eeb4-42a9-b5db-a8f954b0950d:input",
+         "uuid" : "958d3195-bfee-4ab2-a573-5317170c6920"
+      },
+      {
+         "from" : "9afb0046-873d-493b-bcb9-ca31bddde539:!close",
+         "name" : "anonymous",
+         "to" : "39de005d-1205-414b-a7ca-e87247b9c4f4:input",
+         "uuid" : "af00d480-3d0a-48b6-8b87-d95e019559d7"
+      },
+      {
+         "from" : "ce68ac2e-eeb4-42a9-b5db-a8f954b0950d:>3sec",
+         "name" : "anonymous",
+         "to" : "1a41245d-90ef-46e6-98b1-f95d008efe90:input",
+         "uuid" : "6647206d-b901-457e-9005-34932b5c8e55"
+      },
+      {
+         "from" : "35cd237d-d38a-42ae-9b58-0be7fd0dcf98:>3sec",
+         "name" : "anonymous",
+         "to" : "9afb0046-873d-493b-bcb9-ca31bddde539:input",
+         "uuid" : "ddb57322-a126-4493-90bc-0a65ff918b91"
+      },
+      {
+         "from" : "39de005d-1205-414b-a7ca-e87247b9c4f4:>3sec",
+         "name" : "anonymous",
+         "to" : "6db3cc55-4062-4208-84ef-215e2c00aff5:input",
+         "uuid" : "0586ee70-157d-481c-9034-9ee70df320e2"
+      },
+      {
+         "from" : "ce68ac2e-eeb4-42a9-b5db-a8f954b0950d:seen",
+         "name" : "anonymous",
+         "to" : "6db3cc55-4062-4208-84ef-215e2c00aff5:input",
+         "uuid" : "7be7c6e0-dace-4c71-a399-efdfb1db9207"
+      },
+      {
+         "from" : "35cd237d-d38a-42ae-9b58-0be7fd0dcf98:!close",
+         "name" : "anonymous",
+         "to" : "6db3cc55-4062-4208-84ef-215e2c00aff5:input",
+         "uuid" : "08345504-a94f-47db-b092-c7259c9da956"
+      },
+      {
+         "from" : "39de005d-1205-414b-a7ca-e87247b9c4f4:close",
+         "name" : "anonymous",
+         "to" : "9afb0046-873d-493b-bcb9-ca31bddde539:input",
+         "uuid" : "73b809b2-9fc8-4fec-a69a-87c3c8461d2e"
+      }
+   ],
+   "description" : "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;\">\n<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>",
+   "encoding_version" : "0.1",
+   "name" : "robots4sen - Person engagement state machine",
+   "nodes" : [
+      {
+         "cognitive_function" : "Other",
+         "name" : "LOST",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "output"
+            },
+            {
+               "direction" : "in",
+               "name" : "input"
+            }
+         ],
+         "position" : [ 1000, 620 ],
+         "size" : [ 160, 120 ],
+         "uuid" : "1a41245d-90ef-46e6-98b1-f95d008efe90"
+      },
+      {
+         "cognitive_function" : "Other",
+         "name" : "DISENGAGING",
+         "ports" : [
+            {
+               "direction" : "in",
+               "name" : "input"
+            },
+            {
+               "direction" : "out",
+               "name" : "close"
+            },
+            {
+               "direction" : "out",
+               "name" : ">3sec"
+            }
+         ],
+         "position" : [ 1120, 400 ],
+         "size" : [ 160, 144 ],
+         "uuid" : "39de005d-1205-414b-a7ca-e87247b9c4f4"
+      },
+      {
+         "cognitive_function" : "Perception",
+         "name" : "SEEN",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "!seen"
+            },
+            {
+               "direction" : "out",
+               "name" : "close & looking"
+            },
+            {
+               "direction" : "in",
+               "name" : "input"
+            }
+         ],
+         "position" : [ 720, 320 ],
+         "size" : [ 160, 144 ],
+         "uuid" : "6db3cc55-4062-4208-84ef-215e2c00aff5"
+      },
+      {
+         "cognitive_function" : "Other",
+         "name" : "ENGAGING",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : ">3sec"
+            },
+            {
+               "direction" : "in",
+               "name" : "input"
+            },
+            {
+               "direction" : "out",
+               "name" : "!close"
+            }
+         ],
+         "position" : [ 820, 80 ],
+         "size" : [ 160, 144 ],
+         "uuid" : "35cd237d-d38a-42ae-9b58-0be7fd0dcf98"
+      },
+      {
+         "cognitive_function" : "Other",
+         "name" : "DISAPPEARING",
+         "ports" : [
+            {
+               "direction" : "in",
+               "name" : "input"
+            },
+            {
+               "direction" : "out",
+               "name" : "seen"
+            },
+            {
+               "direction" : "out",
+               "name" : ">3sec"
+            }
+         ],
+         "position" : [ 680, 580 ],
+         "size" : [ 160, 144 ],
+         "uuid" : "ce68ac2e-eeb4-42a9-b5db-a8f954b0950d"
+      },
+      {
+         "cognitive_function" : "Other",
+         "name" : "ENGAGED",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "!close"
+            },
+            {
+               "direction" : "in",
+               "name" : "input"
+            }
+         ],
+         "position" : [ 1060, 180 ],
+         "size" : [ 160, 120 ],
+         "uuid" : "9afb0046-873d-493b-bcb9-ca31bddde539"
+      }
+   ],
+   "uuid" : "647a2024-eb21-4c5b-a817-367302081e10",
+   "version" : "0.1"
+}
