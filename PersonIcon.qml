@@ -82,6 +82,11 @@ Item {
             }
         }
 
+        onPressAndHold: {
+            console.log("User " + person.person_id + " deleted");
+            person.delete()
+        }
+
         onXChanged: {
             if (!robot_tracked) {
                 person.setlocation([x/meters_to_px,-y/meters_to_px,0]);
