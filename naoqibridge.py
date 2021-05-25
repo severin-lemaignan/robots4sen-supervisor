@@ -45,7 +45,7 @@ class People(QObject):
     def __init__(self):
         QObject.__init__(self)
 
-        self._people = set()
+        self._people = {}
 
         self.mock_id_idx = -1
         self._mock_people = set()
@@ -62,8 +62,9 @@ class People(QObject):
     def createMockPerson(self, type):
         logger.warning("Adding a mock %s" % type)
 
+        self._people[self.mock_id_idx] = Person(self.mock_id_idx)
         self.newPerson.emit(str(self.mock_id_idx), False, type)
-        self._mock_people.add(str(self.mock_id_idx))
+        self._mock_people.add(self.mock_id_idx)
 
         self.mock_id_idx -= 1
 
@@ -73,7 +74,7 @@ class People(QObject):
         if not almemory:
             return
 
-        detected_ids = set([str(id) for id in almemory.getData("PeoplePerception/PeopleList")])
+        detected_ids = set(almemory.getData("PeoplePerception/PeopleList"))
         detected_ids = detected_ids | self._mock_people
 
         #print("UserSession:" + str(alusersession.getOpenUserSessions()))
@@ -87,27 +88,25 @@ class People(QObject):
 
         for id in new_ids:
             logger.debug("New person <%s>" % id)
-            if int(id) > 0: # else, signal already emitted in createMockPerson()
-                self.newPerson.emit(id, True, NaoqiPerson.AGE_UNKNOWNN)
+
+            if id > 0: # else, signal already emitted in createMockPerson()
+                self._people[id] = Person(id)
+                self.newPerson.emit(str(id), True, NaoqiPerson.AGE_UNKNOWNN)
 
 
         for id in vanished_ids:
             logger.debug("Person <%s> disappeared" % id)
-            self.disappearedPerson.emit(id)
+            self.disappearedPerson.emit(str(id))
+            del(self._people[id])
+
+    def getperson(self, id):
+        return self._people[id]
 
     def getpeople(self):
         return self._people
 
     def getengagedpeople(self):
         return set([p for p in self._people if p.person.is_engaged()])
-
-    def addperson(self, person):
-        logger.warning("Added person <%s>" % person.person_id)
-        self._people.add(person)
-
-    def removeperson(self, person):
-        logger.warning("Removed person <%s>" % person.person_id)
-        self._people.remove(person)
 
 # !! creating a global here !!
 # needed for each Person instance (created from QML) to add itself to the list of
@@ -117,20 +116,11 @@ people = None
 
 class NaoqiPerson(QObject):
 
-    # age groups
-    AGE_UNKNOWNN = "unknown"
-    ADULT = "adult"
-    CHILD = "child"
-
     def __init__(self):
         QObject.__init__(self)
 
         # the Person class manages the engagement state machine
-        self.person = Person()
-
-        self._world_location = [0., 0., 0.]
-
-        self._age = self.AGE_UNKNOWNN
+        self.person = None
 
 
         self._watchdog_timer = QTimer(self)
@@ -143,11 +133,10 @@ class NaoqiPerson(QObject):
         self._logging_timer.timeout.connect(self.log)
         self._logging_timer.start()
 
-
-        people.addperson(self)
-
     def update(self):
 
+        if not self.person:
+            return
 
         # we are connected to naoqi
         if almemory and not self.person.is_mock_person():
@@ -155,23 +144,20 @@ class NaoqiPerson(QObject):
             self.person.user_id = alusersession.getUsidFromPpid(self.person.person_id)
 
 
+            #####################
+            ##   LOCATION
             try:
-                #####################
-                ##   LOCATION
-
-                self._world_location = almemory.getData("PeoplePerception/Person/%s/PositionInWorldFrame" % self.person.person_id)
+                self.person.world_location = almemory.getData("PeoplePerception/Person/%s/PositionInWorldFrame" % self.person.person_id)
                 local_pose = almemory.getData("PeoplePerception/Person/%s/PositionInRobotFrame" % self.person.person_id)
                 self.setlocation(local_pose)
 
             except RuntimeError as re:
+                # almemory keys missing for that person -> person not seen anymore!
                 logger.info("%s not seen anymore" % self.person)
-                ## almemory keys missing for that person -> person not seen anymore!
-                #people.removeperson(self)
-                #self.person.person_id = 0
-                #self._watchdog_timer.stop()
+                self.setlocation([0,0,0])
 
-                #######################
-                ##   GAZE DIRECTION
+            #######################
+            ##   GAZE DIRECTION
             try:
                 looking_at_robot = almemory.getData("PeoplePerception/Person/%s/LookingAtRobotScore" % self.person.person_id)
 
@@ -184,9 +170,8 @@ class NaoqiPerson(QObject):
                     self.looking_at_robot_changed.emit(0)
 
 
-                ######################
-                ##   AGE
-
+            ######################
+            ##   AGE
             try:
                 age_estimate = almemory.getData("PeoplePerception/Person/%s/AgeProperties" % self.person.person_id)
                 if age_estimate:
@@ -200,29 +185,28 @@ class NaoqiPerson(QObject):
 
         is_state_same = self.person.update()
         if not is_state_same:
-            self.state_changed.emit(self.person.state)
+            self.state_changed.emit(self.person.state.value)
 
 
     def log(self):
 
-        if self.person.state != PersonState.UNKNOWN:
+        if self.person.state.value != PersonState.UNKNOWN:
             people_logger.info((
                                     self.person.person_id,
                                     self.person.user_id,
                                     self.person.location[0],
                                     self.person.location[1],
                                     self.person.location[2],
-                                    self._world_location[0],
-                                    self._world_location[1],
-                                    self._world_location[2],
+                                    self.person.world_location[0],
+                                    self.person.world_location[1],
+                                    self.person.world_location[2],
                                     self.person.looking_at_robot,
                                     self.person.state,
-                                    self._age
+                                    self.person.age
                                 )
                               )
 
     moved = Signal()
-
 
     @Slot(list) # the slot is used when we 'mock' users, to set their positions
     def setlocation(self, location):
@@ -237,7 +221,7 @@ class NaoqiPerson(QObject):
     person_id_changed = Signal(str)
 
     def set_person_id(self, id):
-        self.person.person_id = int(id)
+        self.person = people.getperson(int(id))
         self.person_id_changed.emit(str(id))
         logger.info("Person id now %s" % self.person.person_id)
 
@@ -268,23 +252,23 @@ class NaoqiPerson(QObject):
 
     def setage(self, age):
 
-        if age == self.ADULT:
+        if age == Person.ADULT:
 
-            if self._age == self.AGE_UNKNOWNN or self._age == self.CHILD:
+            if self.person.age == Person.AGE_UNKNOWNN or self.person.age == Person.CHILD:
                 logger.warning("%s detected as an adult" % self.person)
-                self._age = self.ADULT
-                self.age_changed.emit(self._age)
+                self.person.age = Person.ADULT
+                self.age_changed.emit(self.person.age)
         else:
-            if self._age == self.AGE_UNKNOWNN or self._age == self.ADULT:
+            if self.person.age == Person.AGE_UNKNOWNN or self.person.age == Person.ADULT:
                 logger.warning("%s detected as a child" % self.person)
-                self._age = self.CHILD
-                self.age_changed.emit(self._age)
+                self.person.age = Person.CHILD
+                self.age_changed.emit(self.person.age)
 
 
 
     age_changed = Signal(str)
     def getage(self):
-        return self._age
+        return self.person.age
 
     age = Property(str, getage, setage, notify=age_changed)
 

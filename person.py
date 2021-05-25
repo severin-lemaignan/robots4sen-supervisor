@@ -136,13 +136,22 @@ class Person():
 
     ENGAGEMENT_DISTANCE = 2 #m
 
-    def __init__(self):
+    # age groups
+    AGE_UNKNOWNN = "unknown"
+    ADULT = "adult"
+    CHILD = "child"
+
+    def __init__(self, id):
 
         self.state = UnknownState()
 
-        self.person_id = 0
+        self.person_id = id
         self.user_id = 0
         self.location = [3., 0., 0.]
+        self.world_location = [0., 0., 0.]
+
+        self.age = self.AGE_UNKNOWNN
+
         self.looking_at_robot = 0.
 
     def __str__(self):
@@ -164,7 +173,7 @@ class Person():
         return self.distance() < self.ENGAGEMENT_DISTANCE
 
     def is_looking(self):
-        return self.looking_at_robot > 0.3
+        return self.is_mock_person() or self.looking_at_robot > 0.3
 
     def is_seen(self):
         return bool(self.location)
@@ -178,11 +187,5 @@ class Person():
         """
 
         oldstate = self.state
-
         self.state = self.state.step(self)
-
-        if oldstate != self.state:
-            logger.info("%s: new state <%s>" % (self, self.state))
-            return False
-        else:
-            return True
+        return oldstate == self.state
