@@ -170,18 +170,24 @@ class NaoqiPerson(QObject):
                 #self.person.person_id = 0
                 #self._watchdog_timer.stop()
 
-            try:
                 #######################
                 ##   GAZE DIRECTION
+            try:
                 looking_at_robot = almemory.getData("PeoplePerception/Person/%s/LookingAtRobotScore" % self.person.person_id)
 
                 if abs(looking_at_robot - self.person.looking_at_robot) > 0.05:
                     self.person.looking_at_robot = looking_at_robot
                     self.looking_at_robot_changed.emit(looking_at_robot)
+            except RuntimeError:
+                if self.person.looking_at_robot != 0:
+                    self.person.looking_at_robot = 0
+                    self.looking_at_robot_changed.emit(0)
+
 
                 ######################
                 ##   AGE
 
+            try:
                 age_estimate = almemory.getData("PeoplePerception/Person/%s/AgeProperties" % self.person.person_id)
                 if age_estimate:
                     age, confidence = age_estimate
