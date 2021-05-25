@@ -17,6 +17,9 @@ class PersonState(object):
     def __init__(self):
         logger.info("Entering state <%s>" % self)
 
+    def step(self,person):
+        return self
+
     def __str__(self):
         return self.value
 
@@ -67,6 +70,9 @@ class EngagingState(PersonState):
         if not person.is_close():
             return SeenState()
 
+        if not person.is_seen():
+            return DisappearingState()
+
         return self
 
 class EngagedState(PersonState):
@@ -75,7 +81,7 @@ class EngagedState(PersonState):
 
     def step(self, person):
 
-        if not person.is_close():
+        if not person.is_close() or not person.is_seen():
             return DisengagingState()
 
         return self
@@ -98,7 +104,7 @@ class DisengagingState(PersonState):
         if delta > DisengagingState.DISENGAGEMENT_MIN_DURATION:
             return SeenState()
         
-        if person.is_close():
+        if person.is_close() and person.is_seen():
             return EngagedState()
 
         return self
@@ -176,7 +182,10 @@ class Person():
         return self.is_mock_person() or self.looking_at_robot > 0.3
 
     def is_seen(self):
-        return bool(self.location)
+        if self.is_mock_person():
+            return self.location[0] > 0 # mock person in front of the robot
+        else:
+            return bool(self.location)
 
     def is_engaged(self):
         return self.state.value in [PersonState.ENGAGED, PersonState.DISENGAGING]
@@ -185,7 +194,6 @@ class Person():
         """
         Returns: True if the person's state has not changed, False otherwise.
         """
-
         oldstate = self.state
         self.state = self.state.step(self)
         return oldstate == self.state

@@ -20,6 +20,7 @@ Item {
             radius: width/2
             color: "red"
 
+
             Circle {
                 meters_to_px: discovery.meters_to_px
                 radius_m: 1
@@ -38,7 +39,6 @@ Item {
 
 
 
-
             Image {
                 id: proxemics
                 anchors.centerIn: parent
@@ -47,6 +47,16 @@ Item {
                 fillMode: Image.PreserveAspectFit
             }
         }
+
+        Rectangle {
+            id: invisible_zone
+            anchors.left: parent.left
+            anchors.right: robot.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            color: "#22000000"
+        }
+
     }
 
     Row {
@@ -63,7 +73,7 @@ Item {
             source: "res/account.svg"
 
             onClicked: {
-                    naoqi.people.createMockPerson("adult");
+                naoqi.people.createMockPerson("adult");
             }
         }
 
@@ -72,7 +82,7 @@ Item {
             source: "res/baby-face-outline.svg"
 
             onClicked: {
-                    naoqi.people.createMockPerson("child");
+                naoqi.people.createMockPerson("child");
             }
 
         }
@@ -106,10 +116,10 @@ Item {
     onNewPerson: {
         var cmpt = Qt.createComponent("PersonIcon.qml");
         var person_qml = cmpt.createObject(robot, {person_id: person, 
-                                               robot_tracked: robot_tracked,
-                                               age: age,
-                                               meters_to_px: meters_to_px
-                                              });
+                                                   robot_tracked: robot_tracked,
+                                                   age: age,
+                                                   meters_to_px: meters_to_px
+                                                  });
         if (!person_qml) {
             console.log(cmpt.errorString());
         }
@@ -118,7 +128,7 @@ Item {
         }
 
     }
-    /////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 }

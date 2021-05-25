@@ -108,6 +108,12 @@ class People(QObject):
     def getengagedpeople(self):
         return set([p for p in self._people if p.person.is_engaged()])
 
+    def delete(self, id):
+        logger.debug("Person <%s> deleted" % id)
+        self.disappearedPerson.emit(str(id))
+        del(self._people[id])
+
+
 # !! creating a global here !!
 # needed for each Person instance (created from QML) to add itself to the list of
 # people
@@ -186,6 +192,8 @@ class NaoqiPerson(QObject):
         is_state_same = self.person.update()
         if not is_state_same:
             self.state_changed.emit(self.person.state.value)
+            if self.person.state.value == PersonState.LOST:
+                self.delete()
 
 
     def log(self):
@@ -207,6 +215,10 @@ class NaoqiPerson(QObject):
                               )
 
     moved = Signal()
+
+    @Slot()
+    def delete(self):
+        people.delete(self.person.person_id)
 
     @Slot(list) # the slot is used when we 'mock' users, to set their positions
     def setlocation(self, location):
@@ -248,7 +260,7 @@ class NaoqiPerson(QObject):
     state_changed = Signal(str)
     @Property(str, notify=state_changed)
     def state(self):
-        return self.person.state
+        return self.person.state.value
 
     def setage(self, age):
 

@@ -13,7 +13,7 @@
          "uuid" : "958d3195-bfee-4ab2-a573-5317170c6920"
       },
       {
-         "from" : "9afb0046-873d-493b-bcb9-ca31bddde539:!close",
+         "from" : "9afb0046-873d-493b-bcb9-ca31bddde539:!close | !seen",
          "name" : "anonymous",
          "to" : "39de005d-1205-414b-a7ca-e87247b9c4f4:input",
          "uuid" : "af00d480-3d0a-48b6-8b87-d95e019559d7"
@@ -43,7 +43,7 @@
          "uuid" : "7be7c6e0-dace-4c71-a399-efdfb1db9207"
       },
       {
-         "from" : "35cd237d-d38a-42ae-9b58-0be7fd0dcf98:!close",
+         "from" : "35cd237d-d38a-42ae-9b58-0be7fd0dcf98:!close | !seen",
          "name" : "anonymous",
          "to" : "6db3cc55-4062-4208-84ef-215e2c00aff5:input",
          "uuid" : "08345504-a94f-47db-b092-c7259c9da956"
@@ -132,7 +132,7 @@
             },
             {
                "direction" : "out",
-               "name" : "!close"
+               "name" : "!close | !seen"
             }
          ],
          "position" : [ 820, 80 ],
@@ -166,7 +166,7 @@
          "ports" : [
             {
                "direction" : "out",
-               "name" : "!close"
+               "name" : "!close | !seen"
             },
             {
                "direction" : "in",
