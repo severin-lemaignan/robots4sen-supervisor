@@ -152,8 +152,8 @@ class MoodBoardActivity:
         ### ASK FOR MOOD
 
         self.robot.tablet.clearAll()
-        self.robot.say(get_dialogue("mood_prompt")).wait()
         self.moods()
+        self.robot.say(get_dialogue("mood_prompt")).wait()
         yield RUNNING
 
         ####################################################################
@@ -167,7 +167,6 @@ class MoodBoardActivity:
 
         logger.info("Got mood: %s" % self.mood)
         self.robot.tablet.debug("Got mood: %s" % self.mood)
-        self.robot.tablet.clearAll()
 
         ####################################################################
         ### PROMPT 'let do smthg'
@@ -189,6 +188,8 @@ class MoodBoardActivity:
         else:
             activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
             sentences = self.make_activity_sentences(activities, add_all_link=False)
+
+        self.robot.tablet.clearAll()
 
         while True:
             logger.info("Offering the following activities: %s" % activities)
@@ -236,7 +237,6 @@ class MoodBoardActivity:
             yield RUNNING
         want_continue = self.response_queue.get()["id"].encode()
 
-        self.robot.tablet.clearAll()
 
         if want_continue == YES:
 
@@ -255,6 +255,8 @@ class MoodBoardActivity:
             else:
                 activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
                 sentences = self.make_activity_sentences(activities, add_all_link=False)
+
+            self.robot.tablet.clearAll()
 
             while True:
                 logger.info("Offering the following activities: %s" % activities)
@@ -298,6 +300,7 @@ class MoodBoardActivity:
             ### ASK FOR MOOD
 
             self.robot.say(get_dialogue("mood_end")).wait()
+            self.robot.tablet.clearAll()
             self.moods()
             yield RUNNING
 
