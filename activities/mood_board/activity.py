@@ -21,15 +21,15 @@ class MoodBoardActivity:
     type = MOODBOARD
 
     ACTIVITIES = {
-            CALM_DANCES: ['do', 'a dance?\\option={"id":"%s","img":"images/calm_dance.svg","label":"Calm dance"}\\' % CALM_DANCES],
-            CALM_MUSIC: ['listen', 'some music?\\option={"id":"%s","img":"images/music.svg","label":"Music"}\\' % CALM_MUSIC],
-            CUDDLE: ['do', 'a cuddle?\\option={"id":"%s","img":"images/cuddle.svg","label":"Cuddle"}\\' % CUDDLE],
-            FUN_DANCES: ['do', 'a fun dance?\\option={"id":"%s","img":"images/party.svg","label":"Fun dance"}\\' % FUN_DANCES],
-            JOKES: ['listen', 'a good joke or two?\\option={"id":"%s","img":"images/joke.svg","label":"Jokes"}\\' % JOKES],
-            LISTENING: ['other', 'simply listen to you?\\option={"id":"%s","img":"images/speak.svg","label":"Talking"}\\' % LISTENING],
-            RELAX_SOUNDS: ['listen', 'relaxing sounds?\\option={"id":"%s","img":"images/relax.svg","label":"Sounds"}\\' % RELAX_SOUNDS],
-            ROCK_SCISSOR_PAPER: ['play', 'rock paper scissors?\\option={"id":"%s","img":"images/scissors.svg","label":"Rock Paper Scissors"}\\' % ROCK_SCISSOR_PAPER],
-            STORY: ['listen', 'a story?\\option={"id":"%s","img":"images/story.svg","label":"Story"}\\' % STORY],
+            CALM_DANCES: ['do', 'a dance?', '\\option={"id":"%s","img":"images/calm_dance.svg","label":"Calm dance"}\\' % CALM_DANCES],
+            CALM_MUSIC: ['listen', 'some music?', '\\option={"id":"%s","img":"images/music.svg","label":"Music"}\\' % CALM_MUSIC],
+            CUDDLE: ['do', 'a cuddle?', '\\option={"id":"%s","img":"images/cuddle.svg","label":"Cuddle"}\\' % CUDDLE],
+            FUN_DANCES: ['do', 'a fun dance?', '\\option={"id":"%s","img":"images/party.svg","label":"Fun dance"}\\' % FUN_DANCES],
+            JOKES: ['listen', 'a good joke or two?', '\\option={"id":"%s","img":"images/joke.svg","label":"Jokes"}\\' % JOKES],
+            LISTENING: ['other', 'simply listen to you?', '\\option={"id":"%s","img":"images/speak.svg","label":"Talking"}\\' % LISTENING],
+            RELAX_SOUNDS: ['listen', 'relaxing sounds?', '\\option={"id":"%s","img":"images/relax.svg","label":"Sounds"}\\' % RELAX_SOUNDS],
+            ROCK_SCISSOR_PAPER: ['play', 'rock paper scissors?', '\\option={"id":"%s","img":"images/scissors.svg","label":"Rock Paper Scissors"}\\' % ROCK_SCISSOR_PAPER],
+            STORY: ['listen', 'a story?', '\\option={"id":"%s","img":"images/story.svg","label":"Story"}\\' % STORY],
             }
 
     MOODS_FEEDBACK = {
@@ -77,29 +77,29 @@ class MoodBoardActivity:
     def make_activity_sentences(self, activities, add_all_link=True):
         res = []
         lastverb = None
-        for verb, activity in [self.ACTIVITIES[a] for a in activities]:
+        for verb, activity, option in [self.ACTIVITIES[a] for a in activities]:
             if not lastverb or lastverb != verb:
                 if verb == "listen":
                     lastverb = verb
                     if len(res) == 0:
-                        res.append("Would you like to listen to %s" % activity)
+                        res.append("%s Would you like to listen to %s" % (option, activity))
                     else:
-                        res.append("Or do you feel like listening to %s" % activity)
+                        res.append("%s Or do you feel like listening to %s" % (option, activity))
                 elif verb == "do":
                     lastverb = verb
                     if len(res) == 0:
-                        res.append("Do you want me to do %s" % activity)
+                        res.append("%s Do you want me to do %s" % (option, activity))
                     else:
-                        res.append("Or I could do %s" % activity)
+                        res.append("%s Or I could do %s" % (option, activity))
                 else:
                     lastverb = None
                     if len(res) == 0:
-                        res.append("Do you want me to %s" % activity)
+                        res.append("%s Do you want me to %s" % (option, activity))
                     else:
-                        res.append("Or I could %s" % activity)
+                        res.append("%s Or I could %s" % (option, activity))
 
             else:
-                res.append("or %s" % activity)
+                res.append("%s or %s" % (option, activity))
 
         if add_all_link:
             res.append('\\option={"id":"%s","img":"images/again.svg","label": "All","footer":true}\\' % ALL)
