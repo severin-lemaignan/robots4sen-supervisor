@@ -82,7 +82,7 @@ class People(QObject):
         #    ppid = alusersession.getPpidFromUsid(user_id)
         #    print("User <%s> -> Person <%s>" % (user_id, ppid))
 
-        current_ids = set([p.person_id for p in self._people])
+        current_ids = set(self._people.keys())
         new_ids = detected_ids - current_ids
         vanished_ids = current_ids - detected_ids
 
@@ -106,7 +106,7 @@ class People(QObject):
         return self._people
 
     def getengagedpeople(self):
-        return set([p for p in self._people if p.person.is_engaged()])
+        return set([p for id, p in self._people.items() if p.is_engaged()])
 
     def delete(self, id):
         logger.debug("Person <%s> deleted" % id)
