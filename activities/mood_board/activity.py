@@ -11,7 +11,7 @@ import time
 import random
 
 from constants import *
-from dialogues import get_dialogue
+from dialogues import *
 from events import ActivityEvent
 
 from supervisor import action_logger
@@ -19,28 +19,6 @@ from supervisor import action_logger
 class MoodBoardActivity:
 
     type = MOODBOARD
-
-    ACTIVITIES = {
-            CALM_DANCES: ['do', 'a dance?', '\\option={"id":"%s","img":"images/calm_dance.svg","label":"Calm dance"}\\' % CALM_DANCES],
-            CALM_MUSIC: ['listen', 'some music?', '\\option={"id":"%s","img":"images/music.svg","label":"Music"}\\' % CALM_MUSIC],
-            CUDDLE: ['do', 'a cuddle?', '\\option={"id":"%s","img":"images/cuddle.svg","label":"Cuddle"}\\' % CUDDLE],
-            FUN_DANCES: ['do', 'a fun dance?', '\\option={"id":"%s","img":"images/party.svg","label":"Fun dance"}\\' % FUN_DANCES],
-            JOKES: ['listen', 'a good joke or two?', '\\option={"id":"%s","img":"images/joke.svg","label":"Jokes"}\\' % JOKES],
-            LISTENING: ['other', 'simply listen to you?', '\\option={"id":"%s","img":"images/speak.svg","label":"Talking"}\\' % LISTENING],
-            RELAX_SOUNDS: ['listen', 'relaxing sounds?', '\\option={"id":"%s","img":"images/relax.svg","label":"Sounds"}\\' % RELAX_SOUNDS],
-            ROCK_SCISSOR_PAPER: ['play', 'rock paper scissors?', '\\option={"id":"%s","img":"images/scissors.svg","label":"Rock Paper Scissors"}\\' % ROCK_SCISSOR_PAPER],
-            STORY: ['listen', 'a story?', '\\option={"id":"%s","img":"images/story.svg","label":"Story"}\\' % STORY],
-            }
-
-    MOODS_FEEDBACK = {
-            PARTYMOOD: ["Cool!", "Full of energy!", "Good, I like that!"],
-            HAPPY: ["Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
-            CONFUSED: ["Not too sure? Let see.","A bit lost? Let see.", "That's ok.", "A bit confused? That's ok.", "Let see what we can do."],
-            TIRED: ["A bit tired? Ok, let see.", "Ok, that's fine.", "Not too much energy? no worries.", "Ok, that's fine to be tired sometimes!"],
-            SAD: ["Oh, sorry to hear that you feel sad", "You feel sad? Let see what we can do.", "That's ok, let see.", "Ok, thank you for letting me know."],
-            ANGRY: ["Oh! You feel angry? Let see.", "You feel angry? Ok, thanks for telling me", "Ok, let see if we can calm down a little then", "That's ok to feel angry. Let see what we can do."],
-            }
-
 
     MOODS_ACTIVITIES = {
             ALL: [
@@ -77,7 +55,7 @@ class MoodBoardActivity:
     def make_activity_sentences(self, activities, add_all_link=True):
         res = []
         lastverb = None
-        for verb, activity, option in [self.ACTIVITIES[a] for a in activities]:
+        for verb, activity, option in [ACTIVITIES_DIALOGUES[a] for a in activities]:
             if not lastverb or lastverb != verb:
                 if verb == "listen":
                     lastverb = verb
@@ -172,7 +150,7 @@ class MoodBoardActivity:
         ### PROMPT 'let do smthg'
 
         if self.mood != ALL:
-            self.robot.say(random.choice(self.MOODS_FEEDBACK[self.mood])).wait()
+            self.robot.say(random.choice(MOODS_FEEDBACK[self.mood])).wait()
             yield RUNNING
 
         self.robot.say(get_dialogue("mood_prompt_activities")).wait()
