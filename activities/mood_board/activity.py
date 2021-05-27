@@ -151,6 +151,7 @@ class MoodBoardActivity:
         ####################################################################
         ### ASK FOR MOOD
 
+        self.robot.tablet.clearAll()
         self.robot.say(get_dialogue("mood_prompt")).wait()
         self.moods()
         yield RUNNING
