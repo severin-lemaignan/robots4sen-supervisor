@@ -294,6 +294,10 @@ class MoodBoardActivity:
 
             logger.info("Got final mood: %s" % final_mood)
             mood_logger.info((self.mood, final_mood, self.activities_done))
+
+            if final_mood != ALL:
+                self.robot.say(random.choice(FINAL_MOODS_FEEDBACK[self.mood])).wait()
+
             self.robot.tablet.clearAll()
 
 

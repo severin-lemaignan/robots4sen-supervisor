@@ -99,5 +99,14 @@ MOODS_FEEDBACK = {
         ANGRY: ["Oh! You feel angry? Let see.", "You feel angry? Ok, thanks for telling me", "Ok, let see if we can calm down a little then", "That's ok to feel angry. Let see what we can do."],
         }
 
+FINAL_MOODS_FEEDBACK = {
+        PARTYMOOD: ["Cool!", "Full of energy!", "Good, I like that!", "Good to hear"],
+        HAPPY: ["Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
+        CONFUSED: ["Not too sure?","A bit lost?", "That's ok.", "A bit confused? That's ok."],
+        TIRED: ["A bit tired?", "Still not too much energy? no worries.", "Ok, that's fine to be tired sometimes!"],
+        SAD: ["Sorry to hear that you still feel sad", "Ok, thank you for letting me know."],
+        ANGRY: ["Oh! You still feel angry? Maybe you should talk to an adult."],
+        }
+
 def get_dialogue(type):
     return random.choice(DIALOGUES[type])
