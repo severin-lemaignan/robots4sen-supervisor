@@ -74,7 +74,7 @@ class MoodBoardActivity:
     def __str__(self):
         return "Mood board"
 
-    def make_activity_sentences(self, activities):
+    def make_activity_sentences(self, activities, add_all_link=True):
         res = []
         lastverb = None
         for verb, activity in [self.ACTIVITIES[a] for a in activities]:
@@ -101,7 +101,9 @@ class MoodBoardActivity:
             else:
                 res.append("or %s" % activity)
 
-        res.append('\\option={"id":"%s","img":"images/again.svg","label": "All","footer":true}\\' % ALL)
+        if add_all_link:
+            res.append('\\option={"id":"%s","img":"images/again.svg","label": "All","footer":true}\\' % ALL)
+
         return res
 
     def moods(self):
@@ -182,12 +184,13 @@ class MoodBoardActivity:
         if self.mood != ALL:
             activities = random.sample(self.MOODS_ACTIVITIES[self.mood],
                                        random.randint(2,3))
+            sentences = self.make_activity_sentences(activities, add_all_link=True)
         else:
             activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
+            sentences = self.make_activity_sentences(activities, add_all_link=False)
 
         while True:
             logger.info("Offering the following activities: %s" % activities)
-            sentences = self.make_activity_sentences(activities)
 
             for s in sentences:
                 self.robot.say(s).wait()
@@ -214,6 +217,7 @@ class MoodBoardActivity:
                 self.robot.say(get_dialogue("mood_all_activities")).wait()
                 yield RUNNING
                 activities = random.sample(self.MOODS_ACTIVITIES[ALL], 8)
+                sentences = self.make_activity_sentences(activities, add_all_link=False)
             else:
                 break
 
@@ -246,12 +250,13 @@ class MoodBoardActivity:
 
             if self.mood != ALL:
                 activities = random.sample(self.MOODS_ACTIVITIES[self.mood], random.randint(2,3))
+                sentences = self.make_activity_sentences(activities, add_all_link=True)
             else:
                 activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
+                sentences = self.make_activity_sentences(activities, add_all_link=False)
 
             while True:
                 logger.info("Offering the following activities: %s" % activities)
-                sentences = self.make_activity_sentences(activities)
 
                 for s in sentences:
                     self.robot.say(s).wait()
@@ -278,6 +283,7 @@ class MoodBoardActivity:
                     self.robot.say(get_dialogue("mood_all_activities")).wait()
                     yield RUNNING
                     activities = random.sample(self.MOODS_ACTIVITIES[ALL], 8)
+                    sentences = self.make_activity_sentences(activities, add_all_link=False)
                 else:
                     break
 
