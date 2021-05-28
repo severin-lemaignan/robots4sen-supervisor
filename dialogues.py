@@ -1,4 +1,5 @@
 import random
+from constants import *
 
 DIALOGUES = {
     "story_prompt":         ["I love stories! ^startTag(estimate)Let's find one!",
@@ -78,6 +79,32 @@ DIALOGUES = {
 
 
     }
+
+ACTIVITIES_DIALOGUES = {
+        CALM_DANCES: ['do', 'a dance?', '\\option={"id":"%s","img":"images/calm_dance.svg","label":"Calm dance"}\\' % CALM_DANCES],
+        CALM_MUSIC: ['listen', 'some music?', '\\option={"id":"%s","img":"images/music.svg","label":"Music"}\\' % CALM_MUSIC],
+        CUDDLE: ['do', 'a cuddle?', '\\option={"id":"%s","img":"images/cuddle.svg","label":"Cuddle"}\\' % CUDDLE],
+        FUN_DANCES: ['do', 'a fun dance?', '\\option={"id":"%s","img":"images/party.svg","label":"Fun dance"}\\' % FUN_DANCES],
+        JOKES: ['listen', 'a good joke or two?', '\\option={"id":"%s","img":"images/joke.svg","label":"Jokes"}\\' % JOKES],
+        LISTENING: ['other', 'simply listen to you?', '\\option={"id":"%s","img":"images/speak.svg","label":"Talking"}\\' % LISTENING],
+        RELAX_SOUNDS: ['listen', 'relaxing sounds?', '\\option={"id":"%s","img":"images/relax.svg","label":"Sounds"}\\' % RELAX_SOUNDS],
+        ROCK_SCISSOR_PAPER: ['play', 'rock paper scissors?', '\\option={"id":"%s","img":"images/scissors.svg","label":"Rock Paper Scissors"}\\' % ROCK_SCISSOR_PAPER],
+        STORY: ['listen', 'a story?', '\\option={"id":"%s","img":"images/story.svg","label":"Story"}\\' % STORY],
+        }
+
+MOODS_FEEDBACK = {
+        SAD: ["Oh, sorry to hear that you feel not so good", "You feel a bit down? Let see what we can do.", "That's ok, let see.", "Ok, thank you for letting me know."],
+        HAPPY: ["Cool!", "Good, I like that!", "Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
+        CONFUSED: ["Not too good? Let see.","A bit all over the place? Let see what we can do.", "Let's do something then.", "Let see what we can do.", "Ok, let's do something together", "Feeling a bit funny?"],
+        ANGRY: ["Oh! You feel angry? Let see.", "You feel angry? Ok, thanks for telling me", "Ok, let see if we can calm down a little then", "That's ok to feel angry. Let see what we can do."],
+        }
+
+FINAL_MOODS_FEEDBACK = {
+        SAD: ["Sorry to hear that you still feel sad", "Ok, I hope you will feel better soon."],
+        HAPPY: ["Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
+        CONFUSED: ["Not too sure?","Still feeling a bit funny. Well, I hope you enjoyed it anyway.", "Ok. I hope you'll feel calmer soon."],
+        ANGRY: ["Oh! You still feel angry? Maybe you should talk to an adult."],
+        }
 
 def get_dialogue(type):
     return random.choice(DIALOGUES[type])

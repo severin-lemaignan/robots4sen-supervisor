@@ -9,7 +9,8 @@ Item {
 
     property bool robot_tracked: true // if true, the person's position is tracked by the robot; if false, manually tracked on the tablet
     property bool is_tracked: false
-    property bool is_seen: true
+    property bool is_lost: false
+    property bool is_seen: !(person.state in ["lost", "disappearing"])
 
     property alias person_id: person.person_id
 
@@ -50,15 +51,15 @@ Item {
 
         draggable: !robot_tracked
 
-        label: "(" + person.x.toFixed(2) + ", " + person.y.toFixed(2) + ")"
+        label: person.state + " (" + person.x.toFixed(2) + ", " + person.y.toFixed(2) + ")"
 
         Behavior on x { PropertyAnimation {} }
         Behavior on y { PropertyAnimation {} }
 
-        opacity: is_seen ? 1 : 0
+        opacity: is_lost ? 0 : 1
         Behavior on opacity { PropertyAnimation { duration: 5000} }
 
-        source: age == "child" ? "res/baby-face-outline.svg" : (person.age == "adult" ? "res/account.svg" : "res/account-unsure.svg")
+        source: is_seen ? (age == "child" ? "res/baby-face-outline.svg" : (age == "adult" ? "res/account.svg" : "res/account-unsure.svg")) : "res/account-unsure.svg"
 
         Rectangle {
             id: indicator
@@ -81,6 +82,11 @@ Item {
             }
         }
 
+        onPressAndHold: {
+            console.log("User " + person.person_id + " deleted");
+            person.delete()
+        }
+
         onXChanged: {
             if (!robot_tracked) {
                 person.setlocation([x/meters_to_px,-y/meters_to_px,0]);
@@ -100,7 +106,7 @@ Item {
     onDisappearedPerson: {
         if (person_id == person.person_id) {
             console.log("I, Person " + person_id + ", have disappeared!");
-            is_seen = false;
+            is_lost = true;
         }
     }
 

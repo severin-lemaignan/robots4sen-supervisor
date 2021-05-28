@@ -21,12 +21,62 @@
     </head>
     <body>
 
-        <div id="options_container" class="container">
-            <div class="col"></div>
-            <div class="col"></div>
-        </div>
+        <div class="page">
 
-        <div id="footer">
+            <img id="default" class="wavy hand" src="/static/images/hand.svg" />
+
+            <div id="options_container" class="container">
+            </div>
+            <div id="moods_container">
+                <div id="mood_blue" class="mood_col blue">
+                        <img src="/static/images/sad.svg"/>
+
+                        <p>
+                        Sick<br/>
+                        Sad<br/>
+                        Tired<br/>
+                        Bored<br/>
+                        Moving slowly<br/>
+                        </p>
+                </div>
+                <div id="mood_green" class="mood_col green">
+                    <img src="/static/images/happy.svg"/>
+
+                    <p>
+                    Happy<br/>
+                    Calm<br/>
+                    Feeling okay<br/>
+                    Focused<br/>
+                    </p>
+                </div>
+                <div id="mood_yellow" class="mood_col yellow">
+                    <img src="/static/images/frustrated.svg"/>
+
+                    <p>
+                    Frustrated<br/>
+                    Worried<br/>
+                    Silly/Wiggly<br/>
+                    Excited<br/>
+                    Loss of some control<br/>
+                    </p>
+                </div>
+                <div id="mood_red" class="mood_col red">
+                    <img src="/static/images/angry.svg"/>
+
+                    <p>
+                    Mad/Angry<br/>
+                    Mean<br/>
+                    Yelling/Hitting<br/>
+                    Disgusted<br/>
+                    Out of control<br/>
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div id="footer">
+            </div>
         </div>
 
         <script>
@@ -35,44 +85,59 @@
                 $(el).css('z-index', 10);
                 anime({
                     targets: el,
-                    scale: 2,
-                    opacity: {
-                        value: 1,
-                        duration: 200
-                    },
+                    scale: [
+                        {value: 2, duration: 200},
+                        {value: 1, duration: 200, delay:200}
+                    ],
                     easing: 'easeOutElastic',
-                    duration: 1000
-                });
-                anime({
-                    targets: ".container",
-                    opacity: 0,
-                    duration: 1000,
-                    delay:1000,
                     complete: function(anim) {
-                      send(el.id);
+                        send(el.id);
+                        $(".page").fadeOut(400);
                     }
                 });
 
+
             };
 
-            function show(el) {
+            function wavyHand() {
+                $("#default").css('transform', '');
+                $("#default").css('z-index', 1);
+                $("#default").show();
+
                 anime({
-                    targets: el,
-                    //translateX: 250,
-                    opacity: 0.7,
-                    easing: 'easeOutQuad',
-                    duration: 5000
+                    targets: ".wavy.hand",
+                    rotate:[
+                        {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
+                        {easing:'easeInOutQuad', value: 30, duration: 300},
+                        {easing:'easeInOutQuad', value: -30, duration: 300},
+                        {easing:'easeInOutQuad', value: 30, duration: 300},
+                        {easing:'easeOutQuad', value: 0, duration: 150},
+                        {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
+                        {easing:'easeInOutQuad', value: 30, duration: 300},
+                        {easing:'easeInOutQuad', value: -30, duration: 300},
+                        {easing:'easeInOutQuad', value: 30, duration: 300},
+                        {easing:'easeOutQuad', value: 0, duration: 150},
+                    ],
+                    opacity:[
+                        {value: 0.5, duration: 1000},
+                        {value: 0., duration: 2000, delay:4000},
+                        {value: 0., duration: 500, delay:4000}
+                    ],
+                    loop: true,
                 });
-            };
+            }
+
 
             // Create WebSocket connection.
             const socket = new WebSocket('ws://{{ ws_server_ip }}:{{ ws_server_port }}');
 
-            // Connection opened
-            //socket.addEventListener('open', function (event) {
-                //    socket.send('helo');
-                //});
+            $("#mood_green").click(function () {popOut(this);});
+            $("#mood_yellow").click(function () {popOut(this);});
+            $("#mood_blue").click(function () {popOut(this);});
+            $("#mood_red").click(function () {popOut(this);});
 
+            $(".wavy.hand").click(function () {popOut(this);});
+            wavyHand();
 
             function send(id) {
                 var msg = {
@@ -99,7 +164,7 @@
                     case "redirect":
                         location.href = msg.url;
                         break;
-
+                    
                     // creates one 'icon' per option
                     case "set_options":
 
@@ -124,12 +189,8 @@
                             $(fig).click(function () {popOut(this);});
                         }
 
-                        anime({
-                            targets: ".container",
-                            opacity: 1,
-                            duration: 1000,
-
-                        });
+                        $("#options_container").show()
+                         $(".page").fadeIn(200);
 
 
                          anime({
@@ -148,62 +209,34 @@
                         break;
 
                     case "clear_all":
+                        $("#default").hide();
+                        $("#moods_container").hide();
+                        $("#options_container").hide();
                         $("#options_container").empty();
                         $("#footer").empty();
                         break;
 
-                    case "show_option":
-                        show($(msg.id)[0]);
-                        break;
+                    case "moods":
+                        
+                        $(".mood_col").css("opacity",0);
+                        $("#moods_container").show();
+
+                        anime({
+                             targets: ".mood_col",
+                             opacity: 1,
+                            delay: anime.stagger(250, {start:400}),
+                             easing: 'easeOutQuad',
+                             duration: 1000
+                        });
+
+
 
                     case "debug":
                         console.log("DEBUG MSG FROM robotCtrl: " + msg.msg);
                         break;
 
                     case "default":
-
-                        $("#options_container").empty()
-
-                        $("<div class=\"col\">").appendTo("#options_container");
-
-                        var col = $("<div class=\"col\">");
-                        var img = $("<img id=\"default\" class=\"wavy hand\" src=\"/static/images/hand.svg\" />");
-
-                        img.appendTo(col);
-                        col.appendTo("#options_container");
-
-                        $("<div class=\"col\">").appendTo("#options_container");
-
-                        anime({
-                            targets: ".container",
-                            opacity: 1,
-                            duration: 1000,
-
-                        });
-
-                         anime({
-                             targets: ".wavy.hand",
-                             rotate:[
-                                {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
-                                {easing:'easeInOutQuad', value: 30, duration: 300},
-                                {easing:'easeInOutQuad', value: -30, duration: 300},
-                                {easing:'easeInOutQuad', value: 30, duration: 300},
-                                {easing:'easeOutQuad', value: 0, duration: 150},
-                                {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
-                                {easing:'easeInOutQuad', value: 30, duration: 300},
-                                {easing:'easeInOutQuad', value: -30, duration: 300},
-                                {easing:'easeInOutQuad', value: 30, duration: 300},
-                                {easing:'easeOutQuad', value: 0, duration: 150},
-                             ],
-                             opacity:[
-                                {value: 0.5, duration: 1000},
-                                {value: 0., duration: 2000, delay:4000},
-                                {value: 0., duration: 500, delay:4000}
-                             ],
-                             loop: true,
-                         });
-
-                        $(".wavy.hand").click(function () {popOut(this);});
+                        wavyHand();
                         break;
                 }
             });
