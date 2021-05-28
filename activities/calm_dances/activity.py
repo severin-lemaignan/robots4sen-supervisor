@@ -1,22 +1,20 @@
 import logging
-
 logger = logging.getLogger("robots.activities.calm_dances")
 
 import random
 
 from constants import *
 from dialogues import get_dialogue
-from events import ActivityEvent
+from events import Event
 
-class CalmDancesActivity:
+from activities.activity import Activity
+
+class CalmDancesActivity(Activity):
 
     type = CALM_DANCES
 
     def __init__(self):
         pass
-
-    def __str__(self):
-        return "Calm dances"
 
     def start(self, robot, cmd_queue):
 
@@ -26,7 +24,7 @@ class CalmDancesActivity:
 
         self.robot.tablet.debug("activity/calm_dances")
 
-        self.stop_dance = False
+        self.stop_behaviour = False
 
         # self._behaviour is a generator returning the current activity status;
         # self.tick() (called by the supervisor) will progress through it
@@ -38,35 +36,37 @@ class CalmDancesActivity:
         self.robot.say(get_dialogue("calm_dances_start")).wait()
         yield RUNNING
 
-        dances = ["robots4sen-brl/dance-taichi"]
-                
-        dance = self.robot.run_behaviour(random.choice(dances))
+        behaviours = ["robots4sen-brl/dance-taichi"]
 
-        while dance.isRunning():
-            if self.stop_dance:
-                dance.cancel()
-                self.stop_dance = False
+        behaviour = self.robot.run_behaviour(random.choice(behaviours))
+
+        while behaviour.isRunning():
+            if self.stop_behaviour:
+                behaviour.cancel()
+                self.stop_behaviour = False
             yield RUNNING
 
     def tick(self, evt=None):
 
         if evt:
-            if evt.type == ActivityEvent.INTERRUPTED:
+            if evt.type == Event.INTERRUPTED:
                 logger.warning("Activity 'calm dances' stopped: interrupt request!");
-                self.stop_dance = True
-                return STOPPED
-            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+                self.terminate()
+            if evt.type == Event.NO_ONE_ENGAGED:
                 logger.warning("Activity 'calm dances' stopped: no one in front of the robot!");
-                self.stop_dance = True
-                return STOPPED
+                self.terminate()
 
         try:
             return next(self._behaviour)
         except StopIteration:
             return STOPPED
 
+    def terminate(self):
+        self.stop_behaviour = True
+        next(self._behaviour)
+        return STOPPED
+
 activity = CalmDancesActivity()
 
 def get_activity():
     return activity
-

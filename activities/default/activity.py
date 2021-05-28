@@ -7,16 +7,14 @@ import time
 
 from constants import *
 
+from activities.activity import Activity
 
-class DefaultActivity:
+class DefaultActivity(Activity):
 
     type = DEFAULT
 
     def __init__(self):
         pass
-
-    def __str__(self):
-        return "Default"
 
     def start(self, robot, cmd_queue):
 

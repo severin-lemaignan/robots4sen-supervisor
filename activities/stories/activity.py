@@ -10,14 +10,15 @@ from flask.helpers import url_for
 
 from constants import *
 from dialogues import get_dialogue
-from events import ActivityEvent
+from events import Event
 
 from flask_server import tablet_webserver
 from story_parser import Story
+from activities.activity import Activity
 
 assets_path = "stories/susanne-and-ben/assets/"
 
-class StoryActivity:
+class StoryActivity(Activity):
 
     type = STORY
 
@@ -26,10 +27,6 @@ class StoryActivity:
         self.story = Story("static/stories/susanne-and-ben/story.json")
 
         self.current_speech_action = None
-
-
-    def __str__(self):
-        return "Story telling"
 
     def start(self, robot, cmd_queue):
 
@@ -111,11 +108,11 @@ class StoryActivity:
     def tick(self, evt=None):
 
         if evt:
-            if evt.type == ActivityEvent.INTERRUPTED:
+            if evt.type == Event.INTERRUPTED:
                 logger.warning("Activity story stopped: interrupt request!");
                 self.robot.say(get_dialogue("story_interrupted")).wait()
                 return STOPPED
-            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+            if evt.type == Event.NO_ONE_ENGAGED:
                 logger.warning("Activity story stopped: no one in front of the robot!");
                 self.robot.say(get_dialogue("story_no_one_left")).wait()
                 return STOPPED

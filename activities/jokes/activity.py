@@ -1,12 +1,13 @@
 import logging
-
 logger = logging.getLogger("robots.activities.jokes")
 
 import random
 
 from constants import *
 from dialogues import get_dialogue
-from events import ActivityEvent
+from events import Event
+
+from activities.activity import Activity
 
 JOKES = [
             "How do you make a sausage roll?\\pau=1500\\^startTag(down)Roll it down a hill!",
@@ -19,15 +20,12 @@ JOKES = [
             "What is a witch's favorite subject in school?\\pau=1300\\Spelling!",
         ]
 
-class JokesActivity:
+class JokesActivity(Activity):
 
     type = JOKES
 
     def __init__(self):
         pass
-
-    def __str__(self):
-        return "Jokes"
 
     def start(self, robot, cmd_queue):
 
@@ -65,13 +63,14 @@ class JokesActivity:
     def tick(self, evt=None):
 
         if evt:
-            if evt.type == ActivityEvent.INTERRUPTED:
+            if evt.type == Event.INTERRUPTED:
                 logger.warning("Activity 'jokes' stopped: interrupt request!");
-                return STOPPED
-            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+                self.terminate()
+
+            if evt.type == Event.NO_ONE_ENGAGED:
                 logger.warning("Activity 'jokes' stopped: no one in front of the robot!");
                 self.robot.say(get_dialogue("jokes_no_one_left")).wait()
-                return STOPPED
+                self.terminate()
 
         try:
             return next(self._behaviour)

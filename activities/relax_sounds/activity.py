@@ -6,17 +6,15 @@ import random
 
 from constants import *
 from dialogues import get_dialogue
-from events import ActivityEvent
+from events import Event
+from activities.activity import Activity
 
-class RelaxSoundsActivity:
+class RelaxSoundsActivity(Activity):
 
     type = RELAX_SOUNDS
 
     def __init__(self):
         pass
-
-    def __str__(self):
-        return "Relax sounds"
 
     def start(self, robot, cmd_queue):
 
@@ -51,11 +49,11 @@ class RelaxSoundsActivity:
     def tick(self, evt=None):
 
         if evt:
-            if evt.type == ActivityEvent.INTERRUPTED:
+            if evt.type == Event.INTERRUPTED:
                 logger.warning("Activity 'relax sounds' stopped: interrupt request!");
                 self.stop_behaviour = True
                 return STOPPED
-            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+            if evt.type == Event.NO_ONE_ENGAGED:
                 logger.warning("Activity 'relax sounds' stopped: no one in front of the robot!");
                 self.stop_behaviour = True
                 return STOPPED

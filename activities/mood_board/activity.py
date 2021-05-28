@@ -1,4 +1,3 @@
-from events import ActivityEvent
 import logging
 
 from csv_logging import create_csv_logger
@@ -12,11 +11,12 @@ import random
 
 from constants import *
 from dialogues import *
-from events import ActivityEvent
+from events import Event
 
 from supervisor import action_logger
+from activities.activity import Activity
 
-class MoodBoardActivity:
+class MoodBoardActivity(Activity):
 
     type = MOODBOARD
 
@@ -45,10 +45,6 @@ class MoodBoardActivity:
         self.current_speech_action = None
 
         self.activities_done = []
-
-
-    def __str__(self):
-        return "Mood board"
 
     def make_activity_sentences(self, activities, add_all_link=True):
         res = []
@@ -297,10 +293,10 @@ class MoodBoardActivity:
     def tick(self, evt=None):
 
         if evt:
-            if evt.type == ActivityEvent.INTERRUPTED:
+            if evt.type == Event.INTERRUPTED:
                 logger.warning("Activity mood-board stopped: interrupt request!");
                 return STOPPED
-            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
+            if evt.type == Event.NO_ONE_ENGAGED:
                 logger.warning("Activity mood-board stopped: no one in front of the robot!");
                 return STOPPED
 
