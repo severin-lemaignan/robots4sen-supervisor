@@ -65,7 +65,7 @@ class TabletWebSocketServer(QObject):
         if self.tablet:
             self.tablet.sendTextMessage(msg)
         else:
-            logger.warning("Tablet not yet connected. Msg <%s> *not* sent." % msg)
+            logger.error("Tablet not yet connected. Msg <%s> *not* sent." % msg)
 
 
     def default(self):

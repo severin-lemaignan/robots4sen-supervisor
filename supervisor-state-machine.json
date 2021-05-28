@@ -1,0 +1,222 @@
+{
+   "connections" : [
+      {
+         "from" : "5ff60048-8540-4d3f-b2fd-990de5143809:activity",
+         "name" : "anonymous",
+         "to" : "d24c75de-5bc8-4840-9465-6f55b788f6ac:input",
+         "uuid" : "0cef5ed0-78cc-487b-aa12-3acc69317e91"
+      },
+      {
+         "from" : "08453de6-710c-4df4-9c09-47ba69a68c6f:output",
+         "name" : "anonymous",
+         "to" : "8bade029-be44-4cd3-9a3e-5b36e38fb260:input",
+         "uuid" : "91c5b097-5770-4fd5-96de-8d697a80cb1c"
+      },
+      {
+         "from" : "a3556455-a8ec-4f38-8647-2891dc181437:output",
+         "name" : "anonymous",
+         "to" : "8bade029-be44-4cd3-9a3e-5b36e38fb260:input",
+         "uuid" : "9d4654eb-2a84-4f5f-b127-d3e8180825ab"
+      },
+      {
+         "from" : "8bade029-be44-4cd3-9a3e-5b36e38fb260:output",
+         "name" : "data",
+         "to" : "5ff60048-8540-4d3f-b2fd-990de5143809:input",
+         "uuid" : "96cac889-0e38-4ff1-838b-2afc7e99fdcf"
+      },
+      {
+         "from" : "cb310ba9-c421-4bcd-9135-fb96cf6f5f30:output",
+         "name" : "anonymous",
+         "to" : "8bade029-be44-4cd3-9a3e-5b36e38fb260:input",
+         "uuid" : "d3063014-bb6c-4a39-9caf-38923a3c3ca4"
+      },
+      {
+         "from" : "642593e0-82bf-4dd4-8599-6182b22e615c:continue",
+         "name" : "anonymous",
+         "to" : "d24c75de-5bc8-4840-9465-6f55b788f6ac:input",
+         "uuid" : "02706480-b1fd-44f7-8a1c-5c2a5290b0bc"
+      },
+      {
+         "from" : "d24c75de-5bc8-4840-9465-6f55b788f6ac:end",
+         "name" : "anonymous",
+         "to" : "642593e0-82bf-4dd4-8599-6182b22e615c:input",
+         "uuid" : "c8e9fffa-db2c-4a9d-a390-a38079d64041"
+      },
+      {
+         "from" : "642593e0-82bf-4dd4-8599-6182b22e615c:end",
+         "name" : "anonymous",
+         "to" : "ecd2cce7-604c-4ab4-bf2d-cd422dda955b:input",
+         "uuid" : "df9cf0ba-3d2d-4060-98fc-d0023bc022cf"
+      },
+      {
+         "from" : "ecd2cce7-604c-4ab4-bf2d-cd422dda955b:output",
+         "name" : "anonymous",
+         "to" : "8bade029-be44-4cd3-9a3e-5b36e38fb260:input",
+         "uuid" : "5a881119-e836-417c-8a18-0ef21c4faaa0"
+      },
+      {
+         "from" : "ea1ca293-22d3-458f-a327-cdfb2199e6fb:output",
+         "name" : "anonymous",
+         "to" : "5ff60048-8540-4d3f-b2fd-990de5143809:input",
+         "uuid" : "c7b118bc-f851-4f5d-a62e-68fa2548e4d3"
+      },
+      {
+         "from" : "d24c75de-5bc8-4840-9465-6f55b788f6ac:child interrupted",
+         "name" : "anonymous",
+         "to" : "642593e0-82bf-4dd4-8599-6182b22e615c:input",
+         "uuid" : "eea5301f-5b95-4980-aa78-19af14441983"
+      }
+   ],
+   "description" : "The <strong>CoolArch</strong> architecture is based on <a href=\"http://example.org\">this article</a> with the following modifications...",
+   "encoding_version" : "0.1",
+   "name" : "CoolArch",
+   "nodes" : [
+      {
+         "cognitive_function" : "Decision making",
+         "name" : "SOMEONE ENGAGING",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "output"
+            }
+         ],
+         "position" : [ 160, 120 ],
+         "size" : [ 160, 120 ],
+         "uuid" : "ea1ca293-22d3-458f-a327-cdfb2199e6fb"
+      },
+      {
+         "cognitive_function" : "Perception",
+         "name" : "Hand waving",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "output"
+            },
+            {
+               "direction" : "in",
+               "name" : "input"
+            }
+         ],
+         "position" : [ 180, 280 ],
+         "size" : [ 160, 120 ],
+         "uuid" : "8bade029-be44-4cd3-9a3e-5b36e38fb260"
+      },
+      {
+         "cognitive_function" : "Decision making",
+         "name" : "NO ONE ENGAGING",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "output"
+            }
+         ],
+         "position" : [ -200, 260 ],
+         "size" : [ 160, 120 ],
+         "uuid" : "a3556455-a8ec-4f38-8647-2891dc181437"
+      },
+      {
+         "cognitive_function" : "Other",
+         "name" : "Mood board continuation",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "end"
+            },
+            {
+               "direction" : "in",
+               "name" : "input"
+            },
+            {
+               "direction" : "out",
+               "name" : "continue"
+            }
+         ],
+         "position" : [ 1120, 240 ],
+         "size" : [ 220, 210 ],
+         "uuid" : "642593e0-82bf-4dd4-8599-6182b22e615c"
+      },
+      {
+         "cognitive_function" : "Other",
+         "name" : "Mood board",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "activity"
+            },
+            {
+               "direction" : "in",
+               "name" : "input"
+            }
+         ],
+         "position" : [ 460, 240 ],
+         "size" : [ 160, 177 ],
+         "uuid" : "5ff60048-8540-4d3f-b2fd-990de5143809"
+      },
+      {
+         "cognitive_function" : "Decision making",
+         "name" : "NO INTERACTION",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "output"
+            }
+         ],
+         "position" : [ -200, 440 ],
+         "size" : [ 160, 120 ],
+         "uuid" : "08453de6-710c-4df4-9c09-47ba69a68c6f"
+      },
+      {
+         "cognitive_function" : "Perception",
+         "name" : "Activity",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "end"
+            },
+            {
+               "direction" : "out",
+               "name" : "child interrupted"
+            },
+            {
+               "direction" : "in",
+               "name" : "input"
+            }
+         ],
+         "position" : [ 740, 240 ],
+         "size" : [ 160, 210 ],
+         "uuid" : "d24c75de-5bc8-4840-9465-6f55b788f6ac"
+      },
+      {
+         "cognitive_function" : "Decision making",
+         "name" : "CTRL INTERRUPTED",
+         "ports" : [
+            {
+               "direction" : "out",
+               "name" : "output"
+            }
+         ],
+         "position" : [ -200, 60 ],
+         "size" : [ 160, 120 ],
+         "uuid" : "cb310ba9-c421-4bcd-9135-fb96cf6f5f30"
+      },
+      {
+         "cognitive_function" : "Decision making",
+         "name" : "COOLDOWN",
+         "ports" : [
+            {
+               "direction" : "in",
+               "name" : "input"
+            },
+            {
+               "direction" : "out",
+               "name" : "output"
+            }
+         ],
+         "position" : [ 620, 640 ],
+         "size" : [ 160, 120 ],
+         "uuid" : "ecd2cce7-604c-4ab4-bf2d-cd422dda955b"
+      }
+   ],
+   "uuid" : "935c4ddf-4922-4b7a-afde-9af382a56bd2",
+   "version" : "0.1"
+}

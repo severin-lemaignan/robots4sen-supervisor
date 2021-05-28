@@ -7,33 +7,23 @@ import time
 
 from constants import *
 
+from activities.activity import Activity
 
-class DefaultActivity:
+class DefaultActivity(Activity):
 
     type = DEFAULT
 
     def __init__(self):
-        pass
-
-    def __str__(self):
-        return "Default"
+        super(DefaultActivity, self).__init__()
 
     def start(self, robot, cmd_queue):
-
-        self.robot = robot
-        self.cmd_queue = cmd_queue
-
-        self.robot.tablet.debug("activity/default")
+        super(DefaultActivity, self).start(robot, cmd_queue)
 
         # display the waving hand
         self.robot.tablet.clearAll()
         self.robot.tablet.default()
 
-        # self._behaviour is a generator returning the current activity status;
-        # self.tick() (called by the supervisor) will progress through it
-        self._behaviour = self.behaviour()
-
-    def behaviour(self):
+    def run(self):
 
         ####################################################################
         ### WAIT FOR THE CHILD TO CLICK ON THE WAVING HAND
@@ -47,11 +37,6 @@ class DefaultActivity:
 
         self.cmd_queue.put((TABLET, MOODBOARD, None))
 
-    def tick(self, evt=None):
-        try:
-            return next(self._behaviour)
-        except StopIteration:
-            return STOPPED
 
 default_activity = DefaultActivity()
 

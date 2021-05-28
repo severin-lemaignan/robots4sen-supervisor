@@ -10,41 +10,24 @@ from flask.helpers import url_for
 
 from constants import *
 from dialogues import get_dialogue
-from events import ActivityEvent
+from events import Event
 
 from flask_server import tablet_webserver
 from story_parser import Story
+from activities.activity import Activity
 
 assets_path = "stories/susanne-and-ben/assets/"
 
-class StoryActivity:
+class StoryActivity(Activity):
 
     type = STORY
 
     def __init__(self):
+        super(StoryActivity, self).__init__()
 
         self.story = Story("static/stories/susanne-and-ben/story.json")
 
-        self.current_speech_action = None
-
-
-    def __str__(self):
-        return "Story telling"
-
-    def start(self, robot, cmd_queue):
-
-        self.robot = robot
-        self.cmd_queue = cmd_queue
-        self.response_queue = self.robot.tablet.response_queue
-
-        self.robot.tablet.debug("activity/stories")
-
-        # self._behaviour is a generator returning the current activity status;
-        # self.tick() (called by the supervisor) will progress through it
-        self._behaviour = self.behaviour()
-
-    def behaviour(self):
-
+    def run(self):
  
         self.robot.tablet.clearAll()
         self.robot.say(get_dialogue("story_prompt")).wait()
@@ -108,22 +91,13 @@ class StoryActivity:
         yield RUNNING
         time.sleep(1)
 
-    def tick(self, evt=None):
+    def on_interrrupted(self, evt):
+        self.robot.say(get_dialogue("story_interrupted")).wait()
+        return super(StoryActivity, self).on_interrrupted(evt)
 
-        if evt:
-            if evt.type == ActivityEvent.INTERRUPTED:
-                logger.warning("Activity story stopped: interrupt request!");
-                self.robot.say(get_dialogue("story_interrupted")).wait()
-                return STOPPED
-            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
-                logger.warning("Activity story stopped: no one in front of the robot!");
-                self.robot.say(get_dialogue("story_no_one_left")).wait()
-                return STOPPED
-
-        try:
-            return next(self._behaviour)
-        except StopIteration:
-            return STOPPED
+    def on_no_one_engaged(self, evt):
+        self.robot.say(get_dialogue("story_no_one_left")).wait()
+        return super(StoryActivity, self).on_no_one_engaged(evt)
 
 story_activity = StoryActivity()
 

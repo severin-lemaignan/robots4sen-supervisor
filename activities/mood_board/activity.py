@@ -1,4 +1,3 @@
-from events import ActivityEvent
 import logging
 
 from csv_logging import create_csv_logger
@@ -12,11 +11,11 @@ import random
 
 from constants import *
 from dialogues import *
-from events import ActivityEvent
+from events import Event
 
-from supervisor import action_logger
+from activities.activity import Activity, action_logger
 
-class MoodBoardActivity:
+class MoodBoardActivity(Activity):
 
     type = MOODBOARD
 
@@ -39,16 +38,9 @@ class MoodBoardActivity:
             }
 
     def __init__(self):
-
-        self.progress = 0
-
-        self.current_speech_action = None
+        super(MoodBoardActivity, self).__init__()
 
         self.activities_done = []
-
-
-    def __str__(self):
-        return "Mood board"
 
     def make_activity_sentences(self, activities, add_all_link=True):
         res = []
@@ -98,26 +90,19 @@ class MoodBoardActivity:
         continuation: if True, means that mood-board is re-started at the
         end of another activity.
         """
+        super(MoodBoardActivity, self).start(robot, cmd_queue)
 
-        self.robot = robot
-        self.cmd_queue = cmd_queue
-        self.response_queue = self.robot.tablet.response_queue
-
-        self.robot.tablet.debug("activity/mood_board")
-
-        # self._behaviour is a generator returning the current activity status;
-        # self.tick() (called by the supervisor) will progress through it
         if not continuation:
 
             self.mood = None
             self.activities_done = []
 
-            self._behaviour = self.behaviour()
+            self._behaviour = self.run()
 
         else:
-            self._behaviour = self.continuation_behaviour()
+            self._behaviour = self.continuation_run()
 
-    def behaviour(self):
+    def run(self):
 
         ####################################################################
         ### ASK FOR MOOD
@@ -198,7 +183,7 @@ class MoodBoardActivity:
         action_logger.info((action, self.mood))
         self.cmd_queue.put((TABLET, ACTIVITY, action))
 
-    def continuation_behaviour(self):
+    def continuation_run(self):
 
         self.robot.tablet.clearAll()
         self.robot.tablet.yesNoBtns()
@@ -292,22 +277,6 @@ class MoodBoardActivity:
                 self.robot.say(random.choice(FINAL_MOODS_FEEDBACK[self.mood])).wait()
 
             self.robot.tablet.clearAll()
-
-
-    def tick(self, evt=None):
-
-        if evt:
-            if evt.type == ActivityEvent.INTERRUPTED:
-                logger.warning("Activity mood-board stopped: interrupt request!");
-                return STOPPED
-            if evt.type == ActivityEvent.NO_ONE_ENGAGED:
-                logger.warning("Activity mood-board stopped: no one in front of the robot!");
-                return STOPPED
-
-        try:
-            return next(self._behaviour)
-        except StopIteration:
-            return STOPPED
 
 mood_board_activity = MoodBoardActivity()
 
