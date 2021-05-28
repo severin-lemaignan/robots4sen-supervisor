@@ -91,20 +91,16 @@ ACTIVITIES_DIALOGUES = {
         }
 
 MOODS_FEEDBACK = {
-        PARTYMOOD: ["Cool!", "Full of energy!", "Good, I like that!"],
-        HAPPY: ["Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
-        CONFUSED: ["Not too sure? Let see.","A bit lost? Let see.", "That's ok.", "A bit confused? That's ok.", "Let see what we can do."],
-        TIRED: ["A bit tired? Ok, let see.", "Ok, that's fine.", "Not too much energy? no worries.", "Ok, that's fine to be tired sometimes!"],
-        SAD: ["Oh, sorry to hear that you feel sad", "You feel sad? Let see what we can do.", "That's ok, let see.", "Ok, thank you for letting me know."],
+        SAD: ["Oh, sorry to hear that you feel not so good", "You feel a bit down? Let see what we can do.", "That's ok, let see.", "Ok, thank you for letting me know."],
+        HAPPY: ["Cool!", "Good, I like that!", "Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
+        CONFUSED: ["Not too good? Let see.","A bit all over the place? Let see what we can do.", "Let's do something then.", "Let see what we can do.", "Ok, let's do something together", "Feeling a bit funny?"],
         ANGRY: ["Oh! You feel angry? Let see.", "You feel angry? Ok, thanks for telling me", "Ok, let see if we can calm down a little then", "That's ok to feel angry. Let see what we can do."],
         }
 
 FINAL_MOODS_FEEDBACK = {
-        PARTYMOOD: ["Cool!", "Full of energy!", "Good, I like that!", "Good to hear"],
+        SAD: ["Sorry to hear that you still feel sad", "Ok, I hope you will feel better soon."],
         HAPPY: ["Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
-        CONFUSED: ["Not too sure?","A bit lost?", "That's ok.", "A bit confused? That's ok."],
-        TIRED: ["A bit tired?", "Still not too much energy? no worries.", "Ok, that's fine to be tired sometimes!"],
-        SAD: ["Sorry to hear that you still feel sad", "Ok, thank you for letting me know."],
+        CONFUSED: ["Not too sure?","Still feeling a bit funny. Well, I hope you enjoyed it anyway.", "Ok. I hope you'll feel calmer soon."],
         ANGRY: ["Oh! You still feel angry? Maybe you should talk to an adult."],
         }
 

@@ -38,9 +38,7 @@ ROCK_SCISSOR_PAPER = "rock-scissor-paper"
 STORY = "story"
 
 # MOODS
-ANGRY = "angry"
-CONFUSED = "confused"
-HAPPY = "happy"
-PARTYMOOD = "partymood"
-SAD = "sad"
-TIRED = "tired"
+ANGRY = "mood_red"
+CONFUSED = "mood_yellow"
+HAPPY = "mood_green"
+SAD = "mood_blue"

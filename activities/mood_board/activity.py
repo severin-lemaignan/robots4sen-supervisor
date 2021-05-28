@@ -32,11 +32,9 @@ class MoodBoardActivity:
                 ROCK_SCISSOR_PAPER, 
                 STORY, 
                 ],
-            PARTYMOOD: [JOKES, FUN_DANCES, ROCK_SCISSOR_PAPER],
-            HAPPY: [JOKES, FUN_DANCES, STORY, ROCK_SCISSOR_PAPER],
-            CONFUSED: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, CUDDLE],
-            TIRED: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, CUDDLE, FUN_DANCES],
             SAD: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, LISTENING, CUDDLE, JOKES],
+            HAPPY: [JOKES, FUN_DANCES, STORY, ROCK_SCISSOR_PAPER],
+            CONFUSED: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, CUDDLE, LISTENING],
             ANGRY: [STORY, CALM_DANCES, CALM_MUSIC, RELAX_SOUNDS, LISTENING, CUDDLE],
             }
 
@@ -87,17 +85,12 @@ class MoodBoardActivity:
     def moods(self):
 
         options = [
-                {"id": PARTYMOOD, "img": "images/partymood.svg", "label": "Party!"},
-                {"id": HAPPY, "img": "images/happy.svg", "label": "Happy"},
-                {"id": CONFUSED, "img": "images/confused.svg", "label": "Not sure"},
-                {"id": TIRED, "img": "images/tired.svg", "label": "Tired"},
-                {"id": SAD, "img": "images/sad.svg", "label": "Sad"},
-                {"id": ANGRY, "img": "images/angry.svg", "label": "Angry"},
                 {"id": ALL, "img": "images/arrow.svg", "label": "Skip", "footer": True}
                 ]
         
 
-        self.robot.tablet.clearOptions()
+        self.robot.tablet.clearAll()
+        self.robot.tablet.showMoodBoard()
         self.robot.tablet.setOptions(options)
 
     def start(self, robot, cmd_queue, continuation=False):

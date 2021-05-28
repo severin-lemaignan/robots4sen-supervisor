@@ -89,8 +89,8 @@ class TabletWebSocketServer(QObject):
     def setOptions(self, options):
         self.write.emit(json.dumps({"type":"set_options", "options":options}))
 
-    def showOption(self, id):
-        self.write.emit(json.dumps({"type":"show_option", "id":id}))
+    def showMoodBoard(self):
+        self.write.emit(json.dumps({"type":"moods"}))
 
     def addCancelBtn(self):
         btn = {"id": INTERRUPT, "img": "images/stop.svg", "label": "Stop", "footer": True}

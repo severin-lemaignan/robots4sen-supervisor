@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    font-size: 18px;
+    font-size: 23px;
     line-height: 1.6;
     font-weight: 600;
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -13,13 +13,50 @@ body {
 
     background-color: #FD940A;
     background-image: radial-gradient(circle, #F9A72B 0%, #FA9026 70%, #FB6C1F 100%);
+    overflow: hidden;
+    width:1280px;
+    height:800px;
 }
 
 .container {
-    padding: 0px 10% 0px 10%;
-    height: 800px;
-    width:80%;
+    height: 100%;
+    width: 100%;
     text-align: center;
+}
+
+#options_container {
+    display:none;
+}
+
+#moods_container {
+    height: 800px;
+    width: 100%;
+    display:none;
+}
+
+.mood_col {
+    width: 25%;
+    height: 100%;
+    float:left;
+    text-align: center;
+    font-size: 40px;
+}
+
+.mood_col > img {
+    padding: 40px;
+}
+
+.green {
+    background-color: #26a269;
+}
+.yellow {
+    background-color: #e5a50a;
+}
+.blue {
+    background-color: #1a5fb4;
+}
+.red {
+    background-color: #a51d2d;
 }
 
 #footer {
@@ -32,7 +69,7 @@ body {
 
 .col {
     text-align:center;
-    width: 200px;
+    width: 250px;
     margin: 16px;
     margin-top: 75px;
     display: inline-block;
@@ -61,5 +98,4 @@ figcaption {
   width: 300px;
   height: 300px;
   transform-origin: 50% 100%;
-  transform: 
 }
