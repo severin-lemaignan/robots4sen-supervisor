@@ -13,8 +13,7 @@ from constants import *
 from dialogues import *
 from events import Event
 
-from supervisor import action_logger
-from activities.activity import Activity
+from activities.activity import Activity, action_logger
 
 class MoodBoardActivity(Activity):
 
@@ -91,15 +90,8 @@ class MoodBoardActivity(Activity):
         continuation: if True, means that mood-board is re-started at the
         end of another activity.
         """
+        super(MoodBoardActivity, self).start(robot, cmd_queue)
 
-        self.robot = robot
-        self.cmd_queue = cmd_queue
-        self.response_queue = self.robot.tablet.response_queue
-
-        self.robot.tablet.debug("activity/mood_board")
-
-        # self._behaviour is a generator returning the current activity status;
-        # self.tick() (called by the supervisor) will progress through it
         if not continuation:
 
             self.mood = None

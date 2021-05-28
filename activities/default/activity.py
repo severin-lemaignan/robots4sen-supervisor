@@ -17,11 +17,7 @@ class DefaultActivity(Activity):
         super(DefaultActivity, self).__init__()
 
     def start(self, robot, cmd_queue):
-
-        self.robot = robot
-        self.cmd_queue = cmd_queue
-
-        self.robot.tablet.debug("activity/default")
+        super(DefaultActivity, self).start(robot, cmd_queue)
 
         # display the waving hand
         self.robot.tablet.clearAll()

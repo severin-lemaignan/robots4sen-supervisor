@@ -2,10 +2,6 @@
 
 import logging;logger = logging.getLogger("robots.supervisor")
 
-from csv_logging import create_csv_logger
-
-action_logger = create_csv_logger("logs/actions.csv") 
-
 import time
 from Queue import Queue, Empty
 
@@ -77,7 +73,6 @@ class Supervisor(QObject):
                 assert(status == STOPPED)
 
                 logger.info("Activity <%s> interrupted (%s)" % (self.activity, evt.type))
-                action_logger.info((self.activity.type, status))
 
                 self.startActivity(DEFAULT)
 
@@ -93,18 +88,17 @@ class Supervisor(QObject):
 
                     self.startActivity(MOODBOARD)
 
-            if self.activity.type == MOODBOARD:
-
-                if evt.type == Event.ACTIVITY_REQUEST:
-                    self.startActivity(evt.activity)
-
 
             status = self.activity.tick(evt)
 
             if status == STOPPED:
 
                 logger.info("Activity <%s> completed" % self.activity)
-                action_logger.info((self.activity.type, status))
+
+                if self.activity.type == MOODBOARD:
+
+                    if evt.type == Event.ACTIVITY_REQUEST:
+                        self.startActivity(evt.activity)
 
                 if self.activity.type != MOODBOARD:
                     # go back to moodboard to ask whether to continue or final mood
@@ -144,7 +138,6 @@ class Supervisor(QObject):
         else:
             self.activity.start(self.bridge, self.cmd_queue)
 
-        action_logger.info((self.activity.type, RUNNING))
         self.isCurrentActivity_changed.emit(str(self.activity))
 
 

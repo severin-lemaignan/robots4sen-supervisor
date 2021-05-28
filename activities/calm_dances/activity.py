@@ -15,15 +15,6 @@ class CalmDancesActivity(Activity):
 
     def __init__(self):
         super(CalmDancesActivity, self).__init__()
-
-    def start(self, robot, cmd_queue):
-
-        self.robot = robot
-        self.cmd_queue = cmd_queue
-        self.response_queue = self.robot.tablet.response_queue
-
-        self.robot.tablet.debug("activity/calm_dances")
-
         self.stop_behaviour = False
 
     def run(self):

@@ -27,14 +27,6 @@ class StoryActivity(Activity):
 
         self.story = Story("static/stories/susanne-and-ben/story.json")
 
-    def start(self, robot, cmd_queue):
-
-        self.robot = robot
-        self.cmd_queue = cmd_queue
-        self.response_queue = self.robot.tablet.response_queue
-
-        self.robot.tablet.debug("activity/stories")
-
     def run(self):
  
         self.robot.tablet.clearAll()

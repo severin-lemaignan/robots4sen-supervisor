@@ -28,12 +28,7 @@ class JokesActivity(Activity):
         super(JokesActivity, self).__init__()
 
     def start(self, robot, cmd_queue):
-
-        self.robot = robot
-        self.cmd_queue = cmd_queue
-        self.response_queue = self.robot.tablet.response_queue
-
-        self.robot.tablet.debug("activity/jokes")
+        super(JokesActivity, self).start(robot, cmd_queue)
 
         self.jokes = random.sample(JOKES, random.randint(2,5))
 

@@ -1,6 +1,10 @@
 import logging
 logger = logging.getLogger("robots.activity")
 
+from csv_logging import create_csv_logger
+action_logger = create_csv_logger("logs/actions.csv") 
+
+
 from events import Event
 from constants import *
 
@@ -9,16 +13,23 @@ class Activity(object):
     type = "undefined"
 
     def __init__(self):
-
-        # self._behaviour is a generator returning the current activity status;
-        # self.tick() (called by the supervisor) will progress through it
-        self._behaviour = self.run()
+        pass
 
     def __str__(self):
         return self.type
 
-    def start(self):
-        raise NotImplementedError()
+    def start(self, robot, cmd_queue):
+       
+        self.robot = robot
+        self.cmd_queue = cmd_queue
+        self.response_queue = self.robot.tablet.response_queue
+
+        self.robot.tablet.debug("activity/%s" % self)
+        action_logger.info(str(self),RUNNING)
+ 
+        # self._behaviour is a generator returning the current activity status;
+        # self.tick() (called by the supervisor) will progress through it
+        self._behaviour = self.run()
 
     def run(self):
         raise NotImplementedError()
@@ -39,19 +50,23 @@ class Activity(object):
         try:
             return next(self._behaviour)
         except StopIteration:
+            action_logger.info(str(self),STOPPED)
             return STOPPED
 
 
     def on_interrrupted(self, evt):
         logger.warning("Activity <%s> interrupted: %s" % (self, evt));
+        action_logger.info(str(self),str(evt))
         return self.terminate()
 
     def on_no_one_engaged(self, evt):
         logger.warning("Activity <%s> interrupted: %s" % (self, evt));
+        action_logger.info(str(self),str(evt))
         return self.terminate()
 
     def on_no_interaction(self, evt):
         logger.warning("Activity <%s> interrupted: %s" % (self, evt));
+        action_logger.info(str(self),str(evt))
         return self.terminate()
 
     def terminate(self):
