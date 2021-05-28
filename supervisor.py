@@ -7,6 +7,7 @@ from csv_logging import create_csv_logger
 
 action_logger = create_csv_logger("logs/actions.csv") 
 
+import time
 from Queue import Queue, Empty
 
 from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property
@@ -30,6 +31,7 @@ from activities.relax_sounds import activity as relax_sounds
 ###########################################
 
 TICK_PERIOD = 0.05 #sec
+COOL_DOWN_DURATION = 5 #sec
 
 class Supervisor(QObject):
     def __init__(self, bridge):
@@ -41,6 +43,11 @@ class Supervisor(QObject):
 
         self.activity = None
         self.request_interrupt = False
+
+        # rest_time stores the timestamp at which the last activity stopped
+        # used to ensure a 'cool down' period between 2 activities
+        self.rest_time = time.time()
+
     
     isCurrentActivity_changed = Signal(str)
     @Property(str, notify=isCurrentActivity_changed)
@@ -66,6 +73,11 @@ class Supervisor(QObject):
             if self.activity:
 
                 if self.activity.type == DEFAULT:
+                    t = time.time() - self.rest_time
+                    if t < COOL_DOWN_DURATION:
+                        logger.warning("Cool-down period (%.1f/%fs)" % (t, COOL_DOWN_DURATION))
+                        continue
+
                     if len(self.bridge.people.getengagedpeople()) > 0:
                         logger.warning("Someone is engaging! Start moodboard")
                         self.startActivity(moodboard.get_activity())
@@ -88,10 +100,15 @@ class Supervisor(QObject):
                 if status == STOPPED:
                     logger.info("Activity <%s> completed" % self.activity)
                     action_logger.info((self.activity.type, status))
+
+                    # implement logic to either:
+                    #  - go back to moodboard and either do another activity or ask final mood
+                    #  - or go to rest (default waving hand)
                     if self.activity == moodboard.get_activity():
                         self.activity = None
                         self.request_interrupt = False
                         self.isCurrentActivity_changed.emit(None)
+                        self.rest_time = time.time()
                     else:
                         logger.warning("Returning to moodboard")
                         self.startActivity(moodboard.get_activity(), True) # continuation = True
