@@ -61,20 +61,10 @@ class Supervisor(QObject):
 
     def run(self):
 
-         while True:
+        has_completed_mood_continuation = False
+
+        while True:
             evt = self.process_events()
-
-            if self.activity.type != DEFAULT \
-               and ((evt.type == Event.INTERRUPTED and evt.src == Event.CTRL_TABLET)
-                    or evt.type == Event.NO_ONE_ENGAGED
-                    or evt.type == Event.NO_INTERACTION):
-
-                status = self.activity.tick(evt) # give the chance to close appropriately
-                assert(status == STOPPED)
-
-                logger.info("Activity <%s> interrupted (%s)" % (self.activity, evt.type))
-
-                self.startActivity(DEFAULT)
 
             if self.activity.type == DEFAULT:
 
@@ -86,6 +76,7 @@ class Supervisor(QObject):
                      or evt.type == Event.ONE_TO_ONE_ENGAGEMENT \
                      or evt.type == Event.MULTI_ENGAGEMENT:
 
+                    has_completed_mood_continuation = False
                     self.startActivity(MOODBOARD)
 
 
@@ -97,18 +88,18 @@ class Supervisor(QObject):
 
                 if self.activity.type == MOODBOARD:
 
-                    if evt.type == Event.ACTIVITY_REQUEST:
-                        self.startActivity(evt.activity)
+                    if not has_completed_mood_continuation:
+                        if evt.type == Event.ACTIVITY_REQUEST:
+                            self.startActivity(evt.activity)
+                    else:
+                        # go back to hand waving, and restart cool-down period
+                        self.startActivity(DEFAULT)
+                        self.rest_time = time.time()
 
-                if self.activity.type != MOODBOARD:
+                elif self.activity.type != MOODBOARD:
                     # go back to moodboard to ask whether to continue or final mood
                     self.startActivity(MOODBOARD, True)
-
-                if self.activity.type == MOODBOARD:
-                    # go back to hand waving, and restart cool-down period
-                    self.startActivity(DEFAULT)
-                    self.rest_time = time.time()
-
+                    has_completed_mood_continuation = True
 
     def startActivity(self, activity, *args):
         if activity == DEFAULT:
@@ -128,7 +119,8 @@ class Supervisor(QObject):
         elif activity == CALM_DANCES:
             self.activity = calm_dances.get_activity()
         else:
-            logger.error("Unknown activity <%s>" % activity)
+            logger.error("Unknown activity <%s>. Falling back to DEFAULT" % activity)
+            self.activity = default_activity.get_activity()
             return
 
         logger.info("Activity <%s> starting" % self.activity)
