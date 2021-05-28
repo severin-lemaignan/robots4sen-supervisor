@@ -14,7 +14,7 @@ class RelaxSoundsActivity(Activity):
     type = RELAX_SOUNDS
 
     def __init__(self):
-        pass
+        super(RelaxSoundsActivity, self).__init__()
 
     def start(self, robot, cmd_queue):
 
@@ -26,18 +26,14 @@ class RelaxSoundsActivity(Activity):
 
         self.stop_behaviour = False
 
-        # self._behaviour is a generator returning the current activity status;
-        # self.tick() (called by the supervisor) will progress through it
-        self._behaviour = self.behaviour()
-
-    def behaviour(self):
+    def run(self):
 
         self.robot.tablet.clearOptions()
         self.robot.say(get_dialogue("relax_sounds_start")).wait()
         yield RUNNING
 
         behaviours = ["robots4sen-brl/relax_sounds"]
-                
+
         behaviour = self.robot.run_behaviour(random.choice(behaviours))
 
         while behaviour.isRunning():
@@ -46,22 +42,10 @@ class RelaxSoundsActivity(Activity):
                 self.stop_behaviour = False
             yield RUNNING
 
-    def tick(self, evt=None):
-
-        if evt:
-            if evt.type == Event.INTERRUPTED:
-                logger.warning("Activity 'relax sounds' stopped: interrupt request!");
-                self.stop_behaviour = True
-                return STOPPED
-            if evt.type == Event.NO_ONE_ENGAGED:
-                logger.warning("Activity 'relax sounds' stopped: no one in front of the robot!");
-                self.stop_behaviour = True
-                return STOPPED
-
-        try:
-            return next(self._behaviour)
-        except StopIteration:
-            return STOPPED
+    def terminate(self):
+        self.stop_behaviour = True
+        next(self._behaviour) # run it one more time to ensure the naoqi behaviour is cancelled
+        return STOPPED
 
 activity = RelaxSoundsActivity()
 

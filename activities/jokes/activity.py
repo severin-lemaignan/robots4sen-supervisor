@@ -25,7 +25,7 @@ class JokesActivity(Activity):
     type = JOKES
 
     def __init__(self):
-        pass
+        super(JokesActivity, self).__init__()
 
     def start(self, robot, cmd_queue):
 
@@ -37,11 +37,7 @@ class JokesActivity(Activity):
 
         self.jokes = random.sample(JOKES, random.randint(2,5))
 
-        # self._behaviour is a generator returning the current activity status;
-        # self.tick() (called by the supervisor) will progress through it
-        self._behaviour = self.behaviour()
-
-    def behaviour(self):
+    def run(self):
 
         self.robot.tablet.clearAll()
         self.robot.say(get_dialogue("jokes_start")).wait()
@@ -60,22 +56,9 @@ class JokesActivity(Activity):
 
         self.robot.say(get_dialogue("jokes_end")).wait()
 
-    def tick(self, evt=None):
-
-        if evt:
-            if evt.type == Event.INTERRUPTED:
-                logger.warning("Activity 'jokes' stopped: interrupt request!");
-                self.terminate()
-
-            if evt.type == Event.NO_ONE_ENGAGED:
-                logger.warning("Activity 'jokes' stopped: no one in front of the robot!");
-                self.robot.say(get_dialogue("jokes_no_one_left")).wait()
-                self.terminate()
-
-        try:
-            return next(self._behaviour)
-        except StopIteration:
-            return STOPPED
+    def on_no_one_engaged(self, evt):
+        self.robot.say(get_dialogue("jokes_no_one_left")).wait()
+        return super(JokesActivity, self).on_no_one_engaged(evt)
 
 activity = JokesActivity()
 

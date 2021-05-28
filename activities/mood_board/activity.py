@@ -39,10 +39,7 @@ class MoodBoardActivity(Activity):
             }
 
     def __init__(self):
-
-        self.progress = 0
-
-        self.current_speech_action = None
+        super(MoodBoardActivity, self).__init__()
 
         self.activities_done = []
 
@@ -108,12 +105,12 @@ class MoodBoardActivity(Activity):
             self.mood = None
             self.activities_done = []
 
-            self._behaviour = self.behaviour()
+            self._behaviour = self.run()
 
         else:
-            self._behaviour = self.continuation_behaviour()
+            self._behaviour = self.continuation_run()
 
-    def behaviour(self):
+    def run(self):
 
         ####################################################################
         ### ASK FOR MOOD
@@ -194,7 +191,7 @@ class MoodBoardActivity(Activity):
         action_logger.info((action, self.mood))
         self.cmd_queue.put((TABLET, ACTIVITY, action))
 
-    def continuation_behaviour(self):
+    def continuation_run(self):
 
         self.robot.tablet.clearAll()
         self.robot.tablet.yesNoBtns()
@@ -288,22 +285,6 @@ class MoodBoardActivity(Activity):
                 self.robot.say(random.choice(FINAL_MOODS_FEEDBACK[self.mood])).wait()
 
             self.robot.tablet.clearAll()
-
-
-    def tick(self, evt=None):
-
-        if evt:
-            if evt.type == Event.INTERRUPTED:
-                logger.warning("Activity mood-board stopped: interrupt request!");
-                return STOPPED
-            if evt.type == Event.NO_ONE_ENGAGED:
-                logger.warning("Activity mood-board stopped: no one in front of the robot!");
-                return STOPPED
-
-        try:
-            return next(self._behaviour)
-        except StopIteration:
-            return STOPPED
 
 mood_board_activity = MoodBoardActivity()
 

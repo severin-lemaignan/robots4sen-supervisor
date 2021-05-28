@@ -14,7 +14,7 @@ class CalmDancesActivity(Activity):
     type = CALM_DANCES
 
     def __init__(self):
-        pass
+        super(CalmDancesActivity, self).__init__()
 
     def start(self, robot, cmd_queue):
 
@@ -26,11 +26,7 @@ class CalmDancesActivity(Activity):
 
         self.stop_behaviour = False
 
-        # self._behaviour is a generator returning the current activity status;
-        # self.tick() (called by the supervisor) will progress through it
-        self._behaviour = self.behaviour()
-
-    def behaviour(self):
+    def run(self):
 
         self.robot.tablet.clearOptions()
         self.robot.say(get_dialogue("calm_dances_start")).wait()
@@ -46,24 +42,10 @@ class CalmDancesActivity(Activity):
                 self.stop_behaviour = False
             yield RUNNING
 
-    def tick(self, evt=None):
-
-        if evt:
-            if evt.type == Event.INTERRUPTED:
-                logger.warning("Activity 'calm dances' stopped: interrupt request!");
-                self.terminate()
-            if evt.type == Event.NO_ONE_ENGAGED:
-                logger.warning("Activity 'calm dances' stopped: no one in front of the robot!");
-                self.terminate()
-
-        try:
-            return next(self._behaviour)
-        except StopIteration:
-            return STOPPED
 
     def terminate(self):
         self.stop_behaviour = True
-        next(self._behaviour)
+        next(self._behaviour) # run it one more time to ensure the naoqi behaviour is cancelled
         return STOPPED
 
 activity = CalmDancesActivity()
