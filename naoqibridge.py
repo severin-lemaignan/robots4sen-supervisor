@@ -37,6 +37,28 @@ class MockFuture():
     def isFinished(self):
         return True
 
+class BehaviourFuture():
+    def __init__(self, albehaviour, behaviour):
+        self.albehaviour = albehaviour
+        self.behaviour = behaviour
+
+    def wait(self):
+        while self.isRunning():
+            time.sleep(0.05)
+
+    def isRunning(self):
+        return self.albehaviour.isBehaviorRunning(self.behaviour)
+
+    def isFinished(self):
+        return not self.isRunning()
+
+    def start(self):
+        self.albehaviour.startBehavior(self.behaviour)
+
+    def cancel(self):
+        self.albehaviour.stopBehavior(self.behaviour)
+
+
 class People(QObject):
 
     PEOPLE_UPDATE_INTERVAL = 200 #ms
@@ -574,10 +596,12 @@ class NaoqiBridge(QObject):
 
         if not self._connected:
             logger.warning("Robot not connected. Can not perform 'run_behaviour'")
-            return
+            return MockFuture()
 
         logging.debug("Running behaviour <%s>" % behaviour)
-        return qi.async(self.albehaviours.runBehavior, behaviour)
+        future = BehaviourFuture(self.albehaviours, behaviour)
+        future.start()
+        return future
 
     @Slot(str)
     def request_activity(self, activity):
