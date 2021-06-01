@@ -91,7 +91,7 @@ class People(QObject):
 
             if id > 0: # else, signal already emitted in createMockPerson()
                 self._people[id] = Person(id)
-                self.newPerson.emit(str(id), True, NaoqiPerson.AGE_UNKNOWNN)
+                self.newPerson.emit(str(id), True, Person.AGE_UNKNOWNN)
 
 
         for id in vanished_ids:
@@ -183,7 +183,7 @@ class NaoqiPerson(QObject):
                 if age_estimate:
                     age, confidence = age_estimate
                     if confidence > 0.3:
-                        self.setage(self.ADULT if age > 17 else self.CHILD)
+                        self.setage(Person.ADULT if age > 17 else Person.CHILD)
             except RuntimeError:
                 pass
 
