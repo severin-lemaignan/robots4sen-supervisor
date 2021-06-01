@@ -41,6 +41,7 @@ class SeenState(PersonState):
 
     def step(self, person):
 
+        #logger.debug("is close: %s; is looking: %s" % (person.is_close(), person.is_looking()))
         if person.is_close() and person.is_looking():
             return EngagingState()
 
@@ -124,6 +125,7 @@ class DisappearingState(PersonState):
     def step(self, person):
 
         delta = time.time() - self.start_time
+        #logger.debug("DisengagingState duration: %s" % delta)
 
         if delta > DisappearingState.DISAPPEARING_DURATION:
             return LostState()
@@ -168,24 +170,29 @@ class Person():
 
 
     def distance(self):
-        x,y,z=self.location
-        return math.sqrt(x*x+y*y+z*z)
+        """ Returns the 2D (x,y) distance to the robot (z ignored)
+        """
+        x,y,_=self.location
+        return math.sqrt(x*x+y*y)
 
     def distance_to(self, x, y, z):
-        x1,y1,z1=self.location
-        return math.sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1)+(z-z1)*(z-z1))
+        """ Returns the 2D (x,y) distance between the person and a 2d point (z ignored)
+        """
+        x1,y1,_=self.location
+        return math.sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1))
 
     def is_close(self):
+        #logger.debug("Distance to robot: %.2fm" % self.distance())
         return self.distance() < self.ENGAGEMENT_DISTANCE
 
     def is_looking(self):
-        return self.is_mock_person() or self.looking_at_robot > 0.3
+        return self.is_mock_person() or self.looking_at_robot > 0.5
 
     def is_seen(self):
         if self.is_mock_person():
             return self.location[0] > 0 # mock person in front of the robot
         else:
-            return bool(self.location)
+            return bool(self.location[0]) and bool(self.location[1])
 
     def is_engaged(self):
         return self.state.value in [PersonState.ENGAGED, PersonState.DISENGAGING]
