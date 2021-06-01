@@ -144,6 +144,12 @@ class NaoqiPerson(QObject):
         if not self.person:
             return
 
+        if self.person.state.value == PersonState.LOST:
+            logger.warning("%s is lost. Not tracking her/him anymore." % self.person)
+            self._watchdog_timer.stop()
+            self._logging_timer.stop()
+            self.log() # log a last time to record the 'LOST' state
+
         # we are connected to naoqi
         if almemory and not self.person.is_mock_person():
 
