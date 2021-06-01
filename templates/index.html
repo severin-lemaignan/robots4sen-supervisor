@@ -22,11 +22,10 @@
     <body>
 
         <div class="page">
-
+                
             <img id="default" class="wavy hand" src="/static/images/hand.svg" />
 
-            <div id="options_container" class="container">
-            </div>
+            <div id="options_container" class="container"></div>
             <div id="moods_container">
                 <div id="mood_blue" class="mood_col blue">
                         <img src="/static/images/sad.svg"/>
@@ -237,6 +236,7 @@
 
                     case "default":
                         $(".page").fadeIn(200);
+                        $("#default").show();
                         wavyHand();
                         break;
                 }

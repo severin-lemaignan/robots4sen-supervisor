@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    font-size: 23px;
+    font-size: 40px;
     line-height: 1.6;
     font-weight: 600;
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -14,8 +14,12 @@ body {
     background-color: #FD940A;
     background-image: radial-gradient(circle, #F9A72B 0%, #FA9026 70%, #FB6C1F 100%);
     overflow: hidden;
-    width:1280px;
-    height:800px;
+    width:1707px; /* reported width and height on the tablet's browser (which is surprising, as it does not match the tablet's model advertised resolution) */
+    height:1067px;
+}
+
+.page {
+    height: 100%;
 }
 
 .container {
@@ -29,7 +33,7 @@ body {
 }
 
 #moods_container {
-    height: 800px;
+    height: 100%;
     width: 100%;
     display:none;
 }
@@ -69,7 +73,7 @@ body {
 
 .col {
     text-align:center;
-    width: 250px;
+    width: 300px;
     margin: 16px;
     margin-top: 75px;
     display: inline-block;
@@ -92,10 +96,10 @@ figcaption {
 
 .wavy.hand {
   position: fixed;
-  top:250px; /* 800px/2 - height/2 */
-  left: 490px; /* 1280px/2 - width/2 */
+  top:333px; /* 1067px/2 - height/2 */
+  left: 653px; /* 1707px/2 - width/2 */
   opacity:0.01;
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   transform-origin: 50% 100%;
 }
