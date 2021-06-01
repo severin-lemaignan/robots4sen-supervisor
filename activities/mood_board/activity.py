@@ -70,14 +70,14 @@ class MoodBoardActivity(Activity):
                 res.append("%s or %s" % (option, activity))
 
         if add_all_link:
-            res.append('\\option={"id":"%s","img":"images/again.svg","label": "All","footer":true}\\' % ALL)
+            res.append('\\option={"id":"%s","img":"images/again.svg","label": "","footer":true}\\' % ALL)
 
         return res
 
     def moods(self):
 
         options = [
-                {"id": ALL, "img": "images/arrow.svg", "label": "Skip", "footer": True}
+                {"id": ALL, "img": "images/arrow.svg", "label": "", "footer": True}
                 ]
         
 
