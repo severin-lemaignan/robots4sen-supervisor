@@ -94,7 +94,8 @@ class People(QObject):
 
 
         for id in vanished_ids:
-            logger.debug("Person <%s> not seen anymore" % id)
+            if self.getperson(id).is_seen():
+                logger.debug("Person <%s> not seen anymore" % id)
 
     def getperson(self, id):
         return self._people[id]
@@ -154,9 +155,10 @@ class NaoqiPerson(QObject):
                 self.setlocation(local_pose)
 
             except RuntimeError as re:
-                # almemory keys missing for that person -> person not seen anymore!
-                logger.info("%s not seen anymore" % self.person)
-                self.setlocation([0,0,0])
+                if self.person.is_seen():
+                    # almemory keys missing for that person -> person not seen anymore!
+                    logger.info("%s not seen anymore" % self.person)
+                    self.setlocation([0,0,0])
 
             #######################
             ##   GAZE DIRECTION
@@ -164,6 +166,7 @@ class NaoqiPerson(QObject):
                 looking_at_robot = almemory.getData("PeoplePerception/Person/%s/LookingAtRobotScore" % self.person.person_id)
 
                 if abs(looking_at_robot - self.person.looking_at_robot) > 0.05:
+                    #logger.debug("Looking at: %s" % looking_at_robot)
                     self.person.looking_at_robot = looking_at_robot
                     self.looking_at_robot_changed.emit(looking_at_robot)
             except RuntimeError:
