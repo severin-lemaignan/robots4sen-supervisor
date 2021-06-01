@@ -177,6 +177,9 @@
                     // creates one 'icon' per option
                     case "set_options":
 
+                        var show_mood = false;
+                        var show_footer = false;
+
                         for (var i = 0; i < msg.options.length; i++) {
                             var option = msg.options[i];
 
@@ -191,25 +194,32 @@
                             if ('footer' in option && option.footer) {
                                 $("#footer").empty();
                                 col.appendTo("#footer");
+                                show_footer = true;
                             }
                             else {
                                 col.appendTo("#options_container");
+                                show_mood = true;
                             }
                             $(fig).click(function () {popOut(this);});
                         }
 
-                        $("#options_container").show()
-                         $(".page").fadeIn(200);
+                        if (show_mood) {
+                            $("#options_container").show()
+                        }
+                        if (show_footer) {
+                            $("#footer").show()
+                        }
+                        $(".page").fadeIn(200);
 
 
-                         anime({
+                        anime({
                              targets: ".popout",
                              opacity: 0.7,
                              delay: anime.stagger(400, {start: 500}),
                              easing: 'easeOutQuad',
                              duration: 2000
 
-                         });
+                        });
 
                         break;
 
