@@ -9,7 +9,7 @@ Item {
 
     property bool robot_tracked: true // if true, the person's position is tracked by the robot; if false, manually tracked on the tablet
     property bool is_tracked: false
-    property bool is_lost: false
+    property bool is_lost: person.state == "lost"
     property bool is_seen: !(person.state in ["lost", "disappearing"])
 
     property alias person_id: person.person_id
@@ -100,14 +100,5 @@ Item {
 
     }
 
-
-    signal disappearedPerson(string person_id)
-
-    onDisappearedPerson: {
-        if (person_id == person.person_id) {
-            console.log("I, Person " + person_id + ", have disappeared!");
-            is_lost = true;
-        }
-    }
 
 }

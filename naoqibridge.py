@@ -56,7 +56,6 @@ class People(QObject):
         self._watchdog_timer.start()
 
     newPerson = Signal(str, bool, str) # str: person id; bool: true -> auto tracked; false: manually tracked; str -> age group (child or adult)
-    disappearedPerson = Signal(str)
 
     @Slot(str)
     def createMockPerson(self, type):
@@ -95,9 +94,7 @@ class People(QObject):
 
 
         for id in vanished_ids:
-            logger.debug("Person <%s> disappeared" % id)
-            self.disappearedPerson.emit(str(id))
-            del(self._people[id])
+            logger.debug("Person <%s> not seen anymore" % id)
 
     def getperson(self, id):
         return self._people[id]
@@ -110,7 +107,6 @@ class People(QObject):
 
     def delete(self, id):
         logger.debug("Person <%s> deleted" % id)
-        self.disappearedPerson.emit(str(id))
         del(self._people[id])
 
 
@@ -143,12 +139,6 @@ class NaoqiPerson(QObject):
 
         if not self.person:
             return
-
-        if self.person.state.value == PersonState.LOST:
-            logger.warning("%s is lost. Not tracking her/him anymore." % self.person)
-            self._watchdog_timer.stop()
-            self._logging_timer.stop()
-            self.log() # log a last time to record the 'LOST' state
 
         # we are connected to naoqi
         if almemory and not self.person.is_mock_person():
@@ -199,6 +189,9 @@ class NaoqiPerson(QObject):
         if not is_state_same:
             self.state_changed.emit(self.person.state.value)
             if self.person.state.value == PersonState.LOST:
+
+                logger.warning("%s is lost. Not tracking her/him anymore." % self.person)
+                self.log() # log a last time to record the 'LOST' state
                 self.delete()
 
 
@@ -224,6 +217,9 @@ class NaoqiPerson(QObject):
 
     @Slot()
     def delete(self):
+        logger.warning("Deleting %s." % self.person)
+        self._watchdog_timer.stop()
+        self._logging_timer.stop()
         people.delete(self.person.person_id)
 
     @Slot(list) # the slot is used when we 'mock' users, to set their positions

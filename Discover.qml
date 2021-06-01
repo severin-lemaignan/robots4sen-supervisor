@@ -123,10 +123,6 @@ Item {
         if (!person_qml) {
             console.log(cmpt.errorString());
         }
-        else {
-            naoqi.people.disappearedPerson.connect(person_qml.disappearedPerson)
-        }
-
     }
 /////////////////////////////////////////////////////////////////////////
 
