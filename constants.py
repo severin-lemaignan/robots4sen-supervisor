@@ -9,8 +9,10 @@ NONE = None
 
 # STATUS
 RUNNING = "running"
-STOPPED = "stopped"
+FINISHED = "finished"
 PAUSED = "paused"
+INTERRUPTED = "interrupted"
+
 INTERRUPT = "interrupt"
 
 # SOURCES
@@ -38,6 +40,7 @@ ROCK_SCISSOR_PAPER = "rock-scissor-paper"
 STORY = "story"
 
 # MOODS
+UNKNOWN = "unknown"
 ANGRY = "mood_red"
 CONFUSED = "mood_yellow"
 HAPPY = "mood_green"

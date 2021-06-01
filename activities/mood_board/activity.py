@@ -98,7 +98,7 @@ class MoodBoardActivity(Activity):
 
         if not continuation:
 
-            self.mood = None
+            self.mood = UNKNOWN
             self.activities_done = []
             self.original_event = event
 
@@ -117,7 +117,7 @@ class MoodBoardActivity(Activity):
         if self.is_multiparty(): # skip mood selection
             self.robot.say(get_dialogue("multiparty_prompt")).wait()
             yield RUNNING
-            self.mood = ALL
+            self.mood = UNKNOWN
         else:
             self.moods()
             self.robot.say(get_dialogue("mood_prompt")).wait()
@@ -132,6 +132,8 @@ class MoodBoardActivity(Activity):
             while self.response_queue.empty():
                 yield RUNNING
             self.mood = self.response_queue.get()["id"].encode()
+            if self.mood == ALL:
+                self.mood = UNKNOWN
 
             logger.info("Got mood: %s" % self.mood)
             self.robot.tablet.debug("Got mood: %s" % self.mood)
@@ -139,7 +141,7 @@ class MoodBoardActivity(Activity):
             ####################################################################
             ### PROMPT 'let do smthg'
 
-            if self.mood != ALL:
+            if self.mood != UNKNOWN:
                 self.robot.say(random.choice(MOODS_FEEDBACK[self.mood])).wait()
                 yield RUNNING
 
@@ -149,12 +151,12 @@ class MoodBoardActivity(Activity):
         ####################################################################
         ### OFFER ACTIVITIES BASED ON MOOD
 
-        if self.mood != ALL:
+        if self.mood != UNKNOWN:
             activities = random.sample(self.MOODS_ACTIVITIES[self.mood],
                                        random.randint(2,3))
             sentences = self.make_activity_sentences(activities, add_all_link=True)
         else:
-            activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
+            activities = random.sample(self.MOODS_ACTIVITIES[ALL], 8)
             sentences = self.make_activity_sentences(activities, add_all_link=False)
 
         self.robot.tablet.clearAll()
@@ -217,11 +219,11 @@ class MoodBoardActivity(Activity):
             ####################################################################
             ### OFFER ACTIVITIES BASED ON MOOD
 
-            if self.mood != ALL:
+            if self.mood != UNKNOWN:
                 activities = random.sample(self.MOODS_ACTIVITIES[self.mood], random.randint(2,3))
                 sentences = self.make_activity_sentences(activities, add_all_link=True)
             else:
-                activities = random.sample(self.MOODS_ACTIVITIES[self.mood], 8)
+                activities = random.sample(self.MOODS_ACTIVITIES[ALL], 8)
                 sentences = self.make_activity_sentences(activities, add_all_link=False)
 
             self.robot.tablet.clearAll()
@@ -266,7 +268,7 @@ class MoodBoardActivity(Activity):
         else:
 
             if self.is_multiparty():
-                final_mood = ALL
+                final_mood = UNKNOWN
 
             else:
                 ####################################################################
@@ -286,21 +288,52 @@ class MoodBoardActivity(Activity):
                     yield RUNNING
 
                 final_mood = self.response_queue.get()["id"].encode()
+                if final_mood == ALL:
+                    final_mood = UNKNOWN
 
                 logger.info("Got final mood: %s" % final_mood)
 
             mood_logger.info((self.original_event.nb_children, 
                               self.mood, 
                               final_mood, 
-                              self.activities_done))
+                              self.activities_done,
+                              FINISHED))
 
-            if final_mood != ALL:
+            if final_mood != UNKNOWN:
                 self.robot.say(random.choice(FINAL_MOODS_FEEDBACK[self.mood])).wait()
             else:
                 self.robot.say(get_dialogue("multiparty_end")).wait()
 
             self.robot.tablet.clearAll()
             self.cmd_queue.put((TABLET, ACTIVITY, DEFAULT))
+
+    def on_no_one_engaged(self, evt):
+        mood_logger.info((self.original_event.nb_children, 
+                            self.mood, 
+                            UNKNOWN, 
+                            self.activities_done,
+                            evt.type))
+
+        return super(MoodBoardActivity, self).on_no_one_engaged(evt)
+
+    def on_no_interaction(self, evt):
+        mood_logger.info((self.original_event.nb_children, 
+                            self.mood, 
+                            UNKNOWN, 
+                            self.activities_done,
+                            evt.type))
+
+        return super(MoodBoardActivity, self).on_no_interaction(evt)
+
+    def on_interrupted(self, evt):
+        mood_logger.info((self.original_event.nb_children, 
+                            self.mood, 
+                            UNKNOWN, 
+                            self.activities_done,
+                            evt.type))
+
+        return super(MoodBoardActivity, self).on_interrupted(evt)
+
 
 mood_board_activity = MoodBoardActivity()
 

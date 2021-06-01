@@ -33,6 +33,8 @@ class Supervisor(QObject):
     def __init__(self, bridge):
         QObject.__init__(self)
 
+        self.events_queue = Queue()
+
         self.cmd_queue = Queue()
 
         self.bridge = bridge
@@ -62,10 +64,28 @@ class Supervisor(QObject):
 
     def run(self):
 
-        has_completed_mood_continuation = False
-
         while True:
-            evt = self.process_events()
+            self.process_events()
+            #logger.debug("%s evt in event queue" % self.events_queue.qsize())
+            try:
+                evt = self.events_queue.get_nowait()
+                logger.debug("Got event: %s" % evt)
+            except Empty:
+                evt = Event()
+
+            if self.activity is None:
+                if evt.type == Event.ACTIVITY_REQUEST:
+
+                        if evt.activity == DEFAULT:
+                            self.rest_time = time.time()
+
+                        self.startActivity(evt.activity)
+                else: # we have no activity running, but the event was not ana ctivity request. Hopefully the next event will
+                    logger.error("No activity running, and the event was not an activity request (was: %s). If this message appears more than once, there is a bug somewhere." % evt)
+                    continue
+
+
+            assert(self.activity is not None)
 
             if self.activity.type == DEFAULT:
 
@@ -74,15 +94,20 @@ class Supervisor(QObject):
                     logger.warning("Cool-down period (%.1f/%fs)" % (t, COOL_DOWN_DURATION))
 
                 elif    evt.type == Event.ACTIVITY_REQUEST \
-                     or evt.type == Event.ONE_TO_ONE_ENGAGEMENT \
-                     or evt.type == Event.MULTI_ENGAGEMENT:
+                    or evt.type == Event.ONE_TO_ONE_ENGAGEMENT \
+                    or evt.type == Event.MULTI_ENGAGEMENT:
 
                     self.startActivity(MOODBOARD, evt)
 
 
             status = self.activity.tick(evt)
 
-            if status == STOPPED:
+            if status == INTERRUPTED:
+
+                logger.warning("Activity <%s> interrupted" % self.activity)
+                self.startActivity(DEFAULT)
+
+            elif status == FINISHED:
 
                 logger.info("Activity <%s> completed" % self.activity)
 
@@ -91,12 +116,9 @@ class Supervisor(QObject):
                     self.startActivity(MOODBOARD, continuation=True)
 
                 else: # self.activity.type == MOODBOARD
-
-                    if evt.type == Event.ACTIVITY_REQUEST:
-                        if evt.activity == DEFAULT:
-                            self.rest_time = time.time()
-
-                        self.startActivity(evt.activity)
+                    # the moodboard should have put the next activity into the 
+                    # cmd_queue, we'll pick it up at the next loop.
+                    self.activity = None
 
 
     def startActivity(self, activity, *args, **kwargs):
@@ -150,22 +172,22 @@ class Supervisor(QObject):
             # no one engaged anymore
             if nb_currently_engaged == 0:
                 self.nb_engaged = nb_currently_engaged
-                return Event(Event.NO_ONE_ENGAGED)
+                self.events_queue.put(Event(Event.NO_ONE_ENGAGED))
 
-            if self.nb_engaged == 0:
+            elif self.nb_engaged == 0:
 
                 # only one person around: one-to-one engagement
                 if    nb_currently_engaged == 1 \
                   and nb_currently_seen == 1:
                       self.nb_engaged = nb_currently_engaged
-                      return Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1)
+                      self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1))
 
                 # else, several people around the robot. Even if only
                 # one is detected as 'engaged', we trigger a group engagement
                 # event
                 else:
                       self.nb_engaged = nb_currently_engaged
-                      return Event(Event.MULTI_ENGAGEMENT, nb_children=self.nb_engaged)
+                      self.events_queue.put(Event(Event.MULTI_ENGAGEMENT, nb_children=self.nb_engaged))
 
 
         #####################################################################
@@ -173,7 +195,7 @@ class Supervisor(QObject):
         ###   CTRL TABLET INTERRUPTION REQUESTS
 
         if self.bridge.tablet.isCancellationRequested():
-            return Event(Event.INTERRUPTED, src=Event.CTRL_TABLET)
+            self.events_queue.put(Event(Event.INTERRUPTED, src=Event.CTRL_TABLET))
 
 
         #####################################################################
@@ -182,28 +204,28 @@ class Supervisor(QObject):
 
         try:
             source, cmd, args = self.cmd_queue.get(block=True, timeout=TICK_PERIOD)
+
+            logger.debug("GOT A %s CMD: %s (%s)" % (source, cmd, args))
+
+            if cmd == INTERRUPT:
+                self.events_queue.put(Event(Event.INTERRUPTED, src=source))
+            #elif cmd == SOCIAL_GESTURE:
+            #    self.bridge.animate(args)
+            #elif cmd == BEHAVIOUR:
+            #    self.bridge.run_behaviour(args)
+            #elif cmd == LOOK_AT:
+            #    self.bridge.lookAt(*args)
+            #elif cmd == TRACK:
+            #    if not args:
+            #        self.bridge.stop_tracking()
+            #    else:
+            #        self.bridge.track(args)
+            elif cmd == ACTIVITY:
+                self.events_queue.put(Event(Event.ACTIVITY_REQUEST, src=source, activity=args))
+
+            else:
+                logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd))
+
         except Empty:
-            return Event()
-
-        logger.debug("GOT A %s CMD: %s (%s)" % (source, cmd, args))
-
-        if cmd == INTERRUPT:
-            return Event(Event.INTERRUPTED, src=source)
-        #elif cmd == SOCIAL_GESTURE:
-        #    self.bridge.animate(args)
-        #elif cmd == BEHAVIOUR:
-        #    self.bridge.run_behaviour(args)
-        #elif cmd == LOOK_AT:
-        #    self.bridge.lookAt(*args)
-        #elif cmd == TRACK:
-        #    if not args:
-        #        self.bridge.stop_tracking()
-        #    else:
-        #        self.bridge.track(args)
-        elif cmd == ACTIVITY:
-            return Event(Event.ACTIVITY_REQUEST, src=source, activity=args)
-
-        else:
-            logger.error("UNHANDLED CMD FROM %s: %s" % (source, cmd))
-
+            pass
 

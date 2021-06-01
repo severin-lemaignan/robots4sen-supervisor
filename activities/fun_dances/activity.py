@@ -39,10 +39,12 @@ class FunDancesActivity(Activity):
     def on_no_one_engaged(self, evt):
         logger.warning("No one detected anymore. Ignoring it as I'm dancing and not paying attention to my surroundings.");
 
+        return RUNNING
+
     def terminate(self):
         self.stop_behaviour = True
         next(self._behaviour) # run it one more time to ensure the naoqi behaviour is cancelled
-        return STOPPED
+        return INTERRUPTED
 
 activity = FunDancesActivity()
 

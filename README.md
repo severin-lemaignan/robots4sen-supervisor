@@ -48,7 +48,7 @@ Command flows
    `get_activity()`, and
    sets it as its active activity `Supervisor.activity`. Then, in
    `Supervisor.run`, it calls the `tick()` method of the activity at a set
-   frequency, until `tick()` returns the status `STOPPED`.
+   frequency, until `tick()` returns the status `FINISHED` or `INTERRUPTED`.
 
 Pre-requisites
 --------------

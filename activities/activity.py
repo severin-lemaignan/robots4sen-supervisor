@@ -36,12 +36,12 @@ class Activity(object):
 
     def tick(self, evt=None):
         """
-        returns: RUNNING while running, STOPPED once finished
+        returns: RUNNING while running, FINISHED once finished
         """
 
         if evt:
             if evt.type == Event.INTERRUPTED:
-                return self.on_interrrupted(evt)
+                return self.on_interrupted(evt)
             if evt.type == Event.NO_ONE_ENGAGED:
                 return self.on_no_one_engaged(evt)
             if evt.type == Event.NO_INTERACTION:
@@ -50,11 +50,11 @@ class Activity(object):
         try:
             return next(self._behaviour)
         except StopIteration:
-            action_logger.info((str(self),STOPPED))
-            return STOPPED
+            action_logger.info((str(self),FINISHED))
+            return FINISHED
 
 
-    def on_interrrupted(self, evt):
+    def on_interrupted(self, evt):
         logger.warning("Activity <%s> interrupted: %s" % (self, evt));
         action_logger.info((str(self),str(evt)))
         return self.terminate()
@@ -70,5 +70,5 @@ class Activity(object):
         return self.terminate()
 
     def terminate(self):
-        return STOPPED
+        return INTERRUPTED
 

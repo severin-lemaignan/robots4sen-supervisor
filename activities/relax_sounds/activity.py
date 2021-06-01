@@ -37,7 +37,7 @@ class RelaxSoundsActivity(Activity):
     def terminate(self):
         self.stop_behaviour = True
         next(self._behaviour) # run it one more time to ensure the naoqi behaviour is cancelled
-        return STOPPED
+        return INTERRUPTED
 
 activity = RelaxSoundsActivity()
 
