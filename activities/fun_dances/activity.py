@@ -36,6 +36,8 @@ class FunDancesActivity(Activity):
                 self.stop_behaviour = False
             yield RUNNING
 
+    def on_no_one_engaged(self, evt):
+        logger.warning("No one detected anymore. Ignoring it as I'm dancing and not paying attention to my surroundings.");
 
     def terminate(self):
         self.stop_behaviour = True
