@@ -39,11 +39,22 @@ DIALOGUES = {
                             "^startTag(happy)Hi! How are you?",
                             "^startTag(happy)Nice to see you! How are you?"],
 
+    "multiparty_prompt":    ["^startTag(excited)Hi! Good to see you!",
+                             "^startTag(excited)Hi! How are you?"
+                             ],
 
-    "mood_prompt_activities": ["What can we do?",
+    "multiparty_end":    ["Bye! See you soon!",
+                          "Bye bye",
+                          "See you!",
+                          "See you soon!",
+                          "Have fun! Bye!"
+                        ],
+
+    "mood_prompt_activities": ["What do you want to do?",
                               "So. What do you feel doing?",
-                              "Let see what we have.",
+                              "Let see what we can do.",
                               "What should we do?",
+                              "What do you like to do?",
                               "What would you like to do?"],
 
     "mood_all_activities":    ["Alright, here other options.",

@@ -14,10 +14,11 @@ class Event:
     CTRL_TABLET = "ctrl tablet"
     PEPPER_TABLET = "Pepper tablet"
 
-    def __init__(self, type = NO_EVENT, src=None, activity=None):
+    def __init__(self, type = NO_EVENT, src=None, activity=None, nb_children=0):
         self.type = type
         self.src = src
         self.activity = activity
+        self.nb_children = nb_children
 
     def __str__(self):
         return self.type + \

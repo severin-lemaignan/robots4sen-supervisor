@@ -41,6 +41,7 @@ class MoodBoardActivity(Activity):
         super(MoodBoardActivity, self).__init__()
 
         self.activities_done = []
+        self.original_event = None
 
     def make_activity_sentences(self, activities, add_all_link=True):
         res = []
@@ -85,7 +86,10 @@ class MoodBoardActivity(Activity):
         self.robot.tablet.showMoodBoard()
         self.robot.tablet.setOptions(options)
 
-    def start(self, robot, cmd_queue, continuation=False):
+    def is_multiparty(self):
+        return self.original_event is not None and self.original_event.nb_children > 1
+
+    def start(self, robot, cmd_queue, event=None, continuation=False):
         """
         continuation: if True, means that mood-board is re-started at the
         end of another activity.
@@ -96,6 +100,7 @@ class MoodBoardActivity(Activity):
 
             self.mood = None
             self.activities_done = []
+            self.original_event = event
 
             self._behaviour = self.run()
 
@@ -108,28 +113,35 @@ class MoodBoardActivity(Activity):
         ### ASK FOR MOOD
 
         self.robot.tablet.clearAll()
-        self.moods()
-        self.robot.say(get_dialogue("mood_prompt")).wait()
-        yield RUNNING
 
-        ####################################################################
-        ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
-
-        logger.info("Waiting for mood...")
-
-        while self.response_queue.empty():
+        if self.is_multiparty(): # skip mood selection
+            self.robot.say(get_dialogue("multiparty_prompt")).wait()
             yield RUNNING
-        self.mood = self.response_queue.get()["id"].encode()
-
-        logger.info("Got mood: %s" % self.mood)
-        self.robot.tablet.debug("Got mood: %s" % self.mood)
-
-        ####################################################################
-        ### PROMPT 'let do smthg'
-
-        if self.mood != ALL:
-            self.robot.say(random.choice(MOODS_FEEDBACK[self.mood])).wait()
+            self.mood = ALL
+        else:
+            self.moods()
+            self.robot.say(get_dialogue("mood_prompt")).wait()
             yield RUNNING
+
+
+            ####################################################################
+            ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
+
+            logger.info("Waiting for mood...")
+
+            while self.response_queue.empty():
+                yield RUNNING
+            self.mood = self.response_queue.get()["id"].encode()
+
+            logger.info("Got mood: %s" % self.mood)
+            self.robot.tablet.debug("Got mood: %s" % self.mood)
+
+            ####################################################################
+            ### PROMPT 'let do smthg'
+
+            if self.mood != ALL:
+                self.robot.say(random.choice(MOODS_FEEDBACK[self.mood])).wait()
+                yield RUNNING
 
         self.robot.say(get_dialogue("mood_prompt_activities")).wait()
         yield RUNNING
@@ -253,29 +265,39 @@ class MoodBoardActivity(Activity):
 
         else:
 
-            ####################################################################
-            ### ASK FOR MOOD
+            if self.is_multiparty():
+                final_mood = ALL
 
-            self.robot.say(get_dialogue("mood_end")).wait()
-            self.robot.tablet.clearAll()
-            self.moods()
-            yield RUNNING
+            else:
+                ####################################################################
+                ### ASK FOR MOOD
 
-            ####################################################################
-            ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
-
-            logger.info("Waiting for final mood...")
-
-            while self.response_queue.empty():
+                self.robot.say(get_dialogue("mood_end")).wait()
+                self.robot.tablet.clearAll()
+                self.moods()
                 yield RUNNING
 
-            final_mood = self.response_queue.get()["id"].encode()
+                ####################################################################
+                ### WAIT FOR THE CHILD TO CHOOSE AN OPTION
 
-            logger.info("Got final mood: %s" % final_mood)
-            mood_logger.info((self.mood, final_mood, self.activities_done))
+                logger.info("Waiting for final mood...")
+
+                while self.response_queue.empty():
+                    yield RUNNING
+
+                final_mood = self.response_queue.get()["id"].encode()
+
+                logger.info("Got final mood: %s" % final_mood)
+
+            mood_logger.info((self.original_event.nb_children, 
+                              self.mood, 
+                              final_mood, 
+                              self.activities_done))
 
             if final_mood != ALL:
                 self.robot.say(random.choice(FINAL_MOODS_FEEDBACK[self.mood])).wait()
+            else:
+                self.robot.say(get_dialogue("multiparty_end")).wait()
 
             self.robot.tablet.clearAll()
             self.cmd_queue.put((TABLET, ACTIVITY, DEFAULT))

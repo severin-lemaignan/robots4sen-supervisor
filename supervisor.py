@@ -77,8 +77,7 @@ class Supervisor(QObject):
                      or evt.type == Event.ONE_TO_ONE_ENGAGEMENT \
                      or evt.type == Event.MULTI_ENGAGEMENT:
 
-                    has_completed_mood_continuation = False
-                    self.startActivity(MOODBOARD)
+                    self.startActivity(MOODBOARD, evt)
 
 
             status = self.activity.tick(evt)
@@ -89,7 +88,7 @@ class Supervisor(QObject):
 
                 if self.activity.type != MOODBOARD:
                     # go back to moodboard to ask whether to continue or final mood
-                    self.startActivity(MOODBOARD, True)
+                    self.startActivity(MOODBOARD, continuation=True)
 
                 else: # self.activity.type == MOODBOARD
 
@@ -100,7 +99,7 @@ class Supervisor(QObject):
                         self.startActivity(evt.activity)
 
 
-    def startActivity(self, activity, *args):
+    def startActivity(self, activity, *args, **kwargs):
         if activity == DEFAULT:
             self.activity = default_activity.get_activity()
         elif activity == MOODBOARD:
@@ -124,10 +123,8 @@ class Supervisor(QObject):
 
         logger.info("Activity <%s> starting" % self.activity)
 
-        if args:
-            self.activity.start(self.bridge, self.cmd_queue, *args)
-        else:
-            self.activity.start(self.bridge, self.cmd_queue)
+
+        self.activity.start(self.bridge, self.cmd_queue, *args, **kwargs)
 
         self.isCurrentActivity_changed.emit(str(self.activity))
 
@@ -161,14 +158,14 @@ class Supervisor(QObject):
                 if    nb_currently_engaged == 1 \
                   and nb_currently_seen == 1:
                       self.nb_engaged = nb_currently_engaged
-                      return Event(Event.ONE_TO_ONE_ENGAGEMENT)
+                      return Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1)
 
                 # else, several people around the robot. Even if only
                 # one is detected as 'engaged', we trigger a group engagement
                 # event
                 else:
                       self.nb_engaged = nb_currently_engaged
-                      return Event(Event.MULTI_ENGAGEMENT)
+                      return Event(Event.MULTI_ENGAGEMENT, nb_children=self.nb_engaged)
 
 
         #####################################################################
@@ -203,9 +200,6 @@ class Supervisor(QObject):
         #        self.bridge.stop_tracking()
         #    else:
         #        self.bridge.track(args)
-        elif cmd == MOODBOARD:
-            return Event(Event.ACTIVITY_REQUEST, src=source, activity=MOODBOARD)
-
         elif cmd == ACTIVITY:
             return Event(Event.ACTIVITY_REQUEST, src=source, activity=args)
 
