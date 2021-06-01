@@ -248,6 +248,7 @@ class MoodBoardActivity(Activity):
 
 
             self.activities_done.append(action)
+            action_logger.info((action, self.mood))
             self.cmd_queue.put((TABLET, ACTIVITY, action))
 
         else:
@@ -277,6 +278,7 @@ class MoodBoardActivity(Activity):
                 self.robot.say(random.choice(FINAL_MOODS_FEEDBACK[self.mood])).wait()
 
             self.robot.tablet.clearAll()
+            self.cmd_queue.put((TABLET, ACTIVITY, DEFAULT))
 
 mood_board_activity = MoodBoardActivity()
 

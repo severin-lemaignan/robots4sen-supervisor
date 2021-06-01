@@ -87,20 +87,18 @@ class Supervisor(QObject):
 
                 logger.info("Activity <%s> completed" % self.activity)
 
-                if self.activity.type == MOODBOARD:
-
-                    if not has_completed_mood_continuation:
-                        if evt.type == Event.ACTIVITY_REQUEST:
-                            self.startActivity(evt.activity)
-                    else:
-                        # go back to hand waving, and restart cool-down period
-                        self.startActivity(DEFAULT)
-                        self.rest_time = time.time()
-
-                elif self.activity.type != MOODBOARD:
+                if self.activity.type != MOODBOARD:
                     # go back to moodboard to ask whether to continue or final mood
                     self.startActivity(MOODBOARD, True)
-                    has_completed_mood_continuation = True
+
+                else: # self.activity.type == MOODBOARD
+
+                    if evt.type == Event.ACTIVITY_REQUEST:
+                        if evt.activity == DEFAULT:
+                            self.rest_time = time.time()
+
+                        self.startActivity(evt.activity)
+
 
     def startActivity(self, activity, *args):
         if activity == DEFAULT:
