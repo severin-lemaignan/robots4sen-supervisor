@@ -131,6 +131,8 @@ class TabletWebSocketServer(QObject):
             if msg == "helo":
                 logger.info("Tablet (re-)connected (port: %s)" % self.tablet.peerPort())
                 self.is_connected = True
+            elif msg["type"] == "debug":
+                logger.warning("TABLET DEBUG: %s" % msg["msg"])
             else:
                 logger.debug("Received [port %s]: <%s>" % (self.tablet.peerPort(), msg))
                 if not self.response_queue.empty():

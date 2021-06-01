@@ -148,6 +148,15 @@
                 socket.send(JSON.stringify(msg));
             }
 
+	    function debug(msg) {
+                var msg = {
+                    type: "debug",
+                    msg: msg
+                };
+
+                socket.send(JSON.stringify(msg));
+	    }
+
             // Listen for messages
             socket.addEventListener('message', function (event) {
                 console.log('Message from robotCtrl: ', event.data);
@@ -157,6 +166,7 @@
                     case "helo":
                         console.log("Sending back 'helo'");
                         socket.send(JSON.stringify('helo'));
+			debug("tablet resolution: " + window.innerWidth + "x" + window.innerHeight);
                         break;
 
                     // redirect to a different page
