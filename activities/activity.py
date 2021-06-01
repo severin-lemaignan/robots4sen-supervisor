@@ -25,7 +25,7 @@ class Activity(object):
         self.response_queue = self.robot.tablet.response_queue
 
         self.robot.tablet.debug("activity/%s" % self)
-        action_logger.info(str(self),RUNNING)
+        action_logger.info((str(self),RUNNING))
  
         # self._behaviour is a generator returning the current activity status;
         # self.tick() (called by the supervisor) will progress through it
@@ -50,23 +50,23 @@ class Activity(object):
         try:
             return next(self._behaviour)
         except StopIteration:
-            action_logger.info(str(self),STOPPED)
+            action_logger.info((str(self),STOPPED))
             return STOPPED
 
 
     def on_interrrupted(self, evt):
         logger.warning("Activity <%s> interrupted: %s" % (self, evt));
-        action_logger.info(str(self),str(evt))
+        action_logger.info((str(self),str(evt)))
         return self.terminate()
 
     def on_no_one_engaged(self, evt):
         logger.warning("Activity <%s> interrupted: %s" % (self, evt));
-        action_logger.info(str(self),str(evt))
+        action_logger.info((str(self),str(evt)))
         return self.terminate()
 
     def on_no_interaction(self, evt):
         logger.warning("Activity <%s> interrupted: %s" % (self, evt));
-        action_logger.info(str(self),str(evt))
+        action_logger.info((str(self),str(evt)))
         return self.terminate()
 
     def terminate(self):
