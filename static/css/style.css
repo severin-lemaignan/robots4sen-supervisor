@@ -48,6 +48,7 @@ body {
 
 .mood_col > img {
     padding: 40px;
+    width: 80%
 }
 
 .green {
@@ -78,6 +79,10 @@ body {
     margin-top: 75px;
     display: inline-block;
 
+}
+
+#footer .col {
+    width: 170px;
 }
 
 .square {
