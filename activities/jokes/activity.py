@@ -9,7 +9,7 @@ from events import Event
 
 from activities.activity import Activity
 
-JOKES = [
+JOKES_LIST = [
             "How do you make a sausage roll?\\pau=1500\\^startTag(down)Roll it down a hill!",
             "Why did the teddy bear say no to dessert?\\pau=1700\\^startTag(down)Because she was stuffed.",
             "What did the left eye say to the right eye?\\pau=1600\\Between us, something smells!",
@@ -30,7 +30,7 @@ class JokesActivity(Activity):
     def start(self, robot, cmd_queue):
         super(JokesActivity, self).start(robot, cmd_queue)
 
-        self.jokes = random.sample(JOKES, random.randint(2,5))
+        self.jokes = random.sample(JOKES_LIST, random.randint(2,5))
 
     def run(self):
 
