@@ -27,6 +27,8 @@ class TabletWebSocketServer(QObject):
 
         self.response_queue = Queue()
 
+        self.cancellation_requested = False
+
         self.WS_IP = get_ip()
 
         self.server = QWebSocketServer("robotCtrl", QWebSocketServer.NonSecureMode)
@@ -93,7 +95,7 @@ class TabletWebSocketServer(QObject):
         self.write.emit(json.dumps({"type":"moods"}))
 
     def addCancelBtn(self):
-        btn = {"id": INTERRUPT, "img": "images/stop.svg", "label": "Stop", "footer": True}
+        btn = {"id": INTERRUPT, "img": "images/stop.svg", "label": "", "footer": True}
 
         self.setOptions([btn])
 
@@ -108,18 +110,9 @@ class TabletWebSocketServer(QObject):
 
     def isCancellationRequested(self):
 
-        to_requeue = []
-        while not self.response_queue.empty():
-            action = self.response_queue.get()
-            if action["id"] == INTERRUPT:
-                return True
-            else:
-                # we've got an action from the tablet, but not a 'cancel' -> probably another
-                # btn pressed. Save it to re-enqueue it later
-                to_requeue.append(action)
-
-        for a in to_requeue:
-            self.response_queue.put(a)
+        if self.cancellation_requested:
+            self.cancellation_requested = False
+            return True
 
         return False
 
@@ -135,8 +128,11 @@ class TabletWebSocketServer(QObject):
                 logger.warning("TABLET DEBUG: %s" % msg["msg"])
             else:
                 logger.debug("Received [port %s]: <%s>" % (self.tablet.peerPort(), msg))
+                if msg["type"] == unicode(INTERRUPT):
+                    self.cancellation_requested = True
+
                 if not self.response_queue.empty():
-                    logger.warning("Tablet's response queue not empty! skipping the last mesage (%s)" % msg)
+                    logger.error("Tablet's response queue not empty! skipping the last mesage (%s)" % msg)
                 else:
                     self.response_queue.put(msg)
 

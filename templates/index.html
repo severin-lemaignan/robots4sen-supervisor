@@ -143,10 +143,15 @@
             wavyHand();
 
             function send(id) {
+                    
                 var msg = {
                     type: "choice",
                     id: id
                 };
+
+                if (id == "interrupt") {
+                    msg.type = "interrupt";
+                }
 
                 console.log("Sending back message to robot ctrl: " + JSON.stringify(msg));
                 socket.send(JSON.stringify(msg));
