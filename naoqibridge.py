@@ -80,10 +80,20 @@ class People(QObject):
     newPerson = Signal(str, bool, str) # str: person id; bool: true -> auto tracked; false: manually tracked; str -> age group (child or adult)
 
     @Slot(str)
-    def createMockPerson(self, type):
+    def createMockPerson(self, 
+                         type=Person.AGE_UNKNOWN,
+                         is_engaged=False,
+                         is_temporary=False):
+
         logger.warning("Adding a mock %s" % type)
 
-        self._people[self.mock_id_idx] = Person(self.mock_id_idx)
+        if is_engaged:
+            location = [1.5, 0 , 0]
+        else:
+            location = [3., 0, 0]
+
+        self._people[self.mock_id_idx] = Person(self.mock_id_idx, location, selfdestruct=is_temporary)
+
         self.newPerson.emit(str(self.mock_id_idx), False, type)
         self._mock_people.add(self.mock_id_idx)
 
@@ -112,7 +122,7 @@ class People(QObject):
 
             if id > 0: # else, signal already emitted in createMockPerson()
                 self._people[id] = Person(id)
-                self.newPerson.emit(str(id), True, Person.AGE_UNKNOWNN)
+                self.newPerson.emit(str(id), True, Person.AGE_UNKNOWN)
 
 
         for id in vanished_ids:
@@ -293,12 +303,12 @@ class NaoqiPerson(QObject):
 
         if age == Person.ADULT:
 
-            if self.person.age == Person.AGE_UNKNOWNN or self.person.age == Person.CHILD:
+            if self.person.age == Person.AGE_UNKNOWN or self.person.age == Person.CHILD:
                 logger.warning("%s detected as an adult" % self.person)
                 self.person.age = Person.ADULT
                 self.age_changed.emit(self.person.age)
         else:
-            if self.person.age == Person.AGE_UNKNOWNN or self.person.age == Person.ADULT:
+            if self.person.age == Person.AGE_UNKNOWN or self.person.age == Person.ADULT:
                 logger.warning("%s detected as a child" % self.person)
                 self.person.age = Person.CHILD
                 self.age_changed.emit(self.person.age)

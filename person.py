@@ -144,21 +144,28 @@ class Person():
 
     ENGAGEMENT_DISTANCE = 2 #m
 
+    # for temporary Persons (usually, temporary mock users),
+    # the delay in secs before auto-deleting the person
+    SELFDESTRUCTION_DELAY = 10 #s
+
     # age groups
-    AGE_UNKNOWNN = "unknown"
+    AGE_UNKNOWN = "unknown"
     ADULT = "adult"
     CHILD = "child"
 
-    def __init__(self, id):
+    def __init__(self, id, location = [0., 0., 0.], selfdestruct=False):
 
         self.state = UnknownState()
 
         self.person_id = id
         self.user_id = 0
-        self.location = [3., 0., 0.]
+        self.location = location
         self.world_location = [0., 0., 0.]
 
-        self.age = self.AGE_UNKNOWNN
+        self.created_at = time.time()
+        self.selfdestruct = selfdestruct
+
+        self.age = self.AGE_UNKNOWN
 
         self.looking_at_robot = 0.
 
@@ -201,6 +208,14 @@ class Person():
         """
         Returns: True if the person's state has not changed, False otherwise.
         """
+
         oldstate = self.state
-        self.state = self.state.step(self)
+
+        if     self.selfdestruct \
+           and time.time() - self.created_at > Person.SELFDESTRUCTION_DELAY:
+               self.state = LostState()
+
+        else:
+               self.state = self.state.step(self)
+
         return oldstate == self.state
