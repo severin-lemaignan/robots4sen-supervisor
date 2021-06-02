@@ -14,12 +14,19 @@ Item {
             source: "res/robot-outline-white.svg"
             fillMode: Image.PreserveAspectFit
             sourceSize: Qt.size(parent.width, parent.height)
+
     }
 
     ColorOverlay {
             anchors.fill: connection
             source: connection
-            color: naoqi.connected ? 'green' : 'red'
+            color: naoqi.awake ? 'green' : 'red'
+
+            MouseArea {
+                id: onoff
+                anchors.fill: parent
+                onClicked: naoqi.awake ? naoqi.rest() : naoqi.wakeup()
+            }
     }
 
     Image {

@@ -751,7 +751,9 @@ class NaoqiBridge(QObject):
             logger.warning("MOCK ROBOT: rest")
             return
 
+        self.altablet.turnScreenOn(False)
         self.almotion.rest()
+        self.awake_changed.emit(False)
 
     @Slot()
     def wakeup(self):
@@ -761,6 +763,18 @@ class NaoqiBridge(QObject):
             return
 
         self.almotion.wakeUp()
+        self.altablet.turnScreenOn(True)
+        self.awake_changed.emit(True)
+
+    awake_changed = Signal(bool)
+    @Property(bool, notify=awake_changed)
+    def awake(self):
+        if not self._with_robot:
+            logger.warning("MOCK ROBOT: is awake = True")
+            return True
+
+        return self.almotion.robotIsWakeUp()
+
 
     @Slot()
     def toggleArmsStiffness(self):
