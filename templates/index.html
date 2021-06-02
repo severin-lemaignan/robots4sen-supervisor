@@ -94,7 +94,7 @@
                 //        $(".page").fadeOut(400);
                 //    }
                 //});
-                $(el).delay(100).fadeOut('slow', function() {
+                $(el).delay(100).fadeTo('slow', 0, function() {
                             send(el.id);
                             $(".page").fadeOut(400);
                 });
@@ -248,7 +248,8 @@
                         break;
 
                     case "moods":
-                        
+           
+
                         $(".mood_col").css("opacity",0);
                         $("#moods_container").show();
 
