@@ -87,7 +87,7 @@ class MoodBoardActivity(Activity):
         self.robot.tablet.setOptions(options)
 
     def is_multiparty(self):
-        return self.original_event is not None and self.original_event.nb_children > 1
+        return self.original_event is not None and self.original_event.type == Event.MULTI_ENGAGEMENT
 
     def start(self, robot, cmd_queue, event=None, continuation=False):
         """
@@ -106,6 +106,8 @@ class MoodBoardActivity(Activity):
 
         else:
             self._behaviour = self.continuation_run()
+
+        logger.warning("Starting a %s interaction" % self.original_event.type)
 
     def run(self):
 

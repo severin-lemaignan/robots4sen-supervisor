@@ -8,7 +8,7 @@ class Event:
     NO_INTERACTION = "no interaction"
     ACTIVITY_REQUEST = "activity request"
     ONE_TO_ONE_ENGAGEMENT = "one to one engagement"
-    MULTI_ENGAGEMENT = "multi-party engagemend"
+    MULTI_ENGAGEMENT = "multi-party engagement"
 
     # source
     CTRL_TABLET = "ctrl tablet"
