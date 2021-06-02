@@ -17,7 +17,7 @@ from csv_logging import create_csv_logger
 
 from websocketserver import TabletWebSocketServer
 
-from person import Person, PersonState
+from person import EngagedState, Person, PersonState
 
 people_logger = create_csv_logger("logs/people.csv")
 
@@ -89,10 +89,15 @@ class People(QObject):
 
         if is_engaged:
             location = [1.5, 0 , 0]
+            state = EngagedState()
         else:
             location = [3., 0, 0]
+            state = None
 
-        self._people[self.mock_id_idx] = Person(self.mock_id_idx, location, selfdestruct=is_temporary)
+        self._people[self.mock_id_idx] = Person(self.mock_id_idx, 
+                                                state=state,
+                                                location=location,
+                                                selfdestruct=is_temporary)
 
         self.newPerson.emit(str(self.mock_id_idx), False, type)
         self._mock_people.add(self.mock_id_idx)

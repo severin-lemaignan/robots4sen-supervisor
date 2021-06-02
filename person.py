@@ -146,16 +146,19 @@ class Person():
 
     # for temporary Persons (usually, temporary mock users),
     # the delay in secs before auto-deleting the person
-    SELFDESTRUCTION_DELAY = 10 #s
+    SELFDESTRUCTION_DELAY = 20 #s
 
     # age groups
     AGE_UNKNOWN = "unknown"
     ADULT = "adult"
     CHILD = "child"
 
-    def __init__(self, id, location = [0., 0., 0.], selfdestruct=False):
+    def __init__(self, id, 
+                 state = None,
+                 location = [0., 0., 0.], 
+                 selfdestruct=False):
 
-        self.state = UnknownState()
+        self.state = state if state is not None else UnknownState()
 
         self.person_id = id
         self.user_id = 0
