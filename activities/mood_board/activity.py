@@ -302,7 +302,7 @@ class MoodBoardActivity(Activity):
                               FINISHED))
 
             if final_mood != UNKNOWN:
-                self.robot.say(random.choice(FINAL_MOODS_FEEDBACK[self.mood])).wait()
+                self.robot.say(random.choice(FINAL_MOODS_FEEDBACK[final_mood])).wait()
             else:
                 self.robot.say(get_dialogue("multiparty_end")).wait()
 
