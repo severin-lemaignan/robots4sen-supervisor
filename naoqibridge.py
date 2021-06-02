@@ -17,7 +17,7 @@ from csv_logging import create_csv_logger
 
 from websocketserver import TabletWebSocketServer
 
-from person import EngagedState, Person, PersonState
+from person import EngagedState, LostState, Person, PersonState
 
 people_logger = create_csv_logger("logs/people.csv")
 
@@ -146,6 +146,8 @@ class People(QObject):
     def delete(self, id):
         logger.debug("Person <%s> deleted" % id)
         del(self._people[id])
+        if id in self._mock_people:
+            self._mock_people.remove(id)
 
 
 # !! creating a global here !!
@@ -228,11 +230,13 @@ class NaoqiPerson(QObject):
         is_state_same = self.person.update()
         if not is_state_same:
             self.state_changed.emit(self.person.state.value)
-            if self.person.state.value == PersonState.LOST:
 
-                logger.warning("%s is lost. Not tracking her/him anymore." % self.person)
-                self.log() # log a last time to record the 'LOST' state
-                self.delete()
+        if self.person.state.value == PersonState.LOST:
+            self.state_changed.emit(self.person.state.value)
+
+            logger.warning("%s is lost. Not tracking her/him anymore." % self.person)
+            self.log() # log a last time to record the 'LOST' state
+            self.delete()
 
 
     def log(self):
@@ -256,6 +260,9 @@ class NaoqiPerson(QObject):
     moved = Signal()
 
     @Slot()
+    def request_delete(self):
+        self.person.state = LostState()
+
     def delete(self):
         logger.warning("Deleting %s." % self.person)
         self._watchdog_timer.stop()

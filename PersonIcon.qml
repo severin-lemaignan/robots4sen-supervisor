@@ -84,7 +84,7 @@ Item {
 
         onPressAndHold: {
             console.log("User " + person.person_id + " deleted");
-            person.delete()
+            person.request_delete()
         }
 
         onXChanged: {
