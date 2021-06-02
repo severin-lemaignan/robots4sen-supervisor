@@ -93,7 +93,7 @@ class Supervisor(QObject):
                 if t < COOL_DOWN_DURATION:
                     logger.warning("Cool-down period (%.1f/%fs)" % (t, COOL_DOWN_DURATION))
 
-                elif    evt.type == Event.ACTIVITY_REQUEST \
+                elif   evt.type == Event.ACTIVITY_REQUEST \
                     or evt.type == Event.ONE_TO_ONE_ENGAGEMENT \
                     or evt.type == Event.MULTI_ENGAGEMENT:
 
@@ -111,7 +111,12 @@ class Supervisor(QObject):
 
                 logger.info("Activity <%s> completed" % self.activity)
 
-                if self.activity.type != MOODBOARD:
+                if self.activity.type == DEFAULT:
+                    # we are coming from default activity: someone pressed the 'waving hand', but wasn't (yet) detected as
+                    # engaged. Let's create a temporary 'mock' user
+                    self.bridge.people.createMockPerson(is_engaged=True, is_temporary=True)
+
+                elif self.activity.type != MOODBOARD:
                     # go back to moodboard to ask whether to continue or final mood
                     self.startActivity(MOODBOARD, continuation=True)
 
