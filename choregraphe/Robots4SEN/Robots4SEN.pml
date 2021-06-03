@@ -30,6 +30,7 @@
         <File name="heavy_rain" src="relax_sounds/heavy_rain.ogg" />
         <File name="morning_in_a_village" src="relax_sounds/morning_in_a_village.ogg" />
         <File name="seaside" src="relax_sounds/seaside.ogg" />
+        <File name="swiftswords_ext" src="dance-taichi/swiftswords_ext.mp3" />
     </Resources>
     <Topics />
     <IgnoredPaths />
