@@ -129,9 +129,9 @@ class TabletWebSocketServer(QObject):
             else:
                 logger.debug("Received [port %s]: <%s>" % (self.tablet.peerPort(), msg))
                 if msg["type"] == unicode(INTERRUPT):
+                    logger.debug("Cancellation requested!")
                     self.cancellation_requested = True
-
-                if not self.response_queue.empty():
+                elif not self.response_queue.empty():
                     logger.error("Tablet's response queue not empty! skipping the last mesage (%s)" % msg)
                 else:
                     self.response_queue.put(msg)
