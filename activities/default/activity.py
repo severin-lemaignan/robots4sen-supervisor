@@ -31,8 +31,10 @@ class DefaultActivity(Activity):
         while self.robot.tablet.response_queue.empty():
             yield RUNNING
 
-        if self.robot.tablet.response_queue.get()["id"] != "default":
+        msg = self.robot.tablet.response_queue.get()
+        if msg["id"] != "default":
             logger.error("[EE] Did not get 'default' as option choice while in default activity. The tablet response queue contains old values!")
+            logger.error("Got: %s" % msg)
 
 
         self.cmd_queue.put((TABLET, MOODBOARD, None))

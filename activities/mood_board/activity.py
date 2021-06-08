@@ -143,9 +143,13 @@ class MoodBoardActivity(Activity):
             ####################################################################
             ### PROMPT 'let do smthg'
 
-            if self.mood != UNKNOWN:
-                self.robot.say(random.choice(MOODS_FEEDBACK[self.mood])).wait()
-                yield RUNNING
+            try:
+                if self.mood != UNKNOWN:
+                    self.robot.say(random.choice(MOODS_FEEDBACK[self.mood])).wait()
+                    yield RUNNING
+            except KeyError:
+                logger.error("Got unexpected mood: %s. Returning to default activity." % self.mood) 
+                yield INTERRUPTED
 
         self.robot.say(get_dialogue("mood_prompt_activities")).wait()
         yield RUNNING

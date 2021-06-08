@@ -167,6 +167,7 @@ class Supervisor(QObject):
 
         nb_currently_engaged = len(self.bridge.people.getengagedpeople())
         nb_currently_seen = len(self.bridge.people.getpeople())
+        #logger.debug("Currently seen: %s       Currently engaged: %s (known engaged: %s)" % (nb_currently_seen, nb_currently_engaged, self.nb_engaged))
 
         # we *only* generate events if:
         #  - the number of currently engaged person goes down to 0
