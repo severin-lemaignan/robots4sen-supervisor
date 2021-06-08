@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package version="0.0.1" uuid="robots4sen-brl">
+<package uuid="robots4sen-brl" version="0.0.1">
  <names>
   <name lang="en_US">Robots4SEN</name>
  </names>
