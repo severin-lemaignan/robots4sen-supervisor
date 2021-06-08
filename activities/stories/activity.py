@@ -79,6 +79,9 @@ class StoryActivity(Activity):
         time.sleep(1)
         yield RUNNING
 
+        self.robot.tablet.clearOptions()
+        self.robot.tablet.addCancelBtn()
+
         for idx, sentence in enumerate(txt):
             logger.info("STORY [%s/%s]: %s" % (idx + 1, len(txt), sentence))
             self.robot.say(sentence).wait()
