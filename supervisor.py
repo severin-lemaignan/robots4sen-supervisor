@@ -73,6 +73,11 @@ class Supervisor(QObject):
             except Empty:
                 evt = Event()
 
+            # highest priority: the control tablet requests starting an activity
+            if evt.src == Event.CTRL_TABLET and evt.type == Event.ACTIVITY_REQUEST:
+                self.startActivity(evt.activity)
+
+
             if self.activity is None:
                 if evt.type == Event.ACTIVITY_REQUEST:
 
@@ -80,7 +85,7 @@ class Supervisor(QObject):
                             self.rest_time = time.time()
 
                         self.startActivity(evt.activity)
-                else: # we have no activity running, but the event was not ana ctivity request. Hopefully the next event will
+                else: # we have no activity running, but the event was not an activity request. Hopefully the next event will
                     logger.error("No activity running, and the event was not an activity request (was: %s). If this message appears more than once, there is a bug somewhere." % evt)
                     continue
 

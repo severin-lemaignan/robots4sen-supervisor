@@ -41,7 +41,8 @@ class MoodBoardActivity(Activity):
         super(MoodBoardActivity, self).__init__()
 
         self.activities_done = []
-        self.original_event = None
+        self.original_event = Event()
+        self.mood = UNKNOWN
 
     def make_activity_sentences(self, activities, add_all_link=True):
         res = []

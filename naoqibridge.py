@@ -13,6 +13,7 @@ from PySide2.QtCore import QUrl, Slot, Signal, QObject, Property, QTimer
 
 
 from constants import *
+from events import Event
 from csv_logging import create_csv_logger
 
 from websocketserver import TabletWebSocketServer
@@ -578,7 +579,7 @@ class NaoqiBridge(QObject):
         http://doc.aldebaran.com/2-5/naoqi/motion/alanimationplayer-advanced.html#animationplayer-tags-pepper
         """
         
-        self.cmd_queue.put((CTRL, SOCIAL_GESTURE, animation))
+        self.cmd_queue.put((Event.CTRL_TABLET, SOCIAL_GESTURE, animation))
 
 
     def animate(self, animation):
@@ -604,7 +605,7 @@ class NaoqiBridge(QObject):
         Argument is one of the available installed behaviour.
         """
         
-        self.cmd_queue.put((CTRL, BEHAVIOUR, behaviour))
+        self.cmd_queue.put((Event.CTRL_TABLET, BEHAVIOUR, behaviour))
 
 
     def run_behaviour(self, behaviour):
@@ -631,7 +632,7 @@ class NaoqiBridge(QObject):
         Argument is one of the available installed behaviour.
         """
         
-        self.cmd_queue.put((CTRL, ACTIVITY, activity))
+        self.cmd_queue.put((Event.CTRL_TABLET, ACTIVITY, activity))
 
 
     @Slot()
@@ -647,7 +648,7 @@ class NaoqiBridge(QObject):
 
     @Slot(str)
     def request_track(self, person_id):
-        self.cmd_queue.put((CTRL, TRACK, person_id))
+        self.cmd_queue.put((Event.CTRL_TABLET, TRACK, person_id))
 
     def track(self, person_id):
 
@@ -665,7 +666,7 @@ class NaoqiBridge(QObject):
 
     @Slot()
     def request_stop_tracking(self):
-        self.cmd_queue.put((CTRL, TRACK, ""))
+        self.cmd_queue.put((Event.CTRL_TABLET, TRACK, ""))
 
     def stop_tracking(self):
         if not self._with_robot:
@@ -678,7 +679,7 @@ class NaoqiBridge(QObject):
 
     @Slot(float, float, float)
     def request_lookAt(self, x, y, z):
-        self.cmd_queue.put((CTRL, LOOK_AT, (x, y, z)))
+        self.cmd_queue.put((Event.CTRL_TABLET, LOOK_AT, (x, y, z)))
 
     def lookAt(self, x, y, z):
 

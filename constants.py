@@ -15,10 +15,6 @@ INTERRUPTED = "interrupted"
 
 INTERRUPT = "interrupt"
 
-# SOURCES
-CTRL = "control"
-TABLET = "tablet"
-
 # BEHAVIOURS
 SOCIAL_GESTURE = "social gesture"
 BEHAVIOUR = "generic behaviour"

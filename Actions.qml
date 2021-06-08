@@ -180,31 +180,6 @@ Item {
                     anchors.rightMargin: 50
                     anchors.top: gestures.bottom
                     anchors.topMargin: 50
-                    model : list_animations
-                    cellHeight: parent.width * 0.12
-                    cellWidth: cellHeight
-
-                    delegate: IconButton{
-                            height:gestures.cellHeight * 0.8
-                            noborder:true
-                            source:image //we use this name in ListModel
-                            label: action.split("/")[1]
-                            onClicked: {
-                                            naoqi.request_behaviour(action);
-                            }
-
-                    }
-            }
-
-            GridView {
-                    id:activities
-                    height: parent.height/4
-                    anchors.left: parent.left
-                    anchors.leftMargin: 50
-                    anchors.right: parent.right
-                    anchors.rightMargin: 50
-                    anchors.top: animations.bottom
-                    anchors.topMargin: 50
                     model : list_activities
                     cellHeight: parent.width * 0.12
                     cellWidth: cellHeight
@@ -258,34 +233,36 @@ Item {
                     }
             }
 
-
-            ListModel {
-
-                    id: list_animations
-                    ListElement {
-                            action: "robots4sen-brl/elephant"
-                            image: "res/robot-angry-outline.svg"
-                    }
-                    ListElement {
-                            action: "robots4sen-brl/saxophone"
-                            image: "res/robot-love-outline.svg"
-                    }
-                    ListElement {
-                            action: "robots4sen-brl/dance-taichi"
-                            image: "res/robot-love-outline.svg"
-                    }
-            }
-
             ListModel {
 
                     id: list_activities
                     ListElement {
-                            action: "stories"
-                            image: "res/robot-angry-outline.svg"
+                            action: "calm dances"
+                            image: "res/activities/calm_dance.svg"
                     }
                     ListElement {
-                            action: "all_activities"
-                            image: "res/robot-angry-outline.svg"
+                            action: "cuddle"
+                            image: "res/activities/cuddle.svg"
+                    }
+                    ListElement {
+                            action: "jokes"
+                            image: "res/activities/joke.svg"
+                    }
+                    ListElement {
+                            action: "calm music"
+                            image: "res/activities/music.svg"
+                    }
+                    ListElement {
+                            action: "relaxing sounds"
+                            image: "res/activities/relax.svg"
+                    }
+                    ListElement {
+                            action: "listening"
+                            image: "res/activities/speak.svg"
+                    }
+                    ListElement {
+                            action: "story"
+                            image: "res/activities/story.svg"
                     }
             }
 
