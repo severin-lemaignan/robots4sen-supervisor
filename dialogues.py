@@ -104,9 +104,9 @@ ACTIVITIES_DIALOGUES = {
         }
 
 MOODS_FEEDBACK = {
-        SAD: ["Oh, sorry to hear that you feel not so good", "You feel a bit down? Let see what we can do.", "That's ok, let see.", "Ok, thank you for letting me know."],
+        SAD: ["Oh, sorry to hear that you feel not so good", "You feel a bit down?", "That's ok, let see.", "Ok, thank you for letting me know."],
         HAPPY: ["Cool!", "Good, I like that!", "Good to hear!", "Glad you feel good!", "Cool!", "Nice!"],
-        CONFUSED: ["Not too good? Let see.","A bit all over the place? Let see what we can do.", "Let's do something then.", "Let see what we can do.", "Ok, let's do something together", "Feeling a bit funny?"],
+        CONFUSED: ["Not too good?","A bit all over the place?", "Let's do something then.", "Ok, let's do something together", "Feeling a bit funny?"],
         ANGRY: ["Oh! You feel angry? Let see.", "You feel angry? Ok, thanks for telling me", "Ok, let see if we can calm down a little then", "That's ok to feel angry."],
         }
 
