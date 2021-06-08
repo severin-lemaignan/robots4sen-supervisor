@@ -143,6 +143,8 @@ class Supervisor(QObject):
             self.activity = relax_sounds.get_activity()
         elif activity == CALM_DANCES:
             self.activity = calm_dances.get_activity()
+        elif activity == CUDDLE:
+            self.activity = cuddle.get_activity()
         else:
             logger.error("Unknown activity <%s>. Falling back to DEFAULT" % activity)
             self.activity = default_activity.get_activity()
