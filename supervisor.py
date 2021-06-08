@@ -176,8 +176,10 @@ class Supervisor(QObject):
 
         if self.nb_engaged != nb_currently_engaged:
 
-            # no one engaged anymore
-            if nb_currently_engaged == 0:
+            # no one engaged anymore, and no-one around
+            if     nb_currently_engaged == 0 \
+               and nb_currently_seen == 0:
+
                 self.nb_engaged = nb_currently_engaged
                 self.events_queue.put(Event(Event.NO_ONE_ENGAGED))
 
@@ -186,6 +188,7 @@ class Supervisor(QObject):
                 # only one person around: one-to-one engagement
                 if    nb_currently_engaged == 1 \
                   and nb_currently_seen == 1:
+
                       self.nb_engaged = nb_currently_engaged
                       self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1))
 
