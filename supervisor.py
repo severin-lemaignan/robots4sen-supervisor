@@ -112,9 +112,14 @@ class Supervisor(QObject):
                 logger.info("Activity <%s> completed" % self.activity)
 
                 if self.activity.type == DEFAULT:
-                    # we are coming from default activity: someone pressed the 'waving hand', but wasn't (yet) detected as
-                    # engaged. Let's create a temporary 'mock' user
-                    self.bridge.people.createMockPerson(is_engaged=True, is_temporary=True)
+                    if self.nb_engaged == 0:
+                        # we are coming from default activity: someone pressed the 'waving hand', but wasn't (yet) detected as
+                        # engaged. Let's create a temporary 'mock' user
+                        logger.info("Initiating interaction without anyone seen yet. Creating a temporary mock user, and hopefully the real user will be detected before the mock user expires.")
+                        self.bridge.people.createMockPerson(is_engaged=True, is_temporary=True)
+
+                    self.nb_engaged = 0 # this will re-trigger a interaction event as the current number of engaged children (set ot 0) won't match the detected one
+
 
                 elif self.activity.type != MOODBOARD:
                     # go back to moodboard to ask whether to continue or final mood
