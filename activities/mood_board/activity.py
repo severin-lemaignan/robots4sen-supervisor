@@ -51,21 +51,21 @@ class MoodBoardActivity(Activity):
                 if verb == "listen":
                     lastverb = verb
                     if len(res) == 0:
-                        res.append("%s Would you like to listen to %s" % (option, activity))
+                        res.append("%s Would you like to listen to %s\\pau=300\\" % (option, activity))
                     else:
-                        res.append("%s Or do you feel like listening to %s" % (option, activity))
+                        res.append("%s Or do you feel like listening to %s\\pau=300\\" % (option, activity))
                 elif verb == "do":
                     lastverb = verb
                     if len(res) == 0:
-                        res.append("%s Do you want me to do %s" % (option, activity))
+                        res.append("%s Do you want me to do %s\\pau=300\\" % (option, activity))
                     else:
-                        res.append("%s Or I could do %s" % (option, activity))
+                        res.append("%s Or I could do %s\\pau=300\\" % (option, activity))
                 else:
                     lastverb = None
                     if len(res) == 0:
-                        res.append("%s Do you want me to %s" % (option, activity))
+                        res.append("%s Do you want me to %s\\pau=300\\" % (option, activity))
                     else:
-                        res.append("%s Or I could %s" % (option, activity))
+                        res.append("%s Or I could %s\\pau=300\\" % (option, activity))
 
             else:
                 res.append("%s or %s" % (option, activity))
