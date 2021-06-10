@@ -12,10 +12,17 @@ DIALOGUES = {
 
     "story_end":            ["The story is finished! I hope you liked it.",
                             "The end. Did you like the story?"],
-
     "story_interrupted":    ["\\pau=500\\Alright, I stop the story."],
-
     "story_no_one_left":    ["\\pau=500\\^startTag(disappointed)No one to listen to my story? Alright."],
+
+    "listening_prompt":     ["Tell me! I'm listening",
+                            "What do you want to tell me? I'm listening!",
+                            "Sure, happy to listen to you"],
+
+    "listening_end":        ["Thank you!",
+                            "Thank you for telling me."],
+
+    "listening_no_one_left":    ["^startTag(disappointed)You are gone? alright."],
 
     "jokes_start":          ["^startTag(excited)Joke time!",
                             "^startTag(estimate)Let me think of a good joke...\\pau=500\\"],

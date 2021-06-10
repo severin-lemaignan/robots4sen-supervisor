@@ -70,6 +70,10 @@ class TabletWebSocketServer(QObject):
             logger.error("Tablet not yet connected. Msg <%s> *not* sent." % msg)
 
 
+    def setCentered(self, option):
+        # set a single, centered button (typically, cancel)
+        self.write.emit(json.dumps({"type":"centered", "option": option}))
+
     def default(self):
         # set the default 'wavy hand' animation
         self.write.emit(json.dumps({"type":"default"}))

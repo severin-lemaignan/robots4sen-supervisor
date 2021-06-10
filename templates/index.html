@@ -24,6 +24,7 @@
         <div class="page">
                 
             <img id="default" class="wavy hand" src="/static/images/hand.svg" />
+            <img class="centered_btn" src="" />
 
             <div id="options_container" class="container"></div>
             <div id="moods_container">
@@ -134,6 +135,8 @@
             // Create WebSocket connection.
             const socket = new WebSocket('ws://{{ ws_server_ip }}:{{ ws_server_port }}');
 
+            $(".centered_btn").click(function () {popOut(this);});
+
             $("#mood_green").click(function () {popOut(this);});
             $("#mood_yellow").click(function () {popOut(this);});
             $("#mood_blue").click(function () {popOut(this);});
@@ -241,6 +244,7 @@
 
                     case "clear_all":
                         $("#default").hide();
+                        $(".centered_btn").hide();
                         $("#moods_container").hide();
                         $("#options_container").hide();
                         $("#options_container").empty();
@@ -265,6 +269,14 @@
 
                     case "debug":
                         console.log("DEBUG MSG FROM robotCtrl: " + msg.msg);
+                        break;
+
+                    case "centered":
+                        $(".page").fadeIn(200);
+                        $(".centered_btn").css("opacity", 0.6);
+                        $(".centered_btn").attr("id", msg.option.id);
+                        $(".centered_btn").attr("src", "/static/" + msg.option.img);
+                        $(".centered_btn").show();
                         break;
 
                     case "default":

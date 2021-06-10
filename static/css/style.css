@@ -95,6 +95,16 @@ figcaption {
     text-align: center;
 }
 
+.centered_btn {
+  display: none;
+  position: fixed;
+  top:333px; /* 1067px/2 - height/2 */
+  left: 653px; /* 1707px/2 - width/2 */
+  opacity:0.6;
+  width: 400px;
+  height: 400px;
+}
+
 .wavy.hand {
   position: fixed;
   top:333px; /* 1067px/2 - height/2 */

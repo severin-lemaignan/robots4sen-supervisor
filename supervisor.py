@@ -17,6 +17,7 @@ from events import Event
 from activities.default import activity as default_activity
 from activities.mood_board import activity as moodboard
 from activities.stories import activity as stories
+from activities.listening import activity as listening
 from activities.jokes import activity as jokes
 from activities.fun_dances import activity as fun_dances
 from activities.calm_music import activity as calm_music
@@ -143,6 +144,8 @@ class Supervisor(QObject):
             self.activity = moodboard.get_activity()
         elif activity == STORY:
             self.activity = stories.get_activity()
+        elif activity == LISTENING:
+            self.activity = listening.get_activity()
         elif activity == JOKES:
             self.activity = jokes.get_activity()
         elif activity == FUN_DANCES:
