@@ -146,6 +146,17 @@ Item {
 
 
             }
+    
+            Text {
+                id: social_gestures_label
+                text: "Perform social gestures:"
+                font.pixelSize: 30
+                    anchors.left: parent.left
+                    anchors.leftMargin: 50
+                    anchors.right: parent.right
+                    anchors.rightMargin: 50
+                    anchors.top: currentActivity.bottom
+            }
 
             GridView {
                     id:gestures
@@ -154,7 +165,8 @@ Item {
                     anchors.leftMargin: 50
                     anchors.right: parent.right
                     anchors.rightMargin: 50
-                    anchors.top: currentActivity.bottom
+                    anchors.top: social_gestures_label.bottom
+                    anchors.topMargin: 20
                     model : list_gestures
                     cellHeight: parent.width * 0.12
                     cellWidth: cellHeight
@@ -171,6 +183,18 @@ Item {
                     }
             }
 
+            Text {
+                id: activities_label
+                text: "Start activity:"
+                font.pixelSize: 30
+                    anchors.left: parent.left
+                    anchors.leftMargin: 50
+                    anchors.right: parent.right
+                    anchors.rightMargin: 50
+                    anchors.top: gestures.bottom
+                    anchors.topMargin: 100
+            }
+
             GridView {
                     id:animations
                     height: parent.height/4
@@ -178,7 +202,7 @@ Item {
                     anchors.leftMargin: 50
                     anchors.right: parent.right
                     anchors.rightMargin: 50
-                    anchors.top: gestures.bottom
+                    anchors.top: activities_label.bottom
                     anchors.topMargin: 50
                     model : list_activities
                     cellHeight: parent.width * 0.12
@@ -200,36 +224,36 @@ Item {
 
                     id: list_gestures
                     ListElement {
-                            action: "unknown"
-                            image: "res/robot-angry-outline.svg"
-                    }
-                    ListElement {
                             action: "hello"
-                            image: "res/robot-love-outline.svg"
-                    }
-                    ListElement {
-                            action: "calm"
-                            image: "res/robot-angry-outline.svg"
-                    }
-                    ListElement {
-                            action: "bored"
-                            image: "res/robot-love-outline.svg"
-                    }
-                    ListElement {
-                            action: "disappointed"
-                            image: "res/robot-angry-outline.svg"
-                    }
-                    ListElement {
-                            action: "embarrassed"
-                            image: "res/robot-love-outline.svg"
+                            image: "res/hello.svg"
                     }
                     ListElement {
                             action: "happy"
-                            image: "res/robot-angry-outline.svg"
+                            image: "res/happy.svg"
+                    }
+                    ListElement {
+                            action: "calm"
+                            image: "res/calm.svg"
+                    }
+                    ListElement {
+                            action: "unknown"
+                            image: "res/unknown.svg"
                     }
                     ListElement {
                             action: "explain"
-                            image: "res/robot-love-outline.svg"
+                            image: "res/explain.svg"
+                    }
+                    ListElement {
+                            action: "bored"
+                            image: "res/bored.svg"
+                    }
+                    ListElement {
+                            action: "disappointed"
+                            image: "res/disappointed.svg"
+                    }
+                    ListElement {
+                            action: "embarrassed"
+                            image: "res/embarrassed.svg"
                     }
             }
 
