@@ -12,7 +12,7 @@
    width="24"
    height="24"
    viewBox="0 0 24 24"
-   sodipodi:docname="microphone-other.svg"
+   sodipodi:docname="microphone-event.svg"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <metadata
      id="metadata9">
@@ -22,6 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -49,12 +50,20 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="mdi-microphone" />
   <circle
-     style="fill:#e9b96e;stroke-width:6.879;stroke-linecap:round;stroke-miterlimit:10;stop-color:#000000"
+     style="fill:#cea695;stroke-width:6.879;stroke-linecap:round;stroke-miterlimit:10;stop-color:#000000;fill-opacity:1"
      id="path834"
      cx="12.027039"
      cy="12.027039"
      r="11.898659" />
   <path
-     d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
-     id="path2" />
+     d="M 20.608163,0.52886323 A 1.2157435,1.2157435 0 0 1 21.823906,1.7446066 V 4.1760934 A 1.2157435,1.2157435 0 0 1 20.608163,5.3918368 1.2157435,1.2157435 0 0 1 19.392419,4.1760934 V 1.7446066 a 1.2157435,1.2157435 0 0 1 1.215744,-1.21574337 m 2.836735,3.64723017 c 0,1.430525 -1.057698,2.6097957 -2.431487,2.8083674 V 8.2285716 H 20.202915 V 6.9844608 C 18.829125,6.7858891 17.771428,5.6066184 17.771428,4.1760934 h 0.810495 a 2.0262391,2.0262391 0 0 0 2.02624,2.0262395 2.0262391,2.0262391 0 0 0 2.026239,-2.0262395 z"
+     id="path2"
+     inkscape:connector-curvature="0"
+     style="stroke-width:0.40524781" />
+  <path
+     id="path914"
+     d="m 11.053969,15.301346 h 2.737366 v 2.737367 h -2.737366 v -2.737367 m 0,-10.949461 h 2.737366 V 12.56398 H 11.053969 V 4.351885"
+     inkscape:connector-curvature="0"
+     style="stroke-width:1.36868274"
+     sodipodi:nodetypes="cccccccccc" />
 </svg>

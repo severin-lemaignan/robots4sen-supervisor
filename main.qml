@@ -49,14 +49,6 @@ Window {
             y: 15
         }
 
-        Rectangle {
-            anchors.right: record_btn.horizontalCenter
-            height: record_btn.height
-            anchors.top: record_btn.top
-            anchors.left: parent.left
-
-            color: "#f66151"
-        }
 
         Rectangle {
             id: record_modal
@@ -93,39 +85,53 @@ Window {
         }
 
 
-        IconButton {
-            id: record_btn
+    MicButton {
+        id: questions_mic
+        name: "questions"
+        source: "res/microphone-question.svg"
+        record_modal: record_modal
+        bg_color: "#b2ce95"
 
-            anchors.left: status.left
-            anchors.top: status.bottom
-            anchors.topMargin: 30
-            height: 200
+        anchors.left: status.left
+        anchors.top: status.bottom
+        anchors.topMargin: 30
+    }
 
-            noborder: true
+    MicButton {
+        id: event_mic
+        name: "event"
+        source: "res/microphone-event.svg"
+        record_modal: record_modal
+        bg_color: "#cea695"
 
-            source: "res/microphone.svg"
-
-            AudioRecorder {
-                id: audiorecorder
-                location: "default.ogg"
-            }
-
-            onPressedChanged: {
-                if (pressed) {
-                    var dateTime = new Date().toLocaleString(Qt.locale("en_GB"), "yyyy-MM-dd-HH-mm-ss");
-                    audiorecorder.location = "./logs/notes/audionote-" + dateTime + ".ogg"
-                    audiorecorder.record();
-                    record_modal.visible = true;
-                }
-                else {
-                    audiorecorder.stop();
-                    record_modal.visible = false;
-                }
-            }
+        anchors.left: questions_mic.left
+        anchors.top: questions_mic.bottom
+        anchors.topMargin: 130
+    }
 
 
-        }
+    MicButton {
+        id: chat_mic
+        name: "chat"
+        source: "res/microphone-interview.svg"
+        record_modal: record_modal
+        bg_color: "#ad7fa8"
 
+        anchors.left: event_mic.left
+        anchors.top: event_mic.bottom
+        anchors.topMargin: 130
+    }
+
+    MicButton {
+        id: other_mic
+        name: "other"
+        record_modal: record_modal
+        bg_color: "#e9b96e"
+
+        anchors.left: chat_mic.left
+        anchors.top: chat_mic.bottom
+        anchors.topMargin: 130
+    }
 
         footer: TabBar {
             id: tabBar
