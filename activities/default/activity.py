@@ -38,7 +38,7 @@ class DefaultActivity(Activity):
             logger.error("Got: %s" % msg)
 
 
-        self.cmd_queue.put((Event.CTRL_TABLET, MOODBOARD, None))
+        self.cmd_queue.put((Event.PEPPER_TABLET, MOODBOARD, None))
 
 
 default_activity = DefaultActivity()

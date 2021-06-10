@@ -203,7 +203,7 @@ class MoodBoardActivity(Activity):
 
         self.activities_done.append(action)
         action_logger.info((action, self.mood))
-        self.cmd_queue.put((Event.CTRL_TABLET, ACTIVITY, action))
+        self.cmd_queue.put((Event.PEPPER_TABLET, ACTIVITY, action))
 
     def continuation_run(self):
 
@@ -271,7 +271,7 @@ class MoodBoardActivity(Activity):
 
             self.activities_done.append(action)
             action_logger.info((action, self.mood))
-            self.cmd_queue.put((Event.CTRL_TABLET, ACTIVITY, action))
+            self.cmd_queue.put((Event.PEPPER_TABLET, ACTIVITY, action))
 
         else:
 
@@ -313,7 +313,7 @@ class MoodBoardActivity(Activity):
                 self.robot.say(get_dialogue("multiparty_end")).wait()
 
             self.robot.tablet.clearAll()
-            self.cmd_queue.put((Event.CTRL_TABLET, ACTIVITY, DEFAULT))
+            self.cmd_queue.put((Event.PEPPER_TABLET, ACTIVITY, DEFAULT))
 
     def on_no_one_engaged(self, evt):
         mood_logger.info((self.original_event.nb_children, 
