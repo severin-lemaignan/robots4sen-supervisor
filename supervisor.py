@@ -53,7 +53,7 @@ class Supervisor(QObject):
     isCurrentActivity_changed = Signal(str)
     @Property(str, notify=isCurrentActivity_changed)
     def currentActivity(self):
-        return str(self.activity) if self.activity else ""
+        return str(self.activity) if (self.activity and self.activity != default_activity.get_activity()) else ""
 
     @Slot()
     def interruptCurrentActivity(self):

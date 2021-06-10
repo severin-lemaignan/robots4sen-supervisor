@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Controls 2.3
 
 Item {
@@ -67,6 +67,47 @@ Item {
 
         anchors.right: parent.right
         spacing: 9
+    
+
+        IconButton {
+                id: interrupt_btn
+
+                height: 70
+
+                noborder:true
+                source: "res/stop-circle.svg"
+                visible: naoqi_supervisor.currentActivity ? true : false
+
+                onClicked: {
+                    blink.start()
+                    naoqi_supervisor.interruptCurrentActivity();
+                }
+
+                SequentialAnimation {
+                    id: blink
+                    loops: 10
+                    NumberAnimation {target:interrupt_btn; property: "opacity"; to: 0; duration: 300 }
+                    NumberAnimation {target:interrupt_btn; property: "opacity"; to: 1;  duration: 300 }
+                }
+
+                onVisibleChanged: {
+                    if (!visible) {blink.stop()}
+                }
+            }
+
+
+
+        Text {
+            id: activity_label
+            text: "Currently doing:\n" + (naoqi_supervisor.currentActivity ? naoqi_supervisor.currentActivity : "no activity")
+            font.pixelSize: 30
+        }
+
+        Rectangle {
+            width: 2
+            color: "black"
+            height: 70
+        }
 
         IconButton {
             id: adult
@@ -87,11 +128,6 @@ Item {
 
         }
 
-
-        IconButton {
-            id: remove
-            source: "res/account-off.svg"
-        }
     }
 
     //        Image {
