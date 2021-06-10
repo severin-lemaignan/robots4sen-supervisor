@@ -6,6 +6,7 @@ import json
 import time
 
 from constants import *
+from events import Event
 
 from activities.activity import Activity
 
@@ -37,7 +38,7 @@ class DefaultActivity(Activity):
             logger.error("Got: %s" % msg)
 
 
-        self.cmd_queue.put((TABLET, MOODBOARD, None))
+        self.cmd_queue.put((Event.CTRL_TABLET, MOODBOARD, None))
 
 
 default_activity = DefaultActivity()
