@@ -190,11 +190,25 @@
                         location.href = msg.url;
                         break;
                     
+                    case "btn_size":
+                        // if 4 options or less, they fit on one line, and we center
+                        // that line
+                        if (msg.size == "small") {
+                            console.log("setting small size");
+                            $("#options_container").css("transform", "scale(0.8) translate(0px,-280px)");
+                        }
+                        else {
+                            console.log("setting large size");
+                            $("#options_container").css("transform", "");
+                        }
+                        break;
+
                     // creates one 'icon' per option
                     case "set_options":
 
                         var show_mood = false;
                         var show_footer = false;
+
 
                         for (var i = 0; i < msg.options.length; i++) {
                             var option = msg.options[i];

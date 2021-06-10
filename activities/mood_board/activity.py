@@ -46,6 +46,12 @@ class MoodBoardActivity(Activity):
         self.mood = UNKNOWN
 
     def make_activity_sentences(self, activities, add_all_link=True):
+
+        if len(activities) > 4:
+            self.robot.tablet.smallSize()
+        else:
+            self.robot.tablet.largeSize()
+
         res = []
         lastverb = None
         for verb, activity, option in [ACTIVITIES_DIALOGUES[a] for a in activities]:
@@ -159,6 +165,8 @@ class MoodBoardActivity(Activity):
         ####################################################################
         ### OFFER ACTIVITIES BASED ON MOOD
 
+        self.robot.tablet.clearAll()
+
         if self.mood != UNKNOWN:
             activities = random.sample(self.MOODS_ACTIVITIES[self.mood],
                                        random.randint(2,3))
@@ -167,7 +175,6 @@ class MoodBoardActivity(Activity):
             activities = random.sample(self.MOODS_ACTIVITIES[ALL], 8)
             sentences = self.make_activity_sentences(activities, add_all_link=False)
 
-        self.robot.tablet.clearAll()
 
         while True:
             logger.info("Offering the following activities: %s" % activities)
@@ -227,6 +234,8 @@ class MoodBoardActivity(Activity):
             ####################################################################
             ### OFFER ACTIVITIES BASED ON MOOD
 
+            self.robot.tablet.clearAll()
+
             if self.mood != UNKNOWN:
                 activities = random.sample(self.MOODS_ACTIVITIES[self.mood], random.randint(2,3))
                 sentences = self.make_activity_sentences(activities, add_all_link=True)
@@ -234,7 +243,6 @@ class MoodBoardActivity(Activity):
                 activities = random.sample(self.MOODS_ACTIVITIES[ALL], 8)
                 sentences = self.make_activity_sentences(activities, add_all_link=False)
 
-            self.robot.tablet.clearAll()
 
             while True:
                 logger.info("Offering the following activities: %s" % activities)

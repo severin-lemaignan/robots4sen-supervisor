@@ -87,6 +87,13 @@ class TabletWebSocketServer(QObject):
     def clearOptions(self):
         self.write.emit(json.dumps({"type":"clear_options"}))
 
+    def smallSize(self):
+        self.write.emit(json.dumps({"type":"btn_size", "size": "small"}))
+
+    def largeSize(self):
+        self.write.emit(json.dumps({"type":"btn_size", "size": "large"}))
+
+
     def clearAll(self):
         """ Clears both options and (possible) footer.
         """ 
