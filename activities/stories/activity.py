@@ -94,9 +94,9 @@ class StoryActivity(Activity):
         yield RUNNING
         time.sleep(1)
 
-    def on_interrrupted(self, evt):
+    def on_interrupted(self, evt):
         self.robot.say(get_dialogue("story_interrupted")).wait()
-        return super(StoryActivity, self).on_interrrupted(evt)
+        return super(StoryActivity, self).on_interrupted(evt)
 
     def on_no_one_engaged(self, evt):
         self.robot.say(get_dialogue("story_no_one_left")).wait()
