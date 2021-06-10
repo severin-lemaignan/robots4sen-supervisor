@@ -91,7 +91,10 @@ Item {
                 }
 
                 onVisibleChanged: {
-                    if (!visible) {blink.stop()}
+                    if (!visible) {
+                        blink.stop();
+                        opacity = 1;
+                    }
                 }
             }
 
