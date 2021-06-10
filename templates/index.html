@@ -103,12 +103,7 @@
 
             };
 
-            function wavyHand() {
-                $("#default").css('transform', '');
-                $("#default").css('z-index', 1);
-                $("#default").show();
-
-                anime({
+            var wavyHandAnimation = anime({
                     targets: ".wavy.hand",
                     rotate:[
                         {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
@@ -128,7 +123,16 @@
                         {value: 0., duration: 500, delay:4000}
                     ],
                     loop: true,
+                    autoplay: false,
                 });
+
+            function wavyHand() {
+                $("#default").css('transform', '');
+                $("#default").css('z-index', 1);
+                $("#default").show();
+
+                wavyHandAnimation.play();
+
             }
 
 
@@ -244,6 +248,7 @@
 
                     case "clear_all":
                         $("#default").hide();
+                        wavyHandAnimation.pause();
                         $(".centered_btn").hide();
                         $("#moods_container").hide();
                         $("#options_container").hide();
