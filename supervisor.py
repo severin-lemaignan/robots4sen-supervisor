@@ -239,8 +239,8 @@ class Supervisor(QObject):
 
             if cmd == INTERRUPT:
                 self.events_queue.put(Event(Event.INTERRUPTED, src=source))
-            #elif cmd == SOCIAL_GESTURE:
-            #    self.bridge.animate(args)
+            elif cmd == SOCIAL_GESTURE:
+                self.bridge.animate(args)
             #elif cmd == BEHAVIOUR:
             #    self.bridge.run_behaviour(args)
             #elif cmd == LOOK_AT:

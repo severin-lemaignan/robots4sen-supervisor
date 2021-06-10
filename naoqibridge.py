@@ -597,7 +597,7 @@ class NaoqiBridge(QObject):
 
         logging.debug("Running animation tag <%s>" % animation)
         future = self.alanimationplayer.runTag(animation, _async=True)
-        future.value() # wait until the animation is complete
+        #future.value() # wait until the animation is complete
 
     @Slot(str)
     def request_behaviour(self, behaviour):
