@@ -79,8 +79,9 @@ class StoryActivity(Activity):
         time.sleep(1)
         yield RUNNING
 
-        self.robot.tablet.clearOptions()
-        self.robot.tablet.addCancelBtn()
+        self.robot.tablet.clearAll()
+        btn = {"id": INTERRUPT, "img": "images/stop.svg"}
+        self.robot.tablet.setCentered(btn)
 
         for idx, sentence in enumerate(txt):
             logger.info("STORY [%s/%s]: %s" % (idx + 1, len(txt), sentence))

@@ -24,8 +24,9 @@ class ListeningActivity(Activity):
         # display the stop btn
         self.robot.tablet.clearAll()
 
-        btn = {"id": INTERRUPT, "img": "images/stop.svg"}
         self.robot.say(get_dialogue("listening_prompt")).wait()
+
+        btn = {"id": INTERRUPT, "img": "images/stop.svg"}
         self.robot.tablet.setCentered(btn)
 
     def run(self):

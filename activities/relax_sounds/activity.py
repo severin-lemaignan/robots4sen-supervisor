@@ -20,8 +20,12 @@ class RelaxSoundsActivity(Activity):
 
     def run(self):
 
-        self.robot.tablet.clearOptions()
+        self.robot.tablet.clearAll()
         self.robot.say(get_dialogue("relax_sounds_start")).wait()
+
+        btn = {"id": INTERRUPT, "img": "images/stop.svg"}
+        self.robot.tablet.setCentered(btn)
+
         yield RUNNING
 
         behaviours = ["robots4sen-brl/relax_sounds"]
