@@ -111,7 +111,13 @@ class Supervisor(QObject):
             if status == INTERRUPTED:
 
                 logger.warning("Activity <%s> interrupted" % self.activity)
-                self.startActivity(DEFAULT)
+
+                # is the activity interrupted due to a request from the child?
+                # if so, propose another activity
+                if evt.type == Event.INTERRUPTED and evt.src == Event.PEPPER_TABLET:
+                    self.startActivity(MOODBOARD, continuation=True)
+                else:
+                    self.startActivity(DEFAULT)
 
             elif status == FINISHED:
 
