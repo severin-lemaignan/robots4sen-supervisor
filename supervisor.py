@@ -60,7 +60,7 @@ class Supervisor(QObject):
 
         if self.activity:
             logger.warning("Ctrl tablet requests <%s> to stop" % self.activity)
-            self.request_interrupt = True
+            self.cmd_queue.put((Event.CTRL_TABLET, INTERRUPT, None))
 
 
     def run(self):
@@ -216,10 +216,10 @@ class Supervisor(QObject):
 
         #####################################################################
         ###
-        ###   CTRL TABLET INTERRUPTION REQUESTS
+        ###   PEPPER TABLET INTERRUPTION REQUESTS
 
         if self.bridge.tablet.isCancellationRequested():
-            self.events_queue.put(Event(Event.INTERRUPTED, src=Event.CTRL_TABLET))
+            self.events_queue.put(Event(Event.INTERRUPTED, src=Event.PEPPER_TABLET))
 
 
         #####################################################################
