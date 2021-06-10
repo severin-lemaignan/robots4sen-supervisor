@@ -24,8 +24,8 @@ DIALOGUES = {
 
     "listening_no_one_left":    ["^startTag(disappointed)You are gone? alright."],
 
-    "jokes_start":          ["^startTag(excited)Joke time!",
-                            "^startTag(estimate)Let me think of a good joke...\\pau=500\\"],
+    "jokes_start":          ["^startTag(excited)Joke time!\\pau=500\\",
+                            "^startTag(estimate)Let me think of a good joke...\\pau=700\\"],
 
     "jokes_inbetween":      ["^runTag(happy)Another one!\\pau=500\\",
                              "^runTag(happy)I've got another one!\\pau=500\\",
