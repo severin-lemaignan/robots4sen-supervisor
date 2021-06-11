@@ -569,7 +569,7 @@ class NaoqiBridge(QObject):
 
     @Slot()
     def on_isConnected_changed(self, value):
-        logging.warning("Connection status changed! connected=%s" % value)
+        logger.warning("Connection status changed! connected=%s" % value)
 
 
     @Slot(str)
@@ -595,7 +595,7 @@ class NaoqiBridge(QObject):
             logger.warning("Robot not connected. Can not perform 'animate'")
             return
 
-        logging.debug("Running animation tag <%s>" % animation)
+        logger.debug("Running animation tag <%s>" % animation)
         future = self.alanimationplayer.runTag(animation, _async=True)
         #future.value() # wait until the animation is complete
 
@@ -621,7 +621,7 @@ class NaoqiBridge(QObject):
             logger.warning("Robot not connected. Can not perform 'run_behaviour'")
             return MockFuture()
 
-        logging.debug("Running behaviour <%s>" % behaviour)
+        logger.debug("Running behaviour <%s>" % behaviour)
         future = BehaviourFuture(self.albehaviours, behaviour)
         future.start()
         return future

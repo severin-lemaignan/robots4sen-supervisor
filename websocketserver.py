@@ -100,7 +100,9 @@ class TabletWebSocketServer(QObject):
         self.write.emit(json.dumps({"type":"clear_all"}))
 
     def setOptions(self, options):
+        logger.debug("Sending options to tablet...")
         self.write.emit(json.dumps({"type":"set_options", "options":options}))
+        logger.debug("Finished sending options to tablet.")
 
     def showMoodBoard(self):
         self.write.emit(json.dumps({"type":"moods"}))
@@ -143,7 +145,7 @@ class TabletWebSocketServer(QObject):
                     logger.debug("Cancellation requested!")
                     self.cancellation_requested = True
                 elif not self.response_queue.empty():
-                    logger.error("Tablet's response queue not empty! skipping the last mesage (%s)" % msg)
+                    logger.error("Tablet's response queue not empty! skipping the last message (%s)" % msg)
                 else:
                     self.response_queue.put(msg)
 

@@ -224,6 +224,7 @@ class MoodBoardActivity(Activity):
 
 
         if want_continue == YES:
+            logger.debug("Child wants to continue")
 
             ####################################################################
             ### PROMPT 'let do smthg'
@@ -282,6 +283,7 @@ class MoodBoardActivity(Activity):
             self.cmd_queue.put((Event.PEPPER_TABLET, ACTIVITY, action))
 
         else:
+            logger.debug("Child does not want to continue")
 
             if self.is_multiparty():
                 final_mood = UNKNOWN

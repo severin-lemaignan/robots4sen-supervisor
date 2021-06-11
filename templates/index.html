@@ -162,12 +162,13 @@
 
                 console.log("Sending back message to robot ctrl: " + JSON.stringify(msg));
                 socket.send(JSON.stringify(msg));
+
             }
 
 	    function debug(msg) {
                 var msg = {
                     type: "debug",
-                    msg: msg
+                    msg: (Date.now()/1000).toString() + ": " + msg
                 };
 
                 socket.send(JSON.stringify(msg));
@@ -254,6 +255,7 @@
 
                         //col.fadeIn(500)
 
+			debug("finished set_options")
                         break;
 
                     case "clear_options":
@@ -285,6 +287,8 @@
                              duration: 1000
                         });
 
+			debug("finished mood")
+			break;
 
 
                     case "debug":
