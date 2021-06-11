@@ -40,7 +40,7 @@ JOKES_LIST = [
             "What do you think of that new dinner on the moon?\\pau=1400\\Food was good, but there really wasn't much atmosphere.",
             "Why did the dinosaur cross the road?\\pau=1800\\Because the chicken wasn't born yet.",
             "Why can't Elsa have a balloon?\\pau=1600\\Because she will let it go.",
-            "How do you make an octopus laugh?\\pau=1600\\With ten-tickles!",
+            "How do you make an octopus laugh?\\pau=1600\\With ten\\pau=200\\tickles!",
             "How do you make a tissue dance?\\pau=1600\\You put a little boogie in it.",
             "What did the nose say to the finger?\\pau=1600\\Quit picking on me!",
             "Why did the kid bring a ladder to school?\\pau=1600\\Because she wanted to go to high school.",
