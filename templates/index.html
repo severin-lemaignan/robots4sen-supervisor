@@ -139,7 +139,7 @@
             }
 
             // guard to mke sure we never send twice the same message
-            var canSendMsg = false;
+            var canSendMsg = true;
 
             // Create WebSocket connection.
             const socket = new WebSocket('ws://{{ ws_server_ip }}:{{ ws_server_port }}');
