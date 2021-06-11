@@ -109,7 +109,7 @@ figcaption {
   position: fixed;
   top:333px; /* 1067px/2 - height/2 */
   left: 653px; /* 1707px/2 - width/2 */
-  opacity:0.01;
+  opacity:1;
   width: 400px;
   height: 400px;
   transform-origin: 50% 100%;

@@ -16,28 +16,28 @@
 
         <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
 
-        <script src="/static/js/anime.min.js"></script>
+        <!--<script src="/static/js/anime.min.js"></script>-->
         <script src="/static/js/jquery-1.12.4.min.js"></script>
     </head>
     <body>
 
         <div class="page">
-                
+
             <img id="default" class="wavy hand" src="/static/images/hand.svg" />
             <img class="centered_btn" src="" />
 
             <div id="options_container" class="container"></div>
             <div id="moods_container">
                 <div id="mood_blue" class="mood_col blue">
-                        <img src="/static/images/sad.svg"/>
+                    <img src="/static/images/sad.svg"/>
 
-                        <p>
-                        Sick<br/>
-                        Sad<br/>
-                        Tired<br/>
-                        Bored<br/>
-                        Moving slowly<br/>
-                        </p>
+                    <p>
+                    Sick<br/>
+                    Sad<br/>
+                    Tired<br/>
+                    Bored<br/>
+                    Moving slowly<br/>
+                    </p>
                 </div>
                 <div id="mood_green" class="mood_col green">
                     <img src="/static/images/happy.svg"/>
@@ -95,48 +95,51 @@
                 //        $(".page").fadeOut(400);
                 //    }
                 //});
-                $(el).delay(100).fadeTo('slow', 0, function() {
-                            send(el.id);
-                            $(".page").fadeOut(400);
-                });
+
+                //$(el).delay(100).fadeTo('slow', 0, function() {
+                //    send(el.id);
+                //    $(".page").fadeOut(400);
+                //});
+                send(el.id);
+                $(".page").hide();
 
 
             };
 
-            var wavyHandAnimation = anime({
-                    targets: ".wavy.hand",
-                    rotate:[
-                        {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
-                        {easing:'easeInOutQuad', value: 30, duration: 300},
-                        {easing:'easeInOutQuad', value: -30, duration: 300},
-                        {easing:'easeInOutQuad', value: 30, duration: 300},
-                        {easing:'easeOutQuad', value: 0, duration: 150},
-                        {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
-                        {easing:'easeInOutQuad', value: 30, duration: 300},
-                        {easing:'easeInOutQuad', value: -30, duration: 300},
-                        {easing:'easeInOutQuad', value: 30, duration: 300},
-                        {easing:'easeOutQuad', value: 0, duration: 150},
-                    ],
-                    opacity:[
-                        {value: 0.5, duration: 1000},
-                        {value: 0., duration: 2000, delay:4000},
-                        {value: 0., duration: 500, delay:4000}
-                    ],
-                    loop: true,
-                    autoplay: false,
-                });
+            //var wavyHandAnimation = anime({
+            //    targets: ".wavy.hand",
+            //    rotate:[
+            //        {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
+            //        {easing:'easeInOutQuad', value: 30, duration: 300},
+            //        {easing:'easeInOutQuad', value: -30, duration: 300},
+            //        {easing:'easeInOutQuad', value: 30, duration: 300},
+            //        {easing:'easeOutQuad', value: 0, duration: 150},
+            //        {easing:'easeOutQuad', value: -30, duration: 150, delay:1000},
+            //        {easing:'easeInOutQuad', value: 30, duration: 300},
+            //        {easing:'easeInOutQuad', value: -30, duration: 300},
+            //        {easing:'easeInOutQuad', value: 30, duration: 300},
+            //        {easing:'easeOutQuad', value: 0, duration: 150},
+            //    ],
+            //    opacity:[
+            //        {value: 0.5, duration: 1000},
+            //        {value: 0., duration: 2000, delay:4000},
+            //        {value: 0., duration: 500, delay:4000}
+            //    ],
+            //    loop: true,
+            //    autoplay: false,
+            //});
 
             function wavyHand() {
                 $("#default").css('transform', '');
                 $("#default").css('z-index', 1);
                 $("#default").show();
 
-                wavyHandAnimation.play();
+                //wavyHandAnimation.play();
 
             }
 
-	    // guard to mke sure we never send twice the same message
-	    var canSendMsg = false;
+            // guard to mke sure we never send twice the same message
+            var canSendMsg = false;
 
             // Create WebSocket connection.
             const socket = new WebSocket('ws://{{ ws_server_ip }}:{{ ws_server_port }}');
@@ -152,13 +155,13 @@
             wavyHand();
 
             function send(id) {
-                
-		if (!canSendMsg) {
-                    console.log("Not sending msg (msg already sent): " + JSON.stringify(msg));
-		    return;
-		}
 
-		canSendMsg = false;
+                if (!canSendMsg) {
+                    console.log("Not sending msg (msg already sent): " + JSON.stringify(msg));
+                    return;
+                }
+
+                canSendMsg = false;
 
                 var msg = {
                     type: "choice",
@@ -174,14 +177,14 @@
 
             }
 
-	    function debug(msg) {
+            function debug(msg) {
                 var msg = {
                     type: "debug",
                     msg: (Date.now()/1000).toString() + ": " + msg
                 };
 
                 socket.send(JSON.stringify(msg));
-	    }
+            }
 
             // Listen for messages
             socket.addEventListener('message', function (event) {
@@ -192,14 +195,14 @@
                     case "helo":
                         console.log("Sending back 'helo'");
                         socket.send(JSON.stringify('helo'));
-			debug("tablet resolution: " + window.innerWidth + "x" + window.innerHeight);
+                        debug("tablet resolution: " + window.innerWidth + "x" + window.innerHeight);
                         break;
 
-                    // redirect to a different page
+                        // redirect to a different page
                     case "redirect":
                         location.href = msg.url;
                         break;
-                    
+
                     case "btn_size":
                         // if 4 options or less, they fit on one line, and we center
                         // that line
@@ -213,11 +216,11 @@
                         }
                         break;
 
-                    // creates one 'icon' per option
+                        // creates one 'icon' per option
                     case "set_options":
 
-			debug("got set_options")
-			canSendMsg = true;
+                        debug("got set_options")
+                        canSendMsg = true;
 
                         var show_mood = false;
                         var show_footer = false;
@@ -253,7 +256,8 @@
                         if (show_footer) {
                             $("#footer").show()
                         }
-                        $(".page").fadeIn(200);
+                        //ANIM $(".page").fadeIn(200);
+                        $(".page").show()
 
 
                         //anime({
@@ -267,7 +271,7 @@
 
                         //col.fadeIn(500)
 
-			debug("finished set_options")
+                        debug("finished set_options")
                         break;
 
                     case "clear_options":
@@ -276,7 +280,7 @@
 
                     case "clear_all":
                         $("#default").hide();
-                        wavyHandAnimation.pause();
+                        //wavyHandAnimation.pause();
                         $(".centered_btn").hide();
                         $("#moods_container").hide();
                         $("#options_container").hide();
@@ -286,23 +290,23 @@
                         break;
 
                     case "moods":
-			debug("got mood")
-			canSendMsg = true;
-           
+                        debug("got mood")
+                        canSendMsg = true;
 
-                        $(".mood_col").css("opacity",0);
+
+                        $(".mood_col").css("opacity",1);
                         $("#moods_container").show();
 
-                        anime({
-                             targets: ".mood_col",
-                             opacity: 1,
-                            delay: anime.stagger(250, {start:400}),
-                             easing: 'easeOutQuad',
-                             duration: 1000
-                        });
+                        //anime({
+                            //     targets: ".mood_col",
+                            //     opacity: 1,
+                            //    delay: anime.stagger(250, {start:400}),
+                            //     easing: 'easeOutQuad',
+                            //     duration: 1000
+                            //});
 
-			debug("finished mood")
-			break;
+                        debug("finished mood")
+                        break;
 
 
                     case "debug":
@@ -310,8 +314,9 @@
                         break;
 
                     case "centered":
-			canSendMsg = true;
-                        $(".page").fadeIn(200);
+                        canSendMsg = true;
+                        //ANIM $(".page").fadeIn(200);
+                        $(".page").show()
                         $(".centered_btn").css("opacity", 0.6);
                         $(".centered_btn").attr("id", msg.option.id);
                         $(".centered_btn").attr("src", "/static/" + msg.option.img);
@@ -319,8 +324,9 @@
                         break;
 
                     case "default":
-			canSendMsg = true;
-                        $(".page").fadeIn(200);
+                        canSendMsg = true;
+                        //ANIM $(".page").fadeIn(200);
+                        $(".page").show()
                         $("#default").show();
                         wavyHand();
                         break;
