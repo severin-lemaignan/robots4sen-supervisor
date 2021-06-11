@@ -79,7 +79,7 @@ class MoodBoardActivity(Activity):
                 res.append("%s or %s" % (option, activity))
 
         if add_all_link:
-            res.append('\\option={"id":"%s","img":"images/again.svg","label": "","footer":true}\\' % ALL)
+            res.append('\\option={"id":"%s","img":"images/apps.svg","label": "","footer":true}\\' % ALL)
 
         return res
 
