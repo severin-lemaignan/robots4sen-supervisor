@@ -135,6 +135,8 @@
 
             }
 
+	    // guard to mke sure we never send twice the same message
+	    var canSendMsg = false;
 
             // Create WebSocket connection.
             const socket = new WebSocket('ws://{{ ws_server_ip }}:{{ ws_server_port }}');
@@ -150,7 +152,14 @@
             wavyHand();
 
             function send(id) {
-                    
+                
+		if (!canSendMsg) {
+                    console.log("Not sending msg (msg already sent): " + JSON.stringify(msg));
+		    return;
+		}
+
+		canSendMsg = false;
+
                 var msg = {
                     type: "choice",
                     id: id
@@ -206,6 +215,9 @@
 
                     // creates one 'icon' per option
                     case "set_options":
+
+			debug("got set_options")
+			canSendMsg = true;
 
                         var show_mood = false;
                         var show_footer = false;
@@ -274,6 +286,8 @@
                         break;
 
                     case "moods":
+			debug("got mood")
+			canSendMsg = true;
            
 
                         $(".mood_col").css("opacity",0);
@@ -296,6 +310,7 @@
                         break;
 
                     case "centered":
+			canSendMsg = true;
                         $(".page").fadeIn(200);
                         $(".centered_btn").css("opacity", 0.6);
                         $(".centered_btn").attr("id", msg.option.id);
@@ -304,6 +319,7 @@
                         break;
 
                     case "default":
+			canSendMsg = true;
                         $(".page").fadeIn(200);
                         $("#default").show();
                         wavyHand();
