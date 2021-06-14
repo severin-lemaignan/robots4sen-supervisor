@@ -13,7 +13,7 @@ Item {
         text: "Currently doing:\n" + (naoqi_supervisor.currentActivity ? naoqi_supervisor.currentActivity : "no activity")
         font.pixelSize: 40
         anchors.left: parent.left
-        anchors.leftMargin: 200
+        anchors.leftMargin: 300
         anchors.top: parent.top
     }
 
@@ -22,7 +22,7 @@ Item {
         text: "Interactions"
         font.pixelSize: 40
         anchors.left: parent.left
-        anchors.leftMargin: 200
+        anchors.leftMargin: 300
         anchors.top: activity_label.bottom
         anchors.topMargin: 50
     }
@@ -32,7 +32,7 @@ Item {
         spacing: 20
         height: 150
         anchors.left: parent.left
-        anchors.leftMargin: 200
+        anchors.leftMargin: 300
         anchors.top: interactions_label.bottom
         anchors.topMargin: 50
  
@@ -84,10 +84,10 @@ Item {
 
     Text {
         id: nb_children_label
-        text: "Children"
+        text: "# children"
         font.pixelSize: 40
         anchors.left: parent.left
-        anchors.leftMargin: 200
+        anchors.leftMargin: 300
         anchors.top: interactions_row.bottom
         anchors.topMargin: 50
     }
@@ -95,11 +95,21 @@ Item {
     Row {
         spacing: 20
         anchors.left: parent.left
-        anchors.leftMargin: 200
+        anchors.leftMargin: 300
         anchors.top: nb_children_label.bottom
         anchors.topMargin: 50
         height: 150
  
+        IconButton {
+            source: "res/numeric-0.svg"
+            height: 150
+            onClicked: {
+                naoqi_supervisor.nb_children = 0;
+            }
+
+            color: naoqi_supervisor.nb_children == 0 ? "orange": "white"
+        }
+
         IconButton {
             source: "res/numeric-1.svg"
             height: 150

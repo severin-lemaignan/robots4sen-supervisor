@@ -72,6 +72,10 @@ class Supervisor(QObject):
 
     def set_nb_children(self, nb):
         if nb != self._nb_children:
+
+            if self._nb_children == 0:
+                self.events_queue.put(Event(Event.NO_ONE_ENGAGED))
+
             nb_children_logger.info((nb,))
             self._nb_children = nb
             self.nb_children_changed.emit(nb)
@@ -84,7 +88,8 @@ class Supervisor(QObject):
 
     @Slot()
     def start_single_interaction(self):
-        self.nb_children = 1
+        if self.nb_children != 1:
+            self.nb_children = 1
         self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1))
 
     @Slot()
