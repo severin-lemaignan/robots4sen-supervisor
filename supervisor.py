@@ -46,9 +46,11 @@ class Supervisor(QObject):
         self.activity = default_activity.get_activity()
         self.activity.start(self.bridge, self.cmd_queue)
 
-        self.nb_engaged = 0 # nb of people the robot is currently engaged with
+        self._nb_children = 0 # nb of children engaged, as set by the researcher on the ctrl tablet
 
-        self._nb_children = 0
+        self.nb_engaged = 0 # nb of people the robot is currently engaged with
+        self.nb_currently_seen = 0 # nb of people current seen by the robot
+
 
         # rest_time stores the timestamp at which the last activity stopped
         # used to ensure a 'cool down' period between 2 activities
@@ -83,9 +85,12 @@ class Supervisor(QObject):
 
     def get_nb_children(self):
         return self._nb_children
-
-
     nb_children = Property(int, get_nb_children, set_nb_children, notify=nb_children_changed)
+
+    detected_nb_children_changed = Signal(int)
+    @Property(int, notify=detected_nb_children_changed)
+    def detected_nb_children(self):
+        return len(self.bridge.people.getpeople())
 
     @Slot()
     def start_single_interaction(self):
@@ -229,6 +234,10 @@ class Supervisor(QObject):
 
         nb_currently_engaged = len(self.bridge.people.getengagedpeople())
         nb_currently_seen = len(self.bridge.people.getpeople())
+        if self.nb_currently_seen != nb_currently_seen:
+            self.detected_nb_children_changed.emit(nb_currently_seen)
+            self.nb_currently_seen = nb_currently_seen
+
         #logger.debug("Currently seen: %s       Currently engaged: %s (known engaged: %s)" % (nb_currently_seen, nb_currently_engaged, self.nb_engaged))
 
         # we *only* generate events if:

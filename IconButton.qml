@@ -8,6 +8,7 @@ Rectangle {
     property bool draggable: false
     property bool disabled: false
     property bool noborder: false
+    property int borderwidth: 4
     property string label: ""
 
     property alias pressed: dragArea.pressed
@@ -18,7 +19,7 @@ Rectangle {
     width: height
     //color: "blue"
 
-    border.width: noborder ? 0 : 4
+    border.width: noborder ? 0 : borderwidth
     radius: height/2
 
     Image {
@@ -39,7 +40,7 @@ Rectangle {
         style: Text.Outline
         font.pixelSize: 15/70 * parent.height
         anchors.top: icon.bottom
-        anchors.topMargin: -5
+        anchors.topMargin: 0
         anchors.horizontalCenter: icon.horizontalCenter
     }
 

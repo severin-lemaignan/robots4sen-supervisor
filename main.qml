@@ -26,14 +26,15 @@ Window {
             currentIndex: tabBar.currentIndex
             interactive: false // disable swipe gesture
 
+            Interactions {
+                id: interactionsTab
+            }
             Discover {
                 id: peopleLocalisationTab
+                clip: true
             }
             Actions {
                 id: actionsTab
-            }
-            Interactions {
-                id: interactionsTab
             }
             PhotoCapture {
                 id: captureTab
@@ -138,9 +139,17 @@ Window {
             contentHeight: 0.1 * parent.height
 
             TabButton {
-                id: peopleLocalisationBtn
+                id: interactionsBtn
                 display: AbstractButton.IconOnly
                 icon.source: "res/atom-variant.svg"
+                icon.height: parent.height * 0.7
+                icon.width: parent.height * 0.7
+            }
+
+            TabButton {
+                id: peopleLocalisationBtn
+                display: AbstractButton.IconOnly
+                icon.source: "res/access-point.svg"
                 icon.height: parent.height * 0.7
                 icon.width: parent.height * 0.7            }
 
@@ -148,14 +157,6 @@ Window {
                 id: actionsBtn
                 display: AbstractButton.IconOnly
                 icon.source: "res/hand-okay.svg"
-                icon.height: parent.height * 0.7
-                icon.width: parent.height * 0.7
-            }
-
-            TabButton {
-                id: interactionsBtn
-                display: AbstractButton.IconOnly
-                icon.source: "res/bell-alert.svg"
                 icon.height: parent.height * 0.7
                 icon.width: parent.height * 0.7
             }

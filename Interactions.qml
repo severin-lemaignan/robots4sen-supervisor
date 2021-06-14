@@ -5,21 +5,21 @@ import QtQuick.Controls 2.5
 
 Item {
     id: interactions
-    //anchors.leftMargin: 100
 
 
     Text {
         id: activity_label
-        text: "Currently doing:\n" + (naoqi_supervisor.currentActivity ? naoqi_supervisor.currentActivity : "no activity")
+        text: "Currently doing: <b>" + (naoqi_supervisor.currentActivity ? naoqi_supervisor.currentActivity : "no activity") + "</b>"
         font.pixelSize: 40
         anchors.left: parent.left
         anchors.leftMargin: 300
         anchors.top: parent.top
+        anchors.topMargin: 50
     }
 
     Text {
         id: interactions_label
-        text: "Interactions"
+        text: "<b>Initiate interaction:<b>"
         font.pixelSize: 40
         anchors.left: parent.left
         anchors.leftMargin: 300
@@ -37,7 +37,7 @@ Item {
         anchors.topMargin: 50
  
         IconButton {
-            source: "res/robot-angry-outline.svg"
+            source: "res/account.svg"
             noborder: false
             height: 150
             label: "single"
@@ -47,20 +47,20 @@ Item {
         }
 
         IconButton {
-            source: "res/robot-angry-outline.svg"
+            source: "res/account-multiple.svg"
             noborder: false
             height: 150
-            label: "small group"
+            label: "small"
             onClicked: {
                 naoqi_supervisor.start_small_group_interaction();
             }
         }
 
         IconButton {
-            source: "res/robot-angry-outline.svg"
+            source: "res/account-group.svg"
             noborder: false
             height: 150
-            label: "large group"
+            label: "large"
             onClicked: {
                 naoqi_supervisor.start_large_group_interaction();
             }
@@ -84,7 +84,7 @@ Item {
 
     Text {
         id: nb_children_label
-        text: "# children"
+        text: "<b># children engaged:</b>"
         font.pixelSize: 40
         anchors.left: parent.left
         anchors.leftMargin: 300
@@ -108,6 +108,7 @@ Item {
             }
 
             color: naoqi_supervisor.nb_children == 0 ? "orange": "white"
+            borderwidth: naoqi_supervisor.detected_nb_children == 0 ? 8 : 4
         }
 
         IconButton {
@@ -118,6 +119,7 @@ Item {
             }
 
             color: naoqi_supervisor.nb_children == 1 ? "green": "white"
+            borderwidth: naoqi_supervisor.detected_nb_children == 1 ? 8 : 4
         }
 
         IconButton {
@@ -127,6 +129,7 @@ Item {
                 naoqi_supervisor.nb_children = 2;
             }
             color: naoqi_supervisor.nb_children == 2 ? "green": "white"
+            borderwidth: naoqi_supervisor.detected_nb_children == 2 ? 8 : 4
         }
 
         IconButton {
@@ -136,6 +139,7 @@ Item {
                 naoqi_supervisor.nb_children = 3;
             }
             color: naoqi_supervisor.nb_children == 3 ? "green": "white"
+            borderwidth: naoqi_supervisor.detected_nb_children == 3 ? 8 : 4
         }
 
         IconButton {
@@ -145,6 +149,7 @@ Item {
                 naoqi_supervisor.nb_children = 4;
             }
             color: naoqi_supervisor.nb_children == 4 ? "green": "white"
+            borderwidth: naoqi_supervisor.detected_nb_children == 4 ? 8 : 4
         }
 
         IconButton {
@@ -154,6 +159,7 @@ Item {
                 naoqi_supervisor.nb_children = 5;
             }
             color: naoqi_supervisor.nb_children == 5 ? "green": "white"
+            borderwidth: naoqi_supervisor.detected_nb_children == 5 ? 8 : 4
         }
 
         IconButton {
@@ -163,6 +169,7 @@ Item {
                 naoqi_supervisor.nb_children = 6;
             }
             color: naoqi_supervisor.nb_children == 6 ? "green": "white"
+            borderwidth: naoqi_supervisor.detected_nb_children == 6 ? 8 : 4
         }
 
 
