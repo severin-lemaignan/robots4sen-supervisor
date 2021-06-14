@@ -94,21 +94,31 @@ class Supervisor(QObject):
 
     @Slot()
     def start_single_interaction(self):
-        if self.nb_children != 1:
-            self.nb_children = 1
-        self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1))
+        if self._nb_children != 1:
+            self.set_nb_children(1)
+        self.start_interaction()
 
     @Slot()
     def start_small_group_interaction(self):
-        if self.nb_children < 2 or self.nb_children > 3:
-            self.nb_children = 2
-        self.events_queue.put(Event(Event.MULTI_ENGAGEMENT, nb_children=self._nb_children))
+        if self._nb_children < 2 or self._nb_children > 3:
+            self.set_nb_children(2)
+        self.start_interaction()
 
     @Slot()
     def start_large_group_interaction(self):
-        if self.nb_children < 4:
-            self.nb_children = 4
-        self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=self._nb_children))
+        if self._nb_children < 4:
+            self.set_nb_children(4)
+        self.start_interaction()
+
+    def start_interaction(self):
+        if self._nb_children == 0:
+            self.set_nb_children(1)
+
+        if self._nb_children > 1:
+            self.events_queue.put(Event(Event.MULTI_ENGAGEMENT, nb_children=self._nb_children))
+        else:
+            self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=self._nb_children))
+
 
 
     def run(self):
@@ -172,13 +182,14 @@ class Supervisor(QObject):
                 logger.info("Activity <%s> completed" % self.activity)
 
                 if self.activity.type == DEFAULT:
-                    if self.nb_engaged == 0:
-                        # we are coming from default activity: someone pressed the 'waving hand', but wasn't (yet) detected as
-                        # engaged. Let's create a temporary 'mock' user
-                        logger.info("Initiating interaction without anyone seen yet. Creating a temporary mock user, and hopefully the real user will be detected before the mock user expires.")
-                        self.bridge.people.createMockPerson(is_engaged=True, is_temporary=True)
+                    #if self.nb_engaged == 0:
+                    #    # we are coming from default activity: someone pressed the 'waving hand', but wasn't (yet) detected as
+                    #    # engaged. Let's create a temporary 'mock' user
+                    #    logger.info("Initiating interaction without anyone seen yet. Creating a temporary mock user, and hopefully the real user will be detected before the mock user expires.")
+                    #    self.bridge.people.createMockPerson(is_engaged=True, is_temporary=True)
 
-                    self.nb_engaged = 0 # this will re-trigger a interaction event as the current number of engaged children (set ot 0) won't match the detected one
+                    #self.nb_engaged = 0 # this will re-trigger a interaction event as the current number of engaged children (set ot 0) won't match the detected one
+                    self.start_interaction()
 
 
                 elif self.activity.type != MOODBOARD:
