@@ -71,9 +71,10 @@ class Supervisor(QObject):
     nb_children_changed = Signal(int)
 
     def set_nb_children(self, nb):
+        logger.info("# children: %s (was: %s)" % (nb, self._nb_children))
         if nb != self._nb_children:
 
-            if self._nb_children == 0:
+            if nb == 0:
                 self.events_queue.put(Event(Event.NO_ONE_ENGAGED))
 
             nb_children_logger.info((nb,))
