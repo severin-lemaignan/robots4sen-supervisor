@@ -231,30 +231,30 @@ class Supervisor(QObject):
         #
         #  We do not generate events if eg going from 1 to 2 person engaged
 
-        if self.nb_engaged != nb_currently_engaged:
+        #if self.nb_engaged != nb_currently_engaged:
 
-            # no one engaged anymore, and no-one around
-            if     nb_currently_engaged == 0 \
-               and nb_currently_seen == 0:
+        #    # no one engaged anymore, and no-one around
+        #    if     nb_currently_engaged == 0 \
+        #       and nb_currently_seen == 0:
 
-                self.nb_engaged = nb_currently_engaged
-                self.events_queue.put(Event(Event.NO_ONE_ENGAGED))
+        #        self.nb_engaged = nb_currently_engaged
+        #        self.events_queue.put(Event(Event.NO_ONE_ENGAGED))
 
-            elif self.nb_engaged == 0:
+        #    elif self.nb_engaged == 0:
 
-                # only one person around: one-to-one engagement
-                if    nb_currently_engaged == 1 \
-                  and nb_currently_seen == 1:
+        #        # only one person around: one-to-one engagement
+        #        if    nb_currently_engaged == 1 \
+        #          and nb_currently_seen == 1:
 
-                      self.nb_engaged = nb_currently_engaged
-                      self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1))
+        #              self.nb_engaged = nb_currently_engaged
+        #              self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1))
 
-                # else, several people around the robot. Even if only
-                # one is detected as 'engaged', we trigger a group engagement
-                # event
-                else:
-                      self.nb_engaged = nb_currently_engaged
-                      self.events_queue.put(Event(Event.MULTI_ENGAGEMENT, nb_children=self.nb_engaged))
+        #        # else, several people around the robot. Even if only
+        #        # one is detected as 'engaged', we trigger a group engagement
+        #        # event
+        #        else:
+        #              self.nb_engaged = nb_currently_engaged
+        #              self.events_queue.put(Event(Event.MULTI_ENGAGEMENT, nb_children=self.nb_engaged))
 
 
         #####################################################################
