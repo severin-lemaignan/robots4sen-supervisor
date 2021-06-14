@@ -32,8 +32,8 @@ Window {
             Actions {
                 id: actionsTab
             }
-            Item {
-                id: bookmarkTab
+            Interactions {
+                id: interactionsTab
             }
             PhotoCapture {
                 id: captureTab
@@ -153,7 +153,7 @@ Window {
             }
 
             TabButton {
-                id: bookmarkBtn
+                id: interactionsBtn
                 display: AbstractButton.IconOnly
                 icon.source: "res/bell-alert.svg"
                 icon.height: parent.height * 0.7

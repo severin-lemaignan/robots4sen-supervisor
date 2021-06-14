@@ -95,7 +95,7 @@ class MoodBoardActivity(Activity):
         self.robot.tablet.setOptions(options)
 
     def is_multiparty(self):
-        return self.original_event is not None and self.original_event.type == Event.MULTI_ENGAGEMENT
+        return self.original_event is not None and self.original_event.nb_children > 3
 
     def start(self, robot, cmd_queue, event=None, continuation=False):
         """

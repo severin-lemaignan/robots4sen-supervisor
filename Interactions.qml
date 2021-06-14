@@ -1,0 +1,162 @@
+import QtQuick 2.0
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.5
+
+
+Item {
+    id: interactions
+    //anchors.leftMargin: 100
+
+
+    Text {
+        id: activity_label
+        text: "Currently doing:\n" + (naoqi_supervisor.currentActivity ? naoqi_supervisor.currentActivity : "no activity")
+        font.pixelSize: 40
+        anchors.left: parent.left
+        anchors.leftMargin: 200
+        anchors.top: parent.top
+    }
+
+    Text {
+        id: interactions_label
+        text: "Interactions"
+        font.pixelSize: 40
+        anchors.left: parent.left
+        anchors.leftMargin: 200
+        anchors.top: activity_label.bottom
+        anchors.topMargin: 50
+    }
+
+    Row {
+        id: interactions_row
+        spacing: 20
+        height: 150
+        anchors.left: parent.left
+        anchors.leftMargin: 200
+        anchors.top: interactions_label.bottom
+        anchors.topMargin: 50
+ 
+        IconButton {
+            source: "res/robot-angry-outline.svg"
+            noborder: false
+            height: 150
+            label: "single"
+            onClicked: {
+                naoqi_supervisor.start_single_interaction();
+            }
+        }
+
+        IconButton {
+            source: "res/robot-angry-outline.svg"
+            noborder: false
+            height: 150
+            label: "small group"
+            onClicked: {
+                naoqi_supervisor.start_small_group_interaction();
+            }
+        }
+
+        IconButton {
+            source: "res/robot-angry-outline.svg"
+            noborder: false
+            height: 150
+            label: "large group"
+            onClicked: {
+                naoqi_supervisor.start_large_group_interaction();
+            }
+        }
+
+        IconButton {
+            height: 150
+
+            noborder:true
+            source: "res/stop-circle.svg"
+            label: "stop"
+            onClicked: {
+                naoqi_supervisor.interruptCurrentActivity();
+            }
+
+        }
+
+
+    }
+
+
+    Text {
+        id: nb_children_label
+        text: "Children"
+        font.pixelSize: 40
+        anchors.left: parent.left
+        anchors.leftMargin: 200
+        anchors.top: interactions_row.bottom
+        anchors.topMargin: 50
+    }
+
+    Row {
+        spacing: 20
+        anchors.left: parent.left
+        anchors.leftMargin: 200
+        anchors.top: nb_children_label.bottom
+        anchors.topMargin: 50
+        height: 150
+ 
+        IconButton {
+            source: "res/numeric-1.svg"
+            height: 150
+            onClicked: {
+                naoqi_supervisor.nb_children = 1;
+            }
+
+            color: naoqi_supervisor.nb_children == 1 ? "green": "white"
+        }
+
+        IconButton {
+            source: "res/numeric-2.svg"
+            height: 150
+            onClicked: {
+                naoqi_supervisor.nb_children = 2;
+            }
+            color: naoqi_supervisor.nb_children == 2 ? "green": "white"
+        }
+
+        IconButton {
+            source: "res/numeric-3.svg"
+            height: 150
+            onClicked: {
+                naoqi_supervisor.nb_children = 3;
+            }
+            color: naoqi_supervisor.nb_children == 3 ? "green": "white"
+        }
+
+        IconButton {
+            source: "res/numeric-4.svg"
+            height: 150
+            onClicked: {
+                naoqi_supervisor.nb_children = 4;
+            }
+            color: naoqi_supervisor.nb_children == 4 ? "green": "white"
+        }
+
+        IconButton {
+            source: "res/numeric-5.svg"
+            height: 150
+            onClicked: {
+                naoqi_supervisor.nb_children = 5;
+            }
+            color: naoqi_supervisor.nb_children == 5 ? "green": "white"
+        }
+
+        IconButton {
+            source: "res/numeric-6.svg"
+            height: 150
+            onClicked: {
+                naoqi_supervisor.nb_children = 6;
+            }
+            color: naoqi_supervisor.nb_children == 6 ? "green": "white"
+        }
+
+
+    }
+
+}
+

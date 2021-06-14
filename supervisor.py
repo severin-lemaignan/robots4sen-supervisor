@@ -45,6 +45,8 @@ class Supervisor(QObject):
 
         self.nb_engaged = 0 # nb of people the robot is currently engaged with
 
+        self._nb_children = 0
+
         # rest_time stores the timestamp at which the last activity stopped
         # used to ensure a 'cool down' period between 2 activities
         self.rest_time = time.time()
@@ -61,6 +63,37 @@ class Supervisor(QObject):
         if self.activity:
             logger.warning("Ctrl tablet requests <%s> to stop" % self.activity)
             self.cmd_queue.put((Event.CTRL_TABLET, INTERRUPT, None))
+
+
+    nb_children_changed = Signal(int)
+
+    def set_nb_children(self, nb):
+        if nb != self._nb_children:
+            self._nb_children = nb
+            self.nb_children_changed.emit(nb)
+
+    def get_nb_children(self):
+        return self._nb_children
+
+
+    nb_children = Property(int, get_nb_children, set_nb_children, notify=nb_children_changed)
+
+    @Slot()
+    def start_single_interaction(self):
+        self.nb_children = 1
+        self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=1))
+
+    @Slot()
+    def start_small_group_interaction(self):
+        if self.nb_children < 2 or self.nb_children > 3:
+            self.nb_children = 2
+        self.events_queue.put(Event(Event.MULTI_ENGAGEMENT, nb_children=self._nb_children))
+
+    @Slot()
+    def start_large_group_interaction(self):
+        if self.nb_children < 4:
+            self.nb_children = 4
+        self.events_queue.put(Event(Event.ONE_TO_ONE_ENGAGEMENT, nb_children=self._nb_children))
 
 
     def run(self):
