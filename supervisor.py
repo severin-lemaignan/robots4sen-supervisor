@@ -2,6 +2,9 @@
 
 import logging;logger = logging.getLogger("robots.supervisor")
 
+from csv_logging import create_csv_logger
+nb_children_logger = create_csv_logger("logs/nb_children.csv")
+
 import time
 from Queue import Queue, Empty
 
@@ -69,6 +72,7 @@ class Supervisor(QObject):
 
     def set_nb_children(self, nb):
         if nb != self._nb_children:
+            nb_children_logger.info((nb,))
             self._nb_children = nb
             self.nb_children_changed.emit(nb)
 
