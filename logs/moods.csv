@@ -1,1 +1,106 @@
 time,level,nb_children,initial_mood,final_mood,activities,end_type
+1621952218.965957,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1621952261.328545,INFO,1,mood_green,unknown,[u'jokes'],interrupted - no one engaged
+1621952275.045388,INFO,1,mood_green,mood_green,[u'jokes'],finished
+1621959572.811852,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1621959769.552789,INFO,0,unknown,unknown,[],interrupted - no one engaged
+1621959878.253552,INFO,1,mood_yellow,mood_green,[u'relaxing sounds'],finished
+1621959989.201629,INFO,0,unknown,unknown,[],interrupted - no one engaged
+1621960064.353982,INFO,1,unknown,unknown,[u'fun dances'],interrupted - no one engaged
+1621965479.419209,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1621965628.408066,INFO,0,unknown,unknown,[],interrupted - no one engaged
+1621965839.131556,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1621965917.042965,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1622133244.936598,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1622133370.715466,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1622134996.623458,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1622135095.942428,INFO,1,mood_green,unknown,[u'jokes'],interrupted
+1622135138.037535,INFO,1,mood_green,unknown,[u'jokes'],interrupted - no one engaged
+1622135230.660218,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1622135287.019376,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623331269.18144,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623331407.296217,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623333605.491683,INFO,1,unknown,unknown,[],interrupted
+1623337242.270951,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623337274.476323,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623340883.370189,INFO,0,unknown,unknown,[],interrupted
+1623342566.375317,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623342601.821211,INFO,1,mood_yellow,unknown,[],interrupted - no one engaged
+1623342617.614976,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623342756.262237,INFO,1,mood_yellow,mood_green,"[u'relaxing sounds', u'cuddle']",finished
+1623342971.264127,INFO,1,mood_blue,mood_green,[u'fun dances'],finished
+1623401597.329868,INFO,0,mood_green,unknown,[u'jokes'],finished
+1623401996.71696,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623408812.733348,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623408877.752788,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623409438.325327,INFO,1,mood_blue,unknown,[],interrupted - no one engaged
+1623409540.135877,INFO,1,mood_yellow,unknown,[],interrupted - no one engaged
+1623409996.275149,INFO,1,unknown,unknown,[],interrupted
+1623410439.290154,INFO,1,unknown,unknown,[],interrupted
+1623411768.607538,INFO,1,unknown,unknown,[u'relaxing sounds'],finished
+1623411865.327736,INFO,1,mood_red,unknown,[u'listening'],interrupted - no one engaged
+1623419408.746017,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623419750.73843,INFO,1,unknown,unknown,[u'cuddle'],finished
+1623659151.143934,INFO,1,unknown,unknown,[],interrupted
+1623659332.266879,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623659386.852125,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623659488.104253,INFO,1,mood_yellow,unknown,"[u'cuddle', u'calm dances']",interrupted - no one engaged
+1623659583.38459,INFO,1,mood_yellow,unknown,[],interrupted - no one engaged
+1623659895.79425,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623660616.983389,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623661340.122238,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623661470.020849,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623662451.561148,INFO,1,unknown,unknown,"[u'fun dances', u'jokes', u'calm dances', u'listening', u'jokes', u'calm music', u'cuddle', u'listening', u'story']",finished
+1623662673.464331,INFO,3,unknown,unknown,[u'jokes'],finished
+1623663669.603393,INFO,3,unknown,unknown,"[u'cuddle', u'listening', u'cuddle', u'fun dances', u'relaxing sounds', u'story']",interrupted
+1623664074.920291,INFO,1,unknown,unknown,[u'jokes'],finished
+1623664270.331238,INFO,1,unknown,unknown,"[u'fun dances', u'calm music']",finished
+1623664408.697013,INFO,1,unknown,unknown,[u'calm music'],finished
+1623664448.590872,INFO,1,unknown,unknown,[u'cuddle'],finished
+1623664791.37079,INFO,1,unknown,unknown,"[u'fun dances', u'story', u'listening', u'listening']",finished
+1623664924.083863,INFO,1,mood_red,unknown,[],interrupted - no one engaged
+1623664947.038257,INFO,1,mood_red,unknown,[],interrupted - no one engaged
+1623665276.614774,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623665416.713227,INFO,1,mood_green,mood_green,"[u'fun dances', u'listening', u'fun dances']",finished
+1623666180.26532,INFO,1,mood_green,unknown,"[u'fun dances', u'jokes']",interrupted
+1623666339.000723,INFO,1,mood_green,mood_green,"[u'fun dances', u'jokes', u'listening', u'fun dances', u'listening']",finished
+1623666484.881752,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623666508.181039,INFO,1,mood_red,unknown,[],interrupted - no one engaged
+1623666624.883785,INFO,1,mood_yellow,mood_green,[u'calm dances'],finished
+1623666834.834394,INFO,1,unknown,unknown,"[u'jokes', u'jokes', u'cuddle', u'fun dances']",finished
+1623666930.429996,INFO,1,mood_green,mood_red,[u'calm dances'],finished
+1623667984.989226,INFO,1,unknown,mood_green,"[u'fun dances', u'fun dances', u'jokes', u'listening']",finished
+1623668135.550734,INFO,2,unknown,unknown,[u'story'],interrupted
+1623668202.878714,INFO,2,unknown,unknown,[],interrupted - no one engaged
+1623668984.400037,INFO,1,mood_green,unknown,"[u'jokes', u'fun dances', u'calm dances', u'story']",interrupted
+1623672146.995559,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623672290.868867,INFO,1,mood_red,mood_red,"[u'relaxing sounds', u'listening', u'jokes']",finished
+1623672352.640909,INFO,1,mood_blue,mood_blue,[u'jokes'],finished
+1623672380.017499,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623672445.930186,INFO,1,unknown,unknown,[u'jokes'],finished
+1623672731.496398,INFO,1,unknown,unknown,[u'jokes'],interrupted
+1623672740.567733,INFO,1,unknown,unknown,[u'jokes'],finished
+1623672956.80814,INFO,1,unknown,unknown,[u'cuddle'],finished
+1623673652.640835,INFO,1,unknown,unknown,[u'story'],interrupted
+1623674257.265206,INFO,1,unknown,unknown,"[u'listening', u'cuddle', u'calm music']",interrupted
+1623674739.247388,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623675602.023543,INFO,1,unknown,unknown,[],interrupted
+1623675749.10554,INFO,1,mood_blue,unknown,"[u'cuddle', u'fun dances']",interrupted
+1623676330.091455,INFO,1,mood_green,mood_yellow,[u'jokes'],finished
+1623676472.39986,INFO,1,unknown,unknown,"[u'calm dances', u'fun dances']",finished
+1623676603.644694,INFO,2,unknown,unknown,[u'jokes'],finished
+1623676682.131222,INFO,2,unknown,unknown,[u'jokes'],finished
+1623676740.559688,INFO,2,unknown,unknown,"[u'cuddle', u'relaxing sounds']",finished
+1623676836.782496,INFO,2,unknown,unknown,[u'calm dances'],finished
+1623676905.252161,INFO,2,unknown,unknown,[u'listening'],finished
+1623677022.595715,INFO,2,unknown,unknown,[u'jokes'],finished
+1623677449.125172,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623677483.141274,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623677540.682471,INFO,1,mood_green,unknown,[],interrupted - no one engaged
+1623677566.733411,INFO,1,unknown,unknown,[],interrupted - no one engaged
+1623677798.002888,INFO,1,unknown,unknown,"[u'jokes', u'fun dances', u'listening']",finished
+1623677902.767646,INFO,2,unknown,unknown,"[u'fun dances', u'calm dances']",finished
+1623678091.834174,INFO,1,unknown,unknown,[u'jokes'],finished
+1623678163.61345,INFO,1,unknown,unknown,[u'cuddle'],finished
+1623678293.064259,INFO,1,unknown,unknown,[u'cuddle'],finished
+1623678723.791665,INFO,2,unknown,unknown,"[u'fun dances', u'relaxing sounds', u'listening', u'cuddle']",interrupted

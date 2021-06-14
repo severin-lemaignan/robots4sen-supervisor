@@ -8,10 +8,12 @@ DIALOGUES = {
                             "Ok! Let me tell you a story."],
 
     "story_start":          ["Alright, let start the story.",
-                            "Good, good! Let's start the story"],
+                            "Good, good! Let's start the story",
+                            "Time for a story"],
 
     "story_end":            ["The story is finished! I hope you liked it.",
-                            "The end. Did you like the story?"],
+                            "The end. Did you like the story?",
+                            "That's the end of the story, what do you think?"],
     "story_interrupted":    ["\\pau=500\\Alright, I stop the story."],
     "story_no_one_left":    ["\\pau=500\\^startTag(disappointed)No one to listen to my story? Alright."],
 
@@ -58,7 +60,7 @@ DIALOGUES = {
                         ],
 
     "mood_prompt_activities": ["What do you want to do?",
-                              "So. What do you feel doing?",
+                              "So. What do you feel like doing?",
                               "Let see what we can do.",
                               "What should we do?",
                               "What do you like to do?",
