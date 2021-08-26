@@ -14,7 +14,7 @@ DIALOGUES = {
     "story_end":            ["The story is finished! I hope you liked it.",
                             "The end. Did you like the story?",
                             "That's the end of the story, what do you think?"],
-    "story_interrupted":    ["\\pau=500\\Alright, I stop the story."],
+    "story_interrupted":    ["\\pau=500\\Alright, I'll stop the story."],
     "story_no_one_left":    ["\\pau=500\\^startTag(disappointed)No one to listen to my story? Alright."],
 
     "listening_prompt":     ["Tell me! I'm listening",
